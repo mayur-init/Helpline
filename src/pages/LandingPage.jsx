@@ -3,6 +3,8 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import axios from 'axios';
 import { data } from 'autoprefixer';
+import About from '../components/About';
+import Hero from '../components/Hero';
 
 function LandingPage() {
 
@@ -58,7 +60,8 @@ function LandingPage() {
   return (
     <div className='bg-gray-200 flex flex-col justify-evenly'>
       <Navbar />
-      <div className='min-h-[90vh] flex justify-center'>
+      {/* <div className='min-h-[90vh] flex justify-center'>
+        
         <div className='mt-[10vh] flex flex-col items-center'>
           <h1 className='text-4xl font-semibold text-gray-600 m-4'>Find your location</h1>
           {!location ? <p className='flex justify-center'><button onClick={getLocation} className='btn'>My location</button></p>
@@ -67,9 +70,12 @@ function LandingPage() {
             </div>
           }
         </div>
-        {/* <p className='text-3xl font-medium text-gray-500'>landing page content</p> */}
+         <p className='text-3xl font-medium text-gray-500'>landing page content</p> 
       </div>
-      <Footer />
+       */}
+       <Hero/>
+      <About/>
+      <Footer/>
     </div>
   )
 }
