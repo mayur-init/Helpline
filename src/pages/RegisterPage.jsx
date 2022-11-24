@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import HospitalRegister from '../components/HospitalRegister';
-import AmbulanceRegister from '../components/AmbulanceRegister';
+import AmbulanceServiceRegister from '../components/AmbulanceServiceRegister';
 
 function RegisterPage() {
   
@@ -17,8 +17,8 @@ function RegisterPage() {
           <button className='btn mx-2' onClick={() => setIsActive(true)}>Hospital service</button>
           <button className='btn mx-2' onClick={() => setIsActive(false)}>Ambulance service</button>
         </div>
-        <div className='flex mt-[8vh]'>
-          {isActive? (<HospitalRegister/>):(<AmbulanceRegister/>)}
+        <div className='flex mt-[4vh]'>
+          {isActive? (<HospitalRegister/>):(<AmbulanceServiceRegister/>)}
         </div>
       </div>
       <Footer />
