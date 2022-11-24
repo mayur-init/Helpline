@@ -8,54 +8,54 @@ import Hero from '../components/Hero';
 
 function LandingPage() {
 
-  const [location, setLocation] = useState();
+  //const [location, setLocation] = useState();
 
-  useEffect(() => { }, [location]);
+  // useEffect(() => { }, [location]);
 
-  function getLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(async function (position) {
-        let longitude = position.coords.longitude;
-        let lattitude = position.coords.latitude;
+  // function getLocation() {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(async function (position) {
+  //       let longitude = position.coords.longitude;
+  //       let lattitude = position.coords.latitude;
 
-        //console.log(longitude + " " + lattitude);
+  //       //console.log(longitude + " " + lattitude);
 
-        try {
+  //       try {
 
-          let data = {
-            lattitude,
-            longitude,
-          }
+  //         let data = {
+  //           lattitude,
+  //           longitude,
+  //         }
 
-          let config = {
-            method: 'get',
-            url: 'http://localhost:5000/getNearby',
-            headers: {},
-            data: data,
-          }
+  //         let config = {
+  //           method: 'get',
+  //           url: 'http://localhost:5000/getNearby',
+  //           headers: {},
+  //           data: data,
+  //         }
 
-          let response = await axios.request(config);
-          if(response.data.error_message){
-            console.log(response.data.error_message);
-          }else{
-            console.log(response.data);
-          }
+  //         let response = await axios.request(config);
+  //         if(response.data.error_message){
+  //           console.log(response.data.error_message);
+  //         }else{
+  //           console.log(response.data);
+  //         }
           
 
-        } catch (err) {
-          console.log(err);
-        }
+  //       } catch (err) {
+  //         console.log(err);
+  //       }
 
-        setLocation({
-          "lattitude": lattitude,
-          "longitude": longitude,
-        });
-      });
+  //       setLocation({
+  //         "lattitude": lattitude,
+  //         "longitude": longitude,
+  //       });
+  //     });
 
-    } else {
-      console.log('Geolocation navigation not supported by your browser');
-    }
-  }
+  //   } else {
+  //     console.log('Geolocation navigation not supported by your browser');
+  //   }
+  // }
 
   return (
     <div className='bg-gray-200 flex flex-col justify-evenly'>
