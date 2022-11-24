@@ -71,7 +71,7 @@ const Hero = () => {
                
             </div>
             <div>
-                <img className='w-full' src={'assets/ambulance.png'} alt="/" />
+                <img className='w-full' src={'assets/ambulance1.jpg'} alt="/" />
             </div>
             
         </div>
