@@ -26,22 +26,33 @@ const About = () => {
                 </div>
             </div>
 
-            <div className='grid grid-cols-2 my-4 md:grid-cols-2 gap-2 px-1 text-center'>
-                <div className='border py-4 rounded-xl' >
+            <div className='grid grid-cols-2 mt-16 shadow-2xl text-center'>
+                <div className='border py-4 ' >
                     <img className='w-[85%]' src={'assets/work.png'} alt="/" />  
                 </div>
-                <div  className='border py-8 rounded-xl' >
+                <div  className='border py-8' >
                    <h1 className='text-2xl md:text-6xl font-bold'>How It Works?</h1>
                    <p className='my-3 text-lg'>Book an Ambulance or Emergency Service Anytime, Anywhere.</p>
                             
-               
-                   <p className='text-3xl'><span>1</span>Choose Your Ambulance</p>
-                   
-                   <p className='text-3xl'><span>2</span>Find Nearest Ambulance</p>
-                   
-                   <p className='text-3xl'><span>3</span>Get an Ambulance</p>
-                  
-                   <p className='text-3xl'><span>4</span>Track your Ambulance</p>
+               <div className='mt-4 text-violet-600 font-semibold'> 
+                 <div className='flex'>                
+                    <span className='mt-6 ml-3 w-12 h-12 bg-slate-400 text-blue-800 rounded-full text-4xl hover:bg-blue-800 hover:text-slate-400'>1</span> 
+                    <p className='text-3xl mt-6 ml-4'>Choose Your Ambulance</p>
+                 </div>
+                 <div  className='flex'>
+                    <span className='mt-6 ml-3 w-12 h-12 bg-slate-400 text-blue-800 rounded-full text-4xl hover:bg-blue-800 hover:text-slate-400'>2</span>
+                    <p className='text-3xl mt-7 ml-4'>Find Nearest Ambulance</p>
+                 </div>
+                 <div  className='flex'> 
+                    <span className='mt-6 ml-3 w-12 h-12 bg-slate-400 text-blue-800 rounded-full text-4xl hover:bg-blue-800 hover:text-slate-400'>3</span>
+                    <p className='text-3xl mt-7 ml-4'>Get an Ambulance Easily</p>
+                 </div>
+                 <div className='flex'>
+                   <span className='mt-6 ml-3 w-12 h-12 bg-slate-400 text-blue-800 rounded-full text-4xl hover:bg-blue-800 hover:text-slate-400'>4</span>
+                   <p className='text-3xl mt-7 ml-4'>Track your Ambulance</p>
+                 </div>
+               </div>
+ 
                 </div>
                 
             </div>
