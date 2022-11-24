@@ -14,7 +14,6 @@ const PORT = process.env.PORT || 5000;
 
 
 // databse connection
-
 mongoose.connect(config.DB_URL, {
     useNewUrlParser: true, 
     useUnifiedTopology: true,
@@ -23,9 +22,9 @@ mongoose.connect(config.DB_URL, {
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {console.log('DB connected...')});
+//
 
 // don't disturb the code unless you know how it works
-
 __dirname = path.resolve();
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static(path.join(__dirname, '/build')));
