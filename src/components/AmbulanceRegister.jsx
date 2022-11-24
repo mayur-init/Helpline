@@ -23,9 +23,9 @@ function AmbulanceRegister() {
 
     return (
         <div className='flex flex-col w-[50vh] h-auto mt-[4vh]'>
-            <input type='text' onChange={(e) =>{setVehicleNumber(e.target.value)}} value={VehicleNumber} placeholder='Vehicle Number' className='bg-gray-200 border-2 border-gray-600 rounded-full px-2 py-1 my-2'></input>
-            <input type='text' onChange={(e) =>{setRegisterNumber(e.target.value)}} value={RegisterNumber} placeholder='Register Number' className='bg-gray-200 border-2 border-gray-600 rounded-full px-2 py-1 my-2'></input>
-            <input type='text' onChange={(e) =>{setDriverContact(e.target.value)}} value={DriverContact}placeholder='Driver Contact Number' className='bg-gray-200 border-2 border-gray-600 rounded-full px-2 py-1 my-2'></input>
+            <input type='text' onChange={(e) =>{setVehicleNumber(e.target.value)}} value={VehicleNumber} placeholder='Vehicle Number' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
+            <input type='text' onChange={(e) =>{setRegisterNumber(e.target.value)}} value={RegisterNumber} placeholder='Register Number' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
+            <input type='text' onChange={(e) =>{setDriverContact(e.target.value)}} value={DriverContact}placeholder='Driver Contact Number' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
             <p className='flex justify-end'><button onClick={util} className='btn m-2 '>Add Ambulance</button></p>
         </div>
     )

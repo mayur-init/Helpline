@@ -2,53 +2,50 @@ import React from 'react'
 
 const About = () => {
   return (
-    <div  className='w-full my-32'>
-        <div className='max-w-[1240px] mx-auto'>
-            <div className='text-center'>
-                <h2 className='text-5xl font-bold'>Our Services</h2>
-            </div>
+    <div  className='w-full flex items-center'>
+        <div className='w-[80vw] m-auto'>
+            
+            <h2 className='text-6xl font-bold flex justify-center my-[6vh] hover:text-violet-600 hover:scale-110'>Our Services</h2>
 
-            <div className='grid md:grid-cols-3 gap-2 px-2 text-center'>
-                <div className='border py-4 rounded-xl shadow-xl' >
-                    <img className='w-full' src={'assets/basic.png'} alt="/" />
-                    <p className='text-3xl font-bold'>Basic Ambulance</p> 
+            <div className='grid md:grid-cols-3 gap-4 text-center my-[10vh] mx-8'>
+                <div className='border bg-white m-4 p-6 rounded-xl shadow-xl' >
+                    <img className='w-[80vw] h-[28vh]' src={'assets/img6.jpg'} alt="/" />
+                    <p className='text-3xl font-bold m-6 hover:text-violet-600 hover:scale-110'>Basic Ambulance</p> 
                     <p className='text-black-400 '>Basic Life Support Ambulance is for the patients who need medical transportation. It comprises of patient bed, pulse oximetry and oxygen delivery devices.</p>
                 </div>
-                <div  className='border py-8 rounded-xl shadow-xl' >
-                    <img className='w-full' src={'assets/Advance.png'} alt="/" />
-                    <p className='text-3xl font-bold'>Advance Ambulance</p> 
+                <div className='border bg-white m-4 p-6 rounded-xl shadow-xl' >
+                    <img className='w-[80vw] h-[28vh]' src={'assets/img5.webp'} alt="/" />
+                    <p className='text-3xl font-bold p-6 hover:text-violet-600 hover:scale-110'>Advance Ambulance</p> 
                     <p className='text-black-400 mt-2'>ALS ambulance is equipped with ventilator, ECG, monitoring devices and paramedic staff.</p>
                 </div>
-                <div className='border py-8 rounded-xl shadow-xl' >
-                <img className='w-full' src={'assets/Mortuary.png'} alt="/" />
-                <p className='text-3xl font-bold'>Mortuary Ambulance</p> 
+                <div className='border bg-white m-4 p-6 rounded-xl shadow-xl' >
+                <img className='w-full h-[28vh]' src={'assets/img4.webp'} alt="/" />
+                <p className='text-3xl font-bold p-6 hover:text-violet-600 hover:scale-110'>Mortuary Ambulance</p> 
                     <p className='text-black-400 mt-2'>Mortuary ambulance services are used for the transportation of the dead body</p>
                 </div>
             </div>
 
-            <div className='grid grid-cols-2 mt-16 shadow-2xl text-center'>
-                <div className='border py-4 ' >
-                    <img className='w-[85%]' src={'assets/work.png'} alt="/" />  
+            <div className='bg-white grid grid-cols-2 shadow-2xl text-center mt-[18vh] p-8 mx-6 mb-[20vh] rounded-xl'>
+                <div className='py-4' >
+                    <img className='w-[85%]' src={'assets/img2.webp'} alt="/" />  
                 </div>
-                <div  className='border py-8' >
-                   <h1 className='text-2xl md:text-6xl font-bold'>How It Works?</h1>
-                   <p className='my-3 text-lg'>Book an Ambulance or Emergency Service Anytime, Anywhere.</p>
-                            
-               <div className='mt-4 text-violet-600 font-semibold'> 
+                <div  className='py-8' >
+                   <h1 className='text-2xl md:text-6xl font-bold m-2 text-start hover:text-violet-600 hover:scale-110'>How It Works?</h1>                            
+               <div className='text-gray-500 font-semibold my-[4vh]'> 
                  <div className='flex'>                
-                    <span className='mt-6 ml-3 w-12 h-12 bg-slate-400 text-blue-800 rounded-full text-4xl hover:bg-blue-800 hover:text-slate-400'>1</span> 
-                    <p className='text-3xl mt-6 ml-4'>Choose Your Ambulance</p>
+                    <span className='m-4 ml-3 w-12 h-12 p-1 bg-slate-300 text-sky-800 rounded-full text-4xl hover:bg-sky-800 hover:text-slate-400'>1</span> 
+                    <p className='text-3xl mt-6 ml-4'>Add your location</p>
                  </div>
                  <div  className='flex'>
-                    <span className='mt-6 ml-3 w-12 h-12 bg-slate-400 text-blue-800 rounded-full text-4xl hover:bg-blue-800 hover:text-slate-400'>2</span>
-                    <p className='text-3xl mt-7 ml-4'>Find Nearest Ambulance</p>
+                    <span className='m-4 ml-3 w-12 h-12 p-1 bg-slate-300 text-sky-800 rounded-full text-4xl hover:bg-sky-800 hover:text-slate-400'>2</span>
+                    <p className='text-3xl mt-7 ml-4'>Choose Nearest Ambulance</p>
                  </div>
                  <div  className='flex'> 
-                    <span className='mt-6 ml-3 w-12 h-12 bg-slate-400 text-blue-800 rounded-full text-4xl hover:bg-blue-800 hover:text-slate-400'>3</span>
-                    <p className='text-3xl mt-7 ml-4'>Get an Ambulance Easily</p>
+                    <span className='m-4 ml-3 w-12 h-12 p-1 bg-slate-300 text-sky-800 rounded-full text-4xl hover:bg-sky-800 hover:text-slate-400'>3</span>
+                    <p className='text-3xl mt-7 ml-4'>Book an Ambulance Easily</p>
                  </div>
                  <div className='flex'>
-                   <span className='mt-6 ml-3 w-12 h-12 bg-slate-400 text-blue-800 rounded-full text-4xl hover:bg-blue-800 hover:text-slate-400'>4</span>
+                   <span className='m-4 ml-3 w-12 h-12 p-1 bg-slate-300 text-sky-800 rounded-full text-4xl hover:bg-sky-800 hover:text-slate-400'>4</span>
                    <p className='text-3xl mt-7 ml-4'>Track your Ambulance</p>
                  </div>
                </div>
