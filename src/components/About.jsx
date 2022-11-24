@@ -35,13 +35,13 @@ const About = () => {
                    <p className='my-3 text-lg'>Book an Ambulance or Emergency Service Anytime, Anywhere.</p>
                             
                
-                   <p className='text-3xl'>Choose Your Ambulance</p>
+                   <p className='text-3xl'><span>1</span>Choose Your Ambulance</p>
                    
-                   <p className='text-3xl'>Find Nearest Ambulance</p>
+                   <p className='text-3xl'><span>2</span>Find Nearest Ambulance</p>
                    
-                   <p className='text-3xl'>Get an Ambulance</p>
+                   <p className='text-3xl'><span>3</span>Get an Ambulance</p>
                   
-                   <p className='text-3xl'>Track your Ambulance</p>
+                   <p className='text-3xl'><span>4</span>Track your Ambulance</p>
                 </div>
                 
             </div>
