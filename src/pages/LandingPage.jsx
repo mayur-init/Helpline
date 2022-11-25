@@ -64,7 +64,7 @@ function LandingPage() {
       <Navbar />
       <Hero />
       <About />
-      <div className='bg-white w-[77.6vw] h-auto py-[5vh] mx-8 self-center mb-[10vh] rounded-xl shadow-2xl'>
+      <div className='bg-white w-[75.5vw] h-auto py-[5vh] mx-8 self-center mb-[10vh] rounded-xl shadow-2xl'>
         <div className='flex flex-col justify-center items-center h-full w-full'>
           <h1 className='text-4xl font-semibold text-gray-600 mx-6 my-4 hover:text-violet-600'>Add your location</h1>
           {!location ?

@@ -8,24 +8,24 @@ const About = () => {
                 <h2 className='text-6xl font-bold flex justify-center my-[6vh] hover:text-violet-600'>Our Services</h2>
 
                 <div className='grid md:grid-cols-3 gap-4 text-center my-[10vh] mx-8'>
-                    <div className='border bg-white m-4 p-6 rounded-xl shadow-xl' >
+                    <div className='border bg-white m-4 p-5 rounded-xl shadow-xl' >
                         <img className='w-[80vw] h-[28vh]' src={'assets/img6.jpg'} alt="/" />
                         <p className='text-3xl font-bold m-6 hover:text-violet-600 hover:scale-110'>Basic Ambulance</p>
                         <p className='text-black-400 '>Basic Life Support Ambulance is for the patients who need medical transportation. It comprises of patient bed, pulse oximetry and oxygen delivery devices.</p>
                     </div>
-                    <div className='border bg-white m-4 p-6 rounded-xl shadow-xl' >
+                    <div className='border bg-white m-4 p-5 rounded-xl shadow-xl' >
                         <img className='w-[80vw] h-[28vh]' src={'assets/img5.webp'} alt="/" />
                         <p className='text-3xl font-bold p-6 hover:text-violet-600 hover:scale-110'>Advance Ambulance</p>
                         <p className='text-black-400 mt-2'>ALS ambulance is equipped with ventilator, ECG, monitoring devices and paramedic staff.</p>
                     </div>
-                    <div className='border bg-white m-4 p-6 rounded-xl shadow-xl' >
+                    <div className='border bg-white m-4 p-5 rounded-xl shadow-xl' >
                         <img className='w-full h-[28vh]' src={'assets/img4.webp'} alt="/" />
                         <p className='text-3xl font-bold p-6 hover:text-violet-600 hover:scale-110'>Mortuary Ambulance</p>
                         <p className='text-black-400 mt-2'>Mortuary ambulance services are used for the transportation of the dead body</p>
                     </div>
                 </div>
 
-                <div className='bg-white grid grid-cols-2 shadow-2xl text-center mt-[10vh] p-8 mx-6 mb-[6vh] rounded-xl'>
+                <div className='bg-white grid grid-cols-2 shadow-2xl text-center mt-[10vh] p-8 mx-[2.4vw] mb-[6vh] rounded-xl'>
                     <div className='py-4' >
                         <img className='w-[32vw] h-[50vh]' src={'assets/img2.webp'} alt="/" />
                     </div>

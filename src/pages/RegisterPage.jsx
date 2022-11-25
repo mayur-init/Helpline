@@ -23,8 +23,8 @@ function RegisterPage() {
       </div>
       <div className='min-h-[90vh] p-4 flex flex-col items-center'>
 
-        <div className='h-[20vh] w-full py-2 flex justify-end items-center'>
-          <h1 className='text-4xl font-medium mx-[20vw] hover:text-violet-600'>Register your services</h1>
+        <div className='h-[20vh] w-full flex justify-end items-center'>
+          <h1 className='text-4xl font-medium mr-[21.4vw] hover:text-violet-600'>Register your services</h1>
           <div className='flex'>
             <button className='btn mx-2' onClick={() => setIsActive(true)}>Hospital service</button>
             <button className='btn mx-2' onClick={() => setIsActive(false)}>Ambulance service</button>
