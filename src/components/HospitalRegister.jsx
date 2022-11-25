@@ -30,8 +30,8 @@ function HospitalRegister() {
 
   return (
     <div className='shadow-xl p-4 rounded-xl min-h-max'>
-      <h1 className='text-gray-600 text-2xl font-semibold mt-[2vh] flex justify-center'>Hospital service</h1>
-      <div className='flex flex-col w-[50vh] h-auto mt-[5vh] mb-[4vh]'>
+      <h1 className='text-gray-600 text-3xl font-bold my-[4vh] flex justify-center hover:text-violet-600'>Hospital service</h1>
+      <div className='flex flex-col w-[50vh] h-auto mt-[8vh] mb-[4vh]'>
         <input type='text' onChange={(e) => { setHospitalName(e.target.value) }} value={HospitalName} placeholder='Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
         <input type='text' onChange={(e) => { setContactNumber(e.target.value) }} value={ContactNumber} placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
         <input type='text' onChange={(e) => { setAddress(e.target.value) }} value={Address} placeholder='Address' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
