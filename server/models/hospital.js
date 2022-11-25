@@ -12,4 +12,4 @@ const hospitalSchema = new Schema({
 }, { timestamps: true });
 
 
-module.exports = mongoose.model('Hospital', userSchema, 'hospitals');
+module.exports = mongoose.model('Hospital', hospitalSchema, 'hospitals');

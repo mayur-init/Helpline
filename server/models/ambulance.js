@@ -18,11 +18,11 @@ const ambulanceSchema = new Schema({
 
     vehicleNo: { type: String, required: true, unique: true},
     registration: {type: String, required: true, unique: true},
-    driverContact: { type: Number, required: true, unique: true}
+    driverContact: { type: Number, required: true, unique: true},
 
-    latitude: { type: String},
-    altitude: { type: String}
+    lattitude: { type: String},
+    longitude: { type: String}
 }, { timestamps: true });
 
 
-module.exports = mongoose.model('Ambulance', userSchema, 'ambulances');
+module.exports = mongoose.model('Ambulance', ambulanceSchema, 'ambulances');

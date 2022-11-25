@@ -26,6 +26,6 @@ exports.addHospital = async(req, res, next) => {
         res.status(201).json({msg: "success"});
     }
     catch(err){
-        return next(err);
+        console.log(err);
     }
 };

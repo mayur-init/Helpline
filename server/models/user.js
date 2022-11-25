@@ -8,7 +8,7 @@ const userSchema = new Schema({
     contact: { type: Number, required: true, unique: true},
     //address: { type: String},
     longitude: { type: String},
-    latitude: { type: String}
+    lattitude: { type: String}
 
 }, { timestamps: true });
 

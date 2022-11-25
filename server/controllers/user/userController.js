@@ -14,13 +14,13 @@ exports.addUser = async(req, res, next) => {
             //address: address
             // put code for altitude and longitude
             longitude: '',
-            latitude: ''
+            lattitude: ''
         });
         await user.save();
 
         res.status(201).json({msg: "success"});
     }
     catch(err){
-        return next(err);
+        console.log(err);
     }
 };

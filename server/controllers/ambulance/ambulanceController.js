@@ -21,14 +21,14 @@ exports.addAmbulance = async(req, res, next) => {
             registration: registration,
             driverContact: driverContact,
             
-            latitude: '',
-            altitude: ''
+            lattitude: '',
+            longitude: ''
         });
         await ambulance.save();
 
         res.status(201).json({msg: "success"});
     }
     catch(err){
-        return next(err);
+        console.log(err);
     }
 };
