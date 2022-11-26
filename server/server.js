@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const app = express();
 
 app.use(cors());
-app.use('/', router);
+app.use('/api', router);
 
 const PORT = process.env.PORT || 5000;
 
