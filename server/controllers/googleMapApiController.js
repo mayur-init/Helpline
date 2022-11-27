@@ -1,5 +1,4 @@
 const axios = require('axios');
-const { reset } = require('nodemon');
 const configEnv = require('../config');
 
 const googleMapApiController = {

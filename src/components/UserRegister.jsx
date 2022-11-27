@@ -14,9 +14,13 @@ function UserRegister({location, setLocation}) {
         longitude: location.longitude,
     }
 
+<<<<<<< HEAD
     let API_URL = process.env.REACT_APP_BACKEND_URL;
         
     // console.log(UserData);
+=======
+    console.log(UserData);
+>>>>>>> cfb1d685d56c88279db3d4a92c48b78da82cd959
     
     setUserName('');
     setUserContactNumber('');
