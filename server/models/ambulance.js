@@ -10,17 +10,17 @@ const ownerSchema = new Schema({
 
 const ambulanceSchema = new Schema({
 
-    providerName: { type: String, required: true },
-    contact: { type: Number, required: true, unique: true},
+    serviceProviderName: { type: String, required: true },
+    contactNumber: { type: Number, required: true, unique: true},
     availability: { type: Boolean, default: false},
     owner: { type: String, required: true },
-    aadhar: { type: String, required: true, unique: true},
+    aadharNumber: { type: String, required: true, unique: true},
 
-    vehicleNo: { type: String, required: true, unique: true},
-    registration: {type: String, required: true, unique: true},
-    driverContact: { type: Number, required: true, unique: true},
+    vehicleNumber: { type: String, required: true, unique: true},
+    registrationNumber: {type: String, required: true, unique: true},
+    driverContactNumber: { type: Number, required: true, unique: true},
 
-    lattitude: { type: String},
+    latittude: { type: String},
     longitude: { type: String}
 }, { timestamps: true });
 

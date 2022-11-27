@@ -1,26 +1,34 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 function AmbulanceRegister() {
 
-    const [ambulanceServiceName, setServiceName] = useState('');
-    const [contactNumber, setContactNumber] = useState('');
+    const [VehicleNumber, setVehicleNumber] = useState('');
+    const [RegisterNumber, setRegisterNumber] = useState('');
+    const [DriverContact, setDriverContact] = useState('');
 
     const util = () =>{
-        console.log(ambulanceServiceName + ' ' + contactNumber);
+        
+        const AmbulanceData = {
+            VehicleNumber,
+            RegisterNumber,
+            DriverContact,
+        }
 
-        setServiceName('');
-        setContactNumber('');
+        console.log(AmbulanceData); 
+
+        setVehicleNumber('');
+        setRegisterNumber('');
+        setDriverContact('');
     }
+
     return (
-        <div className='rounded-xl shadow-xl p-4 m-4 min-h-max'>
-            <h1 className='text-gray-600 text-2xl font-semibold mt-[4vh] flex justify-center'>Ambulance service</h1>
-            <div className='flex flex-col w-[50vh] h-auto mt-[14vh] mb-[4vh]'>
-                <input type='text' onChange={(e) => { setServiceName(e.target.value) }} value={ambulanceServiceName} placeholder='Name' className='bg-gray-200 border-2 border-gray-600 rounded-full px-2 py-1 my-2'></input>
-                <input type='text' onChange={(e) => { setContactNumber(e.target.value) }} value={contactNumber} placeholder='Contact' className='bg-gray-200 border-2 border-gray-600 rounded-full px-2 py-1 my-2'></input>
-                <p className='flex justify-end'><button onClick ={util} className='btn w-[100px] m-2'>Register</button></p>
-            </div>
+        <div className='flex flex-col w-[50vh] h-auto mt-[4vh]'>
+            <input type='text' onChange={(e) =>{setVehicleNumber(e.target.value)}} value={VehicleNumber} placeholder='Vehicle Number' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
+            <input type='text' onChange={(e) =>{setRegisterNumber(e.target.value)}} value={RegisterNumber} placeholder='Register Number' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
+            <input type='text' onChange={(e) =>{setDriverContact(e.target.value)}} value={DriverContact}placeholder='Driver Contact Number' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
+            <p className='flex justify-end'><button onClick={() => {util}} className='btn m-2 '>Add Ambulance</button></p>
         </div>
     )
 }
 
-export default AmbulanceRegister
+export default AmbulanceRegister;

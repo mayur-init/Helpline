@@ -5,10 +5,10 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
 
     name: { type: String, required: true },
-    contact: { type: Number, required: true, unique: true},
+    contactNumber: { type: Number, required: true, unique: true},
     //address: { type: String},
     longitude: { type: String},
-    lattitude: { type: String}
+    latittude: { type: String}
 
 }, { timestamps: true });
 
