@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const googleMapApiController = require('../contorllers/googleMapApiControllers');
+const googleMapApiController = require('../controllers/googleMapApiController');
 const {
     hospitalController,
     userController,

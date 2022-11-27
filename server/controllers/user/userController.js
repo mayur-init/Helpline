@@ -14,7 +14,7 @@ exports.addUser = async(req, res, next) => {
             //address: address
             // put code for altitude and longitude
             longitude: '',
-            lattitude: ''
+            latittude: ''
         });
         await user.save();
 
