@@ -18,13 +18,7 @@ function HospitalRegister() {
       Specilization,
     }
 
-<<<<<<< HEAD
-    let API_URL = process.env.REACT_APP_BACKEND_URL;
-        
-    // console.log(HospitalData);
-=======
     console.log(HospitalData);
->>>>>>> cfb1d685d56c88279db3d4a92c48b78da82cd959
 
     setHospitalName('');
     setContactNumber('');

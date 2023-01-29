@@ -1,9 +1,6 @@
 import React, {useState} from 'react';
 import AmbulanceRegister from './AmbulanceRegister';
-<<<<<<< HEAD
 import axios from 'axios';
-=======
->>>>>>> cfb1d685d56c88279db3d4a92c48b78da82cd959
 
 function AmbulanceServiceRegister() {
 
@@ -29,13 +26,7 @@ function AmbulanceServiceRegister() {
             },
         }
 
-<<<<<<< HEAD
-        let API_URL = process.env.REACT_APP_BACKEND_URL;
-        
-        // console.log(AmbulanceServiceData);
-=======
         console.log(AmbulanceServiceData);
->>>>>>> cfb1d685d56c88279db3d4a92c48b78da82cd959
 
         setServiceProviderName('');
         setOwnerName('')
