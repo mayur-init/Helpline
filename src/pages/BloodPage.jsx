@@ -15,7 +15,6 @@ function BloodPage() {
                     <img className='md:w-[32vw] md:h-[70vh]' src={'assets/bloodchart1.jpg'} alt="/" />
                 </div>
             </div>
-
             <Footer/>
         </div>
     )

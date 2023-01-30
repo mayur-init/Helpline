@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
 function Navbar() {
   return (
     <div className='bg-white h-[8vh] p-6 border-b-2 border-gray-200 flex justify-between items-center shadow-b-2xl'>

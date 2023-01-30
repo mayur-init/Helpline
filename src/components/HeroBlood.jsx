@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import Donor from '../pages/DonorRegisterPage'
 
 function HeroBlood() {
   return (
@@ -11,12 +13,11 @@ function HeroBlood() {
                     <div className='flex flex-col justify-center md:items-start w-full px-12'>
                         <p className='text-3xl md:text-4xl font-semibold'>Donate <span className='text-red-600 font-bold'>Blood</span> Give The Gift of Life</p>
                         <h1 className='py-3 text-5xl md:text-7xl font-bold text-red-600 hover:scale-105'>Our Blood Services</h1>
-                        <div className='flex'>
-                            <button className='btn py-3 px-5 sm:w-[60%] my-4 mx-5'>Doante Blood</button>
-                            <button className='btn py-3 px-5 sm:w-[60%] my-4 bg-red-500'>Require Blood </button>
+                        <div className='flex m-4'>
+                            <Link to='/donor'><button className='btn py-3 px-5 my-4 mx-3' >Register as Donor</button></Link>
+                            <Link to='/donorDetails'><button className='btn py-3 px-5 my-4 bg-red-500'>Find a Donor</button></Link>
                         </div>
                     </div>
-
                 </div>
                 {/* Hero Page Ends */}
                 
