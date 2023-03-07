@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import Navbar from '../components/Navbar'
-
+//import { useNavigate } from 'react-router-dom';
 function DonorRegisterPage() {
       const [name, setName] = useState('');
       const [city, setCity] = useState('');
@@ -8,7 +8,7 @@ function DonorRegisterPage() {
       const [contactNo, setContactNo] = useState('');
       const [bloodGroup, setBloodGroup] = useState('');
       const [state, setState] = useState('');
-
+      //const navigate = useNavigate();
       const handleSubmit = () =>{
         const bloodDonorData = {
              name,
@@ -25,6 +25,7 @@ function DonorRegisterPage() {
         setBloodGroup('');
         setCity('');
         setState('');
+        //navigate('/blood');
       }
   return (
     
