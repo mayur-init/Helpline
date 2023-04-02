@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 5000;
 
 
 // databse connection
+mongoose.set('strictQuery', true);
 mongoose.connect(config.DB_URL, {
     useNewUrlParser: true, 
     useUnifiedTopology: true,

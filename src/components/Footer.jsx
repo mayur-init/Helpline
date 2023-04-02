@@ -8,20 +8,17 @@ import {
 
 const Footer = () => {
 
-  const util = () =>{
-    //do something
-  }
 
   return (
-    <div className='w-full mt-24 bg-slate-900 text-gray-300 px-2'>
+    <div className='w-full h-[40vh] mt-24 bg-slate-900 text-gray-300 px-2'>
         <div className='w-[80vw] h-[30vh] grid grid-cols-2 md:grid-cols-1 place-content-center m-auto border-b-2 border-gray-600'>
             <div className='col-span-2 pt-8 md:pt-2'>
                 <p className='font-bold uppercase text-xl'>You Can Give Your Feedback</p>
                 <p className='py-4 text-md'>Write your Feedback</p>
-                <form className='flex flex-col sm:flex-row'>
+                <div className='flex flex-col sm:flex-row'>
                     <input className='w-full p-2 mr-4 rounded-md mb-4 text-black' type="text" placeholder='Write Something..'/>
-                    <button className='p-2 mb-4' onClick = {() => {util()}}>Send</button>
-                </form>
+                    <button className='p-2 mb-4'>Send</button>
+                </div>
             </div>
         </div>
 

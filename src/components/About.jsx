@@ -5,22 +5,24 @@ const About = () => {
         <div className='w-full flex items-center'>
             <div className='w-[80vw] m-auto'>
 
-                <h2 className='text-6xl font-bold flex justify-center my-[6vh] hover:text-violet-600'>Our Services</h2>
-
+                <h2 className='text-5xl font-bold flex justify-center my-[6vh] hover:text-violet-600'>Our Services</h2>
+                
+                {/***************card-box*************/}
                 <div className='grid md:grid-cols-3 gap-4 text-center my-[10vh] mx-8'>
+                    {/********cards*********/}
                     <div className='border bg-white m-4 p-5 rounded-xl shadow-xl' >
-                        <img className='w-[80vw] h-[28vh]' src={'assets/img6.jpg'} alt="/" />
-                        <p className='text-3xl font-bold m-6 hover:text-violet-600 hover:scale-110'>Basic Ambulance</p>
+                        <img className='w-[80vw] h-[28vh]' src={'assets/img4.webp'} alt="/" />
+                        <p className='text-3xl font-bold m-6 hover:text-violet-600 hover:scale-110'>Ambulance Service</p>
                         <p className='text-black-400 '>Basic Life Support Ambulance is for the patients who need medical transportation. It comprises of patient bed, pulse oximetry and oxygen delivery devices.</p>
                     </div>
                     <div className='border bg-white m-4 p-5 rounded-xl shadow-xl' >
-                        <img className='w-[80vw] h-[28vh]' src={'assets/img5.webp'} alt="/" />
-                        <p className='text-3xl font-bold p-6 hover:text-violet-600 hover:scale-110'>Advance Ambulance</p>
+                        <img className='w-[80vw] h-[28vh]' src={'assets/blood_bank.jpg'} alt="/" />
+                        <p className='text-3xl font-bold p-6 hover:text-violet-600 hover:scale-110'>Blood Bank Service</p>
                         <p className='text-black-400 mt-2'>ALS ambulance is equipped with ventilator, ECG, monitoring devices and paramedic staff.</p>
                     </div>
                     <div className='border bg-white m-4 p-5 rounded-xl shadow-xl' >
-                        <img className='w-full h-[28vh]' src={'assets/img4.webp'} alt="/" />
-                        <p className='text-3xl font-bold p-6 hover:text-violet-600 hover:scale-110'>Mortuary Ambulance</p>
+                        <img className='w-full h-[28vh]' src={'assets/Oxygen_cylinder.jpg'} alt="/" />
+                        <p className='text-3xl font-bold p-6 hover:text-violet-600 hover:scale-110'>Oxygen Cylenders Service</p>
                         <p className='text-black-400 mt-2'>Mortuary ambulance services are used for the transportation of the dead body</p>
                     </div>
                 </div>
