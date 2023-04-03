@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import axios from 'axios';
 import { data } from 'autoprefixer';
 import About from '../components/About';
-import Hero from '../components/Hero';
+import LandingHero from '../components/Heroes/LandingHero';
 import { HiOutlineMapPin } from 'react-icons/hi2';
 import UserRegister from '../components/UserRegister';
 import OurServices from '../components/OurServices';
@@ -63,7 +63,7 @@ function LandingPage() {
   return (
     <div className='bg-gray-200 flex flex-col justify-evenly'>
       <Navbar />
-      <Hero />
+      <LandingHero />
       {/* <OurServices/> */}
       <About />
       <div className='bg-white w-[75.5vw] h-auto py-[5vh] mx-8 self-center mb-[10vh] rounded-xl shadow-2xl'>

@@ -10,7 +10,8 @@ const Footer = () => {
 
 
   return (
-    <div className='w-full h-[40vh] mt-24 bg-slate-900 text-gray-300 px-2'>
+    <div className='w-full h-[50vh] mt-24 bg-slate-900 text-gray-300 px-2' id='contact'>
+        <p className='text-2xl font-semibold p-8 flex justify-center'>Contact Us</p>
         <div className='w-[80vw] h-[30vh] grid grid-cols-2 md:grid-cols-1 place-content-center m-auto border-b-2 border-gray-600'>
             <div className='col-span-2 pt-8 md:pt-2'>
                 <p className='font-bold uppercase text-xl'>You Can Give Your Feedback</p>

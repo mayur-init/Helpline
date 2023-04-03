@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Donor from '../pages/DonorRegisterPage'
+import Donor from '../../pages/DonorRegisterPage'
 
-function HeroBlood() {
+function BloodBankHero() {
   return (
-    <div name='home' className='w-full h-[100vh] bg-white  flex flex-col justify-between'>
+    <div className='w-full h-[100vh] bg-white  flex flex-col justify-between'>
                 {/* Hero Page Start */}
                 <div className='grid md:grid-cols-2 max-w-[1240px] m-auto'>
                     <div>
@@ -14,8 +14,8 @@ function HeroBlood() {
                         <p className='text-3xl md:text-4xl font-semibold'>Donate <span className='text-red-600 font-bold'>Blood</span> Give The Gift of Life</p>
                         <h1 className='py-3 text-5xl md:text-7xl font-bold text-red-600 hover:scale-105'>Our Blood Services</h1>
                         <div className='flex m-4'>
-                            <Link to='/donor-register'><button className='btn py-3 px-5 my-4 mx-3' >Register as Donor</button></Link>
-                            <Link to='/donor-details'><button className='btn py-3 px-5 my-4 bg-red-500'>Find a Donor</button></Link>
+                            <Link to='/'><button className='btn py-3 px-5 my-4 mx-3' >Register as Donor</button></Link>
+                            <Link to='/'><button className='btn py-3 px-5 my-4 bg-red-500'>Find a Donor</button></Link>
                         </div>
                     </div>
                 </div>
@@ -24,4 +24,4 @@ function HeroBlood() {
   )
 }
 
-export default HeroBlood
+export default BloodBankHero
