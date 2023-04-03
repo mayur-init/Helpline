@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { HashLink } from 'react-router-hash-link'
 
-const About = () => {
+const Services = () => {
     return (
         <div className='w-full flex items-center' id='services'>
             <div className='w-[80vw] m-auto'>
@@ -73,4 +73,4 @@ const About = () => {
     )
 }
 
-export default About
+export default Services

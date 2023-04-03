@@ -4,6 +4,7 @@ import Footer from '../components/Footer'
 import UserLogin from '../components/Loginforms/UserLogin'
 import AmbulanceServiceLogin from '../components/Loginforms/AmbulaceServiceLogin'
 import BloodBankLogin from '../components/Loginforms/BloodBankLogin'
+import OxygenCylinderServiceLogin from '../components/Loginforms/OxygenCylinderServiceLogin'
 
 function LoginPage() {
 
@@ -26,16 +27,17 @@ function LoginPage() {
       </div>
       <div className='my-[8.5vh] mx-[2vh]'>
         <div className='flex justify-end'>
-          <h1 className='text-4xl font-medium self-center mr-[10vw] hover:text-violet-600'>Login yourself as</h1>
+          <h1 className='text-4xl font-medium self-center mr-[8.4vw] hover:text-violet-600'>Login yourself as</h1>
           <button className='btn my-4 mx-2' onClick={() => { setform(1) }}>User</button>
-          <button className='btn my-4 mx-2' onClick={() => { setform(2) }}>Ambulace Service Provider</button>
-          <button className='btn my-4 mx-2' onClick={() => { setform(3) }}>Blood Bank Serivce Provider</button>
+          <button className='btn my-4 mx-2' onClick={() => { setform(2) }}>Ambulace Service</button>
+          <button className='btn my-4 mx-2' onClick={() => { setform(3) }}>Blood Bank Serivce</button>
+          <button className='btn my-4 mx-2' onClick={() => { setform(4) }}>Oxygen Serivce</button>
           {/* <button className='btn m-4'>User</button> */}
         </div>
       </div>
       <div>
         {
-          form === 1 ? <UserLogin /> : (form === 2 ? <AmbulanceServiceLogin /> : <BloodBankLogin />)
+          form === 1 ? <UserLogin /> : (form === 2 ? <AmbulanceServiceLogin /> : (form === 3?<BloodBankLogin />:<OxygenCylinderServiceLogin/>))
         }
       </div>
       <Footer />

@@ -1,8 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BloodBankPage from './pages/BloodBankPage';
-import DonorDetailsPage from './pages/DonorDetailsPage';
-import DonorRegisterPage from './pages/DonorRegisterPage';
 import LandingPage from './pages/LandingPage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
@@ -18,8 +16,6 @@ function App(){
           <Route path='/' element={<LandingPage/>} exact />
           <Route path='/register' element={<RegisterPage/>}/>
           <Route path='/blood-bank-service' element={<BloodBankPage/>}/>
-          <Route path='/donor-register' element={<DonorRegisterPage/>}/>
-          <Route path='/donor-details' element={<DonorDetailsPage/>}/>
           <Route path='/login' element={<LoginPage/>}/>
           <Route path='/enquiry' element={<EnquiryPage/>}/>
           <Route path='/ambulance-service' element={<AmbulanceServicePage/>}/>

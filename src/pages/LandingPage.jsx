@@ -3,11 +3,10 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import axios from 'axios';
 import { data } from 'autoprefixer';
-import About from '../components/About';
+import Services from '../components/Services';
 import LandingHero from '../components/Heroes/LandingHero';
 import { HiOutlineMapPin } from 'react-icons/hi2';
-import UserRegister from '../components/UserRegister';
-import OurServices from '../components/OurServices';
+import UserRegister from '../components/Registers/UserRegister';
 
 function LandingPage() {
 
@@ -64,8 +63,7 @@ function LandingPage() {
     <div className='bg-gray-200 flex flex-col justify-evenly'>
       <Navbar />
       <LandingHero />
-      {/* <OurServices/> */}
-      <About />
+      <Services/>
       <div className='bg-white w-[75.5vw] h-auto py-[5vh] mx-8 self-center mb-[10vh] rounded-xl shadow-2xl'>
         <div className='flex flex-col justify-center items-center h-full w-full'>
           <h1 className='text-4xl font-semibold text-gray-600 mx-6 my-4 hover:text-violet-600'>Add your location</h1>
