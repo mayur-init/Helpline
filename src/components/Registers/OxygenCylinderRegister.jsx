@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+/* import axios from "axios"; */
 
 function OxygenCylinderRegister() {
     const [OxygenCylinderProviderName, setOxygenCylinderProviderName] = useState('');
@@ -7,7 +8,7 @@ function OxygenCylinderRegister() {
     const [ContactNo, setContactNo] = useState('');
     const [Address, setAddress] = useState('');
 
-    const util = () => {
+    const util = /*async*/() => {
 
         const OxygenCylinderProviderData = {
             OxygenCylinderProviderName,
@@ -18,6 +19,18 @@ function OxygenCylinderRegister() {
         }
 
         console.log(OxygenCylinderProviderData);
+
+        /* try {
+            const response = await axios.post('http://localhost:5000/api/oxygencylinder', OxygenCylinderProviderData, {
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+                  }
+            });
+            console.log("sent");
+          } catch(error) {
+            console.log(error);
+          } */
 
         setOxygenCylinderProviderName('');
         setRegdNo('');
