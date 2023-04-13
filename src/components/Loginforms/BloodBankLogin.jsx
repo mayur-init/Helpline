@@ -1,8 +1,16 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function BloodBankLogin() {
 
+  const navigate = useNavigate();
   //state management for blood bank service provider
+
+
+  const handleClick = () =>{
+    // check if user is logged in or not
+    navigate('/blood-bank-service-provider-panel', {replace: true});
+  }
 
   return (
     <div className='flex justify-center items-center'>
@@ -12,7 +20,7 @@ function BloodBankLogin() {
           <input type='text'  placeholder='Service Provider Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
           <input type='text'  placeholder='Regd Id' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
           <input type='text'  placeholder='Password' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
-          <p className='flex justify-end'><button className='btn w-[100px] m-2'>Submit</button></p>
+          <p className='flex justify-end'><button className='btn w-[100px] m-2' onClick={handleClick}>Submit</button></p>
         </div>
       </div>
     </div>
