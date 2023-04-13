@@ -1,23 +1,23 @@
-const {Oxygencylinderprovider} = require('../../models');
+const {BloodBank} = require('../../models');
 
 // to add a oxygencylinderprovider
-exports.addOxygencylinderprovider = async(req, res) => {
+exports.addBloodBank = async(req, res) => {
 
     try{
-        const name = req.body.OxygenCylinderProviderName;
+        const name = req.body.BloodBankProviderName;
         const regNo = req.body.RegdNo;
         const email = req.body.Email;
         const contact = req.body.ContactNo;
         const address = req.body.Address;
 
-        const oxygencylinder = new Oxygencylinderprovider({
-            providerName: name,
-            regdNo: regNo,
+        const bloodBank = new BloodBank({
+            name: name,
+            regNo: regNo,
             email: email,
-            contactNo: contact,
+            contactNumber: contact,
             address: address    
         });
-        await oxygencylinder.save();
+        await bloodBank.save();
 
         res.status(201).json({msg: "success"});
     }
@@ -27,12 +27,12 @@ exports.addOxygencylinderprovider = async(req, res) => {
     }
 };
 
-exports.getOxygenCylinderProviders = async(req, res) => {
+exports.getBloodBanks = async(req, res) => {
     try{
-        const oxygenCylinderProviders = await Oxygencylinderprovider.find();
-        if(oxygenCylinderProviders.length === 0)
+        const bloodBanks = await BloodBank.find();
+        if(bloodBanks.length === 0)
             return res.status(404).json({msg : "Not found"});
-        res.status(200).json(oxygenCylinderProviders);
+        res.status(200).json(bloodBanks);
     }
     catch(err){
         console.log(err);

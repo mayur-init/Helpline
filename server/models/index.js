@@ -1,6 +1,7 @@
 const User = require('./user');
 const Ambulance = require('./ambulance');
 const Hospital = require('./hospital');
+const BloodBank = require('./bloodBank');
 const Oxygencylinderprovider = require('./oxygencylinderprovider');
 
 module.exports = {
@@ -8,4 +9,5 @@ module.exports = {
     Ambulance,
     Hospital,
     Oxygencylinderprovider,
+    BloodBank,
 };
