@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const app = express();
 
 app.use(cors());
+app.use(express.json());
 app.use('/api', router);
 
 const PORT = process.env.PORT || 5000;
@@ -15,7 +16,7 @@ const PORT = process.env.PORT || 5000;
 
 // databse connection
 mongoose.set('strictQuery', true);
-mongoose.connect(config.DB_URL, {
+mongoose.connect("mongodb+srv://mayur-init:Whyred07@cluster0.ldhun.mongodb.net/helpline?retryWrites=true&w=majority", {
     useNewUrlParser: true, 
     useUnifiedTopology: true,
 });
