@@ -1,14 +1,16 @@
-import React from 'react'
-
+import React, { useContext } from 'react'
+import {globalStateContext} from '../../contexts/globalStateContext'
 
 function UserPanel() {
+
+    const {userName} = useContext(globalStateContext);
 
     return (
         <div>
             <div name='panel-nav' className='h-[6vh] w-auto flex h justify-center p-3 border-b-2 border-gray-300'>
                 user-panel-nav
                 <div className='ml-auto'>
-                    username
+                    {userName}
                 </div>
             </div>
             <div className='flex'>

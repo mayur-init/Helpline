@@ -6,7 +6,6 @@ function AmbulaceServiceLogin() {
   const navigate = useNavigate();
   // state management for ambulance service provider
 
-
   const handleClick = () =>{
     // check if user is logged in or not
     navigate('/ambulance-service-provider-panel', {replace: true});
