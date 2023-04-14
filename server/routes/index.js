@@ -4,7 +4,9 @@ const googleMapApiController = require('../controllers/googleMapApiController');
 const {
     hospitalController,
     userController,
-    ambulanceController
+    ambulanceController,
+    oxygencylinderController,
+    bloodBankController,
 } = require('../controllers');
 
 // router.get('/', (req, res) =>{res.send('<h2>Project-Helpline: server is running...</h2>')});
@@ -20,5 +22,13 @@ router.post('/hospital', hospitalController.addHospital);
 
 // to register ambulance 
 router.post('/ambulance', ambulanceController.addAmbulance);
+
+// to register oxygen cylinder provider
+router.post('/oxygencylinder', oxygencylinderController.addOxygencylinderprovider);
+router.get('/oxygencylinderproviders', oxygencylinderController.getOxygenCylinderProviders);
+
+// to register blood bank service
+router.post('/bloodbank', bloodBankController.addBloodBank);
+router.get('/bloodbanks', bloodBankController.getBloodBanks);
 
 module.exports = router;
