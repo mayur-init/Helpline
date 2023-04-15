@@ -1,34 +1,27 @@
 const {Ambulance} = require('../../models');
 
-// to add a user
+// to add an ambulance
 exports.addAmbulance = async(req, res, next) => {
 
     try{
-        const providerName = req.body.providerName;
-        const contact = req.body.contact;
-        const owner = req.body.owner;
-        const aadhar = req.body.aadhar;
-        const vehicleNo = req.body.vehicleNo;
-        const registration = req.body.registration;
-        const driverContact = req.body.driverContact;
- 
+        const name = req.body.ServiceProviderName;
+        const regNo = req.body.RegdNo;
+        const email = req.body.Email;
+        const contact = req.body.ContactNo;
+        const address = req.body.Address;
+
         const ambulance = new Ambulance({
-            providerName: providerName,
-            contact: contact,
-            owner: owner,
-            aadhar: aadhar,
-            vehicleNo: vehicleNo,
-            registration: registration,
-            driverContact: driverContact,
-            
-            lattitude: '',
-            longitude: ''
+            name: name,
+            regNo: regNo,
+            email: email,
+            contactNumber: contact,
+            address: address    
         });
         await ambulance.save();
-
         res.status(201).json({msg: "success"});
     }
     catch(err){
         console.log(err);
+        res.status(400).json(err);
     }
 };

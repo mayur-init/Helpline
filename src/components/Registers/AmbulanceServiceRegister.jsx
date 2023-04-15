@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import axios from 'axios';
 
 function AmbulanceServiceRegister() {
 
@@ -8,7 +8,7 @@ function AmbulanceServiceRegister() {
     const [Email, setEmail] = useState('');
     const [ContactNo, setContactNo] = useState('');
     const [Address, setAddress] = useState('');
-    const util = () =>{
+    const util = async() =>{
 
         const AmbulanceServiceData = {
             ServiceProviderName,
@@ -19,6 +19,17 @@ function AmbulanceServiceRegister() {
         }
 
         console.log(AmbulanceServiceData);
+        try {
+            const response = await axios.post('http://localhost:5000/api/ambulance', AmbulanceServiceData, {
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+                  }
+            });
+            console.log("sent");
+          } catch(error) {
+            console.log(error);
+          }  
 
         setServiceProviderName('');
         setRegdNo('');
