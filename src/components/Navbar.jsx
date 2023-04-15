@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { globalStateContext } from '../contexts/globalStateContext'
 import { HashLink } from 'react-router-hash-link';
+import RegisterDropdown from '../components/RegisterDropdown'
 
 function Navbar() {
 
@@ -12,8 +13,8 @@ function Navbar() {
         <HashLink smooth to='/enquiry'><button className='mx-2 font-semibold underline hover:text-violet-600'>Enquire</button></HashLink>
         <HashLink smooth to='/#services'><button className='mx-2 font-semibold underline hover:text-violet-600'>Services</button></HashLink>
         <HashLink smooth to='/#contact'><button className='mx-2 font-semibold underline hover:text-violet-600'>Contact us</button></HashLink>
-        <HashLink smooth to='/register'><button className='mx-2 font-semibold underline hover:text-violet-600'>Register</button></HashLink>
-        <HashLink smooth to='/login'><button className='mx-2 font-semibold underline hover:text-violet-600'>login</button></HashLink>
+        <button className='mx-2 font-semibold underline hover:text-violet-600'><RegisterDropdown/></button>
+        <HashLink smooth to='/login'><button className='mx-20 font-semibold underline hover:text-violet-600'>Login</button></HashLink>
       </div>
       <div className='border-2 border-gray-200 rounded-xl px-3'>
         {userName}

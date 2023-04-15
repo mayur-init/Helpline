@@ -40,34 +40,6 @@ const Services = () => {
                     </div>
                     </HashLink>
                 </div>
-
-                {/*********************How it works****************************/}
-                <div className='bg-white grid grid-cols-2 shadow-2xl text-center mt-[10vh] p-7 mx-[2.4vw] mb-[6vh] rounded-xl'>
-                    <div className='py-4' >
-                        <img className='w-[32vw] h-[50vh]' src={'assets/img2.webp'} alt="/" />
-                    </div>
-                    <div className='h-[30vh] px-8 py-2' >
-                        <h1 className='text-2xl md:text-4xl font-bold mx-5 mb-4 text-start hover:text-violet-600'>How It Works?</h1>
-                        <div className='text-gray-500 font-semibold'>
-                            <div className='flex'>
-                                <span className='m-4 ml-3 w-12 h-12 p-1 bg-slate-300 text-sky-800 rounded-full text-4xl hover:bg-sky-800 hover:text-slate-400'>1</span>
-                                <p className='text-2xl m-4 ml-4 hover:text-violet-600'>Add your location</p>
-                            </div>
-                            <div className='flex'>
-                                <span className='m-4 ml-3 w-12 h-12 p-1 bg-slate-300 text-sky-800 rounded-full text-4xl hover:bg-sky-800 hover:text-slate-400'>2</span>
-                                <p className='text-2xl m-4 ml-4 hover:text-violet-600'>Choose Nearest Ambulance</p>
-                            </div>
-                            <div className='flex'>
-                                <span className='m-4 ml-3 w-12 h-12 p-1 bg-slate-300 text-sky-800 rounded-full text-4xl hover:bg-sky-800 hover:text-slate-400'>3</span>
-                                <p className='text-2xl m-4 ml-4 hover:text-violet-600'>Book an Ambulance Easily</p>
-                            </div>
-                            <div className='flex'>
-                                <span className='m-4 ml-3 w-12 h-12 p-1 bg-slate-300 text-sky-800 rounded-full text-4xl hover:bg-sky-800 hover:text-slate-400'>4</span>
-                                <p className='text-2xl m-4 ml-4 hover:text-violet-600'>Track your Ambulance</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     )
