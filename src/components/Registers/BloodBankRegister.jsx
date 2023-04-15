@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-/* import axios from 'axios'; */
+import axios from 'axios'; 
 
 function BloodBankRegister() {
 
@@ -9,7 +9,7 @@ function BloodBankRegister() {
   const [ContactNo, setContactNo] = useState('');
   const [Address, setAddress] = useState('');
 
-  const util = /*async*/() =>{
+  const util = async() =>{
 
     const BloodBankProviderData = {
       BloodBankProviderName,
@@ -21,7 +21,7 @@ function BloodBankRegister() {
 
     console.log(BloodBankProviderData);
 
-    /* try {
+    try {
       const response = await axios.post('http://localhost:5000/api/bloodbank', BloodBankProviderData, {
           headers: {
               "Access-Control-Allow-Origin": "*",
@@ -31,7 +31,7 @@ function BloodBankRegister() {
       console.log("sent");
     } catch(error) {
       console.log(error);
-    }  */
+    }  
 
     setBloodBankProviderName('');
     setRegdNo('');
