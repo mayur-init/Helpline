@@ -7,8 +7,13 @@ import Services from '../components/Services';
 import LandingHero from '../components/Heroes/LandingHero';
 import { HiOutlineMapPin } from 'react-icons/hi2';
 import UserRegister from '../components/Registers/UserRegister';
+import { toast } from 'react-hot-toast';
 
 function LandingPage() {
+
+  useEffect(() =>{
+    toast.success('Welcome Lodu...');
+  });
 
   const [location, setLocation] = useState();
 
