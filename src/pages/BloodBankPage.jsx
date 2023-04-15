@@ -7,9 +7,6 @@ function BloodBankPage() {
         <div className='bg-zinc-200' id='main'>
             <Navbar/>
             <BloodBankHero />
-            <div className="w-full h-[100vh]">
-                {/***********blood bank page content************/}
-            </div>
             <Footer/>
         </div>
     )
