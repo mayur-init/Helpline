@@ -25,3 +25,17 @@ exports.addAmbulance = async(req, res, next) => {
         res.status(400).json(err);
     }
 };
+
+
+exports.getAmbulances = async(req, res) => {
+    try{
+        const ambulances = await Ambulance.find();
+        if(ambulances.length === 0)
+            return res.status(404).json({msg : "Not found"});
+        res.status(200).json(ambulances);
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).json({msg : "Some issue"});
+    }
+};
