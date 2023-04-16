@@ -14,20 +14,22 @@ const {
 //google map api releated routes
 router.get('/getNearby', googleMapApiController.getNearby);
 
-// to collect user data
-router.post('/user', userController.addUser);
+// user routes
+router.post('/user', userController.addUser);           // to register a user
+router.get('/users/:id', userController.getUser);       // to view a user
 
 // to collect hospital data
 router.post('/hospital', hospitalController.addHospital);
 
-// to register ambulance 
+// ambulance routes
 router.post('/ambulance', ambulanceController.addAmbulance);
+router.get('/ambulances', ambulanceController.getAmbulances);
 
-// to register oxygen cylinder provider
+// oxygen cylinder provider routes
 router.post('/oxygencylinder', oxygencylinderController.addOxygencylinderprovider);
 router.get('/oxygencylinderproviders', oxygencylinderController.getOxygenCylinderProviders);
 
-// to register blood bank service
+// blood bank service routes
 router.post('/bloodbank', bloodBankController.addBloodBank);
 router.get('/bloodbanks', bloodBankController.getBloodBanks);
 

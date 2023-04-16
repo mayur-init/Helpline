@@ -1,11 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
+import axios from 'axios';
 
 function UserRegister({location, setLocation}) {
 
   const [UserName, setUserName] = useState('');
   const [UserContactNumber, setUserContactNumber] = useState('');
 
-  const util = () =>{
+  const util = async() =>{
 
     const UserData = {
         Name: UserName,
@@ -15,6 +16,18 @@ function UserRegister({location, setLocation}) {
     }
 
     console.log(UserData);
+
+    try {
+      const response = await axios.post('http://localhost:5000/api/user', UserData, {
+          headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+            }
+      });
+      console.log("sent");
+    } catch(error) {
+      console.log(error);
+    }  
     
     setUserName('');
     setUserContactNumber('');

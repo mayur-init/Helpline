@@ -1,20 +1,18 @@
 const {User} = require('../../models');
 
 // to add a user
-exports.addUser = async(req, res, next) => {
+exports.addUser = async(req, res) => {
 
     try{
-        const name = req.body.name;
-        const contact = req.body.contact;
-        //const address = req.body.address;
+        const name = req.body.Name;
+        const contact = req.body.ContactNumber;
+        const lattitude = req.body.lattitude;
+        const longitude = req.body.longitude;
 
         const user = new User({
             name: name,
-            contact: contact,
-            //address: address
-            // put code for altitude and longitude
-            longitude: '',
-            latittude: ''
+            contactNumber: contact,
+            address: '',
         });
         await user.save();
 
@@ -22,5 +20,20 @@ exports.addUser = async(req, res, next) => {
     }
     catch(err){
         console.log(err);
+        res.status(400).json(err);
     }
 };
+
+exports.getUser = async(req, res) => {
+    try{
+        const userId = req.params.id;
+        const user = await User.findById(userId);
+        if(user === null)
+            return res.status(404).json({msg : "Not found"});
+        res.status(200).json(user);
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).json({msg : "Some issue"});
+    }
+}
