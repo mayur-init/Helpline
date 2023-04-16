@@ -27,7 +27,7 @@ function LoginPage() {
       </div>
       <div className='my-[8.5vh] mx-[2vh]'>
         <div className='flex justify-end'>
-          <h1 className='text-4xl font-medium self-center mr-[8.4vw] hover:text-violet-600'>Login yourself as</h1>
+          <h1 className='text-4xl font-medium self-center mr-[6vw] hover:text-violet-600'>Login yourself as</h1>
           <button className='btn my-4 mx-2' onClick={() => { setform(1) }}>User</button>
           <button className='btn my-4 mx-2' onClick={() => { setform(2) }}>Ambulance Service</button>
           <button className='btn my-4 mx-2' onClick={() => { setform(3) }}>Blood Bank Serivce</button>

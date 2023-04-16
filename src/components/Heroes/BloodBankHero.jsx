@@ -1,9 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import BloodBankDemo from '../DemoData/BloodBankDemo';
-
 function BloodBankHero() {
-    const [data, setData] = useState(BloodBankDemo);
+    const [bloodbanks, setBloodbanks] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:5000/api/bloodbanks')
+          .then(res => res.json())
+          .then(data => setBloodbanks(data))
+          .catch(error => console.log(error));
+      }, []);
+
     return (
         <div>
             <div className='w-full h-[100vh] bg-white  flex flex-col justify-between'>
@@ -27,21 +33,19 @@ function BloodBankHero() {
 
                 {/*BloodBank Details Start*/}
 
-                <h1 className='text-4xl font-bold my-10 text-violet-600 text-center hover:scale-110'>Our Blood Bank Details</h1>
+                <h1 className='flex flex-col  justify-items-center text-4xl font-semibold my-12 text-gray-800 text-center'>Avaliable blood banks near you</h1>
         
-                <div className='grid md:grid-cols-3 gap-3 mx-5'>
+                <div className='w-auto flex flex-col justify-items-center mx-5'>
                 {
-                    data.map((item) => {
-                        const { id, name, address, location, number,email, available,category } = item;
+                    bloodbanks.map((item) => {
+                        const { id, name, address, regNo ,email, contactNumber } = item;
                         return (
-                            <div className="border min-h-[70vh] bg-white m-4 p-5 rounded-xl shadow-xl hover:scale-105" key={id}>
-                                    <h1 className="mx-2 font-bold text-3xl text-center text-violet-600 my-3">{name}</h1>
-                                    <h1 className='text-xl mt-7 font-semibold'>Address: {address}</h1>
-                                    <h2 className="text-xl my-3 font-semibold">City: {location}</h2>
-                                    <h2 className="text-xl my-3 font-semibold">Availability: <span className='text-red-600'>{available}</span></h2>
-                                    <h2 className="text-xl my-3 font-semibold">Category: {category}</h2>
-                                    <h2 className="text-xl my-3 font-semibold">Email: {email}</h2>
-                                    <h2 className="text-xl my-3 font-semibold">Contact No: {number}</h2>
+                            <div className="min-h-[10vh] w-[60vw] mx-auto bg-white my-4 py-5 px-[5vw] rounded-xl shadow-xl" key={id}>
+                                    <h1 className=" font-bold text-2xl text-gray-600 my-2">{name}</h1>
+                                    <h2 className="text-xl my-2 font-semibold">Contact No: {contactNumber}</h2>
+                                    <h1 className='text-xl my-2 font-semibold'>Address: {address}</h1>
+                                    {/* <h2 className="text-xl my-3 font-semibold">Registration No: {regNo}</h2>
+                                    <h2 className="text-xl my-3 font-semibold">Email: {email}</h2> */}
                             </div>
                            
                         )

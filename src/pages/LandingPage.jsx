@@ -11,9 +11,9 @@ import { toast } from 'react-hot-toast';
 
 function LandingPage() {
 
-  useEffect(() =>{
-    toast.success('Welcome Lodu...');
-  });
+  // useEffect(() => {
+  //   toast.success('Welcome Lodu...');
+  // });
 
   const [location, setLocation] = useState();
 
@@ -35,7 +35,7 @@ function LandingPage() {
           lattitude,
           longitude,
         }
-        
+
         //console.log(data);
 
         // try {
@@ -56,7 +56,7 @@ function LandingPage() {
         // } catch (err) {
         //   console.log(err);
         // }
-        
+
       });
 
     } else {
@@ -68,19 +68,50 @@ function LandingPage() {
     <div className='bg-gray-200 flex flex-col justify-evenly'>
       <Navbar />
       <LandingHero />
-      <Services/>
-      <div className='bg-white w-[75.5vw] h-auto py-[5vh] mx-8 self-center mb-[10vh] rounded-xl shadow-2xl'>
-        <div className='flex flex-col justify-center items-center h-full w-full'>
-          <h1 className='text-4xl font-semibold text-gray-600 mx-6 my-4 hover:text-violet-600'>Add your location</h1>
-          {!location ?
-            (<div className='flex justify-center'>
-              <p className='self-center'><button onClick={getLocation} className='btn flex justify-center m-4'>My location</button></p>
-              {/* <HiOutlineMapPin className='w-6 h-6 m-2 hover:scale-150'/> */}
-            </div>) :
-            (<div className='w-full'>
-              <UserRegister location = {location} setLocation = {setLocation}/>
-            </div>)
-          }
+      <Services />
+      {/*********************How it works****************************/}
+      <div className='bg-white w-[75vw] ml-[12vw] grid grid-cols-2 shadow-2xl text-center mt-[10vh] p-7 mx-[2.4vw] mb-[6vh] rounded-xl'>
+        <div className='py-4' >
+          <img className='w-[32vw] h-[50vh]' src={'assets/img2.webp'} alt="/" />
+        </div>
+        <div className='h-[30vh] px-8 py-2' >
+          <h1 className='text-2xl md:text-4xl font-bold mx-5 mb-4 text-start hover:text-violet-600'>How It Works?</h1>
+          <div className='text-gray-500 font-semibold'>
+            <div className='flex'>
+              <span className='m-4 ml-3 w-12 h-12 p-1 bg-slate-300 text-sky-800 rounded-full text-4xl hover:bg-sky-800 hover:text-slate-400'>1</span>
+              <p className='text-2xl m-4 ml-4 hover:text-violet-600'>Add your location</p>
+            </div>
+            <div className='flex'>
+              <span className='m-4 ml-3 w-12 h-12 p-1 bg-slate-300 text-sky-800 rounded-full text-4xl hover:bg-sky-800 hover:text-slate-400'>2</span>
+              <p className='text-2xl m-4 ml-4 hover:text-violet-600'>Choose Nearest Ambulance</p>
+            </div>
+            <div className='flex'>
+              <span className='m-4 ml-3 w-12 h-12 p-1 bg-slate-300 text-sky-800 rounded-full text-4xl hover:bg-sky-800 hover:text-slate-400'>3</span>
+              <p className='text-2xl m-4 ml-4 hover:text-violet-600'>Book an Ambulance Easily</p>
+            </div>
+            <div className='flex' id='userRegister'>
+              <span className='m-4 ml-3 w-12 h-12 p-1 bg-slate-300 text-sky-800 rounded-full text-4xl hover:bg-sky-800 hover:text-slate-400'>4</span>
+              <p className='text-2xl m-4 ml-4 hover:text-violet-600'>Track your Ambulance</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/******************Add your location*************************/}
+      <div className='h-auto w-full flex justify-center'>
+        <div className='bg-white w-[75.5vw] h-auto mt-[2vh] py-[2vh] mx-8 self-center mb-[10vh] rounded-xl shadow-2xl'>
+          <div className='flex flex-col justify-center items-center h-full w-full'>
+            <h1 className='text-4xl font-semibold text-gray-600 mx-6 my-4 hover:text-violet-600'>Add your location</h1>
+            {!location ?
+              (<div className='flex justify-center'>
+                <p className='self-center'><button onClick={getLocation} className='btn flex justify-center m-4'>My location</button></p>
+                {/* <HiOutlineMapPin className='w-6 h-6 m-2 hover:scale-150'/> */}
+              </div>) :
+              (<div className='w-full'>
+                <UserRegister location={location} setLocation={setLocation} />
+              </div>)
+            }
+          </div>
         </div>
       </div>
       <Footer />

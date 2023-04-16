@@ -8,9 +8,6 @@ function OxygenCylinderPage() {
     <div className='bg-zinc-200' id='main'>
             <Navbar/>
             <OxygenCylinderHero/>
-            <div className="w-full h-[100vh]">
-                {/***********oxygen cyliinder service page content************/}
-            </div>
             <Footer/>
     </div>
   )
