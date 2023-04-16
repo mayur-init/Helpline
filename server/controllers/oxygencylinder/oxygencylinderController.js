@@ -4,7 +4,7 @@ const {Oxygencylinderprovider} = require('../../models');
 exports.addOxygencylinderprovider = async(req, res) => {
 
     try{
-        const name = req.body.OxygenCylinderProviderName;
+        const name = req.body.ServiceProviderName;
         const regNo = req.body.RegdNo;
         const email = req.body.Email;
         const contact = req.body.ContactNo;

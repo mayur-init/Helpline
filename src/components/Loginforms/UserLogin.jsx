@@ -3,15 +3,17 @@ import { useNavigate } from 'react-router-dom'
 import { globalStateContext } from '../../contexts/globalStateContext'
 import { toast } from 'react-hot-toast';
 
-function UserLogin() {
+function UserLogin({}) {
 
   const navigate = useNavigate();
-  const { userName, setUserName } = useContext(globalStateContext);
+  const { userName, setUserName, setLoggedIn } = useContext(globalStateContext);
   //state management for user 
 
 
   const handleClick = () =>{
     // check if user is logged in or not
+    setLoggedIn(true);
+    setUserName(userName);
     toast.success(`Welcome ${userName}`)
     navigate('/user-panel', {replace: true});
   }

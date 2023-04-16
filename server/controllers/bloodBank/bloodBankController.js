@@ -4,7 +4,7 @@ const {BloodBank} = require('../../models');
 exports.addBloodBank = async(req, res) => {
 
     try{
-        const name = req.body.BloodBankProviderName;
+        const name = req.body.ServiceProviderName;
         const regNo = req.body.RegdNo;
         const email = req.body.Email;
         const contact = req.body.ContactNo;
