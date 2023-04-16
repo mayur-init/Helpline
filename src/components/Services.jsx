@@ -7,10 +7,10 @@ const Services = () => {
         <div className='w-full flex items-center' id='services'>
             <div className='w-[80vw] m-auto'>
 
-                <h2 className='text-5xl font-bold flex justify-center my-[6vh] hover:text-violet-600'>Our Services</h2>
+                <h2 className='text-5xl font-bold flex justify-center my-[8vh] hover:text-violet-600'>Our Services</h2>
                 
                 {/***************card-box*************/}
-                <div className='grid md:grid-cols-3 gap-4 text-center my-[15vh] mx-8'>
+                <div className='grid md:grid-cols-3 gap-4 text-center my-[10vh] mx-8'>
                     {/********cards*********/}
 
                     <HashLink smooth to={'/ambulance-service#main'}>

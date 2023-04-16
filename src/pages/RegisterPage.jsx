@@ -2,10 +2,7 @@ import React, {useState} from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import RegisterPageHero from '../components/Heroes/RegisterPageHero';
-import BloodBankRegister from '../components/Registers/BloodBankRegister';
-import AmbulanceServiceRegister from '../components/Registers/AmbulanceServiceRegister';
-import OxygenCylinderRegister from '../components//Registers/OxygenCylinderRegister';
-import ServiceRegisterForm from '../components/Registers/AmbulanceServiceRegister';
+import ServiceProviderRegister from '../components/Registers/ServiceProviderRegister';
 
 function RegisterPage() {
   
@@ -30,7 +27,7 @@ function RegisterPage() {
         </div>
         
         <div className='flex mt-[4vh] bg-white rounded-xl'>
-          <ServiceRegisterForm/>
+          <ServiceProviderRegister/>
         </div>
       </div>
       <Footer />

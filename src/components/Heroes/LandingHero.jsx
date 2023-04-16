@@ -18,7 +18,7 @@ const LandingHero = () => {
   }, []);
 
   return (
-    <div className='w-full h-[92vh] bg-white flex flex-col justify-between'>
+    <div className='w-full h-[92vh] bg-white flex flex-col justify-between' id='hero'>
       <div className='grid md:grid-cols-2 mx-[35vh] mt-[18vh]'>
         <div className='flex flex-col justify-center md:items-start w-full mt-[18vh]'>
           <h1 className='p-2 text-5xl md:text-6xl text-gray-400 font-bold'>Book Your</h1>

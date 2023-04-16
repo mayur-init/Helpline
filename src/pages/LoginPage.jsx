@@ -2,9 +2,7 @@ import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import UserLogin from '../components/Loginforms/UserLogin'
-import AmbulanceServiceLogin from '../components/Loginforms/AmbulaceServiceLogin'
-import BloodBankLogin from '../components/Loginforms/BloodBankLogin'
-import OxygenCylinderServiceLogin from '../components/Loginforms/OxygenCylinderServiceLogin'
+import ServiceProviderLogin from '../components/Loginforms/ServiceProviderLogin'
 
 function LoginPage() {
 
@@ -37,7 +35,7 @@ function LoginPage() {
       </div>
       <div>
         {
-          form === 1 ? <UserLogin />: <AmbulanceServiceLogin />
+          form === 1 ? <UserLogin />: <ServiceProviderLogin />
         }
       </div>
       <Footer />

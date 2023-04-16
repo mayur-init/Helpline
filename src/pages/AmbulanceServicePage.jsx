@@ -23,9 +23,6 @@ function AmbulanceServicePage() {
     <div className='bg-zinc-200' id='main'>
             <Navbar/>
             <AmbulanceServiceHero/>
-            <div className="w-full h-[100vh]">
-                {/***********ambulance page content************/}
-            </div>
             <Footer/>
     </div>
   )

@@ -41,17 +41,17 @@ function AmbulanceServiceHero() {
     {/*OxygenProvider Details Start*/}
     <h1 className='text-4xl font-bold my-12 text-gray-800 text-center '>Our Ambulance Providers Details</h1>
         
-        <div className='h-screen flex flex-col justify-content-center mx-5'>
+        <div className='w-auto flex flex-col justify-items-center mx-5'>
         {
             ambulances.map((item) => {
                 const { _id, name, address, regNo ,email, contactNumber} = item;
                 return (
-                    <div className="border min-h-[10vh] w-[60vw] mx-auto bg-white m-4 py-5 px-[5vw] rounded-xl shadow-xl hover:scale-105" key={_id}>
+                    <div className="min-h-[10vh] w-[60vw] mx-auto bg-white my-4 py-5 px-[5vw] rounded-3xl shadow-xl" key={_id}>
                             <h1 className="font-bold text-2xl text-gray-600 my-2">{name}</h1>
                             <h2 className="text-xl my-2 font-semibold">Contact No: { contactNumber}</h2>
                             <h1 className='text-xl my-2 font-semibold'>Address: {address}</h1>
-                            <h2 className="text-xl my-3 font-semibold">Registration No: {regNo}</h2>
-                            <h2 className="text-xl my-3 font-semibold">Email: {email}</h2>
+                            {/* <h2 className="text-xl my-3 font-semibold">Registration No: {regNo}</h2>
+                            <h2 className="text-xl my-3 font-semibold">Email: {email}</h2> */}
                     </div>
                    
                 )

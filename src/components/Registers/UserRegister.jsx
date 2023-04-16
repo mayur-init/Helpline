@@ -1,15 +1,20 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import axios from 'axios';
+import toast from 'react-hot-toast';
+import { globalStateContext } from '../../contexts/globalStateContext'
+import { useNavigate } from 'react-router-dom';
+
 
 function UserRegister({location, setLocation}) {
 
-  const [UserName, setUserName] = useState('');
   const [UserContactNumber, setUserContactNumber] = useState('');
+  const {userName, setUserName, setLoggedIn} = useContext(globalStateContext);
+  const navigate = useNavigate()
 
   const util = async() =>{
 
     const UserData = {
-        Name: UserName,
+        Name: userName,
         ContactNumber: UserContactNumber,
         lattitude: location.lattitude,
         longitude: location.longitude,
@@ -32,6 +37,11 @@ function UserRegister({location, setLocation}) {
     setUserName('');
     setUserContactNumber('');
     setLocation(null);
+
+    setUserName(userName);
+    setLoggedIn(true);
+    toast.success(`Welcome ${userName}`)
+    navigate('/#hero', {replace: true});
   }
 
   return (

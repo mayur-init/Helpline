@@ -70,7 +70,7 @@ function LandingPage() {
       <LandingHero />
       <Services />
       {/*********************How it works****************************/}
-      <div className='bg-white w-[75vw] ml-[12vw] grid grid-cols-2 shadow-2xl text-center mt-[10vh] p-7 mx-[2.4vw] mb-[6vh] rounded-xl'>
+      <div className='bg-white w-[75vw] ml-[12vw] grid grid-cols-2 shadow-2xl text-center mt-[6vh] p-7 mx-[2.4vw] mb-[6vh] rounded-xl'>
         <div className='py-4' >
           <img className='w-[32vw] h-[50vh]' src={'assets/img2.webp'} alt="/" />
         </div>
@@ -99,7 +99,7 @@ function LandingPage() {
 
       {/******************Add your location*************************/}
       <div className='h-auto w-full flex justify-center'>
-        <div className='bg-white w-[75.5vw] h-auto mt-[2vh] py-[2vh] mx-8 self-center mb-[10vh] rounded-xl shadow-2xl'>
+        <div className='bg-white w-[75.5vw] h-auto mt-[4vh] py-[2vh] mx-8 self-center mb-[10vh] rounded-xl shadow-2xl'>
           <div className='flex flex-col justify-center items-center h-full w-full'>
             <h1 className='text-4xl font-semibold text-gray-600 mx-6 my-4 hover:text-violet-600'>Add your location</h1>
             {!location ?

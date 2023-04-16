@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import RegisterFormDropdown from '../RegisterFormDropdown';
+import RegisterFormDropdown from '../Dropdowns/RegisterFormDropdown';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
-function ServiceRegisterForm() {
+function ServiceProviderRegister() {
 
     const options  = [
         {label: 'Ambulance Service Provider', id: 1},
@@ -17,6 +19,7 @@ function ServiceRegisterForm() {
     const [Email, setEmail] = useState('');
     const [ContactNo, setContactNo] = useState('');
     const [Address, setAddress] = useState('');
+    const navigate = useNavigate();
 
     const util = async() =>{
 
@@ -68,13 +71,22 @@ function ServiceRegisterForm() {
               } 
         }
          
-        console.log(formNo);
+        // console.log(formNo);
 
         setServiceProviderName('');
         setRegdNo('');
         setEmail('');
         setContactNo('');
         setAddress('');
+
+        toast.success(`Welcome ${ServiceProviderName}`)
+        if(formNo === 1){
+          navigate('/ambulance-service-provider-panel', {replace: true});
+        }else if(formNo === 2){
+          navigate('/blood-bank-service-provider-panel', {replace: true});
+        }else if(formNo === 3){
+          navigate('/oxygen-cylinder-provider-panel', { replace: true });
+        }
     }
 
     return (
@@ -93,4 +105,4 @@ function ServiceRegisterForm() {
     )
 }
 
-export default ServiceRegisterForm
+export default ServiceProviderRegister

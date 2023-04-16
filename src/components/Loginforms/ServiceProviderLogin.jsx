@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
-import LoginFormDropdown from '../LoginFormDropdown'
+import LoginFormDropdown from '../Dropdowns/LoginFormDropdown'
+import { HashLink } from 'react-router-hash-link'
 
-function AmbulaceServiceLogin() {
+function ServiceProviderLogin() {
 
   const options  = [
     {label: 'Ambulance Service Provider', id: 1},
@@ -37,10 +38,11 @@ function AmbulaceServiceLogin() {
           <input type='text'  placeholder='Regd Id' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
           <input type='text'  placeholder='Password' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
           <p className='flex justify-end'><button className='btn w-[100px] m-2' onClick={handleClick}>Submit</button></p>
+          <p className='flex justify-start text-sm'>Haven't registered yet?<HashLink smooth to='/register#registerForm' className='hover:text-violet-600 mx-2'>Register Now</HashLink></p>
         </div>
       </div>
     </div>
   )
 }
 
-export default AmbulaceServiceLogin
+export default ServiceProviderLogin
