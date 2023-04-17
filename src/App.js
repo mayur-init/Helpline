@@ -19,10 +19,11 @@ function App() {
 
   const [userName, setUserName] = useState(undefined);
   const [location, setLocation] = useState(undefined);
+  const [isLoggedIn, setLoggedIn] = useState(false);
 
   return (
     <div>
-      <globalStateContext.Provider value={{ userName, setUserName, location, setLocation }}>
+      <globalStateContext.Provider value={{ userName, setUserName, location, setLocation, isLoggedIn, setLoggedIn }}>
         {/************react-notification**************/}
         <Toaster 
           position='top-right'
