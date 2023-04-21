@@ -19,11 +19,12 @@ function App() {
 
   const [userName, setUserName] = useState(undefined);
   const [location, setLocation] = useState(undefined);
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isUserLoggedIn, setUserLoggedIn] = useState(false);
+  const [isProviderLoggedIn, setProviderLoggedIn] = useState(false);
 
   return (
     <div>
-      <globalStateContext.Provider value={{ userName, setUserName, location, setLocation, isLoggedIn, setLoggedIn }}>
+      <globalStateContext.Provider value={{ userName, setUserName, location, setLocation, isUserLoggedIn, setUserLoggedIn, isProviderLoggedIn, setProviderLoggedIn }}>
         {/************react-notification**************/}
         <Toaster 
           position='top-right'
@@ -50,9 +51,9 @@ function App() {
             <Route path='/ambulance-service' element={<AmbulanceServicePage />} />
             <Route path='/oxygen-cylinder-service' element={<OxygenCylinderPage />} />
             <Route path='/user-panel' element={<UserPanel />} />
-            <Route path='/ambulance-service-provider-panel' element={<AmbulanceServiceProviderPanel />} />
-            <Route path='/blood-bank-service-provider-panel' element={<BloodBankServiceProviderPanel />} />
-            <Route path='/oxygen-cylinder-provider-panel' element={<OxygenCylinderProviderPanel />} />
+            <Route path='/ambulance-service-provider-panel/:providerName' element={<AmbulanceServiceProviderPanel />} />
+            <Route path='/blood-bank-service-provider-panel/:providerName' element={<BloodBankServiceProviderPanel />} />
+            <Route path='/oxygen-cylinder-provider-panel/:providerName' element={<OxygenCylinderProviderPanel />} />
             <Route path='/admin-panel' element={<AdminPanel />} />
           </Routes>
         </Router>

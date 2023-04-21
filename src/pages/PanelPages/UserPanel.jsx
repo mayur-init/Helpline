@@ -1,9 +1,19 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import {globalStateContext} from '../../contexts/globalStateContext'
 
 function UserPanel() {
 
-    const {userName} = useContext(globalStateContext);
+    const {userName, isUserLoggedIn} = useContext(globalStateContext);
+    const navigate = useNavigate();
+
+    useEffect(() =>{
+        if(!isUserLoggedIn){
+            toast.error('You are not logged in, log in first');
+            navigate('/login' , {replace: true});
+        }
+    })
 
     return (
         <div>
