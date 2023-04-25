@@ -6,18 +6,18 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
-  const { userName, setUserName, isLoggedIn, setLoggedIn } = useContext(globalStateContext);
+  const { userName, setUserName, isUserLoggedIn, setUserLoggedIn } = useContext(globalStateContext);
   const navigate = useNavigate();
 
   const handleLogout = () =>{
     setUserName('');
 
-    if(isLoggedIn){
+    if(isUserLoggedIn){
       toast.success('Logged out Successfully');
-      setLoggedIn(false);
+      setUserLoggedIn(false);
       navigate('/#hero', {replace: true});
     }else{
-      toast.error('You are not logged in, login first')
+      toast.error('You are not logged in, log in first')
     }
   }
 
@@ -33,7 +33,7 @@ function Navbar() {
 
       </div>
       <div className='flex justify-center'>
-        <p className='border-2 border-gray-200 rounded-xl px-3'>{isLoggedIn? 
+        <p className='border-2 border-gray-200 rounded-xl px-3'>{isUserLoggedIn? 
         <HashLink smoot to='/user-panel'>{userName}</HashLink>
         : ''}</p>
         <button className='mx-2 font-semibold underline hover:text-violet-600' onClick={handleLogout}>Logout</button>

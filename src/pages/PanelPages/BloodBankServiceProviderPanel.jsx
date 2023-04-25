@@ -1,12 +1,17 @@
 import React from 'react'
+import { useParams } from 'react-router-dom'
+
 
 function BloodBankServiceProviderPanel() {
+
+    const { providerName } = useParams() 
+
   return (
     <div>
             <div name='panel-nav' className='h-[6vh] w-auto flex h justify-center p-3 border-b-2 border-gray-300'>
                 blood-bank-service-provider-panel-nav
                 <div className='ml-auto'>
-                    service-provider-name
+                    {providerName}
                 </div>
             </div>
             <div className='flex'>

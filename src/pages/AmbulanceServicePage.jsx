@@ -11,10 +11,10 @@ function AmbulanceServicePage() {
 
   const navigate = useNavigate();
 
-  const {isLoggedIn} = useContext(globalStateContext);
+  const {isUserLoggedIn} = useContext(globalStateContext);
   useEffect(() =>{
-    if(!isLoggedIn){
-      toast.error('You are not logged in, login first')
+    if(!isUserLoggedIn){
+      toast.error('You are not logged in, log in first')
       navigate('/login#loginForm', {replace: true});
     }
   });
