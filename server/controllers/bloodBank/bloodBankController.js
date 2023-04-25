@@ -39,3 +39,16 @@ exports.getBloodBanks = async(req, res) => {
         res.status(400).json({msg : "Some issue"});
     }
 }
+
+exports.deleteBloodBank = async(req, res) => {
+    try{
+        const bloodBankId = req.params.id;
+        const response = await BloodBank.findByIdAndRemove(bloodBankId);
+        if(response === null)
+            return res.status(404).json({msg : "Not found"});
+        res.status(200).json(response);
+    }
+    catch(err){
+        res.status(400).json({msg : "Some issue"});
+    }
+};

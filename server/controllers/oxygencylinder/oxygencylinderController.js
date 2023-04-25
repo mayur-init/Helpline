@@ -39,3 +39,18 @@ exports.getOxygenCylinderProviders = async(req, res) => {
         res.status(400).json({msg : "Some issue"});
     }
 }
+
+exports.deleteOxygenCylinderProvider = async(req, res) => {
+    try{
+        const providerId = req.params.id;
+        const response = await Oxygencylinderprovider.findByIdAndRemove(providerId);
+        if(response === null)
+            return res.status(404).json({msg : "Not found"});
+        res.status(200).json(response);
+    }
+    catch(err){
+        console.log(err);
+        res.status(400).json({msg : "Some issue"});
+    }
+};
+    
