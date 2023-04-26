@@ -37,3 +37,28 @@ exports.getUser = async(req, res) => {
         res.status(400).json({msg : "Some issue"});
     }
 }
+
+exports.updateUser = async(req, res) => {
+    try{
+        const userId = req.params.id;
+        const response = await User.findByIdAndUpdate(userId, {$set : req.body} , {new : true});
+        if(response === null)
+            return res.status(404).json({msg : "Not found"});
+        res.status(200).json({data : response, msg : "Updated Successfully"});
+    }catch(err){
+        res.status(400).json({msg : "Some issue"});
+    }
+};
+
+exports.removeUser = async(req, res) => {
+    try{
+        const userId = req.params.id;
+        const response = await User.findByIdAndRemove(userId);
+        if(response === null)
+            return res.status(404).json({msg : "Not found"});
+        res.status(200).json({msg : "Deleted Successfully"});
+    }
+    catch(err){
+        res.status(400).json({msg : "Some issue"});
+    }
+};
