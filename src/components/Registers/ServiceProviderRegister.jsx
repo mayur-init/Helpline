@@ -8,9 +8,10 @@ import { globalStateContext } from '../../contexts/globalStateContext'
 function ServiceProviderRegister() {
 
   const options = [
-    { label: 'Ambulance Service Provider', id: 1 },
-    { label: 'Blood Bank Service Provider', id: 2 },
-    { label: 'Oxygen Cylinder Provider', id: 3 }
+    { label: 'Hospital Service', id: 1 },
+    { label: 'Ambulance Service Provider', id: 2 },
+    { label: 'Blood Bank Service Provider', id: 3 },
+    { label: 'Oxygen Cylinder Provider', id: 4 }
   ]
 
   const [formNo, setFromNo] = useState(0);
@@ -40,6 +41,14 @@ function ServiceProviderRegister() {
 
       if (formNo === 1) {
         try {
+          //send hospital register data in db
+
+        } catch (error) {
+          console.log(error);
+        }
+
+      } else if (formNo === 2) {
+        try {
           const response = await axios.post('http://localhost:5000/api/ambulance', Data, {
             headers: {
               "Access-Control-Allow-Origin": "*",
@@ -50,7 +59,7 @@ function ServiceProviderRegister() {
         } catch (error) {
           console.log(error);
         }
-      } else if (formNo === 2) {
+      } else if (formNo === 3) {
         try {
           const response = await axios.post('http://localhost:5000/api/bloodbank', Data, {
             headers: {
@@ -62,7 +71,7 @@ function ServiceProviderRegister() {
         } catch (error) {
           console.log(error);
         }
-      } else if (formNo === 3) {
+      } else if (formNo === 4) {
         try {
           const response = await axios.post('http://localhost:5000/api/oxygencylinder', Data, {
             headers: {
@@ -84,14 +93,18 @@ function ServiceProviderRegister() {
       setContactNo('');
       setAddress('');
 
+      //set provider logged in
       setProviderLoggedIn(true);
 
-      toast.success(`Welcome ${ServiceProviderName}`)
+      toast.success(`Welcome ${ServiceProviderName}`);
+
       if (formNo === 1) {
-        navigate(`/ambulance-service-provider-panel/${ServiceProviderName}`, { replace: true });
+        navigate(`/hospital-service-panel/${ServiceProviderName}`, { replace: true });
       } else if (formNo === 2) {
-        navigate(`/blood-bank-service-provider-panel/${ServiceProviderName}`, { replace: true });
+        navigate(`/ambulance-service-provider-panel/${ServiceProviderName}`, { replace: true });
       } else if (formNo === 3) {
+        navigate(`/blood-bank-service-provider-panel/${ServiceProviderName}`, { replace: true });
+      } else if (formNo === 4) {
         navigate(`/oxygen-cylinder-provider-panel/${ServiceProviderName}`, { replace: true });
       }
     }

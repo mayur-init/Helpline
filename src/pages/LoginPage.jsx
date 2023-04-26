@@ -33,7 +33,7 @@ function LoginPage() {
           {/* <button className='btn m-4'>User</button> */}
         </div>
       </div>
-      <div>
+      <div className='mb-[6vh]'>
         {
           form === 1 ? <UserLogin />: <ServiceProviderLogin />
         }

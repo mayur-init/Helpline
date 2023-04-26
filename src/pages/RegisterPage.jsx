@@ -26,7 +26,7 @@ function RegisterPage() {
           </div>
         </div>
         
-        <div className='flex mt-[4vh] bg-white rounded-xl'>
+        <div className='flex mt-[4vh] bg-white rounded-xl mb-[10vh]'>
           <ServiceProviderRegister/>
         </div>
       </div>

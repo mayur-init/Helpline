@@ -5,7 +5,7 @@ import {globalStateContext} from '../../contexts/globalStateContext'
 
 function UserPanel() {
 
-    const {userName, isUserLoggedIn} = useContext(globalStateContext);
+    const {userName, isUserLoggedIn, setUserLoggedIn} = useContext(globalStateContext);
     const navigate = useNavigate();
 
     useEffect(() =>{
@@ -15,23 +15,41 @@ function UserPanel() {
         }
     })
 
+    const handleLogout = () => {
+        setUserLoggedIn(false);
+        toast.success('Loggged out successfully');
+        navigate('/login', { replace: true });
+    }
+
     return (
-        <div>
-            <div name='panel-nav' className='h-[6vh] w-auto flex h justify-center p-3 border-b-2 border-gray-300'>
-                user-panel-nav
-                <div className='ml-auto'>
-                    {userName}
+        <div className="" id='main'>
+            <div name='panel-nav' className='h-[6vh] w-auto flex h justify-center py-2 px-3 border-b-2 border-gray-200 sticky top-0 z-50'>
+                <p className='text-xl font-semibold hover:text-violet-500'>Helpline</p>
+                <div className='ml-auto flex'>
+                    <p className='border-gray-300 border-2 rounded-xl px-2 h-[27px]'>{userName}</p>
+                    <button className='mx-2 font-semibold underline hover:text-violet-600' onClick={handleLogout}>Logout</button>
                 </div>
             </div>
-            <div className='flex'>
-                <div name="sideBar" className='w-[20vw] h-screen border-r-2 border-gray-300 flex flex-col justify-center items-center'>
-                    side-bar
+            <div className='flex relative'>
+                <div className=' bg-gray-200 h-screen w-[20vw] border-gray-200 border-r-2 fixed'>
+                    {/*****************************Side-bar************************************/}
+                    <div className='flex flex-col w-full h-full justify-start item-end py-5'>
+                        {/*****************Query form-box*********************/}
+                        <div className='bg-white rounded-xl p-4 w-[16vw] mx-auto my-6'>
+                            <p className='text-center mt-2 mb-4 text-xl font-semibold'>Change Credentials</p>
+                            <input type='text' placeholder='User name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
+                            <input type='text' placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
+                            <input type='text' placeholder='Password' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
+                            <p className='flex justify-end'><button className='btn w-[100px] m-2'>Change</button></p>
+                        </div>
+                    </div>
                 </div>
-                <div name='mainContent' className='w-[50vw] h-screen border-r-2 border-gray-300 flex flex-col justify-center items-center'>
-                    main-content
-                </div>
-                <div name='rightbar' className='w-[30vw] h-screen flex flex-col justify-center items-center'>
-                    right-bar
+                {/****************Query-box*******************/}
+                <div className='h-full w-[80vw] ml-[20vw]'>
+                    <p className='text-2xl font-semibold text-center m-4'>Personal Information</p>
+                    <div className='bg-gray-100 w-full h-[86vh]'>
+                        {/****************Personal Information*******************/}
+                    </div>
                 </div>
             </div>
         </div>

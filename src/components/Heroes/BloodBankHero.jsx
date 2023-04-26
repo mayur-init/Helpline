@@ -33,9 +33,9 @@ function BloodBankHero() {
 
                 {/*BloodBank Details Start*/}
 
-                <h1 className='flex flex-col  justify-items-center text-4xl font-semibold my-12 text-gray-800 text-center'>Avaliable blood banks near you</h1>
+                <h1 className='flex flex-col  justify-items-center text-4xl font-semibold my-12 text-gray-800 text-center'>Nearby Blood Banks</h1>
         
-                <div className='w-auto flex flex-col justify-items-center mx-5'>
+                <div className='w-auto flex flex-col justify-items-center mx-5 mb-[10vh]'>
                 {
                     bloodbanks.map((item) => {
                         const { id, name, address, regNo ,email, contactNumber } = item;

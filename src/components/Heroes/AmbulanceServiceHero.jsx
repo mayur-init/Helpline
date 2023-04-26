@@ -39,9 +39,9 @@ function AmbulanceServiceHero() {
     { /* Hero Page Ends */}
 
     {/*OxygenProvider Details Start*/}
-    <h1 className='text-4xl font-bold my-12 text-gray-800 text-center '>Our Ambulance Providers Details</h1>
+    <h1 className='text-4xl font-bold my-12 text-gray-800 text-center '>Nearby Ambulance Services </h1>
         
-        <div className='w-auto flex flex-col justify-items-center mx-5'>
+        <div className='w-auto flex flex-col justify-items-center mx-5 mb-[10vh]'>
         {
             ambulances.map((item) => {
                 const { _id, name, address, regNo ,email, contactNumber} = item;

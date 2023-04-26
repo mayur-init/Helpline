@@ -11,6 +11,7 @@ import UserPanel from './pages/PanelPages/UserPanel'
 import AmbulanceServiceProviderPanel from './pages/PanelPages/AmbulanceServiceProviderPanel'
 import BloodBankServiceProviderPanel from './pages/PanelPages/BloodBankServiceProviderPanel'
 import OxygenCylinderProviderPanel from './pages/PanelPages/OxygenCylinderProviderPanel'
+import HospitalPanel from './pages/PanelPages/HospitalPanel'
 import AdminPanel from './pages/PanelPages/AdminPanel'
 import { globalStateContext } from './contexts/globalStateContext'
 import { Toaster } from 'react-hot-toast'
@@ -54,6 +55,7 @@ function App() {
             <Route path='/ambulance-service-provider-panel/:providerName' element={<AmbulanceServiceProviderPanel />} />
             <Route path='/blood-bank-service-provider-panel/:providerName' element={<BloodBankServiceProviderPanel />} />
             <Route path='/oxygen-cylinder-provider-panel/:providerName' element={<OxygenCylinderProviderPanel />} />
+            <Route path='/hospital-service-panel/:providerName' element={<HospitalPanel/>} />
             <Route path='/admin-panel' element={<AdminPanel />} />
           </Routes>
         </Router>

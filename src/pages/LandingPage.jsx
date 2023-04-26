@@ -98,7 +98,7 @@ function LandingPage() {
       </div>
 
       {/******************Add your location*************************/}
-      <div className='h-auto w-full flex justify-center'>
+      <div className='h-auto w-full flex justify-center mb-8'>
         <div className='bg-white w-[75.5vw] h-auto mt-[4vh] py-[2vh] mx-8 self-center mb-[10vh] rounded-xl shadow-2xl'>
           <div className='flex flex-col justify-center items-center h-full w-full'>
             <h1 className='text-4xl font-semibold text-gray-600 mx-6 my-4 hover:text-violet-600'>Add your location</h1>
@@ -114,7 +114,7 @@ function LandingPage() {
           </div>
         </div>
       </div>
-      <Footer />
+      <Footer/>
     </div>
   )
 }

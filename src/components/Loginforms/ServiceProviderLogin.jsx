@@ -8,9 +8,10 @@ import { globalStateContext } from '../../contexts/globalStateContext'
 function ServiceProviderLogin() {
 
   const options = [
-    { label: 'Ambulance Service Provider', id: 1 },
-    { label: 'Blood Bank Service Provider', id: 2 },
-    { label: 'Oxygen Cylinder Provider', id: 3 }
+    {label: 'Hospital Service', id: 1},
+    { label: 'Ambulance Service Provider', id: 2},
+    { label: 'Blood Bank Service Provider', id: 3 },
+    { label: 'Oxygen Cylinder Provider', id: 4 }
   ]
 
   const [formNo, setFromNo] = useState(0);
@@ -28,13 +29,16 @@ function ServiceProviderLogin() {
     } else {
       setProviderLoggedIn(true);
       toast.success(`Welcome ${providerName}`)
-      if (formNo === 1) {
-        // check if user is logged in or not
-        navigate(`/ambulance-service-provider-panel/${providerName}`, { replace: true });
+      if(formNo === 1){
+        //check if use is logged in or not
+        navigate(`/hospital-service-panel/${providerName}`, {replace: true});
       } else if (formNo === 2) {
         // check if user is logged in or not
-        navigate(`/blood-bank-service-provider-panel/${providerName}`, { replace: true });
+        navigate(`/ambulance-service-provider-panel/${providerName}`, { replace: true });
       } else if (formNo === 3) {
+        // check if user is logged in or not
+        navigate(`/blood-bank-service-provider-panel/${providerName}`, { replace: true });
+      } else if (formNo === 4) {
         // check if user is logged in or not
         navigate(`/oxygen-cylinder-provider-panel/${providerName}`, { replace: true });
       }

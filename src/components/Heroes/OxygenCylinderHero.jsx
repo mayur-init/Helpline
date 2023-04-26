@@ -28,7 +28,7 @@ function OxygenCylinderHero() {
     {/*OxygenProvider Details Start*/}
     <h1 className='text-4xl font-bold my-12 text-gray-800 text-center '>Our Oxygen Providers Details</h1>
         
-        <div className='h-screen flex flex-col justify-content-center mx-5'>
+        <div className='h-screen flex flex-col justify-content-center mx-5 mb-[10vh]'>
         {
             oxygencylinderproviders.map((item) => {
                 const { id, providerName, address, regdNo ,email, contactNo} = item;
