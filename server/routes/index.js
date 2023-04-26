@@ -28,17 +28,20 @@ router.post('/ambulance', ambulanceController.addAmbulance);
 router.get('/ambulances', ambulanceController.getAmbulances);
 router.put('/ambulances/:id', ambulanceController.updateAmbulance);
 router.delete('/ambulances/:id', ambulanceController.deleteAmbulance);
+router.get('/ambulances/:id', ambulanceController.getParticularAmbulance);
 
 // oxygen cylinder provider routes
 router.post('/oxygencylinder', oxygencylinderController.addOxygencylinderprovider);
 router.get('/oxygencylinderproviders', oxygencylinderController.getOxygenCylinderProviders);
 router.put('/oxygencylinders/:id', oxygencylinderController.updateOxygenCylinder);
-router.delete('/oxygencylinder/:id', oxygencylinderController.deleteOxygenCylinderProvider);
+router.delete('/oxygencylinders/:id', oxygencylinderController.deleteOxygenCylinderProvider);
+router.get('/oxygencylinderproviders/:id', oxygencylinderController.getParticularProvider);
 
 // blood bank service routes
 router.post('/bloodbank', bloodBankController.addBloodBank);
 router.get('/bloodbanks', bloodBankController.getBloodBanks);
 router.put('/bloodbanks/:id', bloodBankController.updateBloodBank);
 router.delete('/bloodbanks/:id', bloodBankController.deleteBloodBank);
+router.get('/bloodbanks/:id', bloodBankController.getParticularBloodBank);
 
 module.exports = router;

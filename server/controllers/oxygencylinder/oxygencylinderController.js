@@ -66,3 +66,15 @@ exports.deleteOxygenCylinderProvider = async(req, res) => {
     }
 };
     
+exports.getParticularProvider = async(req, res) => {
+    try{
+        const oxyCyProviderId = req.params.id;
+        const oxygenCylinderProvider = await Oxygencylinderprovider.findById(oxyCyProviderId);
+        if(oxygenCylinderProvider === null)
+            return res.status(404).json({msg : "Not found"});
+        res.status(200).json(oxygenCylinderProvider);
+    }
+    catch(err){
+        res.status(400).json({msg : "Some issue"});
+    }
+}

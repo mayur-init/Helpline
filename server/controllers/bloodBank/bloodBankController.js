@@ -64,3 +64,16 @@ exports.deleteBloodBank = async(req, res) => {
         res.status(400).json({msg : "Some issue"});
     }
 };
+
+exports.getParticularBloodBank = async(req, res) => {
+    try{
+        const bloodBankId = req.params.id;
+        const bloodbank = await BloodBank.findById(bloodBankId);
+        if(bloodbank === null)
+            return res.status(404).json({msg : "Not found"});
+        res.status(200).json(bloodbank);
+    }
+    catch(err){
+        res.status(400).json({msg : "Some issue"});
+    }
+}
