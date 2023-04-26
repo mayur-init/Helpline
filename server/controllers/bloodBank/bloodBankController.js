@@ -38,7 +38,19 @@ exports.getBloodBanks = async(req, res) => {
         console.log(err);
         res.status(400).json({msg : "Some issue"});
     }
-}
+};
+
+exports.updateBloodBank = async(req, res) => {
+    try{
+        const bloodBankId = req.params.id;
+        const response = await BloodBank.findByIdAndUpdate(bloodBankId, {$set : req.body} , {new : true});
+        if(response === null)
+            return res.status(404).json({msg : "Not found"});
+        res.status(200).json({msg : "Updated Successfully"});
+    }catch(err){
+        res.status(400).json({msg : "Some issue"});
+    }
+};
 
 exports.deleteBloodBank = async(req, res) => {
     try{

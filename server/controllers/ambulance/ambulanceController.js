@@ -39,6 +39,18 @@ exports.getAmbulances = async(req, res) => {
     }
 };
 
+exports.updateAmbulance = async(req, res) => {
+    try{
+        const ambulanceId = req.params.id;
+        const response = await Ambulance.findByIdAndUpdate(ambulanceId, {$set : req.body} , {new : true});
+        if(response === null)
+            return res.status(404).json({msg : "Not found"});
+        res.status(200).json({ msg : "Updated Successfully"});
+    }catch(err){
+        res.status(400).json({msg : "Some issue"});
+    }
+}; 
+
 exports.deleteAmbulance = async(req, res) => {
     try{
         const ambulanceId = req.params.id;
