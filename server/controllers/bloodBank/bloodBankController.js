@@ -4,18 +4,23 @@ const {BloodBank} = require('../../models');
 exports.addBloodBank = async(req, res) => {
 
     try{
-        const name = req.body.ServiceProviderName;
-        const regNo = req.body.RegdNo;
+        const providerName = req.body.ServiceProviderName;
         const email = req.body.Email;
-        const contact = req.body.ContactNo;
         const address = req.body.Address;
+        const regdId = req.body.RegdId;
+        const parentRegdId = req.body.ParentRegdId;
+        const contactNo = req.body.ContactNo;
+        const password = req.body.Password;
+
 
         const bloodBank = new BloodBank({
-            name: name,
-            regNo: regNo,
-            email: email,
-            contactNumber: contact,
-            address: address    
+            providerName,
+            email,
+            address,
+            regdId,
+            parentRegdId,
+            contactNo, 
+            password   
         });
         await bloodBank.save();
 

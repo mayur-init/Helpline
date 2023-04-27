@@ -3,20 +3,22 @@ const {Hospital} = require('../../models');
 exports.addHospital = async(req, res) => {
 
     try{
-        const name = req.body.Name;
+        const providerName = req.body.Name;
+        const email = req.body.email;
         const address = req.body.Address;
-        const regNo = req.body.RegNo;
-        const contact = req.body.contact;
-        
-        const category = req.body.category;
-        const specialization = req.body.specialization;
+        const regdId = req.body.RegNo;
+        const contactNo = req.body.contact;
+        const password = req.body.password;
+        const category = 'unknown';
 
         const hospital = new Hospital({
-            name: name,
-            contact: contact,
-            address: address,
-            specialization: specialization,
-            category: category
+            providerName,
+            email,
+            address,
+            regdId,
+            contactNo,
+            password,
+            category
         });
         await hospital.save();
 

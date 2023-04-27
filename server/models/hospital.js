@@ -4,14 +4,14 @@ const Schema = mongoose.Schema;
 
 const hospitalSchema = new Schema({
 
-    name: { type: String, required: true },
-    address: { type: String, required: true},
-    regNo: {type: String, required: true, unique: true},
+    providerName: { type: String, required: true },
     email: {type: String, required: true, unique: true},
-    contactNumber: { type: Number, required: true, unique: true},
+    address: { type: String, required: true},
+    regdId: {type: String, required: true, unique: true},
+    contactNo: { type: Number, required: true, unique: true},
+    password: {type: String, required: true},
     category: {type: String},
-    specialization: { type: String},
-    availableBeds: {type: Number}
+    
 }, { timestamps: true });
 
 

@@ -4,18 +4,22 @@ const {Oxygencylinderprovider} = require('../../models');
 exports.addOxygencylinderprovider = async(req, res) => {
 
     try{
-        const name = req.body.ServiceProviderName;
-        const regNo = req.body.RegdNo;
+        const providerName = req.body.ServiceProviderName;
         const email = req.body.Email;
-        const contact = req.body.ContactNo;
         const address = req.body.Address;
+        const regdId = req.body.RegdId;
+        const parentRegdId = req.body.ParentRegdId;
+        const contactNo = req.body.ContactNo;
+        const password = req.body.Password;
 
         const oxygencylinder = new Oxygencylinderprovider({
-            providerName: name,
-            regdNo: regNo,
-            email: email,
-            contactNo: contact,
-            address: address    
+            providerName,
+            email,
+            address,
+            regdId,
+            parentRegdId,
+            contactNo, 
+            password   
         });
         await oxygencylinder.save();
 

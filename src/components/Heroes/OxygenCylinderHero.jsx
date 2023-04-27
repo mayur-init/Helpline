@@ -31,9 +31,9 @@ function OxygenCylinderHero() {
         <div className='h-screen flex flex-col justify-content-center mx-5 mb-[10vh]'>
         {
             oxygencylinderproviders.map((item) => {
-                const { id, providerName, address, regdNo ,email, contactNo} = item;
+                const { _id, providerName, address, regdId , email, contactNo} = item;
                 return (
-                    <div className="border min-h-[10vh] w-[60vw] mx-auto bg-white m-4 py-5 px-[5vw] rounded-3xl shadow-xl" key={id}>
+                    <div className="border min-h-[10vh] w-[60vw] mx-auto bg-white m-4 py-5 px-[5vw] rounded-3xl shadow-xl" key={_id}>
                             <h1 className="font-bold text-2xl text-gray-600 my-2">{providerName}</h1>
                             <h2 className="text-xl my-2 font-semibold">Contact No: {contactNo}</h2>
                             <h1 className='text-xl my-2 font-semibold'>Address: {address}</h1>
