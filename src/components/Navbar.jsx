@@ -9,14 +9,14 @@ function Navbar() {
   const { userName, setUserName, isUserLoggedIn, setUserLoggedIn } = useContext(globalStateContext);
   const navigate = useNavigate();
 
-  const handleLogout = () =>{
+  const handleLogout = () => {
     setUserName('');
 
-    if(isUserLoggedIn){
+    if (isUserLoggedIn) {
       toast.success('Logged out Successfully');
       setUserLoggedIn(false);
-      navigate('/#hero', {replace: true});
-    }else{
+      navigate('/#hero', { replace: true });
+    } else {
       toast.error('You are not logged in, log in first')
     }
   }
@@ -28,15 +28,22 @@ function Navbar() {
         <HashLink smooth to='/enquiry'><button className='mx-2 font-semibold underline hover:text-violet-600'>Enquire</button></HashLink>
         <HashLink smooth to='/#services'><button className='mx-2 font-semibold underline hover:text-violet-600'>Services</button></HashLink>
         <HashLink smooth to='/#contact'><button className='mx-2 font-semibold underline hover:text-violet-600'>Contact us</button></HashLink>
-        <button className='mx-2 font-semibold underline hover:text-violet-600'><RegisterDropdown/></button>
-        <HashLink smooth to='/login'><button className='mx-2 font-semibold underline hover:text-violet-600'>Login</button></HashLink>
+        <button className='mx-2 font-semibold underline hover:text-violet-600'><RegisterDropdown /></button>
+        {
+          !isUserLoggedIn ?
+            (<HashLink smooth to='/login'><button className='mx-2 font-semibold underline hover:text-violet-600'>Login</button></HashLink>) : null
+        }
 
       </div>
       <div className='flex justify-center'>
-        <p className='border-2 border-gray-200 rounded-xl px-3'>{isUserLoggedIn? 
-        <HashLink smoot to='/user-panel'>{userName}</HashLink>
-        : ''}</p>
-        <button className='mx-2 font-semibold underline hover:text-violet-600' onClick={handleLogout}>Logout</button>
+        {isUserLoggedIn ?
+          (
+            <div className='flex'>
+              <p className='border-2 border-gray-200 rounded-xl px-3'><HashLink smoot to='/user-panel'>{userName}</HashLink></p>
+              <button className='mx-2 font-semibold underline hover:text-violet-600' onClick={handleLogout}>Logout</button>
+            </div>
+          )
+          : null}
       </div>
     </div>
 
