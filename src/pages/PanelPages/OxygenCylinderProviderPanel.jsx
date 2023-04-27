@@ -38,7 +38,7 @@ function OxygenCylinderProviderPanel() {
                         {/*****************Query form-box*********************/}
                         <div className='bg-white rounded-xl p-4 w-[16vw] mx-auto my-6'>
                             <p className='text-center mt-2 mb-4 text-xl font-semibold'>Add oxygen cylinders</p>
-                            <input type='text' placeholder='Volume' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
+                            <input type='text' placeholder='Cylinder Volume' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
                             <input type='text' placeholder='Availability' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
                             <p className='flex justify-end'><button className='btn w-[100px] m-2'>Add</button></p>
                         </div>

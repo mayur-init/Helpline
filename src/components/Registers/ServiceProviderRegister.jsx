@@ -17,8 +17,6 @@ function ServiceProviderRegister() {
   const [formNo, setFromNo] = useState(0);
 
   const [ServiceProviderName, setServiceProviderName] = useState('');
-  const [RegdNo, setRegdNo] = useState('');
-  const [Email, setEmail] = useState('');
   const [ContactNo, setContactNo] = useState('');
   const [Address, setAddress] = useState('');
 
@@ -88,8 +86,6 @@ function ServiceProviderRegister() {
       // console.log(formNo);
 
       setServiceProviderName('');
-      setRegdNo('');
-      setEmail('');
       setContactNo('');
       setAddress('');
 
@@ -120,10 +116,8 @@ function ServiceProviderRegister() {
       <div className='flex flex-col w-[50vh] h-auto mt-[8vh] mb-[2vh]'>
         <RegisterFormDropdown title={'Register as'} options={options} setFromNo={setFromNo} />
         <input type='text' onChange={(e) => { setServiceProviderName(e.target.value) }} value={ServiceProviderName} placeholder='Service Provider Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
-        <input type='text' onChange={(e) => { setRegdNo(e.target.value) }} value={RegdNo} placeholder='Regd No' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
-        <input type='text' onChange={(e) => { setEmail(e.target.value) }} value={Email} placeholder='Email' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
-        <input type='text' onChange={(e) => { setContactNo(e.target.value) }} value={ContactNo} placeholder='Contact No' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
-        <input type='text' onChange={(e) => { setAddress(e.target.value) }} value={Address} placeholder='Address' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
+        <input type='text' onChange={(e) => { setContactNo(e.target.value) }} value={ContactNo} placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
+        <input type='text' onChange={(e) => { setAddress(e.target.value) }} value={Address} placeholder='Permanent Address' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
         <p className='flex justify-end'><button onClick={() => { util() }} className='btn w-[100px] m-2'>Submit</button></p>
       </div>
     </div>
