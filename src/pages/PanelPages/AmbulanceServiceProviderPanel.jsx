@@ -46,7 +46,7 @@ function AmbulanceServiceProviderPanel() {
                     {/*****************************Side-bar************************************/}
                     <div className='flex flex-col w-full h-full justify-start item-center py-2'>
                         {/*****************Query form-box*********************/}
-                        <p className='text-end px-4 text-gray-400 text-[10px]'>Double click to navigate</p>
+                        {/* <p className='text-end px-4 text-gray-400 text-[10px]'>Double click to navigate</p> */}
                         <div className='flex justify-end'>
                             <button className='bg-gray-100 p-2 rounded-2xl hover:bg-white m-2' onClick={() => { setPageNo(1) }}><HiArrowSmallLeft /></button>
                             <button className='bg-gray-100 p-2 rounded-2xl hover:bg-white m-2' onClick={() => { setPageNo(2) }}><HiArrowSmallRight /></button>
@@ -80,13 +80,13 @@ function AmbulanceServiceProviderPanel() {
                         (<div className='h-full w-[80vw] ml-[20vw]'>
                             <p className='text-2xl font-semibold text-center m-4'>Personal Information</p>
                             <div className='bg-gray-100 w-full h-[86vh]'>
-                                {/* ***************List-of-registered-ambulances****************** */}
+                                {/* ***************Personal Information****************** */}
                             </div>
                         </div>) :
                         (<div className='h-full w-[80vw] ml-[20vw]'>
                             <p className='text-2xl font-semibold text-center m-4'>Registered Ambulances</p>
                             <div className='bg-gray-100 w-full h-[86vh]'>
-                                {/****************List-of-registered blood bank data*******************/}
+                                {/****************List of registered ambulances*******************/}
                             </div>
                         </div>)
                 }

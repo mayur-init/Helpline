@@ -43,7 +43,7 @@ function HospitalPanel() {
                         <p className='text-end px-4 text-gray-400 text-[10px]'>Double click to navigate</p>
                         <div className='flex justify-end'>
                             <button className='bg-gray-100 p-2 rounded-2xl hover:bg-white m-2' onClick={() => { setPageNo(1) }}><HiArrowSmallLeft /></button>
-                            <button className='bg-gray-100 p-2 rounded-2xl hover:bg-white m-2' onClick={() => { setPageNo(2) }}><HiArrowSmallRight /></button>
+                            <button className='bg-gray-100 p-2 rounded-2xl hover:bg-white m-2' onClick={() => { setPageNo(cnt++ % 4) }}><HiArrowSmallRight /></button>
                         </div>
                         {/**********************Add Services Forms*******************************/}
                         {
@@ -74,15 +74,21 @@ function HospitalPanel() {
                         (<div className='h-full w-[80vw] ml-[20vw]'>
                             <p className='text-2xl font-semibold text-center m-4'>Personal Information</p>
                             <div className='bg-gray-100 w-full h-[86vh]'>
-                                {/* ***************List-of-registered-ambulances****************** */}
+                                {/* ***************Personal Information****************** */}
                             </div>
-                        </div>) :
-                        (<div className='h-full w-[80vw] ml-[20vw]'>
-                            <p className='text-2xl font-semibold text-center m-4'>Registered Ambulances</p>
-                            <div className='bg-gray-100 w-full h-[86vh]'>
-                                {/****************List-of-registered blood bank data*******************/}
-                            </div>
-                        </div>)
+                        </div>) : pageNo === 2 ?
+                            (<div className='h-full w-[80vw] ml-[20vw]'>
+                                <p className='text-2xl font-semibold text-center m-4'>Registered Ambulances</p>
+                                <div className='bg-gray-100 w-full h-[86vh]'>
+                                    {/****************List of registered ambulances*******************/}
+                                </div>
+                            </div>) :
+                            (<div className='h-full w-[80vw] ml-[20vw]'>
+                                <p className='text-2xl font-semibold text-center m-4'>Enquiries</p>
+                                <div className='bg-gray-100 w-full h-[86vh]'>
+                                    {/****************List of related enquiries*******************/}
+                                </div>
+                            </div>)
                 }
             </div>
         </div >
