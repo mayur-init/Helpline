@@ -14,7 +14,7 @@ app.use('/api', router);
 const PORT = process.env.PORT || 5000;
 
 
-// databse connection
+// db connection
 mongoose.set('strictQuery', true);
 mongoose.connect("mongodb+srv://mayur-init:Whyred07@cluster0.ldhun.mongodb.net/helpline?retryWrites=true&w=majority", {
     useNewUrlParser: true, 
