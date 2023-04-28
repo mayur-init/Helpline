@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BloodBankPage from './pages/BloodBankPage';
 import LandingPage from './pages/LandingPage';
@@ -19,13 +19,14 @@ import { Toaster } from 'react-hot-toast'
 function App() {
 
   const [userName, setUserName] = useState(undefined);
+  const [userId, setUserId] = useState(undefined);
   const [location, setLocation] = useState(undefined);
   const [isUserLoggedIn, setUserLoggedIn] = useState(false);
   const [isProviderLoggedIn, setProviderLoggedIn] = useState(false);
 
   return (
     <div>
-      <globalStateContext.Provider value={{ userName, setUserName, location, setLocation, isUserLoggedIn, setUserLoggedIn, isProviderLoggedIn, setProviderLoggedIn }}>
+      <globalStateContext.Provider value={{ userName, setUserName, userId, setUserId, location, setLocation, isUserLoggedIn, setUserLoggedIn, isProviderLoggedIn, setProviderLoggedIn }}>
         {/************react-notification**************/}
         <Toaster 
           position='top-right'

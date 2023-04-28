@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
-  const { userName, setUserName, isUserLoggedIn, setUserLoggedIn } = useContext(globalStateContext);
+  const { userName, setUserName, userId, isUserLoggedIn, setUserLoggedIn } = useContext(globalStateContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
