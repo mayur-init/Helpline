@@ -5,7 +5,11 @@ import { globalStateContext } from '../../contexts/globalStateContext'
 
 
 function BloodBankServiceProviderPanel() {
-
+    const [ServiceProviderName, setServiceProviderName] = useState('');
+    const [RegdNo, setRegdNo] = useState('');
+    const [ContactNo, setContactNo] = useState('');
+    const [Email, setEmail] = useState('');
+    const [Address, setAddress] = useState('');
     const { providerName } = useParams();
     const navigate = useNavigate();
     const { isProviderLoggedIn, setProviderLoggedIn } = useContext(globalStateContext);
@@ -16,6 +20,38 @@ function BloodBankServiceProviderPanel() {
             navigate('/login', { replace: true });
         }
     })
+
+    
+    const handleSubmit = async () => {
+        if (ServiceProviderName === '' || RegdNo === '' || Email === '' || ContactNo === '' || Address === '') {
+            toast.error('Some fields are empty, fill them all');
+          }else {
+            const Data = {
+                ServiceProviderName,
+                RegdNo,
+                Email,
+                ContactNo,
+                Address,
+            }
+            try {
+                const response = await axios.post('http://localhost:5000/api/bloodbank', Data, {
+                  headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+                  }
+                });
+                console.log("Data sent");
+              } catch (error) {
+                console.log(error);
+              }
+        }
+        setServiceProviderName('');
+        setRegdNo('');
+        setEmail('');
+        setContactNo('');
+        setAddress('');
+  
+    }
 
     const handleLogout = () =>{
         setProviderLoggedIn(false);
