@@ -4,15 +4,16 @@ const {User} = require('../../models');
 exports.addUser = async(req, res) => {
 
     try{
-        const name = req.body.Name;
-        const contact = req.body.ContactNumber;
-        const lattitude = req.body.lattitude;
-        const longitude = req.body.longitude;
+        const userName = req.body.UserName;
+        const contactNo = req.body.ContactNumber;
+        const regdId = req.body.RegdId;
+        const loacation = req.body.Location;
 
         const user = new User({
-            name: name,
-            contactNumber: contact,
-            address: '',
+            userName,
+            contactNo,
+            regdId,
+            location,
         });
         await user.save();
 
@@ -26,7 +27,7 @@ exports.addUser = async(req, res) => {
 
 exports.getUser = async(req, res) => {
     try{
-        const userId = req.params.id;
+        const userId = req.params.regdId;
         const user = await User.findById(userId);
         if(user === null)
             return res.status(404).json({msg : "Not found"});
@@ -40,7 +41,7 @@ exports.getUser = async(req, res) => {
 
 exports.updateUser = async(req, res) => {
     try{
-        const userId = req.params.id;
+        const userId = req.params.regdId;
         const response = await User.findByIdAndUpdate(userId, {$set : req.body} , {new : true});
         if(response === null)
             return res.status(404).json({msg : "Not found"});
@@ -52,7 +53,7 @@ exports.updateUser = async(req, res) => {
 
 exports.removeUser = async(req, res) => {
     try{
-        const userId = req.params.id;
+        const userId = req.params.regdId;
         const response = await User.findByIdAndRemove(userId);
         if(response === null)
             return res.status(404).json({msg : "Not found"});

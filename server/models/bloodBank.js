@@ -3,11 +3,14 @@ const Schema = mongoose.Schema;
 
 const bloodBankSchema = new Schema({
 
-    name: { type: String, required: true },
-    address: { type: String, required: true},
-    regNo: {type: String, required: true, unique: true},
+    providerName: { type: String, required: true },
     email: {type: String, required: true, unique: true},
-    contactNumber: { type: Number, required: true, unique: true},
+    address: { type: String, required: true},
+    regdId: {type: String, required: true, unique: true},
+    parentRegdId: {type: String},
+    contactNo: { type: Number, required: true, unique: true},
+    password: {type: String, required: true},
+
 }, { timestamps: true });
 
 

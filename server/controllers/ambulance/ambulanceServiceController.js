@@ -1,7 +1,7 @@
-const {BloodBank} = require('../../models');
+const {AmbulanceService} = require('../../models');
 
-// to add a oxygencylinderprovider
-exports.addBloodBank = async(req, res) => {
+// to add an ambulance
+exports.addAmbulanceService = async(req, res, next) => {
 
     try{
         const providerName = req.body.ServiceProviderName;
@@ -12,18 +12,16 @@ exports.addBloodBank = async(req, res) => {
         const contactNo = req.body.ContactNo;
         const password = req.body.Password;
 
-
-        const bloodBank = new BloodBank({
+        const ambulanceService = new AmbulanceService({
             providerName,
             email,
             address,
             regdId,
             parentRegdId,
             contactNo, 
-            password   
+            password
         });
-        await bloodBank.save();
-
+        await ambulanceService.save();
         res.status(201).json({msg: "success"});
     }
     catch(err){
@@ -32,35 +30,35 @@ exports.addBloodBank = async(req, res) => {
     }
 };
 
-exports.getBloodBanks = async(req, res) => {
+
+exports.getAmbulanceServices = async(req, res) => {
     try{
-        const bloodBanks = await BloodBank.find();
-        if(bloodBanks.length === 0)
+        const ambulanceServices = await AmbulanceService.find();
+        if(ambulanceServices.length === 0)
             return res.status(404).json({msg : "Not found"});
-        res.status(200).json(bloodBanks);
+        res.status(200).json(ambulanceServices);
     }
     catch(err){
-        console.log(err);
         res.status(400).json({msg : "Some issue"});
     }
 };
 
-exports.updateBloodBank = async(req, res) => {
+exports.updateAmbulanceService = async(req, res) => {
     try{
-        const bloodBankId = req.params.regdId;
-        const response = await BloodBank.findByIdAndUpdate(bloodBankId, {$set : req.body} , {new : true});
+        const ambulanceServiceId = req.params.regdId;
+        const response = await AmbulanceService.findByIdAndUpdate(ambulanceServiceId, {$set : req.body} , {new : true});
         if(response === null)
             return res.status(404).json({msg : "Not found"});
-        res.status(200).json({msg : "Updated Successfully"});
+        res.status(200).json({ msg : "Updated Successfully"});
     }catch(err){
         res.status(400).json({msg : "Some issue"});
     }
-};
+}; 
 
-exports.deleteBloodBank = async(req, res) => {
+exports.deleteAmbulanceService = async(req, res) => {
     try{
-        const bloodBankId = req.params.regdId;
-        const response = await BloodBank.findByIdAndRemove(bloodBankId);
+        const ambulanceServiceId = req.params.regdId;
+        const response = await AmbulanceService.findByIdAndRemove(ambulanceServiceId);
         if(response === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json(response);
@@ -70,15 +68,16 @@ exports.deleteBloodBank = async(req, res) => {
     }
 };
 
-exports.getParticularBloodBank = async(req, res) => {
+exports.getParticularAmbulanceService = async(req, res) => {
     try{
-        const bloodBankId = req.params.regdId;
-        const bloodbank = await BloodBank.findById(bloodBankId);
-        if(bloodbank === null)
+        const ambulanceServiceId = req.params.regdId;
+        const ambulanceService = await AmbulanceService.findById(ambulanceServiceId);
+        if(ambulanceService === null)
             return res.status(404).json({msg : "Not found"});
-        res.status(200).json(bloodbank);
+        res.status(200).json(ambulanceService);
     }
     catch(err){
+        console.log(err);
         res.status(400).json({msg : "Some issue"});
     }
 }

@@ -52,10 +52,10 @@ function App() {
             <Route path='/ambulance-service' element={<AmbulanceServicePage />} />
             <Route path='/oxygen-cylinder-service' element={<OxygenCylinderPage />} />
             <Route path='/user-panel' element={<UserPanel />} />
-            <Route path='/ambulance-service-provider-panel/:providerName' element={<AmbulanceServiceProviderPanel />} />
-            <Route path='/blood-bank-service-provider-panel/:providerName' element={<BloodBankServiceProviderPanel />} />
-            <Route path='/oxygen-cylinder-provider-panel/:providerName' element={<OxygenCylinderProviderPanel />} />
-            <Route path='/hospital-service-panel/:providerName' element={<HospitalPanel/>} />
+            <Route path='/ambulance-service-provider-panel/:ServiceProviderName' element={<AmbulanceServiceProviderPanel />} />
+            <Route path='/blood-bank-service-provider-panel/:ServiceProviderName' element={<BloodBankServiceProviderPanel />} />
+            <Route path='/oxygen-cylinder-provider-panel/:ServiceProviderName' element={<OxygenCylinderProviderPanel />} />
+            <Route path='/hospital-service-panel/:ServiceProviderName' element={<HospitalPanel/>} />
             <Route path='/admin-panel' element={<AdminPanel />} />
           </Routes>
         </Router>

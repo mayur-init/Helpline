@@ -4,9 +4,10 @@ const googleMapApiController = require('../controllers/googleMapApiController');
 const {
     hospitalController,
     userController,
-    ambulanceController,
-    oxygencylinderController,
+    ambulanceServiceController,
+    oxygenCylinderController,
     bloodBankController,
+    ambulanceController,
 } = require('../controllers');
 
 // router.get('/', (req, res) =>{res.send('<h2>Project-Helpline: server is running...</h2>')});
@@ -16,32 +17,36 @@ router.get('/getNearby', googleMapApiController.getNearby);
 
 // user routes
 router.post('/user', userController.addUser);           // to register a user
-router.get('/users/:id', userController.getUser);       // to view a user
-router.put('/users/:id',userController.updateUser);
-router.delete('/users/:id', userController.removeUser);
+router.get('/users/:regdId', userController.getUser);       // to view a user
+router.put('/users/:regdId',userController.updateUser);
+router.delete('/users/:regdId', userController.removeUser);
 
 // to collect hospital data
 router.post('/hospital', hospitalController.addHospital);
 
-// ambulance routes
-router.post('/ambulance', ambulanceController.addAmbulance);
-router.get('/ambulances', ambulanceController.getAmbulances);
-router.put('/ambulances/:id', ambulanceController.updateAmbulance);
-router.delete('/ambulances/:id', ambulanceController.deleteAmbulance);
-router.get('/ambulances/:id', ambulanceController.getParticularAmbulance);
+// ambulance service routes
+router.post('/ambulanceservice', ambulanceServiceController.addAmbulanceService);
+router.get('/ambulanceservice', ambulanceServiceController.getAmbulanceServices);
+router.put('/ambulanceservice/:regdId', ambulanceServiceController.updateAmbulanceService);
+router.delete('/ambulanceservice/:regdId', ambulanceServiceController.deleteAmbulanceService);
+router.get('/ambulanceservice/:regdId', ambulanceServiceController.getParticularAmbulanceService);
 
 // oxygen cylinder provider routes
-router.post('/oxygencylinder', oxygencylinderController.addOxygencylinderprovider);
-router.get('/oxygencylinderproviders', oxygencylinderController.getOxygenCylinderProviders);
-router.put('/oxygencylinders/:id', oxygencylinderController.updateOxygenCylinder);
-router.delete('/oxygencylinders/:id', oxygencylinderController.deleteOxygenCylinderProvider);
-router.get('/oxygencylinderproviders/:id', oxygencylinderController.getParticularProvider);
+router.post('/oxygencylinder', oxygenCylinderController.addOxygenCylinderProvider);
+router.get('/oxygencylinderproviders', oxygenCylinderController.getOxygenCylinderProviders);
+router.put('/oxygencylinders/:regdId', oxygenCylinderController.updateOxygenCylinder);
+router.delete('/oxygencylinders/:regdId', oxygenCylinderController.deleteOxygenCylinderProvider);
+router.get('/oxygencylinderproviders/:regdId', oxygenCylinderController.getParticularProvider);
 
 // blood bank service routes
 router.post('/bloodbank', bloodBankController.addBloodBank);
 router.get('/bloodbanks', bloodBankController.getBloodBanks);
-router.put('/bloodbanks/:id', bloodBankController.updateBloodBank);
-router.delete('/bloodbanks/:id', bloodBankController.deleteBloodBank);
-router.get('/bloodbanks/:id', bloodBankController.getParticularBloodBank);
+router.put('/bloodbanks/:regdId', bloodBankController.updateBloodBank);
+router.delete('/bloodbanks/:regdId', bloodBankController.deleteBloodBank);
+router.get('/bloodbanks/:regdId', bloodBankController.getParticularBloodBank);
+
+// ambulance routes
+router.post('/ambulance', ambulanceController.addAmbulance);
+
 
 module.exports = router;

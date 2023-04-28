@@ -15,28 +15,28 @@ const Services = () => {
 
                     <HashLink smooth to={'/ambulance-service#main'}>
                     {/**********Ambulance Service************/}
-                    <div className='border h-[64vh] bg-white m-4 p-5 rounded-xl shadow-xl hover:scale-105' >
+                    <div className='border h-auto bg-white m-4 p-5 rounded-xl shadow-xl hover:scale-105' >
                         <img className='w-[80vw] h-[28vh]' src={'assets/img4.webp'} alt="/" />
                         <p className='text-3xl font-bold m-6'>Ambulance Service</p>
-                        <p className='text-black-400 '>Basic Life Support Ambulance is for the patients who need medical transportation. It comprises of patient bed, pulse oximetry and oxygen delivery devices.</p>
+                        <p className='text-black-400 '></p>
                     </div>
                     </HashLink>
 
                     <HashLink smooth to={'/blood-bank-service#main'}>
                     {/******************Blood Bank Service************************/}
-                    <div className='border h-[64vh] bg-white m-4 p-5 rounded-xl shadow-xl hover:scale-105' >
+                    <div className='border h-auto bg-white m-4 p-5 rounded-xl shadow-xl hover:scale-105' >
                         <img className='w-[80vw] h-[28vh]' src={'assets/blood_bank.jpg'} alt="/" />
                         <p className='text-3xl font-bold p-6'>Blood Bank Service</p>
-                        <p className='text-black-400 mt-2'>ALS ambulance is equipped with ventilator, ECG, monitoring devices and paramedic staff.</p>
+                        <p className='text-black-400 mt-2'></p>
                     </div>
                     </HashLink>
 
                     <HashLink smooth to={'oxygen-cylinder-service#main'}>
                     {/***********************Oxygen Cylinder Service*****************************/}
-                    <div className='border h-[64vh] bg-white m-4 p-5 rounded-xl shadow-xl hover:scale-105' >
+                    <div className='border h-auto bg-white m-4 p-5 rounded-xl shadow-xl hover:scale-105' >
                         <img className='w-full h-[28vh]' src={'assets/Oxygen_cylinder.jpg'} alt="/" />
                         <p className='text-3xl font-bold p-6'>Oxygen Cylenders Service</p>
-                        <p className='text-black-400 mt-2'>Mortuary ambulance services are used for the transportation of the dead body</p>
+                        <p className='text-black-400 mt-2'></p>
                     </div>
                     </HashLink>
                 </div>

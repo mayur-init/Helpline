@@ -1,13 +1,17 @@
 const User = require('./user');
-const Ambulance = require('./ambulance');
 const Hospital = require('./hospital');
+const AmbulanceService = require('./ambulanceService');
 const BloodBank = require('./bloodBank');
-const Oxygencylinderprovider = require('./oxygencylinderprovider');
+const OxygenCylinderProvider = require('./oxygenCylinderProvider');
+const Ambulance = require('./ambulance');
+const Enquiry = require('./enquiry');
 
 module.exports = {
 	User,
-    Ambulance,
     Hospital,
-    Oxygencylinderprovider,
+    AmbulanceService,
     BloodBank,
+    OxygenCylinderProvider,
+    Ambulance,
+    Enquiry
 };
