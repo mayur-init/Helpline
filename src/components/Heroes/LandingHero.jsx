@@ -14,7 +14,7 @@ const LandingHero = () => {
       if (index > sentence.length) {
         clearInterval(intervalId);
       }
-    }, 400);
+    }, 300);
   }, []);
 
   return (
