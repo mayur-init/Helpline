@@ -16,7 +16,7 @@ function AmbulanceServiceHero() {
   }, []);
   
   useEffect(() => {
-    fetch('http://localhost:5000/api/ambulances')
+    fetch('http://localhost:5000/api/ambulanceservice')
       .then(res => res.json())
       .then(data => setAmbulances(data))
       .catch(error => console.log(error));

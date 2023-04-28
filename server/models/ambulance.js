@@ -3,13 +3,9 @@ const Schema = mongoose.Schema;
 
 const ambulanceSchema = new Schema({
     
-    providerName: { type: String, required: true },
-    email: {type: String, required: true, unique: true},
-    address: { type: String, required: true},
-    regdId: {type: String, required: true, unique: true},
+    driverName: { type: String, required: true },
     parentRegdId: {type: String},
-    contactNo: { type: Number, required: true, unique: true},
-    password: {type: String, required: true},
+    driverContactNo: { type: Number, required: true, unique: true},
     
 }, { timestamps: true });
 

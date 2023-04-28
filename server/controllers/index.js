@@ -1,13 +1,16 @@
-const ambulanceController = require('./ambulance/ambulanceController');
 const userController = require('./user/userController');
 const hospitalController = require('./hospital/hospitalController');
-const oxygencylinderController = require('./oxygencylinder/oxygencylinderController');
+const ambulanceServiceController = require('./ambulance/ambulanceServiceController');
+const oxygenCylinderController = require('./oxygencylinder/oxygenCylinderController');
 const bloodBankController = require('./bloodBank/bloodBankController');
+const ambulanceController = require('./ambulance/ambulanceController');
+
 
 module.exports = {
-    ambulanceController,
     userController,
     hospitalController,
-    oxygencylinderController,
+    ambulanceServiceController,
+    oxygenCylinderController,
     bloodBankController,
+    ambulanceController,
 };

@@ -48,6 +48,7 @@ function ServiceProviderRegister() {
         try {
           await generateRegdId();
           //send hospital register data in db
+          
 
         } catch (error) {
           console.log(error);
@@ -56,13 +57,13 @@ function ServiceProviderRegister() {
       } else if (formNo === 2) {
         try {
           await generateRegdId();
-          const response = await axios.post('http://localhost:5000/api/ambulance', Data, {
+          const response = await axios.post('http://localhost:5000/api/ambulanceservice', Data, {
             headers: {
               "Access-Control-Allow-Origin": "*",
               "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
             }
           });
-          console.log("Data sent");
+          // console.log("Data sent");
         } catch (error) {
           console.log(error);
         }
@@ -75,7 +76,7 @@ function ServiceProviderRegister() {
               "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
             }
           });
-          console.log("Data sent");
+          // console.log("Data sent");
         } catch (error) {
           console.log(error);
         }
