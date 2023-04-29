@@ -28,7 +28,7 @@ exports.addUser = async(req, res) => {
 exports.getUser = async(req, res) => {
     try{
         const userId = req.params.regdId;
-        const user = await User.findById(userId);
+        const user = await User.find({"regdId":userId});
         if(user === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json(user);
@@ -42,7 +42,7 @@ exports.getUser = async(req, res) => {
 exports.updateUser = async(req, res) => {
     try{
         const userId = req.params.regdId;
-        const response = await User.findByIdAndUpdate(userId, {$set : req.body} , {new : true});
+        const response = await User.update({"regdId":userId}, {$set : req.body} , {new : true});
         if(response === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json({data : response, msg : "Updated Successfully"});
@@ -54,7 +54,7 @@ exports.updateUser = async(req, res) => {
 exports.removeUser = async(req, res) => {
     try{
         const userId = req.params.regdId;
-        const response = await User.findByIdAndRemove(userId);
+        const response = await User.remove({"regdId":userId});
         if(response === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json({msg : "Deleted Successfully"});

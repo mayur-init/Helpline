@@ -24,6 +24,7 @@ router.delete('/users/:regdId', userController.removeUser);
 
 // to collect hospital data
 router.post('/hospital', hospitalController.addHospital);
+router.get('/hospital/:regdId', hospitalController.getParticularhospital);
 
 // ambulance service routes
 router.post('/ambulanceservice', ambulanceServiceController.addAmbulanceService);

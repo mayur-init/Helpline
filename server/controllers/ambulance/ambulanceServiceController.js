@@ -47,7 +47,7 @@ exports.getAmbulanceServices = async(req, res) => {
 exports.updateAmbulanceService = async(req, res) => {
     try{
         const ambulanceServiceId = req.params.regdId;
-        const response = await AmbulanceService.findByIdAndUpdate(ambulanceServiceId, {$set : req.body} , {new : true});
+        const response = await AmbulanceService.update({"regdId": ambulanceServiceId}, {$set : req.body} , {new : true});
         if(response === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json({ msg : "Updated Successfully"});
@@ -59,7 +59,7 @@ exports.updateAmbulanceService = async(req, res) => {
 exports.deleteAmbulanceService = async(req, res) => {
     try{
         const ambulanceServiceId = req.params.regdId;
-        const response = await AmbulanceService.findByIdAndRemove(ambulanceServiceId);
+        const response = await AmbulanceService.remove({"regdId": ambulanceServiceId});
         if(response === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json(response);
@@ -72,7 +72,7 @@ exports.deleteAmbulanceService = async(req, res) => {
 exports.getParticularAmbulanceService = async(req, res) => {
     try{
         const ambulanceServiceId = req.params.regdId;
-        const ambulanceService = await AmbulanceService.findById(ambulanceServiceId);
+        const ambulanceService = await AmbulanceService.find({"regdId": ambulanceServiceId});
         if(ambulanceService === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json(ambulanceService);

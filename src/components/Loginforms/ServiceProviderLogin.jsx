@@ -26,6 +26,7 @@ function ServiceProviderLogin() {
 
   var ProviderType = useRef('');
   var redirectUrl = useRef('');
+  var providerData = null; 
 
   const Data = {
     RegdId,
@@ -45,18 +46,22 @@ function ServiceProviderLogin() {
       if(formNo === 1){
         Data.ProviderType = 'HOSP';
         redirectUrl = `/hospital-service-panel/${RegdId.toLowerCase()}`;
+        providerData = await axios.get(`http://localhost:5000/api/hospital/${RegdId}`);
 
       } else if (formNo === 2) {
         Data.ProviderType = 'AMBU';
         redirectUrl = `/ambulance-service-provider-panel/${RegdId.toLowerCase()}`;
+        providerData = await axios.get(`http://localhost:5000/api/ambulanceservice/${RegdId}`);
         
       } else if (formNo === 3) {
         Data.ProviderType = 'BLOOD';
         redirectUrl = `/blood-bank-service-provider-panel/${RegdId.toLowerCase()}`;
+        providerData = await axios.get(`http://localhost:5000/api/bloodbanks/${RegdId}`);
 
       } else if (formNo === 4) {
         Data.ProviderType = 'OXYG';
         redirectUrl = `/oxygen-cylinder-provider-panel/${RegdId.toLowerCase()}`;
+        providerData = await axios.get(`http://localhost:5000/api/oxygencylinderproviders/${RegdId}`);
 
       }
       
@@ -74,6 +79,9 @@ function ServiceProviderLogin() {
       
       if(res.registered === true && res.verified === true){
         setProviderLoggedIn(true);
+        if(providerData !== null){
+          toast.success(`Welcome ${providerData.data[0].providerName}`);
+        }
         navigate( redirectUrl , {replace: true});
       }
     }

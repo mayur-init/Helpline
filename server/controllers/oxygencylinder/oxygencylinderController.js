@@ -47,7 +47,7 @@ exports.getOxygenCylinderProviders = async(req, res) => {
 exports.updateOxygenCylinder = async(req, res) => {
     try{
         const providerId = req.params.regdId;
-        const response = await OxygenCylinderProvider.findByIdAndUpdate(providerId, {$set : req.body} , {new : true});
+        const response = await OxygenCylinderProvider.update({"regdId":providerId}, {$set : req.body} , {new : true});
         if(response === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json({data : response, msg : "Updated Successfully"});
@@ -59,7 +59,7 @@ exports.updateOxygenCylinder = async(req, res) => {
 exports.deleteOxygenCylinderProvider = async(req, res) => {
     try{
         const providerId = req.params.regdId;
-        const response = await OxygenCylinderProvider.findByIdAndRemove(providerId);
+        const response = await OxygenCylinderProvider.remove({"regdId": providerId});
         if(response === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json(response);
@@ -73,7 +73,7 @@ exports.deleteOxygenCylinderProvider = async(req, res) => {
 exports.getParticularProvider = async(req, res) => {
     try{
         const oxyCyProviderId = req.params.regdId;
-        const oxygenCylinderProvider = await OxygenCylinderProvider.findById(oxyCyProviderId);
+        const oxygenCylinderProvider = await OxygenCylinderProvider.find({"regdId": oxyCyProviderId});
         if(oxygenCylinderProvider === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json(oxygenCylinderProvider);

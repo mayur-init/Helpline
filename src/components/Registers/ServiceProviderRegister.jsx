@@ -109,13 +109,13 @@ function ServiceProviderRegister() {
       toast.success(`Welcome ${ServiceProviderName}`);
 
       if (formNo === 1) {
-        navigate(`/hospital-service-panel/${ServiceProviderName}`, { replace: true });
+        navigate(`/hospital-service-panel/${RegdId.toLowerCase()}`, { replace: true });
       } else if (formNo === 2) {
-        navigate(`/ambulance-service-provider-panel/${ServiceProviderName}`, { replace: true });
+        navigate(`/ambulance-service-provider-panel/${RegdId.toLowerCase()}`, { replace: true });
       } else if (formNo === 3) {
-        navigate(`/blood-bank-service-provider-panel/${ServiceProviderName}`, { replace: true });
+        navigate(`/blood-bank-service-provider-panel/${RegdId.toLowerCase()}`, { replace: true });
       } else if (formNo === 4) {
-        navigate(`/oxygen-cylinder-provider-panel/${ServiceProviderName}`, { replace: true });
+        navigate(`/oxygen-cylinder-provider-panel/${RegdId.toLowerCase()}`, { replace: true });
       }
     }
   }
