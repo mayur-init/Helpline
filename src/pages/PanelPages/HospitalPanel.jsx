@@ -48,7 +48,7 @@ function HospitalPanel() {
                         {/**********************Add Services Forms*******************************/}
                         {
                             pageNo === 2 ?
-                                (<div className='bg-white rounded-xl p-4 w-[16vw] mx-auto my-1'>
+                                (<div className='bg-white rounded-xl p-4 w-[16vw] mx-auto my-8'>
                                     <p className='text-center mt-2 mb-4 text-xl font-semibold'>Add Ambulances</p>
                                     <input type='text' placeholder='Driver Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
                                     <input type='text' placeholder='Driver ontact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
@@ -56,15 +56,18 @@ function HospitalPanel() {
                                 </div>) : null
                         }
                         <div>
-                            <div className='bg-white rounded-xl p-4 w-[16vw] mx-auto my-2'>
-                                <p className='text-center mt-2 mb-4 text-xl font-semibold'>Change Credentials</p>
-                                <input type='text' placeholder='Provider Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
-                                <input type='text' placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
-                                <input type='text' placeholder='Email' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
-                                <input type='text' placeholder='Address' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
-                                <input type='text' placeholder='Password' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
-                                <p className='flex justify-end'><button className='btn w-[100px] mx-2 my-1'>Update</button></p>
-                            </div>
+                            {
+                                pageNo === 1?
+                                (<div className='bg-white rounded-xl p-4 w-[16vw] mx-auto mt-[30vh]'>
+                                    <p className='text-center mt-2 mb-4 text-xl font-semibold'>Change Credentials</p>
+                                    <input type='text' placeholder='Provider Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
+                                    <input type='text' placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
+                                    <input type='text' placeholder='Email' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
+                                    <input type='text' placeholder='Address' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
+                                    <input type='text' placeholder='Password' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
+                                    <p className='flex justify-end'><button className='btn w-[100px] mx-2 my-1'>Update</button></p>
+                                </div>): null
+                            }
                         </div>
                     </div>
                 </div>
