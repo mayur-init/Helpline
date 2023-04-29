@@ -8,6 +8,7 @@ const {
     oxygenCylinderController,
     bloodBankController,
     ambulanceController,
+    loginController,
 } = require('../controllers');
 
 // router.get('/', (req, res) =>{res.send('<h2>Project-Helpline: server is running...</h2>')});
@@ -47,6 +48,9 @@ router.get('/bloodbanks/:regdId', bloodBankController.getParticularBloodBank);
 
 // ambulance routes
 router.post('/ambulance', ambulanceController.addAmbulance);
+
+//auth routes
+router.post('/providerlogin', loginController.verifyServiceProviderLogin);
 
 
 module.exports = router;
