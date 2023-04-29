@@ -48,8 +48,12 @@ function ServiceProviderRegister() {
         try {
           await generateRegdId();
           //send hospital register data in db
-          
-
+          const response = await axios.post('http://localhost:5000/api/hospital', Data, {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+            }
+          });
         } catch (error) {
           console.log(error);
         }

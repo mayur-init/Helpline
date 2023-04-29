@@ -13,7 +13,7 @@ exports.addUser = async(req, res) => {
             userName,
             contactNo,
             regdId,
-            location,
+            location
         });
         await user.save();
 

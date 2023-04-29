@@ -58,6 +58,7 @@ function UserRegister({ location, setLocation }) {
 
     } catch (error) {
       console.log(error);
+      console.log(UserData.Location);
     }
 
     if (userName === '' || contactNo === '') {
