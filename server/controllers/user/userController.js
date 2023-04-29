@@ -4,16 +4,16 @@ const {User} = require('../../models');
 exports.addUser = async(req, res) => {
 
     try{
-        const userName = req.body.UserName;
-        const contactNo = req.body.ContactNumber;
+        const userName = req.body.userName;
+        const contactNo = req.body.UserContactNumber;
         const regdId = req.body.RegdId;
-        const loacation = req.body.Location;
+        const location = req.body.Location;
 
         const user = new User({
             userName,
             contactNo,
             regdId,
-            location,
+            location
         });
         await user.save();
 

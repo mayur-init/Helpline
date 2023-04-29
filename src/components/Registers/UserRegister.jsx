@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 function UserRegister({ location, setLocation }) {
   var RegdId = useRef('');
+  var Location = useRef('');
   const [UserContactNumber, setUserContactNumber] = useState('');
   const { userName, setUserName, setUserLoggedIn } = useContext(globalStateContext);
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ function UserRegister({ location, setLocation }) {
     userName,
     UserContactNumber,
     RegdId,
-    Location
+    Location,
   }
   const util = async (e) => {
     e.preventDefault();
@@ -44,9 +45,11 @@ function UserRegister({ location, setLocation }) {
         }
       });
       console.log("sent");
-      console.log(registerResponse.data);
+      console.log(registerResponse);
+     
     } catch (error) {
       console.log(error);
+      console.log(UserData.Location);
     }
 
     if (userName === '' || UserContactNumber === '') {
