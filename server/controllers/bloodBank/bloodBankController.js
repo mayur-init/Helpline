@@ -1,6 +1,5 @@
 const {BloodBank} = require('../../models');
 
-// to add a oxygencylinderprovider
 exports.addBloodBank = async(req, res) => {
 
     try{
@@ -31,10 +30,10 @@ exports.addBloodBank = async(req, res) => {
         res.status(400).json(err);
     }
 };
-
+//done
 exports.getBloodBanks = async(req, res) => {
     try{
-        const bloodBanks = await BloodBank.find();
+        const bloodBanks = await BloodBank.find().select('providerName email address contactNo -_id');
         if(bloodBanks.length === 0)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json(bloodBanks);
@@ -44,11 +43,11 @@ exports.getBloodBanks = async(req, res) => {
         res.status(400).json({msg : "Some issue"});
     }
 };
-
+//done
 exports.updateBloodBank = async(req, res) => {
     try{
         const bloodBankId = req.params.regdId;
-        const response = await BloodBank.findByIdAndUpdate(bloodBankId, {$set : req.body} , {new : true});
+        const response = await BloodBank.findOneAndUpdate({regdId : bloodBankId}, {$set : req.body} , {new : true});
         if(response === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json({msg : "Updated Successfully"});
@@ -56,24 +55,25 @@ exports.updateBloodBank = async(req, res) => {
         res.status(400).json({msg : "Some issue"});
     }
 };
-
+//done
 exports.deleteBloodBank = async(req, res) => {
     try{
         const bloodBankId = req.params.regdId;
-        const response = await BloodBank.findByIdAndRemove(bloodBankId);
+        const response = await BloodBank.findOneAndDelete({regdId : bloodBankId});
         if(response === null)
             return res.status(404).json({msg : "Not found"});
-        res.status(200).json(response);
+        res.status(200).json({msg : "Success"});
     }
     catch(err){
         res.status(400).json({msg : "Some issue"});
     }
 };
-
+//done
 exports.getParticularBloodBank = async(req, res) => {
     try{
         const bloodBankId = req.params.regdId;
-        const bloodbank = await BloodBank.findById(bloodBankId);
+        const bloodbank = await BloodBank.findOne({regdId : bloodBankId})
+                                        .select(["-_id","-__v","-createdAt","-updatedAt"]);
         if(bloodbank === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json(bloodbank);

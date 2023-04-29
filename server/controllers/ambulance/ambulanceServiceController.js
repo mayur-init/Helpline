@@ -33,7 +33,7 @@ exports.addAmbulanceService = async(req, res, next) => {
 
 exports.getAmbulanceServices = async(req, res) => {
     try{
-        const ambulanceServices = await AmbulanceService.find();
+        const ambulanceServices = await AmbulanceService.find().select('providerName email address contactNo -_id');;
         if(ambulanceServices.length === 0)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json(ambulanceServices);
@@ -46,7 +46,7 @@ exports.getAmbulanceServices = async(req, res) => {
 exports.updateAmbulanceService = async(req, res) => {
     try{
         const ambulanceServiceId = req.params.regdId;
-        const response = await AmbulanceService.findByIdAndUpdate(ambulanceServiceId, {$set : req.body} , {new : true});
+        const response = await AmbulanceService.findOneAndUpdate({regdId : ambulanceServiceId}, {$set : req.body} , {new : true});
         if(response === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json({ msg : "Updated Successfully"});
@@ -54,14 +54,14 @@ exports.updateAmbulanceService = async(req, res) => {
         res.status(400).json({msg : "Some issue"});
     }
 }; 
-
+// incomplete route
 exports.deleteAmbulanceService = async(req, res) => {
     try{
         const ambulanceServiceId = req.params.regdId;
-        const response = await AmbulanceService.findByIdAndRemove(ambulanceServiceId);
+        const response = await AmbulanceService.findOneAndDelete({regdId : ambulanceServiceId});
         if(response === null)
             return res.status(404).json({msg : "Not found"});
-        res.status(200).json(response);
+        res.status(200).json({msg : "success"});
     }
     catch(err){
         res.status(400).json({msg : "Some issue"});
@@ -71,7 +71,8 @@ exports.deleteAmbulanceService = async(req, res) => {
 exports.getParticularAmbulanceService = async(req, res) => {
     try{
         const ambulanceServiceId = req.params.regdId;
-        const ambulanceService = await AmbulanceService.findById(ambulanceServiceId);
+        const ambulanceService = await AmbulanceService.findOne({regdId : ambulanceServiceId})
+                                        .select(["-_id","-__v","-createdAt","-updatedAt"]);
         if(ambulanceService === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json(ambulanceService);

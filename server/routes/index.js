@@ -23,6 +23,10 @@ router.delete('/users/:regdId', userController.removeUser);
 
 // to collect hospital data
 router.post('/hospital', hospitalController.addHospital);
+router.get('/hospitals', hospitalController.getHospitals);
+router.put('/hospital/:regdId', hospitalController.updateHospital);
+router.delete('/hospital/:regdId', hospitalController.deleteHospital);
+router.get('/hospitals/:regdId', hospitalController.getParticularHospital);
 
 // ambulance service routes
 router.post('/ambulanceservice', ambulanceServiceController.addAmbulanceService);
@@ -47,6 +51,8 @@ router.get('/bloodbanks/:regdId', bloodBankController.getParticularBloodBank);
 
 // ambulance routes
 router.post('/ambulance', ambulanceController.addAmbulance);
+router.get('/ambulances/:regdId', ambulanceController.getAllAmbulances);
+router.delete('/ambulances/:contact', ambulanceController.deleteAmbulance);
 
 
 module.exports = router;
