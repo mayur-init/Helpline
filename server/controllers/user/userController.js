@@ -5,15 +5,15 @@ exports.addUser = async(req, res) => {
 
     try{
         const userName = req.body.UserName;
-        const contactNo = req.body.ContactNumber;
+        const contactNo = req.body.ContactNo;
         const regdId = req.body.RegdId;
-        const loacation = req.body.Location;
+        const location = req.body.Location;
 
         const user = new User({
             userName,
             contactNo,
             regdId,
-            location,
+            location
         });
         await user.save();
 

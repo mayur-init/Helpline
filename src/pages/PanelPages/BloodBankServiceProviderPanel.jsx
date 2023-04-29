@@ -7,7 +7,7 @@ import { HiArrowSmallLeft, HiArrowSmallRight } from 'react-icons/hi2'
 
 function BloodBankServiceProviderPanel() {
 
-    const { ServiceProviderName } = useParams();
+    const { RegdId } = useParams();
     const navigate = useNavigate();
     const { isProviderLoggedIn, setProviderLoggedIn } = useContext(globalStateContext);
 
@@ -21,6 +21,38 @@ function BloodBankServiceProviderPanel() {
         }
     })
 
+    
+    const handleSubmit = async () => {
+        if (ServiceProviderName === '' || RegdNo === '' || Email === '' || ContactNo === '' || Address === '') {
+            toast.error('Some fields are empty, fill them all');
+          }else {
+            const Data = {
+                ServiceProviderName,
+                RegdNo,
+                Email,
+                ContactNo,
+                Address,
+            }
+            try {
+                const response = await axios.post('http://localhost:5000/api/bloodbank', Data, {
+                  headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+                  }
+                });
+                console.log("Data sent");
+              } catch (error) {
+                console.log(error);
+              }
+        }
+        setServiceProviderName('');
+        setRegdNo('');
+        setEmail('');
+        setContactNo('');
+        setAddress('');
+  
+    }
+
     const handleLogout = () =>{
         setProviderLoggedIn(false);
         toast.success('Loggged out successfully');
@@ -32,7 +64,7 @@ function BloodBankServiceProviderPanel() {
             <div name='panel-nav' className='h-[6vh] w-auto flex h justify-center py-2 px-3 border-b-2 border-gray-200 sticky top-0 z-50'>
                 <p className='text-xl font-semibold hover:text-violet-500'>Helpline</p>
                 <div className='ml-auto flex'>
-                    {/* <p className='border-gray-300 border-2 rounded-xl px-2 h-[27px]'>{ServiceProviderName}</p> */}
+                    <p className='border-gray-300 border-2 rounded-xl px-2 h-[27px]'>{RegdId.toUpperCase()}</p>
                     <button className='mx-2 font-semibold underline hover:text-violet-600' onClick={handleLogout}>Logout</button>
                 </div>
             </div>

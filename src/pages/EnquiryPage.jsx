@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import EnquiryHero from '../components/Heroes/EnquiryHero'
@@ -15,9 +15,20 @@ function EnquiryPage() {
     { label: 'other...', id: 3 }
   ]
 
+
   const [queryType, setQueryType] = useState(0);
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
+
+  const { userId } = useContext(globalStateContext);
+  const EnquiryId = useRef();
+
+  const enquiryData = {
+    EnquiryId,
+    ParentRegdId: userId,
+    EnquiryType: queryType,
+    Enquiry: query,
+  }
 
   const { isUserLoggedIn } = useContext(globalStateContext);
   useEffect(() => {
@@ -27,15 +38,23 @@ function EnquiryPage() {
     }
   });
 
-  const handleClick = () =>{
+  const handleClick = async () =>{
     if(queryType === 0 || query === ''){
       toast.error('Write some query first')
     }else{
-      toast.success('New query posted');
+      await generateRegdId();
+      console.log(enquiryData);
+
       setQueryType(0);
       setQuery('');
+      toast.success('New query posted');
     }
     
+  }
+
+  const generateRegdId = async () => {
+    var random = await Math.random().toString().substring(2, 8);
+    enquiryData.EnquiryId = `ENQR${random}`;
   }
 
   return (

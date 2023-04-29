@@ -8,6 +8,7 @@ const {
     oxygenCylinderController,
     bloodBankController,
     ambulanceController,
+    loginController,
 } = require('../controllers');
 
 // router.get('/', (req, res) =>{res.send('<h2>Project-Helpline: server is running...</h2>')});
@@ -53,6 +54,9 @@ router.get('/bloodbanks/:regdId', bloodBankController.getParticularBloodBank);
 router.post('/ambulance', ambulanceController.addAmbulance);
 router.get('/ambulances/:regdId', ambulanceController.getAllAmbulances);
 router.delete('/ambulances/:contact', ambulanceController.deleteAmbulance);
+
+//auth routes
+router.post('/providerlogin', loginController.verifyServiceProviderLogin);
 
 
 module.exports = router;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BloodBankPage from './pages/BloodBankPage';
 import LandingPage from './pages/LandingPage';
@@ -19,13 +19,14 @@ import { Toaster } from 'react-hot-toast'
 function App() {
 
   const [userName, setUserName] = useState(undefined);
+  const [userId, setUserId] = useState(undefined);
   const [location, setLocation] = useState(undefined);
   const [isUserLoggedIn, setUserLoggedIn] = useState(false);
   const [isProviderLoggedIn, setProviderLoggedIn] = useState(false);
 
   return (
     <div>
-      <globalStateContext.Provider value={{ userName, setUserName, location, setLocation, isUserLoggedIn, setUserLoggedIn, isProviderLoggedIn, setProviderLoggedIn }}>
+      <globalStateContext.Provider value={{ userName, setUserName, userId, setUserId, location, setLocation, isUserLoggedIn, setUserLoggedIn, isProviderLoggedIn, setProviderLoggedIn }}>
         {/************react-notification**************/}
         <Toaster 
           position='top-right'
@@ -52,10 +53,10 @@ function App() {
             <Route path='/ambulance-service' element={<AmbulanceServicePage />} />
             <Route path='/oxygen-cylinder-service' element={<OxygenCylinderPage />} />
             <Route path='/user-panel' element={<UserPanel />} />
-            <Route path='/ambulance-service-provider-panel/:ServiceProviderName' element={<AmbulanceServiceProviderPanel />} />
-            <Route path='/blood-bank-service-provider-panel/:ServiceProviderName' element={<BloodBankServiceProviderPanel />} />
-            <Route path='/oxygen-cylinder-provider-panel/:ServiceProviderName' element={<OxygenCylinderProviderPanel />} />
-            <Route path='/hospital-service-panel/:ServiceProviderName' element={<HospitalPanel/>} />
+            <Route path='/ambulance-service-provider-panel/:RegdId' element={<AmbulanceServiceProviderPanel />} />
+            <Route path='/blood-bank-service-provider-panel/:RegdId' element={<BloodBankServiceProviderPanel />} />
+            <Route path='/oxygen-cylinder-provider-panel/:RegdId' element={<OxygenCylinderProviderPanel />} />
+            <Route path='/hospital-service-panel/:RegdId' element={<HospitalPanel/>} />
             <Route path='/admin-panel' element={<AdminPanel />} />
           </Routes>
         </Router>

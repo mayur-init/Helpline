@@ -13,5 +13,5 @@ module.exports = {
     BloodBank,
     OxygenCylinderProvider,
     Ambulance,
-    Enquiry
+    Enquiry,
 };

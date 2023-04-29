@@ -38,9 +38,9 @@ function BloodBankHero() {
                 <div className='w-auto flex flex-col justify-items-center mx-5 mb-[10vh]'>
                 {
                     bloodbanks.map((item) => {
-                        const { _id, providerName, address, regdId  ,email, contactNo} = item;
+                        const { providerName, address, regdId  ,email, contactNo} = item;
                         return (
-                            <div className="min-h-[10vh] w-[60vw] mx-auto bg-white my-4 py-5 px-[5vw] rounded-3xl shadow-xl" key={_id}>
+                            <div className="min-h-[10vh] w-[60vw] mx-auto bg-white my-4 py-5 px-[5vw] rounded-3xl shadow-xl" key={regdId}>
                                     <h1 className="font-bold text-2xl text-gray-600 my-2">{providerName}</h1>
                                     <h2 className="text-xl my-2 font-semibold">Contact No: {contactNo}</h2>
                                     <h1 className='text-xl my-2 font-semibold'>Address: {address}</h1>
