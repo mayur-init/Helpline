@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios';
 import LoginFormDropdown from '../Dropdowns/LoginFormDropdown'
 import { HashLink } from 'react-router-hash-link'
 import toast from 'react-hot-toast'
 import { globalStateContext } from '../../contexts/globalStateContext'
+
 
 function ServiceProviderLogin() {
 
@@ -18,35 +20,78 @@ function ServiceProviderLogin() {
   const navigate = useNavigate();
   // state management for ambulance service provider
   const [ServiceProviderName, setServiceProviderName] = useState('');
+  const [RegdId, setRegdId] = useState('');
   const [Password, setPassword] = useState('');
   const { isProviderLoggedIn, setProviderLoggedIn } = useContext(globalStateContext);
 
-  const handleClick = () => {
+  var ProviderType = useRef('');
+  var redirectUrl = useRef('');
 
-    if (ServiceProviderName === '' || Password === '') {
+  const Data = {
+    RegdId,
+    Password,
+    ProviderType,
+  }
+
+  const handleClick = async () => {
+
+    if (RegdId === '' || Password === '') {
       toast.error('All fields are mendatory');
     } else {
+
       setProviderLoggedIn(true);
-      toast.success(`Welcome ${ServiceProviderName}`)
+      // toast.success(`Welcome ${ServiceProviderName}`);
+
       if(formNo === 1){
-        //check if use is logged in or not
-        navigate(`/hospital-service-panel/${ServiceProviderName}`, {replace: true});
+        Data.ProviderType = 'HOSP';
+        redirectUrl = `/hospital-service-panel/${RegdId.toLowerCase()}`;
+
       } else if (formNo === 2) {
-        // check if user is logged in or not
-        navigate(`/ambulance-service-provider-panel/${ServiceProviderName}`, { replace: true });
+        Data.ProviderType = 'AMBU';
+        redirectUrl = `/ambulance-service-provider-panel/${RegdId.toLowerCase()}`;
+        
       } else if (formNo === 3) {
-        // check if user is logged in or not
-        navigate(`/blood-bank-service-provider-panel/${ServiceProviderName}`, { replace: true });
+        Data.ProviderType = 'BLOOD';
+        redirectUrl = `/blood-bank-service-provider-panel/${RegdId.toLowerCase()}`;
+
       } else if (formNo === 4) {
-        // check if user is logged in or not
-        navigate(`/oxygen-cylinder-provider-panel/${ServiceProviderName}`, { replace: true });
+        Data.ProviderType = 'OXYG';
+        redirectUrl = `/oxygen-cylinder-provider-panel/${RegdId.toLowerCase()}`;
+
+      }
+      
+      // console.log(Data);
+      //verifying service provider
+      const res = await isVerified();
+      // console.log(res);
+
+      if(res.registered === false){
+        toast.error('You have not registered yet, register yourself first');
+      }
+      else if(res.verified === false){
+        toast.error('UserName or Password incorrect');
+      }
+      
+      if(res.registered === true && res.verified === true){
+        setProviderLoggedIn(true);
+        navigate( redirectUrl , {replace: true});
       }
     }
   }
 
   useEffect(() => {
     setProviderLoggedIn(false);
-  })
+  });
+
+  const isVerified = async () =>{
+    try {
+      const res = await axios.post('http://localhost:5000/api/providerlogin', Data);
+      // console.log(res.data);
+      return res.data;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div>
@@ -55,7 +100,8 @@ function ServiceProviderLogin() {
           <p className='text-3xl font-bold text-gray-600 my-[4vh] flex justify-center hover:text-violet-600'>Service Provider Login</p>
           <div className='flex flex-col w-[50vh] h-auto mt-[8vh] mb-[4vh]'>
             <LoginFormDropdown title={'Register as'} options={options} setFromNo={setFromNo} />
-            <input type='text' placeholder='Service Provider Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setServiceProviderName(e.target.value) }}></input>
+            {/* <input type='text' placeholder='Service Provider Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setServiceProviderName(e.target.value) }}></input> */}
+            <input type='text' placeholder='Regd Id' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setRegdId(e.target.value) }}></input>
             <input type='text' placeholder='Password' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setPassword(e.target.value) }}></input>
             <p className='flex justify-end'><button className='btn w-[100px] m-2' onClick={handleClick}>Submit</button></p>
             <p className='flex justify-start text-sm'>Haven't registered yet?<HashLink smooth to='/register#registerForm' className='hover:text-violet-600 mx-2'>Register Now</HashLink></p>

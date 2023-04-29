@@ -7,7 +7,7 @@ import { HiArrowSmallLeft, HiArrowSmallRight } from 'react-icons/hi2'
 
 function HospitalPanel() {
 
-    const { ServiceProviderName } = useParams();
+    const { RegdId } = useParams();
     const navigate = useNavigate();
     var [pageNo, setPageNo] = useState(1);
     const { isProviderLoggedIn, setProviderLoggedIn } = useContext(globalStateContext);
@@ -31,7 +31,7 @@ function HospitalPanel() {
             <div name='panel-nav' className='h-[6vh] w-auto flex h justify-center py-2 px-3 border-b-2 border-gray-200 sticky top-0 z-50'>
                 <p className='text-xl font-semibold hover:text-violet-500'>Helpline</p>
                 <div className='ml-auto flex'>
-                    <p className='border-gray-300 border-2 rounded-xl px-2 h-[27px]'>{ServiceProviderName}</p>
+                    <p className='border-gray-300 border-2 rounded-xl px-2 h-[27px]'>{RegdId.toUpperCase()}</p>
                     <button className='mx-2 font-semibold underline hover:text-violet-600' onClick={handleLogout}>Logout</button>
                 </div>
             </div>
