@@ -9,6 +9,7 @@ const {
     bloodBankController,
     ambulanceController,
     loginController,
+    hospitalAmbulanceController,
 } = require('../controllers');
 
 // router.get('/', (req, res) =>{res.send('<h2>Project-Helpline: server is running...</h2>')});
@@ -28,6 +29,11 @@ router.get('/hospitals', hospitalController.getHospitals);
 router.put('/hospital/:regdId', hospitalController.updateHospital);
 router.delete('/hospital/:regdId', hospitalController.deleteHospital);
 router.get('/hospitals/:regdId', hospitalController.getParticularHospital);
+
+//hospital-ambulance routes
+router.post('/hospital-ambulance', hospitalAmbulanceController.addAmbulance);
+router.get('/hospital-ambulances/:regdId', hospitalAmbulanceController.getAllAmbulances);
+router.delete('/hospital-ambulance/:contact', hospitalAmbulanceController.deleteAmbulance);
 
 // ambulance service routes
 router.post('/ambulanceservice', ambulanceServiceController.addAmbulanceService);
