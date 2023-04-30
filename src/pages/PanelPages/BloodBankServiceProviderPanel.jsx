@@ -30,38 +30,6 @@ function BloodBankServiceProviderPanel() {
         setProviderData(res.data[0]);
     }
 
-    
-    const handleSubmit = async () => {
-        if (ServiceProviderName === '' || RegdNo === '' || Email === '' || ContactNo === '' || Address === '') {
-            toast.error('Some fields are empty, fill them all');
-          }else {
-            const Data = {
-                ServiceProviderName,
-                RegdNo,
-                Email,
-                ContactNo,
-                Address,
-            }
-            try {
-                const response = await axios.post('http://localhost:5000/api/bloodbank', Data, {
-                  headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-                  }
-                });
-                console.log("Data sent");
-              } catch (error) {
-                console.log(error);
-              }
-        }
-        setServiceProviderName('');
-        setRegdNo('');
-        setEmail('');
-        setContactNo('');
-        setAddress('');
-  
-    }
-
     const handleLogout = () =>{
         setProviderLoggedIn(false);
         toast.success('Loggged out successfully');

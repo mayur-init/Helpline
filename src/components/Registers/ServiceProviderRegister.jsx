@@ -129,24 +129,20 @@ function ServiceProviderRegister() {
   })
 
   const generateRegdId = async () => {
-    setParentRegdId(null);
-    var random = await Math.random().toString().substring(2, 8);
-    // console.log(random);
+    var response;
 
     if(formNo === 1){
-      RegdId = `HOSP${random}`;
-
+      response = await axios.post('http://localhost:5000/api/generateregdid', {IdType: 'HOSP'});
     }else if(formNo === 2){
-      RegdId = `AMBU${random}`;
-
+      response = await axios.post('http://localhost:5000/api/generateregdid', {IdType: 'AMBU'});
     }else if(formNo === 3){
-      RegdId = `BLOOD${random}`;
-
+      response = await axios.post('http://localhost:5000/api/generateregdid', {IdType: 'BLOOD'});
     }else if(formNo === 4){
-      RegdId = `OXYG${random}`;
-
+      response = await axios.post('http://localhost:5000/api/generateregdid', {IdType: 'OXYG'});
     }
+    RegdId = response.data.generatedId;
     Data.RegdId = RegdId;
+    setParentRegdId(null);
   }
 
   return (

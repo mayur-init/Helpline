@@ -8,12 +8,9 @@ const {
     oxygenCylinderController,
     bloodBankController,
     ambulanceController,
-    loginController,
-<<<<<<< HEAD
-    enquiryController
-=======
+    authController,
+    enquiryController,
     hospitalAmbulanceController,
->>>>>>> aa3cefd3ee89b0a9c411b695ee1f4950f79352a4
 } = require('../controllers');
 
 // router.get('/', (req, res) =>{res.send('<h2>Project-Helpline: server is running...</h2>')});
@@ -67,7 +64,8 @@ router.get('/ambulances/:regdId', ambulanceController.getAllAmbulances);
 router.delete('/ambulances/:contact', ambulanceController.deleteAmbulance);
 
 //auth routes
-router.post('/providerlogin', loginController.verifyServiceProviderLogin);
+router.post('/providerlogin', authController.verifyServiceProviderLogin);
+router.post('/generateregdid', authController.generateRegdId);
 
 //enquiry routes
 router.post('/enquiry/', enquiryController.addEnquiry);
