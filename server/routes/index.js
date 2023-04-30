@@ -10,6 +10,8 @@ const {
     ambulanceController,
     loginController,
     hospitalAmbulanceController,
+    hospitalBloodBankController,
+    hospitalOxygenCylinderController,
 } = require('../controllers');
 
 // router.get('/', (req, res) =>{res.send('<h2>Project-Helpline: server is running...</h2>')});
@@ -35,6 +37,19 @@ router.post('/hospital-ambulance', hospitalAmbulanceController.addAmbulance);
 router.get('/hospital-ambulances/:regdId', hospitalAmbulanceController.getAllAmbulances);
 router.delete('/hospital-ambulance/:contact', hospitalAmbulanceController.deleteAmbulance);
 
+//hospital-bloodbank routes
+router.post('/hospital-bloodbank', hospitalBloodBankController.addBloodBank);
+router.get('/hospital-bloodbanks/:regdId', hospitalBloodBankController.getBloodBanks);
+router.put('/hospital-bloodbank/:regdId', hospitalBloodBankController.updateBloodBank);
+router.delete('/hospital-bloodbank/:regdId', hospitalBloodBankController.deleteBloodBank);
+router.get('/hospital-bloodbank/:regdId', hospitalBloodBankController.getParticularBloodBank);
+
+ //hospital-oxygen cylinder routes
+router.post('/hospital-oxygencylinder', hospitalOxygenCylinderController.addOxygenCylinderProvider);
+router.get('/hospital-oxygencylinders/:regdId', hospitalOxygenCylinderController.getOxygenCylinderProviders);
+router.put('/hospital-oxygencylinder/:regdId', hospitalOxygenCylinderController.updateOxygenCylinder);
+router.delete('/hospital-oxygencylinder/:regdId', hospitalOxygenCylinderController.deleteOxygenCylinderProvider);
+router.get('/hospital-oxygencylinder/:regdId', hospitalOxygenCylinderController.getParticularProvider); 
 
 // ambulance service routes
 router.post('/ambulanceservice', ambulanceServiceController.addAmbulanceService);
