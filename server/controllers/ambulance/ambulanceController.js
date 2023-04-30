@@ -25,7 +25,7 @@ exports.addAmbulance = async(req, res, next) => {
 exports.getAllAmbulances = async(req, res) => {
     try {
         const ambulanceServiceId = req.params.regdId;
-        const ambulances = await Ambulance.find({parentRegdId : ambulanceServiceId}).select('-_id driverName driverContactNo');
+        const ambulances = await Ambulance.find({parentRegdId : ambulanceServiceId});
         if(ambulances.length === 0)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json(ambulances);

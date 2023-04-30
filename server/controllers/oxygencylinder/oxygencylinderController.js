@@ -33,7 +33,7 @@ exports.addOxygenCylinderProvider = async(req, res) => {
 
 exports.getOxygenCylinderProviders = async(req, res) => {
     try{
-        const oxygenCylinderProviders = await OxygenCylinderProvider.find().select('providerName email address contactNo -_id');
+        const oxygenCylinderProviders = await OxygenCylinderProvider.find();
         if(oxygenCylinderProviders.length === 0)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json(oxygenCylinderProviders);

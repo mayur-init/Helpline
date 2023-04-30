@@ -31,7 +31,7 @@ exports.addHospital = async(req, res) => {
 
 exports.getHospitals = async(req, res) => {
     try{
-        const hospitals = await Hospital.find().select('providerName email address contactNo -_id category');
+        const hospitals = await Hospital.find();
         if(hospitals.length === 0)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json(hospitals);

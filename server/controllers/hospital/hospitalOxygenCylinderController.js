@@ -1,6 +1,7 @@
-const {BloodBank} = require('../../models');
+const {OxygenCylinderProvider} = require('../../models');
 
-exports.addBloodBank = async(req, res) => {
+// to add a oxygencylinderprovider
+exports.addOxygenCylinderProvider = async(req, res) => {
 
     try{
         const providerName = req.body.ServiceProviderName;
@@ -11,8 +12,7 @@ exports.addBloodBank = async(req, res) => {
         const contactNo = req.body.ContactNo;
         const password = req.body.Password;
 
-
-        const bloodBank = new BloodBank({
+        const oxygenCylinder = new OxygenCylinderProvider({
             providerName,
             email,
             address,
@@ -21,7 +21,7 @@ exports.addBloodBank = async(req, res) => {
             contactNo, 
             password   
         });
-        await bloodBank.save();
+        await oxygenCylinder.save();
 
         res.status(201).json({msg: "success"});
     }
@@ -30,52 +30,54 @@ exports.addBloodBank = async(req, res) => {
         res.status(400).json(err);
     }
 };
-//done
-exports.getBloodBanks = async(req, res) => {
+
+exports.getOxygenCylinderProviders = async(req, res) => {
     try{
-        const bloodBanks = await BloodBank.find();
-        if(bloodBanks.length === 0)
+        const hospitalId = req.params.regdId;
+        const oxygenCylinderProviders = await OxygenCylinderProvider.find({parentRegdId : hospitalId});
+        if(oxygenCylinderProviders.length === 0)
             return res.status(404).json({msg : "Not found"});
-        res.status(200).json(bloodBanks);
+        res.status(200).json(oxygenCylinderProviders);
     }
     catch(err){
         console.log(err);
         res.status(400).json({msg : "Some issue"});
     }
 };
-//done
-exports.updateBloodBank = async(req, res) => {
+
+exports.updateOxygenCylinder = async(req, res) => {
     try{
-        const bloodBankId = req.params.regdId;
-        const response = await BloodBank.update({"regdId" : bloodBankId}, {$set : req.body} , {new : true});
+        const providerId = req.params.regdId;
+        const response = await OxygenCylinderProvider.update({"regdId":providerId}, {$set : req.body} , {new : true});
         if(response === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json({msg : "Updated Successfully"});
     }catch(err){
         res.status(400).json({msg : "Some issue"});
     }
-};
-//done
-exports.deleteBloodBank = async(req, res) => {
+}; 
+
+exports.deleteOxygenCylinderProvider = async(req, res) => {
     try{
-        const bloodBankId = req.params.regdId;
-        const response = await BloodBank.remove({"regdId" : bloodBankId});
+        const providerId = req.params.regdId;
+        const response = await OxygenCylinderProvider.remove({"regdId": providerId});
         if(response === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json({msg : "Success"});
     }
     catch(err){
+        console.log(err);
         res.status(400).json({msg : "Some issue"});
     }
 };
-//done
-exports.getParticularBloodBank = async(req, res) => {
+    
+exports.getParticularProvider = async(req, res) => {
     try{
-        const bloodBankId = req.params.regdId;
-        const bloodbank = await BloodBank.find({"regdId" : bloodBankId});
-        if(bloodbank === null)
+        const oxyCyProviderId = req.params.regdId;
+        const oxygenCylinderProvider = await OxygenCylinderProvider.find({"regdId": oxyCyProviderId});
+        if(oxygenCylinderProvider === null)
             return res.status(404).json({msg : "Not found"});
-        res.status(200).json(bloodbank);
+        res.status(200).json(oxygenCylinderProvider);
     }
     catch(err){
         res.status(400).json({msg : "Some issue"});

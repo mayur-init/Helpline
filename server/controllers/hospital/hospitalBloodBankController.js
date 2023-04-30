@@ -33,7 +33,8 @@ exports.addBloodBank = async(req, res) => {
 //done
 exports.getBloodBanks = async(req, res) => {
     try{
-        const bloodBanks = await BloodBank.find();
+        const hospitalId = req.params.regdId;
+        const bloodBanks = await BloodBank.find({parentRegdId : hospitalId});
         if(bloodBanks.length === 0)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json(bloodBanks);
