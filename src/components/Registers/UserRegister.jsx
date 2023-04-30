@@ -77,7 +77,7 @@ function UserRegister({ location, setLocation }) {
 
   const generateRegdId = async () => {
     var random = await Math.random().toString().substring(2, 8);
-    // setUserId(random);
+    setUserId(`USER${random}`);
     // console.log(userId);
     UserData.RegdId = `USER${random}`;
   }

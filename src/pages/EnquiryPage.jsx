@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState, useRef } from 'react'
-import Footer from '../components/Footer'
+import axios from 'axios';
 import Navbar from '../components/Navbar'
-import EnquiryHero from '../components/Heroes/EnquiryHero'
 import { globalStateContext } from '../contexts/globalStateContext'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
@@ -38,18 +37,29 @@ function EnquiryPage() {
     }
   });
 
-  const handleClick = async () =>{
-    if(queryType === 0 || query === ''){
+  const handleClick = async () => {
+    if (queryType === 0 || query === '') {
       toast.error('Write some query first')
-    }else{
-      await generateRegdId();
-      console.log(enquiryData);
+    } else {
+      try {
+        await generateRegdId();
+        // console.log(enquiryData);
+        const response = await axios.post('http://localhost:5000/api/enquiry', enquiryData, {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+          }
+        });
+        // console.log("Data sent");
+      } catch (error) {
+        console.log(error);
+      }
 
       setQueryType(0);
       setQuery('');
       toast.success('New query posted');
     }
-    
+
   }
 
   const generateRegdId = async () => {

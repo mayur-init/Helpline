@@ -47,7 +47,7 @@ exports.getAmbulanceServices = async(req, res) => {
 exports.updateAmbulanceService = async(req, res) => {
     try{
         const ambulanceServiceId = req.params.regdId;
-        const response = await AmbulanceService.update({"regdId": ambulanceServiceId}, {$set : req.body} , {new : true});
+        const response = await AmbulanceService.updateOne({"regdId": ambulanceServiceId}, {$set : req.body} , {new : true});
         if(response === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json({ msg : "Updated Successfully"});

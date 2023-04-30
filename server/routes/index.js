@@ -9,6 +9,7 @@ const {
     bloodBankController,
     ambulanceController,
     loginController,
+    enquiryController
 } = require('../controllers');
 
 // router.get('/', (req, res) =>{res.send('<h2>Project-Helpline: server is running...</h2>')});
@@ -53,5 +54,10 @@ router.post('/ambulance', ambulanceController.addAmbulance);
 //auth routes
 router.post('/providerlogin', loginController.verifyServiceProviderLogin);
 
+//enquiry routes
+router.post('/enquiry/', enquiryController.addEnquiry);
+router.get('/enquiry/:parentRegdId', enquiryController.getEnquiriesByParentId);
+router.put('/enquiry/:enquiryId', enquiryController.updateParticularEnquiry);
+router.delete('/enquiry/:enquiryId', enquiryController.deleteParticularEnquiry);
 
 module.exports = router;
