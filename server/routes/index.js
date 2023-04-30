@@ -9,7 +9,11 @@ const {
     bloodBankController,
     ambulanceController,
     loginController,
+<<<<<<< HEAD
     enquiryController
+=======
+    hospitalAmbulanceController,
+>>>>>>> aa3cefd3ee89b0a9c411b695ee1f4950f79352a4
 } = require('../controllers');
 
 // router.get('/', (req, res) =>{res.send('<h2>Project-Helpline: server is running...</h2>')});
@@ -25,7 +29,16 @@ router.delete('/users/:regdId', userController.removeUser);
 
 // to collect hospital data
 router.post('/hospital', hospitalController.addHospital);
+router.get('/hospitals', hospitalController.getHospitals);
+router.put('/hospital/:regdId', hospitalController.updateHospital);
+router.delete('/hospital/:regdId', hospitalController.deleteHospital);
 router.get('/hospital/:regdId', hospitalController.getParticularhospital);
+
+//hospital-ambulance routes
+router.post('/hospital-ambulance', hospitalAmbulanceController.addAmbulance);
+router.get('/hospital-ambulances/:regdId', hospitalAmbulanceController.getAllAmbulances);
+router.delete('/hospital-ambulance/:contact', hospitalAmbulanceController.deleteAmbulance);
+
 
 // ambulance service routes
 router.post('/ambulanceservice', ambulanceServiceController.addAmbulanceService);
@@ -50,6 +63,8 @@ router.get('/bloodbanks/:regdId', bloodBankController.getParticularBloodBank);
 
 // ambulance routes
 router.post('/ambulance', ambulanceController.addAmbulance);
+router.get('/ambulances/:regdId', ambulanceController.getAllAmbulances);
+router.delete('/ambulances/:contact', ambulanceController.deleteAmbulance);
 
 //auth routes
 router.post('/providerlogin', loginController.verifyServiceProviderLogin);

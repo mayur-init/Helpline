@@ -1,6 +1,5 @@
 const {BloodBank} = require('../../models');
 
-// to add a oxygencylinderprovider
 exports.addBloodBank = async(req, res) => {
 
     try{
@@ -31,7 +30,7 @@ exports.addBloodBank = async(req, res) => {
         res.status(400).json(err);
     }
 };
-
+//done
 exports.getBloodBanks = async(req, res) => {
     try{
         const bloodBanks = await BloodBank.find();
@@ -44,7 +43,7 @@ exports.getBloodBanks = async(req, res) => {
         res.status(400).json({msg : "Some issue"});
     }
 };
-
+//done
 exports.updateBloodBank = async(req, res) => {
     try{
         const bloodBankId = req.params.regdId;
@@ -56,20 +55,20 @@ exports.updateBloodBank = async(req, res) => {
         res.status(400).json({msg : "Some issue"});
     }
 };
-
+//done
 exports.deleteBloodBank = async(req, res) => {
     try{
         const bloodBankId = req.params.regdId;
         const response = await BloodBank.remove({"regdId" : bloodBankId});
         if(response === null)
             return res.status(404).json({msg : "Not found"});
-        res.status(200).json(response);
+        res.status(200).json({msg : "Success"});
     }
     catch(err){
         res.status(400).json({msg : "Some issue"});
     }
 };
-
+//done
 exports.getParticularBloodBank = async(req, res) => {
     try{
         const bloodBankId = req.params.regdId;

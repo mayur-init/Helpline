@@ -1,5 +1,6 @@
 const userController = require('./user/userController');
 const hospitalController = require('./hospital/hospitalController');
+const hospitalAmbulanceController = require('./hospital/hospitalAmbulanceController');
 const ambulanceServiceController = require('./ambulance/ambulanceServiceController');
 const oxygenCylinderController = require('./oxygencylinder/oxygenCylinderController');
 const bloodBankController = require('./bloodBank/bloodBankController');
@@ -10,6 +11,7 @@ const enquiryController = require('./enquiry/enquiryController')
 module.exports = {
     userController,
     hospitalController,
+    hospitalAmbulanceController,
     ambulanceServiceController,
     oxygenCylinderController,
     bloodBankController,

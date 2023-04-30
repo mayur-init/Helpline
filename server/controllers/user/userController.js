@@ -45,7 +45,7 @@ exports.updateUser = async(req, res) => {
         const response = await User.update({"regdId":userId}, {$set : req.body} , {new : true});
         if(response === null)
             return res.status(404).json({msg : "Not found"});
-        res.status(200).json({data : response, msg : "Updated Successfully"});
+        res.status(200).json({ msg : "Updated Successfully"});
     }catch(err){
         res.status(400).json({msg : "Some issue"});
     }

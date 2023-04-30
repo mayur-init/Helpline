@@ -33,7 +33,8 @@ exports.addOxygenCylinderProvider = async(req, res) => {
 
 exports.getOxygenCylinderProviders = async(req, res) => {
     try{
-        const oxygenCylinderProviders = await OxygenCylinderProvider.find();
+        const hospitalId = req.params.regdId;
+        const oxygenCylinderProviders = await OxygenCylinderProvider.find({parentRegdId : hospitalId});
         if(oxygenCylinderProviders.length === 0)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json(oxygenCylinderProviders);
@@ -47,7 +48,7 @@ exports.getOxygenCylinderProviders = async(req, res) => {
 exports.updateOxygenCylinder = async(req, res) => {
     try{
         const providerId = req.params.regdId;
-        const response = await OxygenCylinderProvider.updateOne({"regdId":providerId}, {$set : req.body} , {new : true});
+        const response = await OxygenCylinderProvider.update({"regdId":providerId}, {$set : req.body} , {new : true});
         if(response === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json({msg : "Updated Successfully"});
