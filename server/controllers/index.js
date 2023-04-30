@@ -8,7 +8,7 @@ const oxygenCylinderController = require('./oxygencylinder/oxygenCylinderControl
 const bloodBankController = require('./bloodBank/bloodBankController');
 const ambulanceController = require('./ambulance/ambulanceController');
 const loginController = require('./auth/loginController')
-
+const enquiryController = require('./enquiry/enquiryController')
 
 module.exports = {
     userController,
@@ -21,4 +21,5 @@ module.exports = {
     bloodBankController,
     ambulanceController,
     loginController,
+    enquiryController,
 };

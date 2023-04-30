@@ -47,7 +47,7 @@ exports.getOxygenCylinderProviders = async(req, res) => {
 exports.updateOxygenCylinder = async(req, res) => {
     try{
         const providerId = req.params.regdId;
-        const response = await OxygenCylinderProvider.update({"regdId":providerId}, {$set : req.body} , {new : true});
+        const response = await OxygenCylinderProvider.updateOne({"regdId":providerId}, {$set : req.body} , {new : true});
         if(response === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json({msg : "Updated Successfully"});

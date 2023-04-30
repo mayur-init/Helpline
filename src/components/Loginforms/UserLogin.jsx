@@ -8,7 +8,8 @@ import { HashLink } from 'react-router-hash-link';
 function UserLogin({ }) {
 
   const navigate = useNavigate();
-  const { userName, setUserName, setUserLoggedIn } = useContext(globalStateContext);
+  const { userName, setUserName, userId, setUserId, setUserLoggedIn } = useContext(globalStateContext);
+
   //state management for user 
   const [contactNo, setContactNo] = useState('');
   const [otp, setOtp] = useState('');

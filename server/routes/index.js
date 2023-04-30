@@ -9,6 +9,7 @@ const {
     bloodBankController,
     ambulanceController,
     loginController,
+    enquiryController,
     hospitalAmbulanceController,
     hospitalBloodBankController,
     hospitalOxygenCylinderController,
@@ -80,5 +81,10 @@ router.delete('/ambulances/:contact', ambulanceController.deleteAmbulance);
 //auth routes
 router.post('/providerlogin', loginController.verifyServiceProviderLogin);
 
+//enquiry routes
+router.post('/enquiry/', enquiryController.addEnquiry);
+router.get('/enquiry/:parentRegdId', enquiryController.getEnquiriesByParentId);
+router.put('/enquiry/:enquiryId', enquiryController.updateParticularEnquiry);
+router.delete('/enquiry/:enquiryId', enquiryController.deleteParticularEnquiry);
 
 module.exports = router;
