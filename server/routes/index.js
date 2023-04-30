@@ -28,12 +28,13 @@ router.post('/hospital', hospitalController.addHospital);
 router.get('/hospitals', hospitalController.getHospitals);
 router.put('/hospital/:regdId', hospitalController.updateHospital);
 router.delete('/hospital/:regdId', hospitalController.deleteHospital);
-router.get('/hospitals/:regdId', hospitalController.getParticularHospital);
+router.get('/hospital/:regdId', hospitalController.getParticularhospital);
 
 //hospital-ambulance routes
 router.post('/hospital-ambulance', hospitalAmbulanceController.addAmbulance);
 router.get('/hospital-ambulances/:regdId', hospitalAmbulanceController.getAllAmbulances);
 router.delete('/hospital-ambulance/:contact', hospitalAmbulanceController.deleteAmbulance);
+
 
 // ambulance service routes
 router.post('/ambulanceservice', ambulanceServiceController.addAmbulanceService);

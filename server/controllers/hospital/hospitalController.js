@@ -67,16 +67,16 @@ exports.deleteHospital = async(req, res) => {
     }
 };
 
-exports.getParticularHospital = async(req, res) => {
+exports.getParticularhospital = async(req, res) => {
     try{
         const hospitalId = req.params.regdId;
-        const hospital = await Hospital.findOne({regdId : hospitalId})
-                                        .select(["-__v","-createdAt","-updatedAt"]);
+        const hospital = await Hospital.find({"regdId": hospitalId});
         if(hospital === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json(hospital);
     }
     catch(err){
+        console.log(err);
         res.status(400).json({msg : "Some issue"});
     }
 }

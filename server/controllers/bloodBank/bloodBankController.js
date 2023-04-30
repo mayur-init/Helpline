@@ -47,7 +47,7 @@ exports.getBloodBanks = async(req, res) => {
 exports.updateBloodBank = async(req, res) => {
     try{
         const bloodBankId = req.params.regdId;
-        const response = await BloodBank.findOneAndUpdate({regdId : bloodBankId}, {$set : req.body} , {new : true});
+        const response = await BloodBank.update({"regdId" : bloodBankId}, {$set : req.body} , {new : true});
         if(response === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json({msg : "Updated Successfully"});
@@ -59,7 +59,7 @@ exports.updateBloodBank = async(req, res) => {
 exports.deleteBloodBank = async(req, res) => {
     try{
         const bloodBankId = req.params.regdId;
-        const response = await BloodBank.findOneAndDelete({regdId : bloodBankId});
+        const response = await BloodBank.remove({"regdId" : bloodBankId});
         if(response === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json({msg : "Success"});
@@ -72,8 +72,7 @@ exports.deleteBloodBank = async(req, res) => {
 exports.getParticularBloodBank = async(req, res) => {
     try{
         const bloodBankId = req.params.regdId;
-        const bloodbank = await BloodBank.findOne({regdId : bloodBankId})
-                                        .select(["-_id","-__v","-createdAt","-updatedAt"]);
+        const bloodbank = await BloodBank.find({"regdId" : bloodBankId});
         if(bloodbank === null)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json(bloodbank);

@@ -16,6 +16,7 @@ function BloodBankPage() {
             toast.error('You are not logged in, log in first')
             navigate('/login#loginForm', { replace: true });
         }
+        
     });
 
     return (
