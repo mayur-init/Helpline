@@ -74,7 +74,7 @@ exports.getParticularBloodBank = async(req, res) => {
     try{
         const bloodBankId = req.params.regdId;
         const bloodbank = await BloodBank.find({"regdId" : bloodBankId});
-        if(bloodbank === null)
+        if(bloodbank.length === 0)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json(bloodbank);
     }
