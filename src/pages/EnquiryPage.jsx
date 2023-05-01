@@ -63,8 +63,8 @@ function EnquiryPage() {
   }
 
   const generateRegdId = async () => {
-    var random = await Math.random().toString().substring(2, 8);
-    enquiryData.EnquiryId = `ENQR${random}`;
+    const response = await axios.post('http://localhost:5000/api/generateregdid', {IdType: 'USER'});
+    enquiryData.EnquiryId = response.data.generatedId;
   }
 
   return (

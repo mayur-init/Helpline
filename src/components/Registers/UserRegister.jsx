@@ -1,4 +1,4 @@
-import React, { useState, useContext,useRef } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { globalStateContext } from '../../contexts/globalStateContext'
@@ -10,6 +10,7 @@ function UserRegister({ location, setLocation }) {
   const [contactNo, setContactNo] = useState('');
   var { userName, setUserName, userId, setUserId, setUserLoggedIn } = useContext(globalStateContext);
   const navigate = useNavigate();
+  // var RegdId = useRef();
 
   const UserData = {
     UserName: userName,
@@ -52,13 +53,13 @@ function UserRegister({ location, setLocation }) {
         }
       });
 
-      console.log(UserData);
+      // console.log(UserData);
       // console.log("sent");
       // console.log(registerResponse.data);
 
     } catch (error) {
       console.log(error);
-      console.log(UserData.Location);
+      // console.log(UserData.Location);
     }
 
     if (userName === '' || contactNo === '') {
@@ -76,10 +77,11 @@ function UserRegister({ location, setLocation }) {
   }
 
   const generateRegdId = async () => {
-    var random = await Math.random().toString().substring(2, 8);
-    setUserId(`USER${random}`);
+    const response = await axios.post('http://localhost:5000/api/generateregdid', {IdType: 'USER'});
+    // console.log(response);
+    setUserId(response.data.generatedId);
     // console.log(userId);
-    UserData.RegdId = `USER${random}`;
+    UserData.RegdId = response.data.generatedId;
   }
 
   return (
