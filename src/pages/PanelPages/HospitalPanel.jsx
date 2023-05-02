@@ -14,6 +14,11 @@ function HospitalPanel() {
     const { isProviderLoggedIn, setProviderLoggedIn } = useContext(globalStateContext);
     const [providerData, setProviderData] = useState(null);
 
+    //ambulance states
+    const [DriverName, setDriverName] = useState('');
+    const [ParentRegdId, setParentRegdId] = useState(null);
+    const [DriverContactNo, setDriverContactNo] = useState('');
+
     var cnt = pageNo;
 
     useEffect(() => {
@@ -35,6 +40,19 @@ function HospitalPanel() {
         setProviderLoggedIn(false);
         toast.success('Loggged out successfully');
         navigate('/login', { replace: true });
+    }
+
+    const handleAmbulanceSubmit = async () =>{
+        setParentRegdId(providerData.regdId);
+        const response = await axios.post('http://localhost:5000/api/ambulance', {
+            DriverName,
+            ParentRegdId,
+            DriverContactNo
+        });
+
+        toast.success('Ambulance Added');
+        setDriverName('');
+        setDriverContactNo('');
     }
 
     return (
@@ -61,9 +79,9 @@ function HospitalPanel() {
                             pageNo === 2 ?
                                 (<div className='bg-white rounded-xl p-4 w-[16vw] mx-auto my-8'>
                                     <p className='text-center mt-2 mb-4 text-xl font-semibold'>Add Ambulances</p>
-                                    <input type='text' placeholder='Driver Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
-                                    <input type='text' placeholder='Driver ontact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
-                                    <p className='flex justify-end'><button className='btn w-[100px] m-2'>Add</button></p>
+                                    <input type='text' placeholder='Driver Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setDriverName(e.target.value) }}></input>
+                                    <input type='text' placeholder='Driver Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setDriverContactNo(e.target.value) }}></input>
+                                    <p className='flex justify-end'><button className='btn w-[100px] m-2' onClick={handleAmbulanceSubmit}>Add</button></p>
                                 </div>) : null
                         }
                         <div>

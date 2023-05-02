@@ -4,6 +4,7 @@ const {Ambulance} = require('../../models');
 exports.addAmbulance = async(req, res, next) => {
 
     try{
+        console.log(req.body);
         const driverName = req.body.DriverName;
         const parentRegdId = req.body.ParentRegdId;
         const driverContactNo = req.body.DriverContactNo;
