@@ -102,7 +102,7 @@ exports.deleteHospital = async(req, res) => {
 exports.getParticularhospital = async(req, res) => {
     try{
         const hospitalId = req.params.regdId;
-        const hospital = await Hospital.findOne({"regdId": hospitalId});
+        const hospital = await Hospital.find({"regdId": hospitalId});
         if(hospital.length === 0)
             return res.status(404).json({msg : "Not found"});
         res.status(200).json(hospital);

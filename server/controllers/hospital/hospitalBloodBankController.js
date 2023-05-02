@@ -10,7 +10,7 @@ exports.addBloodBank = async(req, res) => {
     const contactNo = req.body.ContactNo;
     const password = req.body.Password;
 
-    if(!providerName || !email || !address || !contactNo || !password)
+    if(!providerName || !email || !address || !contactNo || !password || !parentRegdId)
         return res.status(422).json({error : "Some fields are empty"});
 
     try{
