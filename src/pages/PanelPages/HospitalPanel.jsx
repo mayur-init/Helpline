@@ -21,6 +21,12 @@ function HospitalPanel() {
 
     var cnt = pageNo;
 
+    //
+    const [BloodBankContactNo, setBloodBankContactNo] = useState('');
+    const [OxygenSerivceContactNo, setOxygenServiceContactNo] = useState('');
+    const [AmbulnceServiceContactNo, setAmbulanceServiceContactNo] = useState('');
+    const [ProviderType, setProviderType] = useState('');
+
     useEffect(() => {
         if (!isProviderLoggedIn) {
             toast.error('You are not logged in, log in first');
@@ -42,17 +48,164 @@ function HospitalPanel() {
         navigate('/login', { replace: true });
     }
 
-    const handleAmbulanceSubmit = async () =>{
+    const handleAmbulanceSubmit = async (e) =>{
+        e.preventDefault();
         setParentRegdId(providerData.regdId);
-        const response = await axios.post('http://localhost:5000/api/ambulance', {
+
+        if(DriverName === "" || DriverContactNo === ""){
+            toast.error("All fields are mendatory");
+        }
+
+        const ambulanceData = {
             DriverName,
             ParentRegdId,
             DriverContactNo
-        });
+        }
+        // console.log(ambulanceData);
+        try{
+            const response = await axios.post('http://localhost:5000/api/ambulance', ambulanceData);
+            // console.log(response);
+            if(response.data.msg === "success"){
+                toast.success('Ambulance Added');
+           }
+        }catch(err){
+            console.log(err);
+            if(err.response.data.msg === "contact no already exist"){
+                toast.error("This contact no is already registered");
+            }
+        }
+        setDriverName(''); 
+        setDriverContactNo(''); 
+    }
 
-        toast.success('Ambulance Added');
-        setDriverName('');
-        setDriverContactNo('');
+    const handleBloodBankSubmit = async (e) =>{
+        e.preventDefault();
+
+        if(BloodBankContactNo === ""){
+            toast.error("Blood Bank service contact is required");
+        }else{
+            setProviderType(2);
+            const generatedId = await generateRegdId();
+            const Data = {
+                ServiceProviderName : providerData.providerName ,
+                ContactNo: BloodBankContactNo,
+                Email: providerData.email,
+                RegdId: generatedId,
+                ParentRegdId: providerData.regdId,
+                Address: providerData.address,
+                Password: providerData.password,
+            }
+            try{
+                const response = await axios.post('http://localhost:5000/api/bloodbank', Data, {
+                    headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+                    }
+                });
+                if(response.data.msg === "success"){
+                    toast.success('Blood Bank Service Added');
+               }
+            }catch(err){
+                console.log(err);
+                if(err.response.data.msg === "contact no already exist"){
+                    toast.error("This contact no is already registered");
+                }
+            }
+            setBloodBankContactNo('');
+        }
+        // console.log(ambulanceData);
+    }
+
+    const handleOxygenServiceSubmit = async (e) =>{
+        e.preventDefault();
+        
+        if(OxygenSerivceContactNo === ""){
+            toast.error("Oxygen service contact is required");
+        }else{
+            setProviderType(3);
+            const generatedId = await generateRegdId();
+            const Data = {
+                ServiceProviderName : providerData.providerName ,
+                ContactNo: OxygenSerivceContactNo,
+                Email: providerData.email,
+                RegdId: generatedId,
+                ParentRegdId: providerData.regdId,
+                Address: providerData.address,
+                Password: providerData.password,
+            }
+        // console.log(ambulanceData);
+            try{
+                const response = await axios.post('http://localhost:5000/api/oxygencylinder', Data, {
+                    headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+                    }
+                 });   
+                if(response.data.msg === "success"){
+                    toast.success('Oxygen Service Added');
+               }
+            }catch(err){
+                console.log(err);
+                if(err.response.data.msg === "contact no already exist"){
+                    toast.error("This contact no is already registered");
+                }
+            }
+            setOxygenServiceContactNo('');
+        }
+        
+    }
+
+    const handleAmbulnceServiceSubmit = async (e) =>{
+        e.preventDefault();
+
+        if(AmbulnceServiceContactNo === ""){
+            toast.error("Ambulance service contact is required");
+        }else{
+            setProviderType(1);
+            const generatedId = await generateRegdId();
+            const Data = {
+                ServiceProviderName : providerData.providerName ,
+                ContactNo: AmbulnceServiceContactNo,
+                Email: providerData.email,
+                RegdId: generatedId,
+                ParentRegdId: providerData.regdId,
+                Address: providerData.address,
+                Password: providerData.password,
+            }
+        // console.log(Data);
+            try{
+                const response = await axios.post('http://localhost:5000/api/ambulanceservice', Data, {
+                    headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+                    }
+                 });   
+                if(response.data.msg === "success"){
+                    toast.success('Oxygen Service Added');
+               }
+            }catch(err){
+                console.log(err);
+                if(err.response.data.msg === "contact no already exist"){
+                    toast.error("This contact no is already registered");
+                }
+            }
+            setAmbulanceServiceContactNo('');
+        }
+        // console.log(ambulanceData);
+    }
+
+    const generateRegdId = async () => {
+        var response;
+        
+        if(ProviderType === 1){
+          response = await axios.post('http://localhost:5000/api/generateregdid', {IdType: 'AMBU'});
+        }else if(ProviderType === 2){
+          response = await axios.post('http://localhost:5000/api/generateregdid', {IdType: 'BLOOD'});
+        }else if(ProviderType === 3){
+          response = await axios.post('http://localhost:5000/api/generateregdid', {IdType: 'OXYG'});
+        }
+        // console.log(response);
+        return response.data.generatedId;
     }
 
     return (
@@ -76,13 +229,7 @@ function HospitalPanel() {
                         </div>
                         {/**********************Add Services Forms*******************************/}
                         {
-                            pageNo === 2 ?
-                                (<div className='bg-white rounded-xl p-4 w-[16vw] mx-auto my-8'>
-                                    <p className='text-center mt-2 mb-4 text-xl font-semibold'>Add Ambulances</p>
-                                    <input type='text' placeholder='Driver Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setDriverName(e.target.value) }}></input>
-                                    <input type='text' placeholder='Driver Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setDriverContactNo(e.target.value) }}></input>
-                                    <p className='flex justify-end'><button className='btn w-[100px] m-2' onClick={handleAmbulanceSubmit}>Add</button></p>
-                                </div>) : null
+                            
                         }
                         <div>
                             {
@@ -95,7 +242,33 @@ function HospitalPanel() {
                                         <input type='text' placeholder='Address' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
                                         <input type='text' placeholder='Password' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
                                         <p className='flex justify-end'><button className='btn w-[100px] mx-2 my-1'>Update</button></p>
-                                    </div>) : null
+                                    </div>) : pageNo === 2?
+                                    (<div>
+                                        <div className='bg-white rounded-xl py-2 px-4 w-[16vw] mx-auto my-4'>
+                                            <p className='text-center mt-2 mb-4 text-xl font-semibold'>Add Ambulance Service</p>
+                                            <input type='text' placeholder='Dept Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setAmbulanceServiceContactNo(e.target.value) }}></input>
+                                            <p className='flex justify-end'><button className='btn w-[100px] m-2' onClick={handleAmbulnceServiceSubmit}>Add</button></p>
+                                        </div>
+                                        <div className='bg-white rounded-xl py-2 px-4 w-[16vw] mx-auto my-4'>
+                                            <p className='text-center mt-2 mb-4 text-xl font-semibold'>Add Blood Bank</p>
+                                            <input type='text' placeholder='Dept Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setBloodBankContactNo(e.target.value) }}></input>
+                                            <p className='flex justify-end'><button className='btn w-[100px] m-2' onClick={handleBloodBankSubmit}>Add</button></p>
+                                        </div>
+                                        <div className='bg-white rounded-xl py-2 px-4 w-[16vw] mx-auto my-2'>
+                                            <p className='text-center mt-2 mb-4 text-xl font-semibold'>Add Oxygen Service</p>
+                                            <input type='text' placeholder='Dept Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setOxygenServiceContactNo(e.target.value) }}></input>
+                                            <p className='flex justify-end'><button className='btn w-[100px] m-2' onClick={handleOxygenServiceSubmit}>Add</button></p>
+                                        </div>
+                                    </div>) : pageNo === 3 ?
+                                    (<div>
+                                        <div className='bg-white rounded-xl p-4 w-[16vw] mx-auto my-4'>
+                                            <p className='text-center mt-2 mb-4 text-xl font-semibold'>Add Ambulances</p>
+                                            <input type='text' placeholder='Driver Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setDriverName(e.target.value) }}></input>
+                                            <input type='text' placeholder='Driver Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setDriverContactNo(e.target.value) }}></input>
+                                            <p className='flex justify-end'><button className='btn w-[100px] m-2' onClick={handleAmbulanceSubmit}>Add</button></p>
+                                        </div>
+                                    </div>
+                                     ) : null
                             }
                         </div>
                     </div>
@@ -120,7 +293,14 @@ function HospitalPanel() {
                                         ) : null
                                 }
                             </div>
-                        </div>) : pageNo === 2 ?
+                        </div>) :
+                            pageNo === 2 ?
+                            (<div className='h-full w-[80vw] ml-[20vw]'>
+                                <p className='text-2xl font-semibold text-center m-4'>Registered Services</p>
+                                <div className='bg-gray-100 w-full h-[86vh]'>
+                                    {/****************List of registered ambulances*******************/}
+                                </div> 
+                            </div>) : pageNo === 3 ?
                             (<div className='h-full w-[80vw] ml-[20vw]'>
                                 <p className='text-2xl font-semibold text-center m-4'>Registered Ambulances</p>
                                 <div className='bg-gray-100 w-full h-[86vh]'>

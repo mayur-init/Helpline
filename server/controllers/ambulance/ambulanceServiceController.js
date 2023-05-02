@@ -1,81 +1,121 @@
 const {AmbulanceService} = require('../../models');
+const {Ambulance} = require('../../models');
 
-// to add an ambulance
 exports.addAmbulanceService = async(req, res, next) => {
 
-    try{
-        
-        const providerName = req.body.ServiceProviderName;
-        const email = req.body.Email;
-        const address = req.body.Address;
-        const regdId = req.body.RegdId;
-        const parentRegdId = req.body.ParentRegdId;
-        const contactNo = req.body.ContactNo;
-        const password = req.body.Password;
+    const providerName = req.body.ServiceProviderName;
+    const email = req.body.Email;
+    const address = req.body.Address;
+    const regdId = req.body.RegdId;
+    const parentRegdId = req.body.ParentRegdId;
+    const contactNo = req.body.ContactNo;
+    const password = req.body.Password;
 
-        const ambulanceService = new AmbulanceService({
-            providerName,
-            email,
-            address,
-            regdId,
-            parentRegdId,
-            contactNo, 
-            password
-        });
-        await ambulanceService.save();
-        res.status(201).json({msg: "success"});
+    if(!providerName || !email || !address || !contactNo || !password)
+        return res.status(422).json({error : "Some fields are empty"});
+
+    try{
+            const ambulanceServiceExist = await AmbulanceService.findOne({contactNo : contactNo});
+            if(ambulanceServiceExist){
+                return res.status(422).json({msg : "contact no already exist"});
+            }
+
+            const ambulanceServiceExist1 = await AmbulanceService.findOne({email : email});
+            if(ambulanceServiceExist1){
+                return res.status(422).json({msg : "email already exist"});
+            }
+
+            const ambulanceService = new AmbulanceService({
+                providerName,
+                email,
+                address,
+                regdId,
+                parentRegdId,
+                contactNo, 
+                password
+            });
+            await ambulanceService.save();
+            res.status(201).json({msg: "success"});
     }
     catch(err){
         console.log(err);
-        res.status(400).json(err);
+        res.status(400).json({msg : "Some issue"});
     }
 };
-
-
+//done
 exports.getAmbulanceServices = async(req, res) => {
     try{
-        const ambulanceServices = await AmbulanceService.find().select('providerName email address contactNo -_id');;
+        const ambulanceServices = await AmbulanceService.find();
         if(ambulanceServices.length === 0)
-            return res.status(404).json({msg : "Not found"});
+            return res.status(404).json({msg : "No data exists"});
         res.status(200).json(ambulanceServices);
     }
     catch(err){
+        console.log(err);
         res.status(400).json({msg : "Some issue"});
     }
 };
-
+//done
 exports.updateAmbulanceService = async(req, res) => {
+    const contactNo = req.body.contactNo;
+    const email = req.body.email;
+
     try{
+        if(contactNo){
+            const ambulanceServiceExist = await AmbulanceService.findOne({contactNo : contactNo});
+            if(ambulanceServiceExist){
+                return res.status(200).json({msg : "contact no already exist"});
+            }
+        }
+        if(email){
+            const ambulanceServiceExist1 = await AmbulanceService.findOne({email : email});
+            if(ambulanceServiceExist1){
+                return res.status(200).json({msg : "email already exist"});
+            }
+        }
         const ambulanceServiceId = req.params.regdId;
-        const response = await AmbulanceService.updateOne({"regdId": ambulanceServiceId}, {$set : req.body} , {new : true});
-        if(response === null)
-            return res.status(404).json({msg : "Not found"});
-        res.status(200).json({ msg : "Updated Successfully"});
+        const response = await AmbulanceService.findOneAndUpdate({"regdId" : ambulanceServiceId}, {$set : req.body} , {new : true});
+        if(response)
+            return res.status(200).json({msg : "Updated Successfully"});
+        res.status(404).json({msg : "Not found"});
+        
     }catch(err){
+        console.log(err);
         res.status(400).json({msg : "Some issue"});
     }
-}; 
-// incomplete route
+};
+//done
 exports.deleteAmbulanceService = async(req, res) => {
     try{
-        const ambulanceServiceId = req.params.regdId;
-        const response = await AmbulanceService.remove({"regdId": ambulanceServiceId});
-        if(response === null)
-            return res.status(404).json({msg : "Not found"});
-        res.status(200).json({msg : "success"});
+        const ambulanceServiceId= req.params.regdId;
+        const response = await AmbulanceService.findOne({"regdId" : ambulanceServiceId});
+        if(response){
+            const ambulances = await Ambulance.deleteMany({parentRegdId : ambulanceServiceId});
+            if(ambulances){
+                const result = await AmbulanceService.deleteOne({"regdId" : ambulanceServiceId});
+                if(result)
+                    return res.status(200).json({msg : "Success"});
+                return res.status(404).json({msg : "Issue"});
+            }
+            const result = await AmbulanceService.deleteOne({"regdId" : ambulanceServiceId});
+            if(result)
+                return res.status(200).json({msg : "Success"});
+            return res.status(404).json({msg : "Issue"});
+        }
+        return res.status(200).json({msg : "No data found"});
     }
     catch(err){
-        res.status(400).json({msg : "Some issue"});
+        res.status(404).json({msg : "Some issue"});
     }
 };
-
+//done
 exports.getParticularAmbulanceService = async(req, res) => {
     try{
         const ambulanceServiceId = req.params.regdId;
-        const ambulanceService = await AmbulanceService.find({"regdId": ambulanceServiceId});
-        if(ambulanceService === null)
+        const ambulancsService = await AmbulanceService.find({"regdId" : ambulanceServiceId});
+        if(ambulancsService.length === 0)
             return res.status(404).json({msg : "Not found"});
-        res.status(200).json(ambulanceService);
+        res.status(200).json(ambulancsService);
     }
     catch(err){
         console.log(err);
