@@ -32,6 +32,7 @@ router.get('/hospitals', hospitalController.getHospitals);
 router.put('/hospital/:regdId', hospitalController.updateHospital);
 router.delete('/hospital/:regdId', hospitalController.deleteHospital);
 router.get('/hospital/:regdId', hospitalController.getParticularhospital);
+router.get('/hospital/getallservices/:hospitalRegdId', hospitalController.getAllRegisteredServices);
 
 //hospital-ambulance routes
 router.post('/hospital-ambulance', hospitalAmbulanceController.addAmbulance);
@@ -51,6 +52,7 @@ router.get('/hospital-oxygencylinders/:regdId', hospitalOxygenCylinderController
 router.put('/hospital-oxygencylinder/:regdId', hospitalOxygenCylinderController.updateOxygenCylinder);
 router.delete('/hospital-oxygencylinder/:regdId', hospitalOxygenCylinderController.deleteOxygenCylinderProvider);
 router.get('/hospital-oxygencylinder/:regdId', hospitalOxygenCylinderController.getParticularProvider); 
+
 
 // ambulance service routes
 router.post('/ambulanceservice', ambulanceServiceController.addAmbulanceService);

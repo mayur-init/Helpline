@@ -13,7 +13,7 @@ function UserPanel() {
             toast.error('You are not logged in, log in first');
             navigate('/login' , {replace: true});
         }
-    })
+    }, [])
 
     const handleLogout = () => {
         setUserLoggedIn(false);

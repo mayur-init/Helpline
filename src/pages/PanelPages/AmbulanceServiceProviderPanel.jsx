@@ -27,12 +27,8 @@ function AmbulanceServiceProviderPanel() {
             navigate('/login', { replace: true });
         }
         collectProviderData();
-    })
-
-    
-
-    useEffect(() => {
     }, [])
+
 
     const handleClick = () => {
 

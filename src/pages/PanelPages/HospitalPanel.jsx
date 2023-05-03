@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom'
@@ -18,7 +18,7 @@ function HospitalPanel() {
     const [DriverName, setDriverName] = useState('');
     const [ParentRegdId, setParentRegdId] = useState(null);
     const [DriverContactNo, setDriverContactNo] = useState('');
-
+    const [ambulanceServiceId, setAmbulanceServiceId] = useState('');
     var cnt = pageNo;
 
     //
@@ -26,6 +26,7 @@ function HospitalPanel() {
     const [OxygenSerivceContactNo, setOxygenServiceContactNo] = useState('');
     const [AmbulnceServiceContactNo, setAmbulanceServiceContactNo] = useState('');
     const [ProviderType, setProviderType] = useState('');
+    const [RegisteredServicesData, setRegisteredServiceData] = useState();
 
     useEffect(() => {
         if (!isProviderLoggedIn) {
@@ -33,8 +34,8 @@ function HospitalPanel() {
             navigate('/login', { replace: true });
         }
         collectProviderData();
-
-    })
+        getRegistedAllServicesData();
+    }, [])
 
     const collectProviderData = async () => {
         const res = await axios.get(`http://localhost:5000/api/hospital/${RegdId.toUpperCase()}`);
@@ -50,7 +51,7 @@ function HospitalPanel() {
 
     const handleAmbulanceSubmit = async (e) =>{
         e.preventDefault();
-        setParentRegdId(providerData.regdId);
+        setParentRegdId(ambulanceServiceId);
 
         if(DriverName === "" || DriverContactNo === ""){
             toast.error("All fields are mendatory");
@@ -80,118 +81,129 @@ function HospitalPanel() {
 
     const handleBloodBankSubmit = async (e) =>{
         e.preventDefault();
-
-        if(BloodBankContactNo === ""){
-            toast.error("Blood Bank service contact is required");
-        }else{
-            setProviderType(2);
-            const generatedId = await generateRegdId();
-            const Data = {
-                ServiceProviderName : providerData.providerName ,
-                ContactNo: BloodBankContactNo,
-                Email: providerData.email,
-                RegdId: generatedId,
-                ParentRegdId: providerData.regdId,
-                Address: providerData.address,
-                Password: providerData.password,
-            }
-            try{
-                const response = await axios.post('http://localhost:5000/api/bloodbank', Data, {
-                    headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-                    }
-                });
-                if(response.data.msg === "success"){
-                    toast.success('Blood Bank Service Added');
-               }
-            }catch(err){
-                console.log(err);
-                if(err.response.data.msg === "contact no already exist"){
-                    toast.error("This contact no is already registered");
-                }
-            }
-            setBloodBankContactNo('');
+        console.log(RegisteredServicesData);
+        if(RegisteredServicesData !== null && RegisteredServicesData.bloodbank.regdId !== null){
+            toast.error("Blood bank service already registered");
         }
-        // console.log(ambulanceData);
+        else{
+            if(BloodBankContactNo === ""){
+                toast.error("Blood Bank service contact is required");
+            }else{
+                setProviderType(2);
+                const generatedId = await generateRegdId();
+                const Data = {
+                    ServiceProviderName : providerData.providerName ,
+                    ContactNo: BloodBankContactNo,
+                    Email: providerData.email,
+                    RegdId: generatedId,
+                    ParentRegdId: providerData.regdId,
+                    Address: providerData.address,
+                    Password: providerData.password,
+                }
+                try{
+                    const response = await axios.post('http://localhost:5000/api/bloodbank', Data, {
+                        headers: {
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+                        }
+                    });
+                    if(response.data.msg === "success"){
+                        toast.success('Blood Bank Service Added');
+                   }
+                }catch(err){
+                    console.log(err);
+                    if(err.response.data.msg === "contact no already exist"){
+                        toast.error("This contact no is already registered");
+                    }
+                }
+                setBloodBankContactNo('');
+            }
+            // console.log(ambulanceData);
+        }
     }
 
     const handleOxygenServiceSubmit = async (e) =>{
         e.preventDefault();
-        
-        if(OxygenSerivceContactNo === ""){
-            toast.error("Oxygen service contact is required");
+        if(RegisteredServicesData !== null && RegisteredServicesData.oxygenService.regdId !== null){
+            toast.error("Blood bank service already registered");
         }else{
-            setProviderType(3);
-            const generatedId = await generateRegdId();
-            const Data = {
-                ServiceProviderName : providerData.providerName ,
-                ContactNo: OxygenSerivceContactNo,
-                Email: providerData.email,
-                RegdId: generatedId,
-                ParentRegdId: providerData.regdId,
-                Address: providerData.address,
-                Password: providerData.password,
-            }
-        // console.log(ambulanceData);
-            try{
-                const response = await axios.post('http://localhost:5000/api/oxygencylinder', Data, {
-                    headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-                    }
-                 });   
-                if(response.data.msg === "success"){
-                    toast.success('Oxygen Service Added');
-               }
-            }catch(err){
-                console.log(err);
-                if(err.response.data.msg === "contact no already exist"){
-                    toast.error("This contact no is already registered");
+            if(OxygenSerivceContactNo === ""){
+                toast.error("Oxygen service contact is required");
+            }else{
+                setProviderType(3);
+                const generatedId = await generateRegdId();
+                const Data = {
+                    ServiceProviderName : providerData.providerName ,
+                    ContactNo: OxygenSerivceContactNo,
+                    Email: providerData.email,
+                    RegdId: generatedId,
+                    ParentRegdId: providerData.regdId,
+                    Address: providerData.address,
+                    Password: providerData.password,
                 }
+            // console.log(ambulanceData);
+                try{
+                    const response = await axios.post('http://localhost:5000/api/oxygencylinder', Data, {
+                        headers: {
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+                        }
+                     });   
+                    if(response.data.msg === "success"){
+                        toast.success('Oxygen Service Added');
+                   }
+                }catch(err){
+                    console.log(err);
+                    if(err.response.data.msg === "contact no already exist"){
+                        toast.error("This contact no is already registered");
+                    }
+                }
+                setOxygenServiceContactNo('');
             }
-            setOxygenServiceContactNo('');
         }
-        
     }
 
     const handleAmbulnceServiceSubmit = async (e) =>{
         e.preventDefault();
-
-        if(AmbulnceServiceContactNo === ""){
-            toast.error("Ambulance service contact is required");
+        if(RegisteredServicesData !== null && RegisteredServicesData.ambulanceService.regdId !== null){
+            toast.error("Blood bank service already registered");
         }else{
-            setProviderType(1);
-            const generatedId = await generateRegdId();
-            const Data = {
-                ServiceProviderName : providerData.providerName ,
-                ContactNo: AmbulnceServiceContactNo,
-                Email: providerData.email,
-                RegdId: generatedId,
-                ParentRegdId: providerData.regdId,
-                Address: providerData.address,
-                Password: providerData.password,
-            }
-        // console.log(Data);
-            try{
-                const response = await axios.post('http://localhost:5000/api/ambulanceservice', Data, {
-                    headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-                    }
-                 });   
-                if(response.data.msg === "success"){
-                    toast.success('Oxygen Service Added');
-               }
-            }catch(err){
-                console.log(err);
-                if(err.response.data.msg === "contact no already exist"){
-                    toast.error("This contact no is already registered");
+            if(AmbulnceServiceContactNo === ""){
+                toast.error("Ambulance service contact is required");
+            }else{
+                setProviderType(1);
+                const generatedId = await generateRegdId();
+                setAmbulanceServiceId(generatedId);
+                const Data = {
+                    ServiceProviderName : providerData.providerName ,
+                    ContactNo: AmbulnceServiceContactNo,
+                    Email: providerData.email,
+                    RegdId: generatedId,
+                    ParentRegdId: providerData.regdId,
+                    Address: providerData.address,
+                    Password: providerData.password,
                 }
+            // console.log(Data);
+                try{
+                    const response = await axios.post('http://localhost:5000/api/ambulanceservice', Data, {
+                        headers: {
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+                        }
+                     });   
+                    if(response.data.msg === "success"){
+                        toast.success('Oxygen Service Added');
+                   }
+                }catch(err){
+                    console.log(err);
+                    if(err.response.data.msg === "contact no already exist"){
+                        toast.error("This contact no is already registered");
+                    }
+                }
+                setAmbulanceServiceContactNo('');
             }
-            setAmbulanceServiceContactNo('');
+            // console.log(ambulanceData);
         }
-        // console.log(ambulanceData);
     }
 
     const generateRegdId = async () => {
@@ -206,6 +218,15 @@ function HospitalPanel() {
         }
         // console.log(response);
         return response.data.generatedId;
+    }
+
+    const getRegistedAllServicesData = async () =>{
+        const response = await axios.get(`http://localhost:5000/api//hospital/getallservices/${providerData.regdId}`);
+        // console.log(response.data);
+        if(response !== null){
+            setRegisteredServiceData(response.data); 
+        }
+        // console.log(RegisteredServicesData);
     }
 
     return (

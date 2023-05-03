@@ -1,4 +1,9 @@
-const {Hospital} = require('../../models');
+const {
+    Hospital,
+    AmbulanceService,
+    BloodBank,
+    OxygenCylinderProvider
+} = require('../../models');
 
 exports.addHospital = async(req, res) => {
 
@@ -110,4 +115,51 @@ exports.getParticularhospital = async(req, res) => {
     catch(err){
         res.status(400).json({msg : "Some issue"});
     }
+}
+
+exports.getAllRegisteredServices = async(req, res, next) =>{
+    const hospId = req.params.hospitalRegdId;
+
+    const registeredServiceData = {
+        ambualnceService: {
+            regdId: null,
+            contactNo: null
+        },
+        bloodBank: {
+            regdId: null,
+            contactNo: null,
+        },
+        oxygenService: {
+            regdId: null,
+            contactNo: null,
+        }
+    }
+
+    try{
+        const ambulanceServiceData = await AmbulanceService.find({"parentRegdId": hospId});
+        const bloodBankData = await BloodBank.find({"parentRegdId": hospId});
+        const oxygenServiceData = await OxygenCylinderProvider.find({"parentRegdId": hospId});
+        
+        // console.log(ambulanceServiceData);
+        // console.log(bloodBankData);
+        // console.log(oxygenServiceData);
+
+        if(ambulanceServiceData.length > 0){
+            registeredServiceData.ambualnceService.regdId = ambulanceServiceData[0].regdId;
+            registeredServiceData.ambualnceService.contactNo = ambulanceServiceData[0].contactNo;
+        }
+        if(bloodBankData.length > 0){
+            registeredServiceData.bloodBank.regdId = bloodBankData[0].regdId;
+            registeredServiceData.bloodBank.contactNo = bloodBankData[0].contactNo;
+        }
+        if(oxygenServiceData.length > 0){
+            registeredServiceData.oxygenService.regdId =  oxygenServiceData[0].regdId;
+            registeredServiceData.oxygenService.contactNo =  oxygenServiceData[0].contactNo;
+        }
+
+    }catch(err){
+        res.status(400).json(err);
+    }
+
+    res.status(200).json(registeredServiceData);
 }

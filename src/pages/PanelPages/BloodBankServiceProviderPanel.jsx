@@ -22,7 +22,7 @@ function BloodBankServiceProviderPanel() {
             navigate('/login', { replace: true });
         }
         collectProviderData();
-    })
+    },[])
 
     const collectProviderData = async () => {
         const res = await axios.get(`http://localhost:5000/api/bloodbanks/${RegdId.toUpperCase()}`);
