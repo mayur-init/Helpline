@@ -249,8 +249,6 @@ function HospitalPanel() {
            else if(regdId.startsWith("OXYG")){
             const response = await axios.delete(`http://localhost:5000/api//oxygencylinders/${regdId}`);
            }
-            // console.log(response.data);
-            // console.log(RegisteredServicesData);
         } catch (err) {
             console.log(err);
         }

@@ -25,6 +25,14 @@ function UserLogin({ }) {
       navigate('/#hero', { replace: true });
     }
   }
+  const handleChange = (e) => {
+    const { value } = e.target;
+    if (!isNaN(value)) {
+      setContactNo(value);
+    } else {
+      toast.error('Enter number only');
+    }
+  };
 
   return (
     <div className='flex justify-center items-center'>
@@ -32,7 +40,7 @@ function UserLogin({ }) {
         <p className='text-3xl font-bold text-gray-600 my-[4vh] flex justify-center hover:text-violet-600'>User Login</p>
         <div className='flex flex-col w-[50vh] h-auto mt-[8vh] mb-[4vh]'>
           <input type='text' placeholder='Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setUserName(e.target.value) }}></input>
-          <input type='text' placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setContactNo(e.target.value) }}></input>
+          <input type='text' placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={handleChange}></input>
           <input type='text' placeholder='One Time Password' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setOtp(e.target.value) }}></input>
           <p className='flex justify-end'><button className='btn w-[100px] m-2' onClick={handleClick}>Submit</button></p>
           <p className='flex justify-start text-sm'>Haven't registered yet?<HashLink smooth to='/#userRegister ' className='hover:text-violet-600 mx-2'>Register Now</HashLink></p>
