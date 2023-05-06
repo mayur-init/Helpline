@@ -169,7 +169,7 @@ function HospitalPanel() {
     const handleAmbulnceServiceSubmit = async (e) => {
         e.preventDefault();
         // console.log(providerData);
-        console.log(RegisteredServicesData);
+        // console.log(RegisteredServicesData);
         if (RegisteredServicesData !== null && RegisteredServicesData.ambulanceService.regdId !== null) {
             toast.error("Ambulance service already registered");
         } else {
