@@ -35,11 +35,7 @@ function HospitalPanel() {
             navigate('/login', { replace: true });
         }
         collectProviderData();
-    }, [])
-
-    useEffect(() =>{
-        getRegistedAllServicesData();
-    }, []);
+    }, [])    
 
     const collectProviderData = async () => {
         const res = await axios.get(`http://localhost:5000/api/hospital/${RegdId.toUpperCase()}`);
@@ -173,7 +169,7 @@ function HospitalPanel() {
     const handleAmbulnceServiceSubmit = async (e) => {
         e.preventDefault();
         // console.log(providerData);
-        console.log(RegisteredServicesData);
+        // console.log(RegisteredServicesData);
         if (RegisteredServicesData !== null && RegisteredServicesData.ambulanceService.regdId !== null) {
             toast.error("Ambulance service already registered");
         } else {
@@ -234,8 +230,27 @@ function HospitalPanel() {
         try {
             const response = await axios.get(`http://localhost:5000/api//hospital/getallservices/${providerData.regdId}`);
             setRegisteredServiceData(response.data);
-            console.log(response.data);
-            console.log(RegisteredServicesData);
+            // console.log(response.data);
+            // console.log(RegisteredServicesData);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    getRegistedAllServicesData();
+
+    const deleteData = async (regdId) => {
+        try {
+           if(regdId.startsWith("AMBU")){
+            const response = await axios.delete(`http://localhost:5000/api//ambulanceservice/${regdId}`);
+           }else if(regdId.startsWith("BLOOD")){
+            const response = await axios.delete(`http://localhost:5000/api//bloodbanks/${regdId}`);
+           }
+           else if(regdId.startsWith("OXYG")){
+            const response = await axios.delete(`http://localhost:5000/api//oxygencylinders/${regdId}`);
+           }
+            // console.log(response.data);
+            // console.log(RegisteredServicesData);
         } catch (err) {
             console.log(err);
         }
@@ -332,18 +347,21 @@ function HospitalPanel() {
                                 <p className='text-2xl font-semibold text-center m-4'>Registered Services</p>
                                 <div className='bg-gray-100 w-full h-[86vh] p-4'>
                                     {/****************List of registered services*******************/}
-                                    {/* <div className='bg-white p-4 m-4 rounded-xl text-xl font-semibold'>
+                                    <div className='bg-white p-4 m-4 rounded-xl text-xl font-semibold'>
                                         <p>RegdId: {RegisteredServicesData.ambulanceService.regdId}</p>
                                         <p>Contact No: {RegisteredServicesData.ambulanceService.contactNo}</p>
+                                        <button className='btn float-right' onClick={()=>deleteData(RegisteredServicesData.ambulanceService.regdId)}>Delete</button>
                                     </div>
                                     <div className='bg-white p-4 m-4 rounded-xl text-xl font-semibold'>
                                         <p> RegdId: {RegisteredServicesData.bloodBank.regdId}</p>
                                         <p>Contact No: {RegisteredServicesData.bloodBank.contactNo}</p>
+                                        <button className='btn float-right' onClick={()=>deleteData(RegisteredServicesData.bloodBank.regdId)}>Delete</button>
                                     </div>
                                     <div className='bg-white p-4 m-4 rounded-xl text-xl font-semibold'>
                                         <p>RegdId: {RegisteredServicesData.oxygenService.regdId}</p>
                                         <p>Contact No: {RegisteredServicesData.oxygenService.contactNo}</p>
-                                    </div> */}
+                                        <button className='btn float-right' onClick={()=>deleteData(RegisteredServicesData.oxygenService.regdId)}>Delete</button>
+                                    </div>
                                 </div>
                             </div>) : pageNo === 3 ?
                                 (<div className='h-full w-[80vw] ml-[20vw]'>
