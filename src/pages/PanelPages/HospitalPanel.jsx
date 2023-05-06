@@ -325,37 +325,20 @@ function HospitalPanel() {
                         pageNo === 2 ?
                             (<div className='h-full w-[80vw] ml-[20vw]'>
                                 <p className='text-2xl font-semibold text-center m-4'>Registered Services</p>
-                                <div className='bg-gray-100 w-full h-[86vh]'>
+                                <div className='bg-gray-100 w-full h-[86vh] p-4'>
                                     {/****************List of registered services*******************/}
-                                    {RegisteredServicesData !== null ?
-                                        (
-                                            <div className='p-4'>
-                                                {
-                                                    RegisteredServicesData.ambulanceService.regdId !== null ? (
-                                                        <div className='bg-white p-4 m-4 rounded-xl text-xl font-semibold'>
-                                                            <p>RegdId: {RegisteredServicesData.ambulanceService.regdId}</p>
-                                                            <p>Contact No: {RegisteredServicesData.ambulanceService.contactNo}</p>
-                                                        </div>
-                                                    ) : null
-                                                }
-                                                {
-                                                    RegisteredServicesData.bloodBank.regdId !== null ? (
-                                                        <div className='bg-white p-4 m-4 rounded-xl text-xl font-semibold'>
-                                                            <p> RegdId: {RegisteredServicesData.bloodBank.regdId}</p>
-                                                            <p>Contact No: {RegisteredServicesData.bloodBank.contactNo}</p>
-                                                        </div>
-                                                    ) : null
-                                                }{
-                                                    RegisteredServicesData.oxygenService.regdId !== null ? (
-                                                        <div className='bg-white p-4 m-4 rounded-xl text-xl font-semibold'>
-                                                            <p>RegdId: {RegisteredServicesData.oxygenService.regdId}</p>
-                                                            <p>Contact No: {RegisteredServicesData.oxygenService.contactNo}</p>
-                                                        </div>
-                                                    ) : null
-                                                }
-                                            </div>
-                                        ) : null
-                                    }
+                                    <div className='bg-white p-4 m-4 rounded-xl text-xl font-semibold'>
+                                        <p>RegdId: {RegisteredServicesData.ambulanceService.regdId}</p>
+                                        <p>Contact No: {RegisteredServicesData.ambulanceService.contactNo}</p>
+                                    </div>
+                                    <div className='bg-white p-4 m-4 rounded-xl text-xl font-semibold'>
+                                        <p> RegdId: {RegisteredServicesData.bloodBank.regdId}</p>
+                                        <p>Contact No: {RegisteredServicesData.bloodBank.contactNo}</p>
+                                    </div>
+                                    <div className='bg-white p-4 m-4 rounded-xl text-xl font-semibold'>
+                                        <p>RegdId: {RegisteredServicesData.oxygenService.regdId}</p>
+                                        <p>Contact No: {RegisteredServicesData.oxygenService.contactNo}</p>
+                                    </div>
                                 </div>
                             </div>) : pageNo === 3 ?
                                 (<div className='h-full w-[80vw] ml-[20vw]'>
