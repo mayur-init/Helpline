@@ -35,11 +35,7 @@ function HospitalPanel() {
             navigate('/login', { replace: true });
         }
         collectProviderData();
-    }, [])
-
-    useEffect(() =>{
-        getRegistedAllServicesData();
-    }, []);
+    }, [])    
 
     const collectProviderData = async () => {
         const res = await axios.get(`http://localhost:5000/api/hospital/${RegdId.toUpperCase()}`);
@@ -240,6 +236,8 @@ function HospitalPanel() {
             console.log(err);
         }
     }
+
+    getRegistedAllServicesData();
 
     return (
         <div className="" id='main'>
