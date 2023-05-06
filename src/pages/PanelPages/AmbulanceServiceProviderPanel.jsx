@@ -13,6 +13,11 @@ function AmbulanceServiceProviderPanel() {
     const { isProviderLoggedIn, setProviderLoggedIn } = useContext(globalStateContext);
     const [providerData, setProviderData] = useState(null);
 
+     //ambulance states
+     const [DriverName, setDriverName] = useState('');
+     const [ParentRegdId, setParentRegdId] = useState(null);
+     const [DriverContactNo, setDriverContactNo] = useState('');
+
     var [pageNo, setPageNo] = useState(1);
     var cnt = pageNo;
 
@@ -22,15 +27,17 @@ function AmbulanceServiceProviderPanel() {
             navigate('/login', { replace: true });
         }
         collectProviderData();
-    })
-
-    
-
-    useEffect(() => {
     }, [])
+
 
     const handleClick = () => {
 
+    }
+
+    const collectProviderData = async () => {
+        const res = await axios.get(`http://localhost:5000/api/ambulanceservice/${RegdId.toUpperCase()}`);
+        // console.log(res.data[0]);
+        setProviderData(res.data[0]);
     }
 
     const handleLogout = () => {
@@ -39,10 +46,34 @@ function AmbulanceServiceProviderPanel() {
         navigate('/login', { replace: true });
     }
 
-    const collectProviderData = async () => {
-        const res = await axios.get(`http://localhost:5000/api/ambulanceservice/${RegdId.toUpperCase()}`);
-        // console.log(res.data[0]);
-        setProviderData(res.data[0]);
+    const handleAmbulanceSubmit = async (e) =>{
+        e.preventDefault();
+        setParentRegdId(providerData.regdId);
+
+        if(DriverName === "" || DriverContactNo === ""){
+            toast.error("All fields are mendatory");
+        }
+
+        const ambulanceData = {
+            DriverName,
+            ParentRegdId,
+            DriverContactNo
+        }
+        // console.log(ambulanceData);
+        try{
+            const response = await axios.post('http://localhost:5000/api/ambulance', ambulanceData);
+            // console.log(response);
+            if(response.data.msg === "success"){
+                toast.success('Ambulance Added');
+           }
+        }catch(err){
+            console.log(err);
+            if(err.response.data.msg === "contact no already exist"){
+                toast.error("This contact no is already registered");
+            }
+        }
+        setDriverName(''); 
+        setDriverContactNo('');
     }
 
     return (
@@ -69,9 +100,9 @@ function AmbulanceServiceProviderPanel() {
                             pageNo === 2 ?
                                 (<div className='bg-white rounded-xl p-4 w-[16vw] mx-auto my-8'>
                                     <p className='text-center mt-2 mb-4 text-xl font-semibold'>Add Ambulances</p>
-                                    <input type='text' placeholder='Driver Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
-                                    <input type='text' placeholder='Driver ontact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
-                                    <p className='flex justify-end'><button className='btn w-[100px] m-2'>Add</button></p>
+                                    <input type='text' placeholder='Driver Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' value={DriverName}  onChange={(e) => { setDriverName(e.target.value) }}></input>
+                                    <input type='text' placeholder='Driver Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' value={DriverContactNo} onChange={(e) => {setDriverContactNo(e.target.value) }}></input>
+                                    <p className='flex justify-end'><button className='btn w-[100px] m-2' onClick={handleAmbulanceSubmit}>Add</button></p>
                                 </div>) : null
                         }
                         <div>
