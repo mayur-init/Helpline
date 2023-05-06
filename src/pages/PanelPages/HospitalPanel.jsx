@@ -234,8 +234,8 @@ function HospitalPanel() {
         try {
             const response = await axios.get(`http://localhost:5000/api//hospital/getallservices/${providerData.regdId}`);
             setRegisteredServiceData(response.data);
-            console.log(response.data);
-            console.log(RegisteredServicesData);
+            // console.log(response.data);
+            // console.log(RegisteredServicesData);
         } catch (err) {
             console.log(err);
         }
