@@ -121,7 +121,7 @@ exports.getAllRegisteredServices = async(req, res, next) =>{
     const hospId = req.params.hospitalRegdId;
 
     const registeredServiceData = {
-        ambualnceService: {
+        ambulanceService: {
             regdId: null,
             contactNo: null
         },
@@ -145,8 +145,8 @@ exports.getAllRegisteredServices = async(req, res, next) =>{
         // console.log(oxygenServiceData);
 
         if(ambulanceServiceData.length > 0){
-            registeredServiceData.ambualnceService.regdId = ambulanceServiceData[0].regdId;
-            registeredServiceData.ambualnceService.contactNo = ambulanceServiceData[0].contactNo;
+            registeredServiceData.ambulanceService.regdId = ambulanceServiceData[0].regdId;
+            registeredServiceData.ambulanceService.contactNo = ambulanceServiceData[0].contactNo;
         }
         if(bloodBankData.length > 0){
             registeredServiceData.bloodBank.regdId = bloodBankData[0].regdId;
