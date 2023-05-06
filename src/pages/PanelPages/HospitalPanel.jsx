@@ -27,6 +27,7 @@ function HospitalPanel() {
     const [AmbulnceServiceContactNo, setAmbulanceServiceContactNo] = useState('');
     const [ProviderType, setProviderType] = useState('');
     const [RegisteredServicesData, setRegisteredServiceData] = useState();
+    // var RegisteredServicesData = useRef(null);
 
     useEffect(() => {
         if (!isProviderLoggedIn) {
@@ -34,8 +35,11 @@ function HospitalPanel() {
             navigate('/login', { replace: true });
         }
         collectProviderData();
-        getRegistedAllServicesData();
     }, [])
+
+    useEffect(() =>{
+        getRegistedAllServicesData();
+    }, []);
 
     const collectProviderData = async () => {
         const res = await axios.get(`http://localhost:5000/api/hospital/${RegdId.toUpperCase()}`);
@@ -230,6 +234,7 @@ function HospitalPanel() {
         try {
             const response = await axios.get(`http://localhost:5000/api//hospital/getallservices/${providerData.regdId}`);
             setRegisteredServiceData(response.data);
+            console.log(response.data);
             // console.log(RegisteredServicesData);
         } catch (err) {
             console.log(err);
