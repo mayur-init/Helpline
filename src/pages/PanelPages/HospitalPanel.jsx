@@ -169,7 +169,7 @@ function HospitalPanel() {
     const handleAmbulnceServiceSubmit = async (e) => {
         e.preventDefault();
         // console.log(providerData);
-        // console.log(RegisteredServicesData.bloodBank);
+        console.log(RegisteredServicesData);
         if (RegisteredServicesData !== null && RegisteredServicesData.ambulanceService.regdId !== null) {
             toast.error("Ambulance service already registered");
         } else {
@@ -327,7 +327,7 @@ function HospitalPanel() {
                                 <p className='text-2xl font-semibold text-center m-4'>Registered Services</p>
                                 <div className='bg-gray-100 w-full h-[86vh] p-4'>
                                     {/****************List of registered services*******************/}
-                                    <div className='bg-white p-4 m-4 rounded-xl text-xl font-semibold'>
+                                    {/* <div className='bg-white p-4 m-4 rounded-xl text-xl font-semibold'>
                                         <p>RegdId: {RegisteredServicesData.ambulanceService.regdId}</p>
                                         <p>Contact No: {RegisteredServicesData.ambulanceService.contactNo}</p>
                                     </div>
@@ -338,7 +338,7 @@ function HospitalPanel() {
                                     <div className='bg-white p-4 m-4 rounded-xl text-xl font-semibold'>
                                         <p>RegdId: {RegisteredServicesData.oxygenService.regdId}</p>
                                         <p>Contact No: {RegisteredServicesData.oxygenService.contactNo}</p>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>) : pageNo === 3 ?
                                 (<div className='h-full w-[80vw] ml-[20vw]'>
