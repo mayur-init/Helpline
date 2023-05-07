@@ -22,7 +22,7 @@ function AmbulanceServiceProviderPanel() {
      //ambulance states
      const [DriverName, setDriverName] = useState('');
      const [DriverContactNo, setDriverContactNo] = useState('');
-     const [RegisteredAmbulances, setRegisteredAmbulances] = useState(null);
+     const [RegisteredAmbulances, setRegisteredAmbulances] = useState([]);
     var [pageNo, setPageNo] = useState(1);
     var cnt = pageNo;
 
@@ -193,11 +193,14 @@ function AmbulanceServiceProviderPanel() {
                             <div className='bg-gray-100 w-full h-[86vh]'>
                                 {/****************List of registered ambulances*******************/}
                                 {
-                                    RegisteredAmbulances.map((ambualnce) =>{
-                                        <div key={ambualnce._id}>
-                                            <p>Driver Name: {ambualnce.driverName}</p>
-                                            <p>Driver Contact No: {ambualnce.driverContactNo}</p>
+                                    RegisteredAmbulances.map((ambulance) =>{
+                                        const { _id, driverName,driverContactNo} = ambulance;
+                                        return(
+                                        <div key={_id}>
+                                            <p>Driver Name: {driverName}</p>
+                                            <p>Driver Contact No: {driverContactNo}</p>
                                         </div>
+                                        )
                                     })
                                 }
                             </div>
