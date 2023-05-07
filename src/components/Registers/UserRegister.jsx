@@ -25,26 +25,24 @@ function UserRegister({ location, setLocation }) {
 
     const options = {
       method: 'GET',
-      url: 'https://forward-reverse-geocoding.p.rapidapi.com/v1/reverse',
+      url: 'https://geocodeapi.p.rapidapi.com/GetNearestCities',
       params: {
-        lat: location.lattitude,
-        lon: location.longitude,
-        'accept-language': 'en',
-        polygon_threshold: '0.0'
+        latitude: location.lattitude,
+        longitude: location.longitude,
+        range: '0'
       },
       headers: {
-        'content-type': 'application/octet-stream',
-        'X-RapidAPI-Key': 'b0e520ee8fmshcab43f4f751636dp1176dbjsn85454dfddf6a',
-        'X-RapidAPI-Host': 'forward-reverse-geocoding.p.rapidapi.com'
+        'X-RapidAPI-Key': 'f68ef52b0emsh22a1008ad86b649p11f343jsn9561ac66dfa1',
+        'X-RapidAPI-Host': 'geocodeapi.p.rapidapi.com'
       }
     };
 
     try {
       await generateRegdId();
       const response = await axios.request(options);
-      // console.log(response);
+       console.log(response);
 
-      UserData.Location = response.data.address.city;
+      UserData.Location = response.data[0].City;
 
       const registerResponse = await axios.post('http://localhost:5000/api/user', UserData, {
       headers:{
