@@ -12,7 +12,13 @@ function AmbulanceServiceProviderPanel() {
     const navigate = useNavigate();
     const { isProviderLoggedIn, setProviderLoggedIn } = useContext(globalStateContext);
     const [providerData, setProviderData] = useState(null);
-
+    const [updateData,setUpdateData] = useState({
+        providerName: "",
+        contactNo: "",
+        email: "",
+        address: "",
+        password:"",
+      });
      //ambulance states
      const [DriverName, setDriverName] = useState('');
      const [ParentRegdId, setParentRegdId] = useState(null);
@@ -28,11 +34,6 @@ function AmbulanceServiceProviderPanel() {
         }
         collectProviderData();
     }, [])
-
-
-    const handleClick = () => {
-
-    }
 
     const collectProviderData = async () => {
         const res = await axios.get(`http://localhost:5000/api/ambulanceservice/${RegdId.toUpperCase()}`);
@@ -76,6 +77,41 @@ function AmbulanceServiceProviderPanel() {
         setDriverContactNo('');
     }
 
+
+    const handleFillData = async(regdId) =>{
+        const res = await axios.get(`http://localhost:5000/api/ambulanceservice/${regdId}`);
+        // console.log(res.data[0]);
+        setUpdateData(res.data[0]);
+    }
+    const handleDelete= async (regdId) =>{
+        try { 
+            console.log(regdId);
+             const response = await axios.delete(`http://localhost:5000/api//ambulanceservice/${regdId}`);
+             handleLogout();
+         } catch (err) {
+             console.log(err);
+         }
+        
+    }
+    const handleUpdate= async (regdId) =>{
+        try{
+        axios.put(`http://localhost:5000/api//ambulanceservice/${regdId}`,updateData).then((response) => {
+            console.log(response);
+            console.log(updateData);
+            // reset user data
+            setUpdateData({
+                providerName: "",
+                contactNo: "",
+                email: "",
+                address: "",
+                password:"",
+            });
+          });
+          setProviderData(updateData);
+        }catch (err) {
+            console.log(err);
+        }    
+    }
     return (
         <div className="" id='main'>
             <div name='panel-nav' className='h-[6vh] w-auto flex h justify-center py-2 px-3 border-b-2 border-gray-200 sticky top-0 z-50'>
@@ -108,14 +144,14 @@ function AmbulanceServiceProviderPanel() {
                         <div>
                             {
                                 pageNo === 1 ?
-                                    (<div className='bg-white rounded-xl p-4 w-[16vw] mx-auto mt-[30vh]'>
+                                    (<div className='bg-white rounded-xl p-4 w-[16vw] mx-auto mt-[10vh]'>
                                         <p className='text-center mt-2 mb-4 text-xl font-semibold'>Change Credentials</p>
-                                        <input type='text' placeholder='Provider Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
-                                        <input type='text' placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
-                                        <input type='text' placeholder='Email' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
-                                        <input type='text' placeholder='Address' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
-                                        <input type='text' placeholder='Password' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
-                                        <p className='flex justify-end'><button className='btn w-[100px] mx-2 my-1'>Update</button></p>
+                                        <input type='text' placeholder='Provider Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' value={updateData.providerName} onChange={(e)=>{setUpdateData({...updateData,providerName:e.target.value})}}></input>
+                                        <input type='text' placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'value={updateData.contactNo} onChange={(e)=>{setUpdateData({...updateData,contactNo:e.target.value})}}></input>
+                                        <input type='text' placeholder='Email' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' value={updateData.email} onChange={(e)=>{setUpdateData({...updateData,email:e.target.value})}}></input>
+                                        <input type='text' placeholder='Address' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'value={updateData.address} onChange={(e)=>{setUpdateData({...updateData,address:e.target.value})}}></input>
+                                        <input type='text' placeholder='Password' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'value={updateData.password} onChange={(e)=>{setUpdateData({...updateData,password:e.target.value})}}></input>
+                                        <p className='flex justify-end'><button className='btn w-[100px] mx-2 my-1' onClick={()=>handleUpdate(providerData.regdId)}>Submit</button></p>
                                     </div>) : null
                             }
                         </div>
@@ -137,6 +173,8 @@ function AmbulanceServiceProviderPanel() {
                                                 <p className='text-xl m-2'><span className='font-semibold'>Email: </span>{providerData.email}</p>
                                                 <p className='text-xl m-2'><span className='font-semibold'>Address: </span>{providerData.address}</p>
                                                 <p className='text-xl m-2'><span className='font-semibold'>Password: </span>{providerData.password}</p>
+                                                <button className='btn' onClick={()=>handleFillData(providerData.regdId)}>Update</button>
+                                                <button className='btn bg-red-600' onClick={()=>handleDelete(providerData.regdId)}>Delete</button>
                                             </div>
                                         ) : null
                                 }
