@@ -80,6 +80,7 @@ function AmbulanceServiceProviderPanel() {
         // console.log(res.data[0]);
         setUpdateData(res.data[0]);
     }
+    //Delete Ambulance Provider Details
     const handleDelete= async (regdId) =>{
         try { 
             console.log(regdId);
@@ -107,6 +108,21 @@ function AmbulanceServiceProviderPanel() {
         }catch (err) {
             console.log(err);
         }    
+    }
+//Delete ambulances dtails
+    const deleteData = async (contact) => {
+        try {
+            var response = null;
+            response = await axios.delete(`http://localhost:5000/api//ambulances/${contact}`);
+            // console.log(response);
+            if (response.data.msg === "Success") {
+                toast.success("Deleted successfully");
+            } else {
+                toast.error("Something went wrong!");
+            }
+        } catch (err) {
+            console.log(err);
+        }
     }
     const getAllRegisteredAmbulanceData = async () =>{
         try{
@@ -196,9 +212,10 @@ function AmbulanceServiceProviderPanel() {
                                     RegisteredAmbulances.map((ambulance) =>{
                                         const { _id, driverName,driverContactNo} = ambulance;
                                         return(
-                                        <div key={_id}>
+                                        <div className='bg-white p-4 m-4 rounded-xl text-xl font-semibold' key={_id}>
                                             <p>Driver Name: {driverName}</p>
                                             <p>Driver Contact No: {driverContactNo}</p>
+                                            <p className='flex justify-end'><button className='btn' onClick={() => deleteData(driverContactNo)}>Delete</button></p>
                                         </div>
                                         )
                                     })
