@@ -15,9 +15,8 @@ function AmbulanceServiceProviderPanel() {
 
      //ambulance states
      const [DriverName, setDriverName] = useState('');
-     const [ParentRegdId, setParentRegdId] = useState(null);
      const [DriverContactNo, setDriverContactNo] = useState('');
-
+     const [RegisteredAmbulances, setRegisteredAmbulances] = useState(null);
     var [pageNo, setPageNo] = useState(1);
     var cnt = pageNo;
 
@@ -48,15 +47,13 @@ function AmbulanceServiceProviderPanel() {
 
     const handleAmbulanceSubmit = async (e) =>{
         e.preventDefault();
-        setParentRegdId(providerData.regdId);
-
         if(DriverName === "" || DriverContactNo === ""){
             toast.error("All fields are mendatory");
         }
 
         const ambulanceData = {
             DriverName,
-            ParentRegdId,
+            ParentRegdId: providerData.regdId,
             DriverContactNo
         }
         // console.log(ambulanceData);
@@ -76,6 +73,18 @@ function AmbulanceServiceProviderPanel() {
         setDriverContactNo('');
     }
 
+    const getAllRegisteredAmbulanceData = async () =>{
+        try{
+            const res = await axios.get(`http://localhost:5000/api/ambulances/${providerData.regdId}`);
+            // console.log(res.data);
+            setRegisteredAmbulances(res.data);
+        }catch(err){
+            console.log(err);
+        }
+    }
+
+    getAllRegisteredAmbulanceData()
+    // console.log(RegisteredAmbulances);
     return (
         <div className="" id='main'>
             <div name='panel-nav' className='h-[6vh] w-auto flex h justify-center py-2 px-3 border-b-2 border-gray-200 sticky top-0 z-50'>
@@ -146,6 +155,14 @@ function AmbulanceServiceProviderPanel() {
                             <p className='text-2xl font-semibold text-center m-4'>Registered Ambulances</p>
                             <div className='bg-gray-100 w-full h-[86vh]'>
                                 {/****************List of registered ambulances*******************/}
+                                {
+                                    RegisteredAmbulances.map((ambualnce) =>{
+                                        <div key={ambualnce._id}>
+                                            <p>Driver Name: {ambualnce.driverName}</p>
+                                            <p>Driver Contact No: {ambualnce.driverContactNo}</p>
+                                        </div>
+                                    })
+                                }
                             </div>
                         </div>)
                 }
