@@ -11,10 +11,6 @@ import { toast } from 'react-hot-toast';
 
 function LandingPage() {
 
-  // useEffect(() => {
-  //   toast.success('Welcome Lodu...');
-  // });
-
   const [location, setLocation] = useState();
 
   useEffect(() => { }, [location]);
