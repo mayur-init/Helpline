@@ -120,6 +120,9 @@ function AmbulanceServiceProviderPanel() {
             } else {
                 toast.error("Something went wrong!");
             }
+
+            getAllRegisteredAmbulanceData()
+
         } catch (err) {
             console.log(err);
         }
@@ -206,7 +209,7 @@ function AmbulanceServiceProviderPanel() {
                         </div>) :
                         (<div className='h-full w-[80vw] ml-[20vw]'>
                             <p className='text-2xl font-semibold text-center m-4'>Registered Ambulances</p>
-                            <div className='bg-gray-100 w-full h-[86vh]'>
+                            <div className='bg-gray-100 w-full h-[86vh] p-4'>
                                 {/****************List of registered ambulances*******************/}
                                 {
                                     RegisteredAmbulances.map((ambulance) =>{
