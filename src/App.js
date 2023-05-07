@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import BloodBankPage from './pages/BloodBankPage';
 import LandingPage from './pages/LandingPage';
@@ -14,7 +14,8 @@ import OxygenCylinderProviderPanel from './pages/PanelPages/OxygenCylinderProvid
 import HospitalPanel from './pages/PanelPages/HospitalPanel'
 import AdminPanel from './pages/PanelPages/AdminPanel'
 import { globalStateContext } from './contexts/globalStateContext'
-import { Toaster } from 'react-hot-toast'
+import { Toaster, toast } from 'react-hot-toast'
+import axios from 'axios';
 
 function App() {
 
@@ -24,6 +25,28 @@ function App() {
   const [isUserLoggedIn, setUserLoggedIn] = useState(false);
   const [isProviderLoggedIn, setProviderLoggedIn] = useState(false);
 
+  useEffect(() => {
+    verifyUserLogin();
+   }, []);
+
+  const verifyUserLogin = async () =>{
+      try{
+        const user_access_token = localStorage.getItem('helpline_access_token');
+        const res = await axios.post('http://localhost:5000/api/verifyuser', {
+          AccessToken: user_access_token,
+        });
+
+        const UserData = res.data;
+        setUserName(UserData.userName);
+        setUserId(UserData.regdId);
+        setUserLoggedIn(true);
+        toast.success(`Welcome ${UserData.userName}`);
+        // console.log(res);
+      }catch(err){
+        console.log(err);
+      }
+  }
+  
   return (
     <div>
       <globalStateContext.Provider value={{ userName, setUserName, userId, setUserId, location, setLocation, isUserLoggedIn, setUserLoggedIn, isProviderLoggedIn, setProviderLoggedIn }}>

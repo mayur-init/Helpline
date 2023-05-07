@@ -9,6 +9,7 @@ const bloodBankController = require('./bloodBank/bloodBankController');
 const ambulanceController = require('./ambulance/ambulanceController');
 const authController = require('./auth/authController')
 const enquiryController = require('./enquiry/enquiryController')
+const userAuthController = require('./auth/userAuthController')
 
 module.exports = {
     userController,
@@ -21,5 +22,6 @@ module.exports = {
     bloodBankController,
     ambulanceController,
     authController,
+    userAuthController,
     enquiryController,
 };

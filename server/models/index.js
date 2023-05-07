@@ -5,6 +5,7 @@ const BloodBank = require('./bloodBank');
 const OxygenCylinderProvider = require('./oxygenCylinderProvider');
 const Ambulance = require('./ambulance');
 const Enquiry = require('./enquiry');
+const RefreshToken = require('./refreshToken');
 
 module.exports = {
 	User,
@@ -14,4 +15,5 @@ module.exports = {
     OxygenCylinderProvider,
     Ambulance,
     Enquiry,
+    RefreshToken,
 };

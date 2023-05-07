@@ -40,7 +40,7 @@ function UserRegister({ location, setLocation }) {
     try {
       await generateRegdId();
       const response = await axios.request(options);
-       console.log(response);
+      // console.log(response);
 
       UserData.Location = response.data[0].City;
 
@@ -54,6 +54,10 @@ function UserRegister({ location, setLocation }) {
       // console.log(UserData);
       // console.log("sent");
       // console.log(registerResponse.data);
+
+      //storing access and refresh tokens in localstorage
+      localStorage.setItem('helpline_access_token', registerResponse.data.access_token);
+      localStorage.setItem('helpline_refresh_token', registerResponse.data.refresh_token);
 
     } catch (error) {
       console.log(error);
@@ -89,6 +93,7 @@ function UserRegister({ location, setLocation }) {
       toast.error('Enter number only');
     }
   };
+
   return (
     <div className='w-full'>
       <div className='flex flex-col justify-center items-center w-full my-[8vh]'>
