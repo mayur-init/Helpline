@@ -13,9 +13,10 @@ function Navbar() {
     setUserName('');
 
     if (isUserLoggedIn) {
-      toast.success('Logged out Successfully');
+      localStorage.removeItem('helpline_access_token');
       setUserLoggedIn(false);
       navigate('/#hero', { replace: true });
+      toast.success('Logged out Successfully');
     } else {
       toast.error('You are not logged in, log in first')
     }

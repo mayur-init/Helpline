@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import axios from 'axios';
@@ -7,17 +7,14 @@ import Services from '../components/Services';
 import LandingHero from '../components/Heroes/LandingHero';
 import { HiOutlineMapPin } from 'react-icons/hi2';
 import UserRegister from '../components/Registers/UserRegister';
+import { globalStateContext } from '../contexts/globalStateContext'
 import { toast } from 'react-hot-toast';
 
 function LandingPage() {
 
-  // useEffect(() => {
-  //   toast.success('Welcome Lodu...');
-  // });
-
   const [location, setLocation] = useState();
 
-  useEffect(() => { }, [location]);
+  
 
   function getLocation() {
 

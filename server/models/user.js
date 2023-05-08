@@ -8,6 +8,7 @@ const userSchema = new Schema({
     contactNo: { type: Number, required: true, unique: true},
     regdId: {type: String, required: true, unique: true},
     location: { type: String},
+    accessToken: {type: String, require: true, unique: true},
 
 }, { timestamps: true });
 

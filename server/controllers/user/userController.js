@@ -1,4 +1,7 @@
-const {User} = require('../../models');
+const {User, RefreshToken} = require('../../models');
+const bcrypt = require('bcryptjs');
+const config = require('../../config');
+const JwtService = require('../../services/JwtService');
 
 // to add a user
 exports.addUser = async(req, res) => {
@@ -16,15 +19,26 @@ exports.addUser = async(req, res) => {
         if(userExist){
             return res.status(422).json({msg : "contact no already exist"});
         }
+
+        //generate tokens
+        const access_token = JwtService.sign({ regdId: regdId });
+        const refresh_token = JwtService.sign({ regdId: regdId }, '1y', config.REFRESH_SECRET);
+
         const user = new User({
             userName,
             contactNo,
             regdId,
-            location
+            location,
+            accessToken: access_token,
         });
-        await user.save();
 
-        res.status(201).json({msg: "success"});
+        const refreshToken = new RefreshToken({
+            refreshToken: refresh_token
+        });
+
+        await user.save();
+        await refreshToken.save();
+        res.status(201).json({msg: "success", access_token: access_token, refresh_token: refresh_token});
     }
     catch(err){
         console.log(err);

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const googleMapApiController = require('../controllers/googleMapApiController');
+
 const {
     hospitalController,
     userController,
@@ -9,6 +10,7 @@ const {
     bloodBankController,
     ambulanceController,
     authController,
+    userAuthController,
     enquiryController,
     hospitalAmbulanceController,
     hospitalBloodBankController,
@@ -83,6 +85,8 @@ router.delete('/ambulances/:contact', ambulanceController.deleteAmbulance);
 //auth routes
 router.post('/providerlogin', authController.verifyServiceProviderLogin);
 router.post('/generateregdid', authController.generateRegdId);
+router.post('/verifyuser', userAuthController.verifyUserLogin);
+router.post('/verifyrefreshtoken', userAuthController.verifyRefreshToken);
 
 //enquiry routes
 router.post('/enquiry/', enquiryController.addEnquiry);

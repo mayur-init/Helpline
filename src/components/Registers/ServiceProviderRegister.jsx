@@ -144,6 +144,14 @@ function ServiceProviderRegister() {
     Data.RegdId = RegdId;
     setParentRegdId(null);
   }
+  const handleChange = (e) => {
+    const { value } = e.target;
+    if (!isNaN(value)) {
+      setContactNo(value);
+    } else {
+      toast.error('Enter number only');
+    }
+  };
 
   return (
     <div className='rounded-xl shadow-xl p-4 min-h-max'>
@@ -151,7 +159,7 @@ function ServiceProviderRegister() {
       <div className='flex flex-col w-[50vh] h-auto mt-[8vh] mb-[2vh]'>
         <RegisterFormDropdown title={'Register as'} options={options} setFromNo={setFromNo} />
         <input type='text' onChange={(e) => { setServiceProviderName(e.target.value) }} value={ServiceProviderName} placeholder='Service Provider Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
-        <input type='text' onChange={(e) => { setContactNo(e.target.value) }} value={ContactNo} placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
+        <input type='text' onChange={handleChange} value={ContactNo} placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
         <input type='text' onChange={(e) => { setEmail(e.target.value) }} value={Email} placeholder='Email' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
         <input type='text' onChange={(e) => { setAddress(e.target.value) }} value={Address} placeholder='Permanent Address' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
         <input type='text' onChange={(e) => { setPassword(e.target.value) }} value={Password} placeholder='Password' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>

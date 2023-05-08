@@ -25,17 +25,15 @@ function UserRegister({ location, setLocation }) {
 
     const options = {
       method: 'GET',
-      url: 'https://forward-reverse-geocoding.p.rapidapi.com/v1/reverse',
+      url: 'https://geocodeapi.p.rapidapi.com/GetNearestCities',
       params: {
-        lat: location.lattitude,
-        lon: location.longitude,
-        'accept-language': 'en',
-        polygon_threshold: '0.0'
+        latitude: location.lattitude,
+        longitude: location.longitude,
+        range: '0'
       },
       headers: {
-        'content-type': 'application/octet-stream',
-        'X-RapidAPI-Key': 'b0e520ee8fmshcab43f4f751636dp1176dbjsn85454dfddf6a',
-        'X-RapidAPI-Host': 'forward-reverse-geocoding.p.rapidapi.com'
+        'X-RapidAPI-Key': 'f68ef52b0emsh22a1008ad86b649p11f343jsn9561ac66dfa1',
+        'X-RapidAPI-Host': 'geocodeapi.p.rapidapi.com'
       }
     };
 
@@ -44,7 +42,7 @@ function UserRegister({ location, setLocation }) {
       const response = await axios.request(options);
       // console.log(response);
 
-      UserData.Location = response.data.address.city;
+      UserData.Location = response.data[0].City;
 
       const registerResponse = await axios.post('http://localhost:5000/api/user', UserData, {
       headers:{
@@ -56,6 +54,10 @@ function UserRegister({ location, setLocation }) {
       // console.log(UserData);
       // console.log("sent");
       // console.log(registerResponse.data);
+
+      //storing access and refresh tokens in localstorage
+      localStorage.setItem('helpline_access_token', registerResponse.data.access_token);
+      localStorage.setItem('helpline_refresh_token', registerResponse.data.refresh_token);
 
     } catch (error) {
       console.log(error);
@@ -83,12 +85,20 @@ function UserRegister({ location, setLocation }) {
     // console.log(userId);
     UserData.RegdId = response.data.generatedId;
   }
+  const handleChange = (e) => {
+    const { value } = e.target;
+    if (!isNaN(value)) {
+      setContactNo(value);
+    } else {
+      toast.error('Enter number only');
+    }
+  };
 
   return (
     <div className='w-full'>
       <div className='flex flex-col justify-center items-center w-full my-[8vh]'>
         <input type='text' onChange={(e) => { setUserName(e.target.value) }} placeholder='Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2 w-[20vw]'></input>
-        <input type='text' onChange={(e) => { setContactNo(e.target.value) }} placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2 w-[20vw]'></input>
+        <input type='text' onChange={handleChange} placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2 w-[20vw]'></input>
         <p className='border-2 border-gray-600 rounded-full px-4 py-1 my-2 w-[20vw]'>{location.lattitude}</p>
         <p className='border-2 border-gray-600 rounded-full px-4 py-1 my-2 w-[20vw]'>{location.longitude}</p>
         <p className='flex justify-end w-[20.8vw]'><button onClick={util} className='btn w-[100px] m-2'>Submit</button></p>
