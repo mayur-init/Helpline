@@ -57,27 +57,34 @@ exports.getAmbulanceServices = async(req, res) => {
 };
 //done
 exports.updateAmbulanceService = async(req, res) => {
+    const ambulanceServiceId = req.params.regdId;
     const contactNo = req.body.contactNo;
     const email = req.body.email;
 
     try{
-        if(contactNo){
-            const ambulanceServiceExist = await AmbulanceService.findOne({contactNo : contactNo});
-            if(ambulanceServiceExist){
-                return res.status(200).json({msg : "contact no already exist"});
+        let ambulanceService = await AmbulanceService.findOne({regdId : ambulanceServiceId});
+        if(ambulanceService){
+            if(ambulanceService.contactNo !== contactNo){
+                const ambulanceServiceExist = await AmbulanceService.findOne({contactNo : contactNo});
+                if(ambulanceServiceExist){
+                    return res.status(200).json({msg : "contact no already exist"});
+                }
+            }
+
+            if(ambulanceService.email !== email){
+                const ambulanceServiceExist1 = await AmbulanceService.findOne({email : email});
+                if(ambulanceServiceExist1){
+                    return res.status(200).json({msg : "email already exist"});
+                }
             }
         }
-        if(email){
-            const ambulanceServiceExist1 = await AmbulanceService.findOne({email : email});
-            if(ambulanceServiceExist1){
-                return res.status(200).json({msg : "email already exist"});
-            }
-        }
-        const ambulanceServiceId = req.params.regdId;
-        const response = await AmbulanceService.findOneAndUpdate({"regdId" : ambulanceServiceId}, {$set : req.body} , {new : true});
-        if(response)
-            return res.status(200).json({msg : "Updated Successfully"});
-        res.status(404).json({msg : "Not found"});
+        else
+            return res.status(404).json({msg : "Not found"});
+
+        const updatedAmbService = await AmbulanceService.findOneAndUpdate({regdId : ambulanceServiceId}, {$set : req.body}, {new : true});
+        if(updatedAmbService)
+            return res.status(200).json({msg : "success"});
+        return res.status(404).json({msg : "Not found"});
         
     }catch(err){
         console.log(err);

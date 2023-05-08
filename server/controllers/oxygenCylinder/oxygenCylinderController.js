@@ -57,27 +57,34 @@ exports.getOxygenCylinderProviders = async(req, res) => {
 };
 //done
 exports.updateOxygenCylinder = async(req, res) => {
+    const providerId = req.params.regdId;
     const contactNo = req.body.contactNo;
     const email = req.body.email;
 
     try{
-        if(contactNo){
-            const oxygenCylinderExist = await OxygenCylinderProvider.findOne({contactNo : contactNo});
-            if(oxygenCylinderExist){
-                return res.status(422).json({msg : "contact no already exist"});
+        let oxyCyPro = await OxygenCylinderProvider.findOne({regdId : providerId});
+        if(oxyCyPro){
+            if(oxyCyPro.contactNo !== contactNo){
+                const oxyCyProExist = await OxygenCylinderProvider.findOne({contactNo : contactNo});
+                if(oxyCyProExist){
+                    return res.status(200).json({msg : "contact no already exist"});
+                }
+            }
+
+            if(oxyCyPro.email !== email){
+                const oxyCyProExist1 = await OxygenCylinderProvider.findOne({email : email});
+                if(oxyCyProExist1){
+                    return res.status(200).json({msg : "email already exist"});
+                }
             }
         }
-        if(email){
-            const oxygenCylinderExist1 = await OxygenCylinderProvider.findOne({email : email});
-            if(oxygenCylinderExist1){
-                return res.status(422).json({msg : "email already exist"});
-            }
-        }
-        const providerId = req.params.regdId;
-        const response = await OxygenCylinderProvider.findOneAndUpdate({"regdId" : providerId}, {$set : req.body} , {new : true});
-        if(response)
-            return res.status(200).json({msg : "Updated Successfully"});
-        res.status(404).json({msg : "Not found"});
+        else
+            return res.status(404).json({msg : "Not found"});
+
+        const updatedOxyCyPro = await OxygenCylinderProvider.findOneAndUpdate({regdId : providerId}, {$set : req.body}, {new : true});
+        if(updatedOxyCyPro)
+            return res.status(200).json({msg : "success"});
+        return res.status(404).json({msg : "Not found"});
         
     }catch(err){
         console.log(err);

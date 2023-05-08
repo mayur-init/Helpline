@@ -1,6 +1,6 @@
 const {
     Hospital,
-    AmbulanceService,
+    hospital,
     BloodBank,
     OxygenCylinderProvider
 } = require('../../models');
@@ -63,27 +63,34 @@ exports.getHospitals = async(req, res) => {
 //done
 exports.updateHospital = async(req, res) => {
 
+    const hospitalId = req.params.regdId;
     const contactNo = req.body.contactNo;
     const email = req.body.email;
 
     try{
-        if(contactNo){
-            const hospitalExist = await Hospital.findOne({contactNo : contactNo});
-            if(hospitalExist){
-                return res.status(422).json({msg : "contact no already exist"});
+        let hospital = await Hospital.findOne({regdId : hospitalId});
+        if(hospital){
+            if(hospital.contactNo !== contactNo){
+                const hospitalExist = await Hospital.findOne({contactNo : contactNo});
+                if(hospitalExist){
+                    return res.status(200).json({msg : "contact no already exist"});
+                }
+            }
+
+            if(hospital.email !== email){
+                const hospitalExist1 = await Hospital.findOne({email : email});
+                if(hospitalExist1){
+                    return res.status(200).json({msg : "email already exist"});
+                }
             }
         }
-        if(email){
-            const hospitalExist1 = await Hospital.findOne({email : email});
-            if(hospitalExist1){
-                return res.status(422).json({msg : "email already exist"});
-            }
-        }
-        const hospitalId = req.params.regdId;
-        const response = await Hospital.findOneAndUpdate({"regdId" : hospitalId}, {$set : req.body} , {new : true});
-        if(response)
-            return res.status(200).json({msg : "Updated Successfully"});
-        res.status(404).json({msg : "Not found"});
+        else
+            return res.status(404).json({msg : "Not found"});
+
+        const updatedHospital = await Hospital.findOneAndUpdate({regdId : hospitalId}, {$set : req.body}, {new : true});
+        if(updatedHospital)
+            return res.status(200).json({msg : "success"});
+        return res.status(404).json({msg : "Not found"});
         
     }catch(err){
         console.log(err);
@@ -121,7 +128,7 @@ exports.getAllRegisteredServices = async(req, res, next) =>{
     const hospId = req.params.hospitalRegdId;
 
     const registeredServiceData = {
-        ambulanceService: {
+        hospital: {
             regdId: null,
             contactNo: null
         },
@@ -136,17 +143,17 @@ exports.getAllRegisteredServices = async(req, res, next) =>{
     }
 
     try{
-        const ambulanceServiceData = await AmbulanceService.find({"parentRegdId": hospId});
+        const hospitalData = await hospital.find({"parentRegdId": hospId});
         const bloodBankData = await BloodBank.find({"parentRegdId": hospId});
         const oxygenServiceData = await OxygenCylinderProvider.find({"parentRegdId": hospId});
         
-        // console.log(ambulanceServiceData);
+        // console.log(hospitalData);
         // console.log(bloodBankData);
         // console.log(oxygenServiceData);
 
-        if(ambulanceServiceData.length > 0){
-            registeredServiceData.ambulanceService.regdId = ambulanceServiceData[0].regdId;
-            registeredServiceData.ambulanceService.contactNo = ambulanceServiceData[0].contactNo;
+        if(hospitalData.length > 0){
+            registeredServiceData.hospital.regdId = hospitalData[0].regdId;
+            registeredServiceData.hospital.contactNo = hospitalData[0].contactNo;
         }
         if(bloodBankData.length > 0){
             registeredServiceData.bloodBank.regdId = bloodBankData[0].regdId;

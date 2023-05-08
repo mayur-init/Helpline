@@ -57,27 +57,34 @@ exports.getBloodBanks = async(req, res) => {
 };
 //done
 exports.updateBloodBank = async(req, res) => {
+    const bloodbankId = req.params.regdId;
     const contactNo = req.body.contactNo;
     const email = req.body.email;
 
     try{
-        if(contactNo){
-            const bloodBankExist = await BloodBank.findOne({contactNo : contactNo});
-            if(bloodBankExist){
-                return res.status(422).json({msg : "contact no already exist"});
+        let bloodbank = await BloodBank.findOne({regdId : bloodbankId});
+        if(bloodbank){
+            if(bloodbank.contactNo !== contactNo){
+                const bloodbankExist = await BloodBank.findOne({contactNo : contactNo});
+                if(bloodbankExist){
+                    return res.status(200).json({msg : "contact no already exist"});
+                }
+            }
+
+            if(bloodbank.email !== email){
+                const bloodbankExist1 = await BloodBank.findOne({email : email});
+                if(bloodbankExist1){
+                    return res.status(200).json({msg : "email already exist"});
+                }
             }
         }
-        if(email){
-            const bloodBankExist1 = await BloodBank.findOne({email : email});
-            if(bloodBankExist1){
-                return res.status(422).json({msg : "email already exist"});
-            }
-        }
-        const bloodBankId = req.params.regdId;
-        const response = await BloodBank.findOneAndUpdate({"regdId" : bloodBankId}, {$set : req.body} , {new : true});
-        if(response)
-            return res.status(200).json({msg : "Updated Successfully"});
-        res.status(404).json({msg : "Not found"});
+        else
+            return res.status(404).json({msg : "Not found"});
+
+        const updatedBloodBank = await BloodBank.findOneAndUpdate({regdId : bloodbankId}, {$set : req.body}, {new : true});
+        if(updatedBloodBank)
+            return res.status(200).json({msg : "success"});
+        return res.status(404).json({msg : "Not found"});
         
     }catch(err){
         console.log(err);
