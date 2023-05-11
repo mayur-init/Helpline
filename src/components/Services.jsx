@@ -5,7 +5,7 @@ import { HashLink } from 'react-router-hash-link'
 const Services = () => {
     return (
         <div className='w-full flex items-center' id='services'>
-            <div className='w-[80vw] m-auto'>
+            <div className='w-screen m-auto'>
 
                 <h2 className='text-5xl font-bold flex justify-center my-[8vh] hover:text-violet-600'>Our Services</h2>
                 

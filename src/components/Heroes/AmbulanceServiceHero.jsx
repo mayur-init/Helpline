@@ -24,13 +24,13 @@ function AmbulanceServiceHero() {
   return (
    <div>
     { /* Hero Page Starts */}
-    <div className='w-full h-[100vh] bg-white  flex flex-col justify-between'>
+    <div className='min-h-screen flex flex-col justify-center items-center bg-white' id='hero'>
                 {/* Hero Page Start */}
                 <div className='grid md:grid-cols-2 max-w-[1240px] m-auto'>
                     <div>
-                        <img className='h-[100vh] mix-blend-multiply' src={'assets/img7.webp'} alt="/" />
+                        <img className='w-[80vh] h-[50vh] rounded-md' src={'assets/img7.webp'} alt="/" />
                     </div>
-                    <div className='flex flex-col justify-center md:items-start mt-[8vh] w-full px-12'>
+                    <div className='flex flex-col justify-center md:items-start mt-0 md:mt-[8vh] w-full px-12'>
                         <p className={`text-3xl md:text-4xl font-semibold text-gray-400 transform transition-all duration-1000 ${sentence1 ? 'translate-y-0 opacity-100' : '-translate-y-16 opacity-0'}`}>Your One Step Solution For 24*7 Ambulance Service</p>
                         <h1 className={`py-3 text-5xl md:text-7xl font-bold text-gray-800 hover:text-red-600 transform transition-all duration-1000 ${sentence2 ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}`}>At Your Doorstep!</h1>
                     </div>

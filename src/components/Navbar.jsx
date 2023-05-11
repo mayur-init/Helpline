@@ -40,34 +40,38 @@ function Navbar() {
         }
 
       </div>
-      {/* Responsive */}
-      
-      <div className="md:hidden flex w-9/12 justify-end right-0" onClick={navHandler}>
-           {open ? <HiXMark size={25}/> : <HiBars3 size={25}/>}
-      </div>
-      <div className={open ? "absolute w-1/3 right-0 top-10 bg-white px-4 flex flex-col duration-500 z-50" : "absolute hidden"}>
-        <ul >
-          <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600 hover:text-white rounded-md"><HashLink smooth to='/enquiry'>Enquire</HashLink></li>
-          <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white  rounded-md"><HashLink smooth to='/#services'>Services</HashLink></li>
-          <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white rounded-md"><HashLink smooth to='/#contact'>Contact us</HashLink></li>
-          <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white rounded-md"><RegisterDropdown /></li>
-        {
-          !isUserLoggedIn ?
-            (<HashLink smooth to='/login'><li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white rounded-md">Login</li></HashLink>) : null
-        }
-        </ul>
-      </div>
 
-      <div className='flex justify-center'>
+      <div>
         {isUserLoggedIn ?
           (
-            <div className='flex'>
+            <div className='hidden md:flex'>
               <p className='border-2 border-gray-200 rounded-xl px-3'><HashLink smoot to='/user-panel'>{userName}</HashLink></p>
               <button className='mx-2 font-semibold underline hover:text-violet-600' onClick={handleLogout}>Logout</button>
             </div>
           )
           : null}
       </div>
+
+      {/* Responsive */}
+      
+      <div className="md:hidden flex w-9/12 justify-end right-0" onClick={navHandler}>
+           {open ? <HiXMark size={25}/> : <HiBars3 size={25}/>}
+      </div>
+      <div className={open ? " border-2 broder-slate-300 absolute w-1/2 right-0 top-0 bg-white px-4 flex flex-col duration-1000 -z-10 rounded-md" : "absolute hidden"}>
+        {isUserLoggedIn ?( <p className='w-1/2 mt-2 border-2 border-gray-200 rounded-xl px-3'><HashLink smoot to='/user-panel'>{userName}</HashLink></p>):null}
+        <ul>
+          <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600 hover:text-white rounded-md" onClick={navHandler}><HashLink smooth to='/enquiry'>Enquire</HashLink></li>
+          <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white  rounded-md" onClick={navHandler}><HashLink smooth to='/#services'>Services</HashLink></li>
+          <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white rounded-md" onClick={navHandler}><HashLink smooth to='/#contact'>Contact us</HashLink></li>
+          <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white rounded-md" ><RegisterDropdown /></li>
+          {isUserLoggedIn ?(  <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white rounded-md" onClick={() => {handleLogout();navHandler();}}>Logout</li>):null}
+        {
+          !isUserLoggedIn ?
+            (<HashLink smooth to='/login'><li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white rounded-md" onClick={navHandler}>Login</li></HashLink>) : null
+        }
+        </ul>
+      </div>
+
     </div>
 
   )
