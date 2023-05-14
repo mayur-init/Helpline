@@ -57,13 +57,13 @@ function Navbar() {
       <div className="md:hidden flex w-9/12 justify-end right-0" onClick={navHandler}>
            {open ? <HiXMark size={25}/> : <HiBars3 size={25}/>}
       </div>
-      <div className={open ? " border-2 broder-slate-300 absolute w-1/2 right-0 top-0 bg-white px-4 flex flex-col duration-1000 -z-10 rounded-md" : "absolute hidden"}>
-        {isUserLoggedIn ?( <p className='w-1/2 mt-2 border-2 border-gray-200 rounded-xl px-3'><HashLink smoot to='/user-panel'>{userName}</HashLink></p>):null}
+      <div className={open ? " border-2 broder-slate-300 absolute w-1/2 right-0 top-0 bg-white px-4 m-2 flex flex-col duration-1000 -z-10 rounded-md" : "absolute hidden"}>
+        {isUserLoggedIn ?( <p className='w-auto my-2 mr-4 border-2 border-gray-200 rounded-xl px-3'><HashLink smoot to='/user-panel'>{userName}</HashLink></p>):null}
         <ul>
           <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600 hover:text-white rounded-md" onClick={navHandler}><HashLink smooth to='/enquiry'>Enquire</HashLink></li>
           <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white  rounded-md" onClick={navHandler}><HashLink smooth to='/#services'>Services</HashLink></li>
           <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white rounded-md" onClick={navHandler}><HashLink smooth to='/#contact'>Contact us</HashLink></li>
-          <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white rounded-md" ><RegisterDropdown /></li>
+          <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white rounded-md" ><RegisterDropdown screen={'sm'}/></li>
           {isUserLoggedIn ?(  <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white rounded-md" onClick={() => {handleLogout();navHandler();}}>Logout</li>):null}
         {
           !isUserLoggedIn ?

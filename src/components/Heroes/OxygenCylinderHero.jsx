@@ -11,7 +11,7 @@ function OxygenCylinderHero() {
   return (
    <div>
     { /* Hero Page Starts */}
-    <div className='w-full h-[100vh] bg-white  flex flex-col justify-between'>
+    <div className=' hidden w-full h-[100vh] bg-white  flex flex-col justify-between'>
                 {/* Hero Page Start */}
                 <div className='grid md:grid-cols-2 max-w-[1240px] m-auto'>
                     <div>
@@ -26,14 +26,14 @@ function OxygenCylinderHero() {
     { /* Hero Page Ends */}
 
     {/*OxygenProvider Details Start*/}
-    <h1 className='text-4xl font-bold my-12 text-gray-800 text-center '>Our Oxygen Providers Details</h1>
+    <h1 className='text-3xl md:text-4xl font-semibold my-12 text-gray-800 text-center '>Our Oxygen Providers Details</h1>
         
-        <div className='h-screen flex flex-col justify-content-center mx-5 mb-[10vh]'>
+        <div className='h-auto flex flex-col justify-content-center mx-auto mb-[8vh]'>
         {
             oxygencylinderproviders.map((item) => {
                 const { _id, providerName, address, regdId , email, contactNo} = item;
                 return (
-                    <div className="border min-h-[10vh] w-[60vw] mx-auto bg-white m-4 py-5 px-[5vw] rounded-3xl shadow-xl" key={_id}>
+                    <div className="border min-h-[6vh] w-[85vw] md:w-[60vw] mx-auto bg-white my-3 md:my-4 py-4 px-[5vw] rounded-3xl shadow-xl" key={_id}>
                             <h1 className="font-bold text-2xl text-gray-600 my-2">{providerName}</h1>
                             <h2 className="text-xl my-2 font-semibold">Contact No: {contactNo}</h2>
                             <h1 className='text-xl my-2 font-semibold'>Address: {address}</h1>

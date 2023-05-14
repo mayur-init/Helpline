@@ -4,19 +4,25 @@ import classNames from 'classnames';
 import {HiChevronDown} from 'react-icons/hi2'
 
 
-export default function RegisterDropdown() {
+export default function RegisterDropdown({screen}) {
 
   const options  = [
     {lable: 'user', href: '/#userRegister'},
     {lable: 'service provider', href: '/register#registerForm'}
   ]
 
+  var style
+  if(screen !== 'sm'){
+    style = 'underline hover:text-violet-600';
+  }else{
+    style = 'hover:text-white'
+  }
   const [isActive, setActive] = useState(false);
 
   return (
-    <div>
-      <button className='flex justify-center text-md text-semibold text-gray-600 underline hover:text-white' onClick={() => setActive(!isActive)}>Register<HiChevronDown className='mt-2 ml-1 text-sm'/></button>
-      <div className={classNames("absolute transition ease-out duration-100 bg-white p-2 my-8 mr-8 w-56 rounded-xl shadow-2xl", {
+    <div >
+      <button className={classNames('flex justify-center text-md text-semibold text-gray-600', style)} onClick={() => setActive(!isActive)}>Register<HiChevronDown className='mt-2 ml-1 text-sm'/></button>
+      <div className={classNames("absolute transition ease-out duration-100 bg-white p-2 my-8 md:my-1 w-[44vw] md:w-[15vw] border-gray-200 border-2 rounded-xl shadow-md", {
                 block: isActive,
                 hidden: !isActive
             })}>

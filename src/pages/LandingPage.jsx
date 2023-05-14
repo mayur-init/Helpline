@@ -96,7 +96,7 @@ function LandingPage() {
 
       {/******************Add your location*************************/}
       <div className='h-auto w-full flex justify-center mb-8 mt-4'>
-        <div className='bg-white w-[73vw] h-auto mt-[4vh] text-center p-4 self-center mb-[10vh] rounded-xl shadow-2xl'>
+        <div className='bg-white w-[68.5vw] md:w-[73vw] h-auto mt-[4vh] text-center p-4 self-center mb-[10vh] rounded-xl shadow-2xl'>
           <div className='flex flex-col justify-center items-center h-full w-full p-4'>
             <h1 className='text-3xl font-semibold text-gray-800 mx-6 my-2 hover:text-violet-600'>Add your location</h1>
             {!location ?

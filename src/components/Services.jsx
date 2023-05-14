@@ -11,7 +11,7 @@ const Services = () => {
 
                 {/***************card-box*************/}
                 <div className='grid place-content-center '>
-                    <div className='grid md:grid-cols-3 gap-4 w-[75vw] mx-auto text-center md: my-[6vh]'>
+                    <div className='grid md:grid-cols-3 gap-4 w-[75vw] mx-auto text-center md:my-[6vh]'>
                         {/********cards*********/}
 
                         <HashLink smooth to={'/ambulance-service#main'}>

@@ -14,8 +14,8 @@ const Footer = () => {
         <p className='text-2xl font-semibold p-8 flex justify-center'>Contact Us</p>
         <div className='w-[80vw] h-[30vh] pb-4 md:pb-0 grid grid-cols-2 md:grid-cols-1 place-content-center m-auto border-b-2 border-gray-600'>
             <div className='col-span-2 pt-8 md:pt-2'>
-                <p className='font-semibold uppercase text-xl'>You Can Give Your Feedback</p>
-                <p className='py-4 text-md'>Write your Feedback</p>
+                <p className='font-semibold uppercase text-md'>You Can Give Your Feedback</p>
+                <p className='pb-4 pt-2 text-md'>Write your Feedback</p>
                 <div className='flex flex-col sm:flex-row'>
                     <input className='w-full p-2 mr-4 rounded-md mb-4 text-black' type="text" placeholder='Write Something...'/>
                     <button className='py-2 self-start rounded-xl px-4 border-gray-100 border-2 hover:bg-slate-800 text-sm mb-2'>Send</button>
