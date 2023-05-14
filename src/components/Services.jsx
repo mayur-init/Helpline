@@ -35,7 +35,7 @@ const Services = () => {
                     {/***********************Oxygen Cylinder Service*****************************/}
                     <div className='border h-auto bg-white m-4 p-5 rounded-xl shadow-xl hover:scale-105' >
                         <img className='w-full h-[28vh]' src={'assets/Oxygen_cylinder.jpg'} alt="/" />
-                        <p className='text-3xl font-bold p-6'>Oxygen Cylenders Service</p>
+                        <p className='text-2xl md:text-3xl font-bold p-6'>Oxygen Cylenders Service</p>
                         <p className='text-black-400 mt-2'></p>
                     </div>
                     </HashLink>

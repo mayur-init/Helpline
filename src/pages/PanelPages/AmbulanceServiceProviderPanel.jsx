@@ -149,7 +149,7 @@ function AmbulanceServiceProviderPanel() {
                 </div>
             </div>
             <div className='flex relative'>
-                <div className=' bg-gray-200 h-screen w-[20vw] border-gray-200 border-r-2 fixed'>
+                <div className=' bg-gray-200 h-screen w-[25vw] border-gray-200 border-r-2 fixed'>
                     {/*****************************Side-bar************************************/}
                     <div className='flex flex-col w-full h-full justify-start item-center py-2'>
                         {/*****************Query form-box*********************/}
@@ -161,7 +161,7 @@ function AmbulanceServiceProviderPanel() {
                         {/**********************Add Services Forms*******************************/}
                         {
                             pageNo === 2 ?
-                                (<div className='bg-white rounded-xl p-4 w-[16vw] mx-auto my-8'>
+                                (<div className='bg-white rounded-xl p-4 w-[20vw] mx-auto my-8'>
                                     <p className='text-center mt-2 mb-4 text-xl font-semibold'>Add Ambulances</p>
                                     <input type='text' placeholder='Driver Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' value={DriverName}  onChange={(e) => { setDriverName(e.target.value) }}></input>
                                     <input type='text' placeholder='Driver Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' value={DriverContactNo} onChange={(e) => {setDriverContactNo(e.target.value) }}></input>
@@ -171,7 +171,7 @@ function AmbulanceServiceProviderPanel() {
                         <div>
                             {
                                 pageNo === 1 ?
-                                    (<div className='bg-white rounded-xl p-4 w-[16vw] mx-auto mt-[10vh]'>
+                                    (<div className='bg-white rounded-xl p-4 w-[20vw] mx-auto mt-[10vh]'>
                                         <p className='text-center mt-2 mb-4 text-xl font-semibold'>Change Credentials</p>
                                         <input type='text' placeholder='Provider Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' value={updateData.providerName} onChange={(e)=>{setUpdateData({...updateData,providerName:e.target.value})}}></input>
                                         <input type='text' placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'value={updateData.contactNo} onChange={(e)=>{setUpdateData({...updateData,contactNo:e.target.value})}}></input>
@@ -187,7 +187,7 @@ function AmbulanceServiceProviderPanel() {
                 {
                     // ****************Query-box*******************
                     pageNo === 1 ?
-                        (<div className='h-full w-[80vw] ml-[20vw]'>
+                        (<div className='h-full w-[80vw] ml-[25vw]'>
                             <p className='text-2xl font-semibold text-center m-4'>Personal Information</p>
                             <div className='bg-gray-100 w-full h-[86vh] p-4'>
                                 {/* ***************Personal Information****************** */}
@@ -207,7 +207,7 @@ function AmbulanceServiceProviderPanel() {
                                 }
                             </div>
                         </div>) :
-                        (<div className='h-full w-[80vw] ml-[20vw]'>
+                        (<div className='h-full w-[80vw] ml-[25vw]'>
                             <p className='text-2xl font-semibold text-center m-4'>Registered Ambulances</p>
                             <div className='bg-gray-100 w-full h-[86vh] p-4'>
                                 {/****************List of registered ambulances*******************/}
