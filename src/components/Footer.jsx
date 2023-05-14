@@ -10,22 +10,22 @@ const Footer = () => {
 
 
   return (
-    <div className='w-full h-[60vh] bg-slate-900 text-gray-300 px-2' id='contact'>
+    <div className='w-full h-[65vh] bg-slate-900 text-gray-300 px-2' id='contact'>
         <p className='text-2xl font-semibold p-8 flex justify-center'>Contact Us</p>
-        <div className='w-[80vw] h-[30vh] grid grid-cols-2 md:grid-cols-1 place-content-center m-auto border-b-2 border-gray-600'>
+        <div className='w-[80vw] h-[30vh] pb-4 md:pb-0 grid grid-cols-2 md:grid-cols-1 place-content-center m-auto border-b-2 border-gray-600'>
             <div className='col-span-2 pt-8 md:pt-2'>
-                <p className='font-bold uppercase text-xl'>You Can Give Your Feedback</p>
+                <p className='font-semibold uppercase text-xl'>You Can Give Your Feedback</p>
                 <p className='py-4 text-md'>Write your Feedback</p>
                 <div className='flex flex-col sm:flex-row'>
-                    <input className='w-full p-2 mr-4 rounded-md mb-4 text-black' type="text" placeholder='Write Something..'/>
-                    <button className='p-2 mb-4'>Send</button>
+                    <input className='w-full p-2 mr-4 rounded-md mb-4 text-black' type="text" placeholder='Write Something...'/>
+                    <button className='py-2 self-start rounded-xl px-4 border-gray-100 border-2 hover:bg-slate-800 text-sm mb-2'>Send</button>
                 </div>
             </div>
         </div>
 
-        <div className='flex flex-col w-[80vw] mx-auto mb-[5vh] justify-between sm:flex-row text-center text-gray-500'>
-        <p className='py-4 text-xl'>All rights reserved | Helpline - 2022</p>
-        <div className='flex justify-between sm:w-[200px] pt-4 text-2xl'>
+        <div className='flex flex-col w-[80vw] mx-auto  mb-[5vh] justify-between sm:flex-row text-center text-gray-500'>
+        <p className='py-4 text-sm'>All rights reserved | Helpline - 2022 - 23</p>
+        <div className='flex justify-between md:w-[150px] pt-4 text-2xl'>
             <FaFacebook />
             <FaInstagram />
             <FaGithub />

@@ -67,11 +67,11 @@ function LandingPage() {
       <LandingHero />
       <Services />
       {/*********************How it works****************************/}
-      {/* <div className='bg-white w-[75vw] ml-[12vw] grid grid-cols-2 shadow-2xl text-center mt-[6vh] p-7 mx-[2.4vw] mb-[6vh] rounded-xl'>
+      {/* <div className='hidden bg-white w-[75vw] ml-[12vw] h-auto grid md:grid-cols-2 shadow-2xl text-center mt-[6vh] p-7 mx-[2.4vw] mb-[6vh] rounded-xl'>
         <div className='py-4' >
-          <img className='w-[32vw] h-[50vh]' src={'assets/img2.webp'} alt="/" />
+          <img className='w-full md:w-[32vw] h-[50vh]' src={'assets/img2.webp'} alt="/" />
         </div>
-        <div className='h-[30vh] px-8 py-2' >
+        <div className='h-auto px-8 py-2' >
           <h1 className='text-2xl md:text-4xl font-bold mx-5 mb-4 text-start hover:text-violet-600'>How It Works?</h1>
           <div className='text-gray-500 font-semibold'>
             <div className='flex'>
@@ -95,13 +95,13 @@ function LandingPage() {
       </div> */}
 
       {/******************Add your location*************************/}
-      <div className='h-auto w-full flex justify-center mb-8'>
-        <div className='bg-white w-[75.5vw] h-auto mt-[4vh] py-[2vh] mx-8 self-center mb-[10vh] rounded-xl shadow-2xl'>
-          <div className='flex flex-col justify-center items-center h-full w-full'>
-            <h1 className='text-4xl font-semibold text-gray-600 mx-6 my-4 hover:text-violet-600'>Add your location</h1>
+      <div className='h-auto w-full flex justify-center mb-8 mt-4'>
+        <div className='bg-white w-[73vw] h-auto mt-[4vh] text-center p-4 self-center mb-[10vh] rounded-xl shadow-2xl'>
+          <div className='flex flex-col justify-center items-center h-full w-full p-4'>
+            <h1 className='text-3xl font-semibold text-gray-800 mx-6 my-2 hover:text-violet-600'>Add your location</h1>
             {!location ?
               (<div className='flex justify-center'>
-                <p className='self-center'><button onClick={getLocation} className='btn flex justify-center m-4'>My location</button></p>
+                <p className='self-center'><button onClick={getLocation} className='btn flex justify-center m-2'>My location</button></p>
                 {/* <HiOutlineMapPin className='w-6 h-6 m-2 hover:scale-150'/> */}
               </div>) :
               (<div className='w-full'>

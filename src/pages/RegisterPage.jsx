@@ -17,7 +17,7 @@ function RegisterPage() {
       <div className='min-h-[90vh] p-4 flex flex-col items-center' id='registerForm'>
 
         <div className='h-[20vh] w-full flex justify-end items-center'>
-          <h1 className='text-4xl font-medium m-auto hover:text-violet-600'>Register your service</h1>
+          <h1 className='text-3xl md:text-4xl font-medium m-auto hover:text-violet-600'>Register your service</h1>
           <div className='flex'>
             {/* <button className='btn mx-2' onClick={() => setRegister(1)}>Ambulance Service</button>
             <button className='btn mx-2' onClick={() => setRegister(2)}>Blood Bank Service</button>

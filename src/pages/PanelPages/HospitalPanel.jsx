@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom'
 import { globalStateContext } from '../../contexts/globalStateContext'
-import { HiArrowSmallLeft, HiArrowSmallRight } from 'react-icons/hi2'
+import { HiArrowSmallLeft, HiArrowSmallRight,HiBars3, HiXMark } from 'react-icons/hi2'
 
 
 function HospitalPanel() {
@@ -12,6 +12,7 @@ function HospitalPanel() {
     const navigate = useNavigate();
     const { isProviderLoggedIn, setProviderLoggedIn } = useContext(globalStateContext);
     const [providerData, setProviderData] = useState(null);
+    const [open,setOpen] = useState(true);
     const [updateData,setUpdateData] = useState({
         providerName: "",
         contactNo: "",
@@ -310,15 +311,16 @@ function HospitalPanel() {
                     <button className='mx-2 font-semibold underline hover:text-violet-600' onClick={handleLogout}>Logout</button>
                 </div>
             </div>
-            <div className='flex relative'>
-                <div className=' bg-gray-200 h-screen w-[20vw] border-gray-200 border-r-2 fixed'>
+            <div className='flex'>
+                <div className={open ?'bg-gray-200 h-screen w-[70vw] md:w-[25vw] border-gray-200 border-r-2 fixed duration-500':'bg-gray-200 h-screen w-[10vw] md:w-[25vw] fixed duration-500'}>
                     {/*****************************Side-bar************************************/}
-                    <div className='flex flex-col w-full h-full justify-start item-center py-2'>
+                    <div className='flex flex-col w-full h-full justify-start item-center py-2 relative'>
                         {/*****************Query form-box*********************/}
-                        <p className='text-end px-4 text-gray-400 text-[10px]'>Double click to navigate</p>
+                        <p className={open ? 'text-end px-4 text-gray-400 text-[10px]':'hidden'}>Double click to navigate</p>
                         <div className='flex justify-end'>
                             <button className='bg-gray-100 p-2 rounded-2xl hover:bg-white m-2' onClick={() => { setPageNo(pageNo = 1) }}><HiArrowSmallLeft /></button>
                             <button className='bg-gray-100 p-2 rounded-2xl hover:bg-white m-2' onClick={() => { setPageNo(pageNo++ % 4) }}><HiArrowSmallRight /></button>
+                            <button className='md:hidden p-2' onClick= {()=>{setOpen(!open)}} >{open ? <HiXMark size={30}/> : <HiBars3 size={30}/>}</button> 
                         </div>
                         {/**********************Add Services Forms*******************************/}
                         {
@@ -327,7 +329,7 @@ function HospitalPanel() {
                         <div>
                             {
                                 pageNo === 1 ?
-                                    (<div className='bg-white rounded-xl p-4 w-[16vw] mx-auto mt-[10vh]'>
+                                    (<div className={open ? 'flex flex-col bg-white rounded-xl p-4 w-[60vw] md:w-[20vw] mx-auto mt-[10vh]':'hidden md:block bg-white p-4 rounded-xl w-[20vw] mx-auto mt-[10vh]'}>
                                         <p className='text-center mt-2 mb-4 text-xl font-semibold'>Change Credentials</p>
                                         <input type='text' placeholder='Provider Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' value={updateData.providerName} onChange={(e)=>{setUpdateData({...updateData,providerName:e.target.value})}}></input>
                                         <input type='text' placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' value={updateData.contactNo} onChange={(e)=>{setUpdateData({...updateData,contactNo:e.target.value})}}></input>
@@ -337,24 +339,24 @@ function HospitalPanel() {
                                         <p className='flex justify-end'><button className='btn w-[100px] mx-2 my-1' onClick={()=>handleUpdate(providerData.regdId)}>Submit</button></p>
                                     </div>) : pageNo === 2 ?
                                         (<div>
-                                            <div className='bg-white rounded-xl py-2 px-4 w-[16vw] mx-auto my-4'>
+                                            <div className={open ?'flex flex-col bg-white rounded-xl p-4 w-[60vw] md:w-[20vw] mx-auto my-8':'hidden md:block bg-white rounded-xl p-4 w-[20vw] mx-auto my-8'}>
                                                 <p className='text-center mt-2 mb-4 text-xl font-semibold'>Add Ambulance Service</p>
                                                 <input type='text' placeholder='Dept Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setAmbulanceServiceContactNo(e.target.value) }}></input>
                                                 <p className='flex justify-end'><button className='btn w-[100px] m-2' onClick={handleAmbulnceServiceSubmit}>Add</button></p>
                                             </div>
-                                            <div className='bg-white rounded-xl py-2 px-4 w-[16vw] mx-auto my-4'>
+                                            <div className={open ?'flex flex-col bg-white rounded-xl p-4 w-[60vw] md:w-[20vw] mx-auto my-8':'hidden md:block bg-white rounded-xl p-4 w-[20vw] mx-auto my-8'}>
                                                 <p className='text-center mt-2 mb-4 text-xl font-semibold'>Add Blood Bank</p>
                                                 <input type='text' placeholder='Dept Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setBloodBankContactNo(e.target.value) }}></input>
                                                 <p className='flex justify-end'><button className='btn w-[100px] m-2' onClick={handleBloodBankSubmit}>Add</button></p>
                                             </div>
-                                            <div className='bg-white rounded-xl py-2 px-4 w-[16vw] mx-auto my-2'>
+                                            <div className={open ?'flex flex-col bg-white rounded-xl p-4 w-[60vw] md:w-[20vw] mx-auto my-8':'hidden md:block bg-white rounded-xl p-4 w-[20vw] mx-auto my-8'}>
                                                 <p className='text-center mt-2 mb-4 text-xl font-semibold'>Add Oxygen Service</p>
                                                 <input type='text' placeholder='Dept Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setOxygenServiceContactNo(e.target.value) }}></input>
                                                 <p className='flex justify-end'><button className='btn w-[100px] m-2' onClick={handleOxygenServiceSubmit}>Add</button></p>
                                             </div>
                                         </div>) : pageNo === 3 ?
                                             (<div>
-                                                <div className='bg-white rounded-xl p-4 w-[16vw] mx-auto my-4'>
+                                                <div className={open ?'flex flex-col bg-white rounded-xl p-4 w-[60vw] md:w-[20vw] mx-auto my-8':'hidden md:block bg-white rounded-xl p-4 w-[20vw] mx-auto my-8'}>
                                                     <p className='text-center mt-2 mb-4 text-xl font-semibold'>Add Ambulances</p>
                                                     <input type='text' placeholder='Driver Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setDriverName(e.target.value) }}></input>
                                                     <input type='text' placeholder='Driver Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setDriverContactNo(e.target.value) }}></input>
@@ -369,7 +371,7 @@ function HospitalPanel() {
                 {
                     // ****************Query-box*******************
                     pageNo === 1 ?
-                        (<div className='h-full w-[80vw] ml-[20vw]'>
+                        (<div className='h-full w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
                             <p className='text-2xl font-semibold text-center m-4'>Personal Information</p>
                             <div className='bg-gray-100 w-full h-[86vh] p-4'>
                                 {/* ***************Personal Information****************** */}
@@ -382,7 +384,7 @@ function HospitalPanel() {
                                                 <p className='text-xl m-2'><span className='font-semibold'>Email: </span>{providerData.email}</p>
                                                 <p className='text-xl m-2'><span className='font-semibold'>Address: </span>{providerData.address}</p>
                                                 <p className='text-xl m-2'><span className='font-semibold'>Password: </span>{providerData.password}</p>
-                                                <button className='btn' onClick={()=>handleFillData(providerData.regdId)}>Update</button>
+                                                <button className='btn' onClick={()=>{handleFillData(providerData.regdId);setOpen(true)}}>Update</button>
                                                 <button className='btn bg-red-600' onClick={()=>handleDelete(providerData.regdId)}>Delete</button>
                                             </div>
                                         ) : null
@@ -390,7 +392,7 @@ function HospitalPanel() {
                             </div>
                         </div>) :
                         pageNo === 2 ?
-                            (<div className='h-full w-[80vw] ml-[20vw]'>
+                            (<div className='h-full w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
                                 <p className='text-2xl font-semibold text-center m-4'>Registered Services</p>
                                 <div className='bg-gray-100 w-full h-[86vh] p-4'>
                                     {/****************List of registered services*******************/}
@@ -426,13 +428,13 @@ function HospitalPanel() {
                                     }
                                 </div>
                             </div>) : pageNo === 3 ?
-                                (<div className='h-full w-[80vw] ml-[20vw]'>
+                                (<div className='h-full w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
                                     <p className='text-2xl font-semibold text-center m-4'>Registered Ambulances</p>
                                     <div className='bg-gray-100 w-full h-[86vh]'>
                                         {/****************List of registered ambulances*******************/}
                                     </div>
                                 </div>) :
-                                (<div className='h-full w-[80vw] ml-[20vw]'>
+                                (<div className='h-full w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
                                     <p className='text-2xl font-semibold text-center m-4'>Enquiries</p>
                                     <div className='bg-gray-100 w-full h-[86vh]'>
                                         {/****************List of related enquiries*******************/}

@@ -15,8 +15,8 @@ export default function RegisterDropdown() {
 
   return (
     <div>
-      <button className='flex justify-center text-md text-semibold text-gray-600 underline hover:text-violet-600' onClick={() => setActive(!isActive)}>Register<HiChevronDown className='mt-2 ml-1 text-sm'/></button>
-      <div className={classNames("absolute transition ease-out duration-100 bg-white p-2 m-8 mt-3 w-56 rounded-xl shadow-2xl", {
+      <button className='flex justify-center text-md text-semibold text-gray-600 underline hover:text-white' onClick={() => setActive(!isActive)}>Register<HiChevronDown className='mt-2 ml-1 text-sm'/></button>
+      <div className={classNames("absolute transition ease-out duration-100 bg-white p-2 my-8 mr-8 w-56 rounded-xl shadow-2xl", {
                 block: isActive,
                 hidden: !isActive
             })}>

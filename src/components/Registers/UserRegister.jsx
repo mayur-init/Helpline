@@ -96,7 +96,7 @@ function UserRegister({ location, setLocation }) {
 
   return (
     <div className='w-full'>
-      <div className='flex flex-col justify-center items-center w-full my-[8vh]'>
+      <div className='flex flex-col justify-center items-center w-full my-[4vh]'>
         <input type='text' onChange={(e) => { setUserName(e.target.value) }} placeholder='Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2 w-3/4 md:w-[20vw]'></input>
         <input type='text' onChange={handleChange} placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2 w-3/4 md:w-[20vw]'></input>
         <p className='border-2 border-gray-600 rounded-full px-4 py-1 my-2 w-3/4 md:w-[20vw]'>{location.lattitude}</p>
