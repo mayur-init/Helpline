@@ -98,7 +98,7 @@ function UserRegister({ location, setLocation }) {
     <div className='w-full'>
       <div className='flex flex-col justify-center items-center w-full my-[4vh]'>
         <input type='text' onChange={(e) => { setUserName(e.target.value) }} placeholder='Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2 w-[60vw] md:w-[20vw]'></input>
-        <input type='text' onChange={handleChange} placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2 w-[60vw] md:w-[20vw]'></input>
+        <input type='text' onChange={handleChange} value={contactNo} placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2 w-[60vw] md:w-[20vw]'></input>
         <p className='border-2 text-start border-gray-600 rounded-full px-4 py-1 my-2 w-[60vw] md:w-[20vw]'>{location.lattitude}</p>
         <p className='border-2 text-start border-gray-600 rounded-full px-4 py-1 my-2 w-[60vw] md:w-[20vw]'>{location.longitude}</p>
         <p className='flex md:justify-end ml-[14.5vh] md:ml-0 md:w-[20.8vw]'><button onClick={util} className='btn w-[100px] m-2'>Submit</button></p>
