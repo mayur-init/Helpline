@@ -30,20 +30,22 @@ function App() {
    }, []);
 
   const verifyUserLogin = async () =>{
-      try{
-        const user_access_token = localStorage.getItem('helpline_access_token');
-        const res = await axios.post('http://localhost:5000/api/verifyuser', {
-          AccessToken: user_access_token,
-        });
-
-        const UserData = res.data;
-        setUserName(UserData.userName);
-        setUserId(UserData.regdId);
-        setUserLoggedIn(true);
-        toast.success(`Welcome ${UserData.userName}`);
-        // console.log(res);
-      }catch(err){
-        console.log(err);
+      const user_access_token = localStorage.getItem('helpline_access_token');
+      if(user_access_token !== null){
+        try{
+          const res = await axios.post('http://localhost:5000/api/verifyuser', {
+            AccessToken: user_access_token,
+          });
+  
+          const UserData = res.data;
+          setUserName(UserData.userName);
+          setUserId(UserData.regdId);
+          setUserLoggedIn(true);
+          toast.success(`Welcome ${UserData.userName}`);
+          // console.log(res);
+        }catch(err){
+          console.log(err);
+        }
       }
   }
   

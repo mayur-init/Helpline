@@ -16,11 +16,11 @@ export default function LoginFormDropdown({title, options, setFromNo}) {
           {title}
         <HiChevronDown className='mt-2 ml-1 text-sm'/>
       </button>
-      <div className={classNames("absolute transition duration-100 bg-white p-2 m-8 mt-1 w-[40vw] md:w-[16vw] rounded-xl shadow-2xl", {
+      <div className={classNames("absolute transition duration-100 bg-white p-2 mt-1 w-[45vw] md:w-[16vw] rounded-xl shadow-2xl", {
                 block: isActive,
                 hidden: !isActive
             })}>
-            {options.map((option) => <button key={option.id} ><div className={classNames('text-gray-600 border-b-2 border-gray-100 text-start px-4 w-[35vw] md:w-[15vw] py-2 hover:bg-violet-500 hover:text-white rounded-md')}  onClick={()=> {setFromNo(option.id); setActive(false)}} >
+            {options.map((option) => <button key={option.id} ><div className={classNames('text-gray-600 border-b-2 border-gray-100 text-start w-[35vw] md:w-[15vw] py-2 hover:bg-violet-500 hover:text-white rounded-md')}  onClick={()=> {setFromNo(option.id); setActive(false)}} >
               {option.label}
             </div></button>)}
         </div>

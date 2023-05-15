@@ -1,6 +1,6 @@
 const {
     Hospital,
-    hospital,
+    AmbulanceService,
     BloodBank,
     OxygenCylinderProvider
 } = require('../../models');
@@ -126,47 +126,51 @@ exports.getParticularhospital = async(req, res) => {
 
 exports.getAllRegisteredServices = async(req, res, next) =>{
     const hospId = req.params.hospitalRegdId;
+    // console.log(hospId);
 
-    const registeredServiceData = {
-        hospital: {
-            regdId: null,
-            contactNo: null
-        },
-        bloodBank: {
-            regdId: null,
-            contactNo: null,
-        },
-        oxygenService: {
-            regdId: null,
-            contactNo: null,
+    if(hospId === null){
+        return res.status(400).json({msg: 'hostpital regdId is null'});
+    }else{
+        const registeredServiceData = {
+            ambulanceService: {
+                regdId: null,
+                contactNo: null
+            },
+            bloodBank: {
+                regdId: null,
+                contactNo: null,
+            },
+            oxygenService: {
+                regdId: null,
+                contactNo: null,
+            }
+        }
+    
+        try{
+            const ambulanceServiceData = await AmbulanceService.find({"parentRegdId": hospId});
+            const bloodBankData = await BloodBank.find({"parentRegdId": hospId});
+            const oxygenServiceData = await OxygenCylinderProvider.find({"parentRegdId": hospId});
+            
+            // console.log(hospitalData);
+            // console.log(bloodBankData);
+            // console.log(oxygenServiceData);
+    
+            if(ambulanceServiceData.length > 0){
+                registeredServiceData.ambulanceService.regdId = ambulanceServiceData[0].regdId;
+                registeredServiceData.ambulanceService.contactNo = ambulanceServiceData[0].contactNo;
+            }
+            if(bloodBankData.length > 0){
+                registeredServiceData.bloodBank.regdId = bloodBankData[0].regdId;
+                registeredServiceData.bloodBank.contactNo = bloodBankData[0].contactNo;
+            }
+            if(oxygenServiceData.length > 0){
+                registeredServiceData.oxygenService.regdId =  oxygenServiceData[0].regdId;
+                registeredServiceData.oxygenService.contactNo =  oxygenServiceData[0].contactNo;
+            }
+    
+            return res.status(200).json(registeredServiceData);
+        }catch(err){
+            return res.status(400).json(err);
         }
     }
-
-    try{
-        const hospitalData = await hospital.find({"parentRegdId": hospId});
-        const bloodBankData = await BloodBank.find({"parentRegdId": hospId});
-        const oxygenServiceData = await OxygenCylinderProvider.find({"parentRegdId": hospId});
-        
-        // console.log(hospitalData);
-        // console.log(bloodBankData);
-        // console.log(oxygenServiceData);
-
-        if(hospitalData.length > 0){
-            registeredServiceData.hospital.regdId = hospitalData[0].regdId;
-            registeredServiceData.hospital.contactNo = hospitalData[0].contactNo;
-        }
-        if(bloodBankData.length > 0){
-            registeredServiceData.bloodBank.regdId = bloodBankData[0].regdId;
-            registeredServiceData.bloodBank.contactNo = bloodBankData[0].contactNo;
-        }
-        if(oxygenServiceData.length > 0){
-            registeredServiceData.oxygenService.regdId =  oxygenServiceData[0].regdId;
-            registeredServiceData.oxygenService.contactNo =  oxygenServiceData[0].contactNo;
-        }
-
-    }catch(err){
-        res.status(400).json(err);
-    }
-
-    res.status(200).json(registeredServiceData);
 }

@@ -12,7 +12,7 @@ function BloodBankServiceProviderPanel() {
     const navigate = useNavigate();
     const { isProviderLoggedIn, setProviderLoggedIn } = useContext(globalStateContext);
     const [providerData, setProviderData] = useState(null);
-    const [open,setOpen] = useState(true);
+    const [open,setOpen] = useState(false);
     const [updateData,setUpdateData] = useState({
         providerName: "",
         contactNo: "",

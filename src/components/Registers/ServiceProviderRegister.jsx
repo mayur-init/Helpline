@@ -155,8 +155,8 @@ function ServiceProviderRegister() {
 
   return (
     <div className='rounded-xl shadow-xl p-4 min-h-max'>
-      <h1 className='text-gray-600 text-3xl font-bold my-[4vh] flex justify-center hover:text-violet-600'>Register Service</h1>
-      <div className='flex flex-col w-[35vh] md:w-[50vh] h-auto mt-[8vh] mb-[2vh]'>
+      <h1 className='text-gray-700 text-2xl md:text-3xl font-semibold my-[4vh] flex justify-center hover:text-violet-600'>Register Service</h1>
+      <div className='flex flex-col w-[35vh] md:w-[50vh] h-auto mt-[4vh] mb-[2vh]'>
         <RegisterFormDropdown title={'Register as'} options={options} setFromNo={setFromNo} />
         <input type='text' onChange={(e) => { setServiceProviderName(e.target.value) }} value={ServiceProviderName} placeholder='Service Provider Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
         <input type='text' onChange={handleChange} value={ContactNo} placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
