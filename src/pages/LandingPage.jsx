@@ -9,6 +9,7 @@ import { HiOutlineMapPin } from 'react-icons/hi2';
 import UserRegister from '../components/Registers/UserRegister';
 import { globalStateContext } from '../contexts/globalStateContext'
 import { toast } from 'react-hot-toast';
+import {  HiXMark } from 'react-icons/hi2'
 
 function LandingPage() {
 
@@ -97,7 +98,12 @@ function LandingPage() {
       {/******************Add your location*************************/}
       <div className='h-auto w-full flex justify-center mb-8 mt-4'>
         <div className='bg-white w-[68.5vw] md:w-[73vw] h-auto mt-[4vh] text-center p-4 self-center mb-[10vh] rounded-xl shadow-2xl'>
-          <div className='flex flex-col justify-center items-center h-full w-full p-4'>
+          <div className='flex flex-col justify-center h-full w-full p-4'>
+            {location &&
+            <div className='flex justify-end'>
+              <button onClick={()=>{setLocation(!location)}}><HiXMark size={30}/></button>
+            </div>
+            }
             <h1 className='text-3xl font-semibold text-gray-800 mx-6 my-2 hover:text-violet-600'>Add your location</h1>
             {!location ?
               (<div className='flex justify-center'>
@@ -111,9 +117,11 @@ function LandingPage() {
           </div>
         </div>
       </div>
+
       <Footer/>
     </div>
   )
 }
 
 export default LandingPage
+

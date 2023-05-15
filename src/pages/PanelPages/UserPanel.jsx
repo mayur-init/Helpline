@@ -64,7 +64,7 @@ function UserPanel() {
                     location: "",
                 });
             });
-            setProviderData(updateData);
+            setUserData(updateData);
         } catch (err) {
             console.log(err);
         }
@@ -86,7 +86,7 @@ function UserPanel() {
                     {/*****************************Side-bar************************************/}
                     <div className='flex flex-col w-full h-full justify-start item-end py-4 relative'>
                         {/*****************Query form-box*********************/}
-                        <div className={open ? 'flex flex-col bg-white rounded-xl p-4 w-[60vw] md:w-[20vw] mx-auto mt-[10vh]' : 'hidden md:block bg-white p-4 rounded-xl w-[20vw] mx-auto mt-[10vh]'}>
+                        <div className={open ? 'flex flex-col bg-white rounded-xl p-4 w-[60vw] md:w-[20vw] mx-auto mt-[10vh]' : 'hidden md:flex flex-col bg-white p-4 rounded-xl w-[20vw] mx-auto mt-[10vh]'}>
                             <p className='text-center mt-2 mb-4 text-xl font-semibold'>Change Credentials</p>
                             <input type='text' placeholder='User name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' value={updateData.userName} onChange={(e) => { setUpdateData({ ...updateData, userName: e.target.value }) }}></input>
                             <input type='text' placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' value={updateData.contactNo} onChange={(e) => { setUpdateData({ ...updateData, contactNo: e.target.value }) }}></input>
