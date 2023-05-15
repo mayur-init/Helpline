@@ -5,6 +5,7 @@ import RegisterDropdown from '../components/Dropdowns/RegisterDropdown'
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { HiBars3, HiXMark } from 'react-icons/hi2'
+import { motion } from 'framer-motion'
 
 function Navbar() {
   const { userName, setUserName, userId, isUserLoggedIn, setUserLoggedIn } = useContext(globalStateContext);
@@ -27,7 +28,8 @@ function Navbar() {
   }
 
   return (
-    <div className='bg-white h-[7vh] min-w-full p-2 border-b-2 border-gray-200 flex justify-between items-center shadow-b-2xl sticky top-0 z-50'>
+    <motion.div className='bg-white h-[7vh] min-w-full p-2 border-b-2 border-gray-200 flex justify-between items-center shadow-b-2xl sticky top-0 z-50'
+      initial={{y:-48}} animate={{y:0}} transition={{delay: 0.1}}>
       <HashLink smooth to='/'><h1 className='text-2xl font-bold text-gray-500 hover:text-violet-600'>Helpline</h1></HashLink>
       <div className='hidden md:flex'>
         <HashLink smooth to='/enquiry'><button className='mx-2 font-semibold underline hover:text-violet-600'>Enquire</button></HashLink>
@@ -72,7 +74,7 @@ function Navbar() {
         </ul>
       </div>
 
-    </div>
+    </motion.div>
 
   )
 }

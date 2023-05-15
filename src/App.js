@@ -27,33 +27,33 @@ function App() {
 
   useEffect(() => {
     verifyUserLogin();
-   }, []);
+  }, []);
 
-  const verifyUserLogin = async () =>{
-      const user_access_token = localStorage.getItem('helpline_access_token');
-      if(user_access_token !== null){
-        try{
-          const res = await axios.post('http://localhost:5000/api/verifyuser', {
-            AccessToken: user_access_token,
-          });
-  
-          const UserData = res.data;
-          setUserName(UserData.userName);
-          setUserId(UserData.regdId);
-          setUserLoggedIn(true);
-          toast.success(`Welcome ${UserData.userName}`);
-          // console.log(res);
-        }catch(err){
-          console.log(err);
-        }
+  const verifyUserLogin = async () => {
+    const user_access_token = localStorage.getItem('helpline_access_token');
+    if (user_access_token !== null) {
+      try {
+        const res = await axios.post('http://localhost:5000/api/verifyuser', {
+          AccessToken: user_access_token,
+        });
+
+        const UserData = res.data;
+        setUserName(UserData.userName);
+        setUserId(UserData.regdId);
+        setUserLoggedIn(true);
+        toast.success(`Welcome ${UserData.userName}`);
+        // console.log(res);
+      } catch (err) {
+        console.log(err);
       }
+    }
   }
-  
+
   return (
-    <div>
+    <div className='overflow-hidden scroll-smooth'>
       <globalStateContext.Provider value={{ userName, setUserName, userId, setUserId, location, setLocation, isUserLoggedIn, setUserLoggedIn, isProviderLoggedIn, setProviderLoggedIn }}>
         {/************react-notification**************/}
-        <Toaster 
+        <Toaster
           position='top-right'
           toastOptions={{
             success: {
@@ -68,23 +68,23 @@ function App() {
             // }
           }}
         />
-        <Router>
-          <Routes>
-            <Route path='/' element={<LandingPage />} exact />
-            <Route path='/register' element={<RegisterPage />} />
-            <Route path='/blood-bank-service' element={<BloodBankPage />} />
-            <Route path='/login' element={<LoginPage />} />
-            <Route path='/enquiry' element={<EnquiryPage />} />
-            <Route path='/ambulance-service' element={<AmbulanceServicePage />} />
-            <Route path='/oxygen-cylinder-service' element={<OxygenCylinderPage />} />
-            <Route path='/user-panel' element={<UserPanel />} />
-            <Route path='/ambulance-service-provider-panel/:RegdId' element={<AmbulanceServiceProviderPanel />} />
-            <Route path='/blood-bank-service-provider-panel/:RegdId' element={<BloodBankServiceProviderPanel />} />
-            <Route path='/oxygen-cylinder-provider-panel/:RegdId' element={<OxygenCylinderProviderPanel />} />
-            <Route path='/hospital-service-panel/:RegdId' element={<HospitalPanel/>} />
-            <Route path='/admin-panel' element={<AdminPanel />} />
-          </Routes>
-        </Router>
+          <Router>
+            <Routes>
+              <Route path='/' element={<LandingPage />} exact />
+              <Route path='/register' element={<RegisterPage />} />
+              <Route path='/blood-bank-service' element={<BloodBankPage />} />
+              <Route path='/login' element={<LoginPage />} />
+              <Route path='/enquiry' element={<EnquiryPage />} />
+              <Route path='/ambulance-service' element={<AmbulanceServicePage />} />
+              <Route path='/oxygen-cylinder-service' element={<OxygenCylinderPage />} />
+              <Route path='/user-panel' element={<UserPanel />} />
+              <Route path='/ambulance-service-provider-panel/:RegdId' element={<AmbulanceServiceProviderPanel />} />
+              <Route path='/blood-bank-service-provider-panel/:RegdId' element={<BloodBankServiceProviderPanel />} />
+              <Route path='/oxygen-cylinder-provider-panel/:RegdId' element={<OxygenCylinderProviderPanel />} />
+              <Route path='/hospital-service-panel/:RegdId' element={<HospitalPanel />} />
+              <Route path='/admin-panel' element={<AdminPanel />} />
+            </Routes>
+          </Router>
       </globalStateContext.Provider>
     </div>
   );

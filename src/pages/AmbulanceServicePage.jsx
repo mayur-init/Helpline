@@ -5,7 +5,7 @@ import AmbulanceServiceHero from '../components/Heroes/AmbulanceServiceHero'
 import { globalStateContext } from '../contexts/globalStateContext'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
-
+import { motion } from 'framer-motion'
 
 function AmbulanceServicePage() {
 
@@ -20,11 +20,11 @@ function AmbulanceServicePage() {
   });
 
   return (
-    <div className='bg-zinc-200' id='main'>
+    <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.1}}  className='bg-zinc-200' id='main'>
             <Navbar/>
             <AmbulanceServiceHero/>
             <Footer/>
-    </div>
+    </motion.div>
   )
 }
 
