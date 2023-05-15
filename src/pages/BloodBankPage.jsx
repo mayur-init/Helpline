@@ -22,7 +22,7 @@ function BloodBankPage() {
 
     return (
         <motion.div className='bg-zinc-200' id='main'
-        initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.1}}>
+        initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.15}}>
             <Navbar />
             <BloodBankHero />
             <Footer />

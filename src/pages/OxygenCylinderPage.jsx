@@ -20,7 +20,7 @@ function OxygenCylinderPage() {
     });
     
   return (
-    <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.1}} className='bg-zinc-200' id='main'>
+    <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.15}} className='bg-zinc-200' id='main'>
             <Navbar/>
             <OxygenCylinderHero/>
             <Footer/>
