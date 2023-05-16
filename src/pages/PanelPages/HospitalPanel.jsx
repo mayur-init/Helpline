@@ -13,6 +13,7 @@ function HospitalPanel() {
     const { isProviderLoggedIn, setProviderLoggedIn } = useContext(globalStateContext);
     const [providerData, setProviderData] = useState(null);
     const [open,setOpen] = useState(false);
+    const [click,setClick] = useState(false);
     const [updateData,setUpdateData] = useState({
         providerName: "",
         contactNo: "",
@@ -306,20 +307,51 @@ function HospitalPanel() {
         <div className="" id='main'>
             <div name='panel-nav' className='h-[6vh] w-auto flex h justify-center py-2 px-3 border-b-2 border-gray-200 sticky top-0 z-50'>
                 <p className='text-xl font-semibold hover:text-violet-500'>Helpline</p>
-                <div className='ml-auto flex'>
+                <div className=' hidden md:flex flex-row ml-[70vh]'>
+                    <button className='mx-2 font-semibold underline hover:text-violet-600' onClick={()=>{setPageNo(1)}}>Home</button>
+                    <button className='mx-2 font-semibold underline hover:text-violet-600' onClick={()=>{setPageNo(2)}}>Services</button>
+                    <button className='mx-2 font-semibold underline hover:text-violet-600' onClick={()=>{setPageNo(3)}}>Ambulance</button>
+                    <button className='mx-2 font-semibold underline hover:text-violet-600' onClick={()=>{setPageNo(4)}}>Enquiries</button>
+                </div>
+                <div className='invisible md:visible md:flex ml-auto'>
                     <p className='border-gray-300 border-2 rounded-xl px-2 h-[27px]'>{providerData !== null ? providerData.providerName : null}</p>
                     <button className='mx-2 font-semibold underline hover:text-violet-600' onClick={handleLogout}>Logout</button>
                 </div>
+
+                {/* Responsive */}
+                <div className="md:hidden flex w-9/12 justify-end right-0">
+                    <button onClick={()=>{setClick(!click)}}>{click ? <HiXMark size={25}/> : <HiBars3 size={25}/>}</button>
+               </div>
+      <div className={click ? "border-2 broder-slate-300 absolute w-1/2 right-0 top-0 bg-white px-4 m-2 flex flex-col duration-1000 -z-10 rounded-md":"hidden"}>
+      <ul>
+          <li className="border-b-2 border-gray-100  text-gray-600 p-3 rounded-md">
+          <p className='border-gray-300 border-2 rounded-xl px-2 h-[27px] w-[25vh] text-center'>{providerData !== null ? providerData.providerName : null}</p>
+          </li>
+          <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white  rounded-md" >
+          <button className='mx-2 font-semibold' onClick={()=>{setPageNo(1)}}>Home</button>
+          </li>
+          <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white rounded-md">
+          <button className='mx-2 font-semibold' onClick={()=>{setPageNo(2)}}>Services</button>
+          </li>
+          <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white rounded-md" >
+          <button className='mx-2 font-semibold' onClick={()=>{setPageNo(3)}}>Ambulance</button>
+            </li>  
+            <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white rounded-md" >
+            <button className='mx-2 font-semibold' onClick={()=>{setPageNo(4)}}>Enquiries</button>
+            </li> 
+            <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white rounded-md" >
+            <button className='mx-2 font-semibold' onClick={handleLogout}>Logout</button>
+            </li>  
+        </ul>
+        
+      </div>
             </div>
             <div className='flex'>
                 <div className={open ?'bg-gray-200 h-screen w-[70vw] md:w-[25vw] border-gray-200 border-r-2 fixed duration-500':'bg-gray-200 h-screen w-[10vw] md:w-[25vw] fixed duration-500'}>
                     {/*****************************Side-bar************************************/}
                     <div className='flex flex-col w-full h-full justify-start item-center py-2 relative'>
                         {/*****************Query form-box*********************/}
-                        <p className={open ? 'text-end px-4 text-gray-400 text-[10px]':'hidden'}>Double click to navigate</p>
                         <div className='flex justify-end'>
-                            <button className='bg-gray-100 p-2 rounded-2xl hover:bg-white m-2' onClick={() => { setPageNo(pageNo = 1) }}><HiArrowSmallLeft /></button>
-                            <button className='bg-gray-100 p-2 rounded-2xl hover:bg-white m-2' onClick={() => { setPageNo(pageNo++ % 4) }}><HiArrowSmallRight /></button>
                             <button className='md:hidden p-2' onClick= {()=>{setOpen(!open)}} >{open ? <HiXMark size={30}/> : <HiBars3 size={30}/>}</button> 
                         </div>
                         {/**********************Add Services Forms*******************************/}
@@ -339,24 +371,24 @@ function HospitalPanel() {
                                         <p className='flex justify-end'><button className='btn w-[100px] mx-2 my-1' onClick={()=>handleUpdate(providerData.regdId)}>Submit</button></p>
                                     </div>) : pageNo === 2 ?
                                         (<div>
-                                            <div className={open ?'flex flex-col bg-white rounded-xl p-4 w-[60vw] md:w-[20vw] mx-auto my-8':'hidden md:flex flex-col bg-white rounded-xl p-4 w-[20vw] mx-auto my-8'}>
+                                            <div className={open ?'flex flex-col bg-white rounded-xl p-4 w-[60vw] md:w-[20vw] mx-auto my-8 md:m-0':'hidden md:flex flex-col bg-white rounded-xl p-4 w-[20vw] mx-auto my-8 md:my-1'}>
                                                 <p className='text-center mt-2 mb-4 text-xl font-semibold'>Add Ambulance Service</p>
                                                 <input type='text' placeholder='Dept Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setAmbulanceServiceContactNo(e.target.value) }}></input>
                                                 <p className='flex justify-end'><button className='btn w-[100px] m-2' onClick={handleAmbulnceServiceSubmit}>Add</button></p>
                                             </div>
-                                            <div className={open ?'flex flex-col bg-white rounded-xl p-4 w-[60vw] md:w-[20vw] mx-auto my-8':'hidden md:flex flex-col bg-white rounded-xl p-4 w-[20vw] mx-auto my-8'}>
+                                            <div className={open ?'flex flex-col bg-white rounded-xl p-4 w-[60vw] md:w-[20vw] mx-auto my-8 md:my-1':'hidden md:flex flex-col bg-white rounded-xl p-4 w-[20vw] mx-auto my-8 md:my-3'}>
                                                 <p className='text-center mt-2 mb-4 text-xl font-semibold'>Add Blood Bank</p>
                                                 <input type='text' placeholder='Dept Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setBloodBankContactNo(e.target.value) }}></input>
                                                 <p className='flex justify-end'><button className='btn w-[100px] m-2' onClick={handleBloodBankSubmit}>Add</button></p>
                                             </div>
-                                            <div className={open ?'flex flex-col bg-white rounded-xl p-4 w-[60vw] md:w-[20vw] mx-auto my-8':'hidden md:flex flex-col bg-white rounded-xl p-4 w-[20vw] mx-auto my-8'}>
+                                            <div className={open ?'flex flex-col bg-white rounded-xl p-4 w-[60vw] md:w-[20vw] mx-auto my-8 md:my-1':'hidden md:flex flex-col bg-white rounded-xl p-4 w-[20vw] mx-auto my-8 md:my-3'}>
                                                 <p className='text-center mt-2 mb-4 text-xl font-semibold'>Add Oxygen Service</p>
                                                 <input type='text' placeholder='Dept Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setOxygenServiceContactNo(e.target.value) }}></input>
                                                 <p className='flex justify-end'><button className='btn w-[100px] m-2' onClick={handleOxygenServiceSubmit}>Add</button></p>
                                             </div>
                                         </div>) : pageNo === 3 ?
                                             (<div>
-                                                <div className={open ?'flex flex-col bg-white rounded-xl p-4 w-[60vw] md:w-[20vw] mx-auto my-8':'hidden md:block bg-white rounded-xl p-4 w-[20vw] mx-auto my-8'}>
+                                                <div className={open ?'flex flex-col bg-white rounded-xl p-4 w-[60vw] md:w-[20vw] mx-auto my-8':'hidden md:flex flex-col bg-white rounded-xl p-4 w-[20vw] mx-auto my-8'}>
                                                     <p className='text-center mt-2 mb-4 text-xl font-semibold'>Add Ambulances</p>
                                                     <input type='text' placeholder='Driver Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setDriverName(e.target.value) }}></input>
                                                     <input type='text' placeholder='Driver Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setDriverContactNo(e.target.value) }}></input>
@@ -392,7 +424,7 @@ function HospitalPanel() {
                             </div>
                         </div>) :
                         pageNo === 2 ?
-                            (<div className='h-full w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
+                            (<div className='h-full md:h-[93vh] w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
                                 <p className='text-2xl font-semibold text-center m-4'>Registered Services</p>
                                 <div className='bg-gray-100 w-full h-[86vh] p-4'>
                                     {/****************List of registered services*******************/}
@@ -427,20 +459,21 @@ function HospitalPanel() {
                                             ) : null
                                     }
                                 </div>
-                            </div>) : pageNo === 3 ?
-                                (<div className='h-full w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
+                            </div>) : pageNo === 3 &&
+                                (<div className='h-full md:h-[93vh] w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
                                     <p className='text-2xl font-semibold text-center m-4'>Registered Ambulances</p>
                                     <div className='bg-gray-100 w-full h-[86vh]'>
                                         {/****************List of registered ambulances*******************/}
                                     </div>
-                                </div>) :
-                                (<div className='h-full w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
+                                </div>) 
+                }
+                   { pageNo === 4 &&
+                   (<div className='h-full md:h-[93vh] w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
                                     <p className='text-2xl font-semibold text-center m-4'>Enquiries</p>
                                     <div className='bg-gray-100 w-full h-[86vh]'>
                                         {/****************List of related enquiries*******************/}
                                     </div>
-                                </div>)
-                }
+                                </div>)}
             </div>
         </div >
     )

@@ -5,8 +5,8 @@ function AmbulanceServiceHero() {
   const [sentence1, setsentence1] = useState(false);
   const [sentence2, setsentence2] = useState(false);
   const [ambulances, setAmbulances] = useState([]);
-  const [RegisteredAmbulances, setRegisteredAmbulances] = useState([]);
-  const [click,setClick] = useState(true); //15/05
+  // const [RegisteredAmbulances, setRegisteredAmbulances] = useState([]);
+  // const [click,setClick] = useState(true); //15/05
   console.log(ambulances.regdId);
   useEffect(() => {
     setTimeout(() => {
@@ -23,18 +23,16 @@ function AmbulanceServiceHero() {
       .then(res => res.json())
       .then(data => setAmbulances(data))
       .catch(error => console.log(error));
-      getAllRegisteredAmbulanceData(ambulances.regdId);
   }, []);
-  console.log(1);
-  const getAllRegisteredAmbulanceData = async (regdId) => {
-    try {
-        const res = await axios.get(`http://localhost:5000/api/ambulances/${regdId}`);
-        console.log(ambulances.regdId);
-        setRegisteredAmbulances(res.data);
-    } catch (err) {
-        console.log(err);
-    } //15/05
-}
+  // const getAllRegisteredAmbulanceData = async (regdId) => {
+  //   try {
+  //       const res = await axios.get(`http://localhost:5000/api/ambulances/${regdId}`);
+  //       console.log(ambulances.regdId);
+  //       setRegisteredAmbulances(res.data);
+  //   } catch (err) {
+  //       console.log(err);
+  //   } //15/05
+//}
   return (
     <div>
       { /* Hero Page Starts */}
