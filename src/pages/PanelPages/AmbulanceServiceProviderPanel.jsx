@@ -187,7 +187,7 @@ function AmbulanceServiceProviderPanel() {
                 {
                     // ****************Query-box*******************
                     pageNo === 1 ?
-                        (<div className='h-full w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
+                        (<div className='h-full md:h-[93vh] w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
                             <p className='text-xl md:text-2xl font-semibold text-center m-4'>Personal Information</p>
                             <div className='bg-gray-100 w-full h-[86vh] p-4'>
                                 {/* ***************Personal Information****************** */}

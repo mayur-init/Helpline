@@ -5,8 +5,9 @@ function AmbulanceServiceHero() {
   const [sentence1, setsentence1] = useState(false);
   const [sentence2, setsentence2] = useState(false);
   const [ambulances, setAmbulances] = useState([]);
-  // const [RegisteredAmbulances, setRegisteredAmbulances] = useState([]);
-  // const [click,setClick] = useState(true); 15/05
+  const [RegisteredAmbulances, setRegisteredAmbulances] = useState([]);
+  const [click,setClick] = useState(true); //15/05
+  console.log(ambulances.regdId);
   useEffect(() => {
     setTimeout(() => {
       setsentence1(true);
@@ -22,16 +23,18 @@ function AmbulanceServiceHero() {
       .then(res => res.json())
       .then(data => setAmbulances(data))
       .catch(error => console.log(error));
+      getAllRegisteredAmbulanceData(ambulances.regdId);
   }, []);
-  // const getAllRegisteredAmbulanceData = async (regdId) => {
-  //   try {
-  //       const res = await axios.get(`http://localhost:5000/api/ambulances/${regdId}`);
-  //       console.log(ambulances.regdId);
-  //       setRegisteredAmbulances(res.data);
-  //   } catch (err) {
-  //       console.log(err);
-  //   } 15/05
-//}
+  console.log(1);
+  const getAllRegisteredAmbulanceData = async (regdId) => {
+    try {
+        const res = await axios.get(`http://localhost:5000/api/ambulances/${regdId}`);
+        console.log(ambulances.regdId);
+        setRegisteredAmbulances(res.data);
+    } catch (err) {
+        console.log(err);
+    } //15/05
+}
   return (
     <div>
       { /* Hero Page Starts */}
@@ -56,7 +59,7 @@ function AmbulanceServiceHero() {
         {
           ambulances.map((item) => {
             const { _id, providerName, address, regdId, email, contactNo } = item;
-            //getAllRegisteredAmbulanceData(regdId); 15/05
+            //15/05
 
             return (
               <div className="min-h-[6vh] w-[85vw] md:w-[60vw] mx-auto bg-white my-3 md:my-4 py-4 px-[5vw] rounded-3xl shadow-xl" key={_id}>
@@ -80,7 +83,7 @@ function AmbulanceServiceHero() {
                                 
                                 <div className='flex justify-end'>
                                 <button onClick={()=>{setClick(!click)}}>{click ? <SlArrowUp size={20}/>:<SlArrowDown size={20}/> }</button>
-                                </div>  15/05*/}
+                                </div>  */}
                                 
               </div>
 
