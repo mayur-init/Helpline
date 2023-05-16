@@ -136,7 +136,7 @@ function AmbulanceServiceProviderPanel() {
         }
     }
 
-    getAllRegisteredAmbulanceData()
+    getAllRegisteredAmbulanceData();
     // console.log(RegisteredAmbulances);
     return (
         <div className="" id='main'>
@@ -161,7 +161,7 @@ function AmbulanceServiceProviderPanel() {
                         {/**********************Add Services Forms*******************************/}
                         {
                             pageNo === 2 ?
-                                (<div className={open ? 'flex flex-col bg-white rounded-xl p-4 w-[60vw] md:w-[20vw] mx-auto my-8 duration-500' : 'hidden md:block bg-white rounded-xl p-4 w-[20vw] mx-auto my-8'}>
+                                (<div className={open ? 'flex flex-col bg-white rounded-xl p-4 w-[60vw] md:w-[20vw] mx-auto my-8 duration-500' : 'hidden md:flex flex-col bg-white rounded-xl p-4 w-[20vw] mx-auto my-8'}>
                                     <p className='text-center mt-2 mb-4 text-xl font-semibold'>Add Ambulances</p>
                                     <input type='text' placeholder='Driver Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' value={DriverName} onChange={(e) => { setDriverName(e.target.value) }}></input>
                                     <input type='text' placeholder='Driver Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' value={DriverContactNo} onChange={(e) => { setDriverContactNo(e.target.value) }}></input>

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
-
+import axios from 'axios';
+import { SlArrowDown,SlArrowUp } from "react-icons/sl";
 function AmbulanceServiceHero() {
   const [sentence1, setsentence1] = useState(false);
   const [sentence2, setsentence2] = useState(false);
   const [ambulances, setAmbulances] = useState([]);
-
+  // const [RegisteredAmbulances, setRegisteredAmbulances] = useState([]);
+  // const [click,setClick] = useState(true); 15/05
   useEffect(() => {
     setTimeout(() => {
       setsentence1(true);
@@ -21,6 +23,15 @@ function AmbulanceServiceHero() {
       .then(data => setAmbulances(data))
       .catch(error => console.log(error));
   }, []);
+  // const getAllRegisteredAmbulanceData = async (regdId) => {
+  //   try {
+  //       const res = await axios.get(`http://localhost:5000/api/ambulances/${regdId}`);
+  //       console.log(ambulances.regdId);
+  //       setRegisteredAmbulances(res.data);
+  //   } catch (err) {
+  //       console.log(err);
+  //   } 15/05
+//}
   return (
     <div>
       { /* Hero Page Starts */}
@@ -45,13 +56,32 @@ function AmbulanceServiceHero() {
         {
           ambulances.map((item) => {
             const { _id, providerName, address, regdId, email, contactNo } = item;
+            //getAllRegisteredAmbulanceData(regdId); 15/05
+
             return (
               <div className="min-h-[6vh] w-[85vw] md:w-[60vw] mx-auto bg-white my-3 md:my-4 py-4 px-[5vw] rounded-3xl shadow-xl" key={_id}>
                 <h1 className="font-bold text-xl text-gray-700 my-2">{providerName}</h1>
                 <h2 className="text-xl my-2 font-semibold">Contact No: {contactNo}</h2>
                 <h1 className='text-xl my-2 font-semibold'>Address: {address}</h1>
+                
                 {/* <h2 className="text-xl my-3 font-semibold">Registration No: {regNo}</h2>
                             <h2 className="text-xl my-3 font-semibold">Email: {email}</h2> */}
+                             {/* {click &&
+                                    RegisteredAmbulances.map((ambulance) => {
+                                        const { _id, driverName, driverContactNo } = ambulance;
+                                        return (
+                                            <div className='flex flex-col bg-white pt-4 rounded-xl text-md md:text-xl font-semibold' key={_id}>
+                                                <p>Driver Contact No: <span className='font-normal'>{driverContactNo}</span></p>
+                                                
+                                            </div>
+                                        )
+                                    })
+                                }
+                                
+                                <div className='flex justify-end'>
+                                <button onClick={()=>{setClick(!click)}}>{click ? <SlArrowUp size={20}/>:<SlArrowDown size={20}/> }</button>
+                                </div>  15/05*/}
+                                
               </div>
 
             )
