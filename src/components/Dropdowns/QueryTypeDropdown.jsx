@@ -14,11 +14,11 @@ function QueryTypeDropdown({ title, options, setQueryType }) {
                 {title}
                 <HiChevronDown className='mt-2 ml-1 text-sm' />
             </button>
-            <div className={classNames("absolute transition duration-100 bg-white p-2 m-8 mt-1 w-[16vw] rounded-xl shadow-2xl", {
+            <div className={classNames("absolute transition duration-100 bg-white p-2 m-8 mt-1 w-[30vw] md:w-[16vw] rounded-xl shadow-2xl", {
                 block: isActive,
                 hidden: !isActive
             })}>
-                {options.map((option) => <button key={option.id} ><div className={classNames('text-gray-600 border-b-2 border-gray-100 text-start px-4 w-[15vw] py-2 hover:bg-violet-500 hover:text-white rounded-md')} onClick={() => { setQueryType(option.id); setActive(false)}} >
+                {options.map((option) => <button key={option.id} ><div className={classNames('text-gray-600 border-b-2 border-gray-100 text-start px-4 w-[29vw] md:w-[15vw] py-2 hover:bg-violet-500 hover:text-white rounded-md')} onClick={() => { setQueryType(option.id); setActive(false)}} >
                     {option.label}
                 </div></button>)}
             </div>

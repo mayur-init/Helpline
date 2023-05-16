@@ -32,7 +32,6 @@ function Navbar() {
       initial={{y:-48}} animate={{y:0}} transition={{delay: 0.1}}>
       <HashLink smooth to='/'><h1 className='text-2xl font-bold text-gray-500 hover:text-violet-600'>Helpline</h1></HashLink>
       <div className='hidden md:flex'>
-        <HashLink smooth to='/enquiry'><button className='mx-2 font-semibold underline hover:text-violet-600'>Enquire</button></HashLink>
         <HashLink smooth to='/#services'><button className='mx-2 font-semibold underline hover:text-violet-600'>Services</button></HashLink>
         <HashLink smooth to='/#contact'><button className='mx-2 font-semibold underline hover:text-violet-600'>Contact us</button></HashLink>
         <button className='mx-2 font-semibold underline hover:text-violet-600'><RegisterDropdown /></button>
@@ -62,7 +61,6 @@ function Navbar() {
       <div className={open ? " border-2 broder-slate-300 absolute w-1/2 right-0 top-0 bg-white px-4 m-2 flex flex-col duration-1000 -z-10 rounded-md" : "absolute hidden"}>
         {isUserLoggedIn ?( <p className='w-auto my-2 mr-4 border-2 border-gray-200 rounded-xl px-3'><HashLink smoot to='/user-panel'>{userName}</HashLink></p>):null}
         <ul>
-          <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600 hover:text-white rounded-md" onClick={navHandler}><HashLink smooth to='/enquiry'>Enquire</HashLink></li>
           <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white  rounded-md" onClick={navHandler}><HashLink smooth to='/#services'>Services</HashLink></li>
           <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white rounded-md" onClick={navHandler}><HashLink smooth to='/#contact'>Contact us</HashLink></li>
           <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white rounded-md" ><RegisterDropdown screen={'sm'}/></li>

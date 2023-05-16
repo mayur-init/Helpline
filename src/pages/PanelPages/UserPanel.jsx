@@ -1,9 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
 import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { globalStateContext } from '../../contexts/globalStateContext'
-import { HiBars3, HiXMark } from 'react-icons/hi2'
+import { HiArrowSmallLeft, HiArrowSmallRight, HiBars3, HiXMark } from 'react-icons/hi2'
+import EnquiryPage from '../EnquiryPage';
+import QueryTypeDropdown from '../../components/Dropdowns/QueryTypeDropdown';
+
 
 function UserPanel() {
 
@@ -11,6 +14,23 @@ function UserPanel() {
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const [userData, setUserData] = useState(null);
+    var [pageNo, setPageNo] = useState(1);
+    const [queryType, setQueryType] = useState(0);
+    const [query, setQuery] = useState('');
+    const options = [
+        { label: 'Blood bank query', id: 1 },
+        { label: 'oxygen cylinder query', id: 2 },
+        { label: 'other...', id: 3 }
+    ]
+    const EnquiryId = useRef();
+    const enquiryData = {
+        EnquiryId,
+        ParentRegdId: userId,
+        EnquiryType: queryType,
+        Enquiry: query,
+    }
+
+
 
     const [updateData, setUpdateData] = useState({
         userName: "",
@@ -69,6 +89,34 @@ function UserPanel() {
             console.log(err);
         }
     }
+    const handleClick = async () => {
+        if (queryType === 0 || query === '') {
+            toast.error('Write some query first')
+        } else {
+            try {
+                await generateRegdId();
+                // console.log(enquiryData);
+                const response = await axios.post('http://localhost:5000/api/enquiry', enquiryData, {
+                    headers: {
+                        "Access-Control-Allow-Origin": "*",
+                        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+                    }
+                });
+                // console.log("Data sent");
+            } catch (error) {
+                console.log(error);
+            }
+
+            setQueryType(0);
+            setQuery('');
+            toast.success('New query posted');
+        }
+
+    }
+    const generateRegdId = async () => {
+        const response = await axios.post('http://localhost:5000/api/generateregdid', { IdType: 'USER' });
+        enquiryData.EnquiryId = response.data.generatedId;
+    }
     return (
         <div className="" id='main'>
             <div name='panel-nav' className='h-[6vh] w-auto flex justify-center py-2 px-3 border-b-2 border-gray-200 sticky top-0 z-50'>
@@ -80,41 +128,60 @@ function UserPanel() {
             </div>
             <div className='flex'>
                 <div className={open ? 'bg-gray-200 h-screen w-[70vw] md:w-[25vw] border-gray-200 border-r-2 fixed duration-500' : 'bg-gray-200 h-screen w-[10vw] md:w-[25vw] fixed duration-500'}>
-                    <div className='flex justify-end'>
-                        <button className='md:hidden p-2' onClick={() => { setOpen(!open) }} >{open ? <HiXMark size={30} /> : <HiBars3 size={30} />}</button>
-                    </div>
                     {/*****************************Side-bar************************************/}
                     <div className='flex flex-col w-full h-full justify-start item-end py-2 relative'>
-                        {/*****************Query form-box*********************/}
-                        <div className={open ? 'flex flex-col bg-white rounded-xl p-4 w-[60vw] md:w-[20vw] mx-auto mt-[10vh]' : 'hidden md:flex flex-col bg-white p-4 rounded-xl w-[20vw] mx-auto mt-[10vh]'}>
-                            <p className='text-center mt-2 mb-4 text-xl font-semibold'>Change Credentials</p>
-                            <input type='text' placeholder='User name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' value={updateData.userName} onChange={(e) => { setUpdateData({ ...updateData, userName: e.target.value }) }}></input>
-                            <input type='text' placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' value={updateData.contactNo} onChange={(e) => { setUpdateData({ ...updateData, contactNo: e.target.value }) }}></input>
-                            <input type='text' placeholder='Location' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' value={updateData.location} onChange={(e) => { setUpdateData({ ...updateData, location: e.target.value }) }}></input>
-                            <p className='flex justify-end'><button className='btn w-[100px] m-2' onClick={() => handleUpdate(userData.regdId)}>Change</button></p>
+                        <div className='flex justify-end'>
+                            <button className='bg-gray-100 p-2 rounded-2xl hover:bg-white m-2' onClick={() => { setPageNo(1) }}><HiArrowSmallLeft /></button>
+                            <button className='bg-gray-100 p-2 rounded-2xl hover:bg-white m-2' onClick={() => { setPageNo(2) }}><HiArrowSmallRight /></button>
+                            <button className='md:hidden p-2' onClick={() => { setOpen(!open) }} >{open ? <HiXMark size={30} /> : <HiBars3 size={30} />}</button>
                         </div>
-                    </div>
-                </div>
-                {/****************Query-box*******************/}
-                <div className='h-full md:h-[93vh] w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
-                    <p className='text-2xl font-semibold text-center m-4'>Personal Information</p>
-                    <div className='bg-gray-100 w-full h-[86vh] p-4'>
-                        {/****************Personal Information*******************/}
-                        {
-                            userData !== null ?
-                                (
-                                    <div>
-                                        <p className='text-xl m-2'><span className='font-semibold'>User Name: </span>{userData.userName}</p>
-                                        <p className='text-xl m-2'><span className='font-semibold'>Regd Id: </span>{userData.regdId}</p>
-                                        <p className='text-xl m-2'><span className='font-semibold'>Contact No: </span>{userData.contactNo}</p>
-                                        <p className='text-xl m-2'><span className='font-semibold'>Location: </span>{userData.location}</p>
-                                        <button className='btn' onClick={() => { handleFillData(userData.RegdId); setOpen(true) }}>Update</button>
-                                        <button className='btn bg-red-600' onClick={() => handleDelete(userData.RegdId)}>Delete</button>
-                                    </div>
-                                ) : null
+                        {/*****************Query form-box*********************/}
+                        {pageNo === 1 ?
+                            (<div className={open ? 'flex flex-col bg-white rounded-xl p-4 w-[60vw] md:w-[20vw] mx-auto mt-[10vh]' : 'hidden md:flex flex-col bg-white p-4 rounded-xl w-[20vw] mx-auto mt-[10vh]'}>
+                                <p className='text-center mt-2 mb-4 text-xl font-semibold'>Change Credentials</p>
+                                <input type='text' placeholder='User name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' value={updateData.userName} onChange={(e) => { setUpdateData({ ...updateData, userName: e.target.value }) }}></input>
+                                <input type='text' placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' value={updateData.contactNo} onChange={(e) => { setUpdateData({ ...updateData, contactNo: e.target.value }) }}></input>
+                                <input type='text' placeholder='Location' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' value={updateData.location} onChange={(e) => { setUpdateData({ ...updateData, location: e.target.value }) }}></input>
+                                <p className='flex justify-end'><button className='btn w-[100px] m-2' onClick={() => handleUpdate(userData.regdId)}>Change</button></p>
+                            </div>) :
+
+                            (<div className={open ? 'flex flex-col bg-white rounded-xl p-4 w-[60vw] md:w-[20vw] mx-auto my-8 duration-500' : 'hidden md:flex flex-col bg-white rounded-xl p-4 w-[20vw] mx-auto my-8'}>
+                                <p className='text-center mt-2 mb-4 text-xl font-semibold'>Write your queries</p>
+                                <QueryTypeDropdown title='Select query type' options={options} setQueryType={setQueryType} />
+                                <textarea type='text' placeholder='Query' className='border-2 h-[10vh] w-[45vw] md:w-[14vw] border-gray-600 rounded-xl px-3 py-1 my-2' value={query} onChange={(e) => { setQuery(e.target.value) }}></textarea>
+                                <p className='flex justify-end'><button className='btn w-[100px] m-2' onClick={handleClick}>Submit</button></p>
+                            </div>)
                         }
                     </div>
                 </div>
+                {/****************Query-box*******************/}
+                {pageNo === 1 ?
+                    (<div className='h-full md:h-[93vh] w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
+                        <p className='text-2xl font-semibold text-center m-4'>Personal Information</p>
+                        <div className='bg-gray-100 w-full h-[86vh] p-4'>
+                            {/****************Personal Information*******************/}
+                            {
+                                userData !== null ?
+                                    (
+                                        <div>
+                                            <p className='text-xl m-2'><span className='font-semibold'>User Name: </span>{userData.userName}</p>
+                                            <p className='text-xl m-2'><span className='font-semibold'>Regd Id: </span>{userData.regdId}</p>
+                                            <p className='text-xl m-2'><span className='font-semibold'>Contact No: </span>{userData.contactNo}</p>
+                                            <p className='text-xl m-2'><span className='font-semibold'>Location: </span>{userData.location}</p>
+                                            <button className='btn' onClick={() => { handleFillData(userData.RegdId); setOpen(true) }}>Update</button>
+                                            <button className='btn bg-red-600' onClick={() => handleDelete(userData.RegdId)}>Delete</button>
+                                        </div>
+                                    ) : null
+                            }
+                        </div>
+                    </div>) :
+                    (<div className='h-full md:h-[93vh] w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
+                        <p className='text-2xl font-semibold text-center m-4'>Your Queries</p>
+                        <div className='bg-gray-100 w-full h-[86vh] p-4'>
+                        </div>
+                    </div>
+                    )
+                }
             </div>
         </div>
     )
