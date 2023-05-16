@@ -78,7 +78,7 @@ function BloodBankServiceProviderPanel() {
     }
     return (
         <div className="" id='main'>
-            <div name='panel-nav' className='h-[6vh] w-auto flex h justify-center py-2 px-3 border-b-2 border-gray-200 sticky top-0 z-50'>
+            <div name='panel-nav' className='h-[6vh] w-auto flex justify-center py-2 px-3 border-b-2 border-gray-200 sticky top-0 z-50'>
                 <p className='text-xl font-semibold hover:text-violet-500'>Helpline</p>
                 <div className='ml-auto flex'>
                     <p className='border-gray-300 border-2 rounded-xl px-2 h-[27px]'>{providerData !== null? providerData.providerName : null}</p>

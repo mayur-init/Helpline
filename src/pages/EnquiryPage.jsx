@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import QueryTypeDropdown from '../components/Dropdowns/QueryTypeDropdown'
 
 function EnquiryPage() {
-
+  const [open,setOpen] = useState(false);
   const options = [
     { label: 'Blood bank query', id: 1 },
     { label: 'oxygen cylinder query', id: 2 },
@@ -71,10 +71,10 @@ function EnquiryPage() {
     <div className="" id='main'>
       <Navbar />
       {/* <EnquiryHero/> */}
-      <div className='flex relative'>
-        <div className=' bg-gray-200 h-screen w-[20vw] border-gray-200 border-r-2 fixed'>
+      <div className='flex'>
+        <div className={open ?'bg-gray-200 h-screen w-[70vw] md:w-[25vw] border-gray-200 border-r-2 fixed duration-500':'bg-gray-200 h-screen w-[10vw] md:w-[25vw] fixed duration-500'}>
           {/*****************************Side-bar************************************/}
-          <div className='flex flex-col w-full h-full justify-start item-center py-5'>
+          <div className='flex flex-col w-full h-full justify-start item-center py-5 relative'>
             {/*****************Query form-box*********************/}
             <div className='bg-white rounded-xl p-4 w-[16vw] mx-auto'>
               <p className='text-center mt-2 mb-4 text-xl font-semibold'>Write your queries</p>
