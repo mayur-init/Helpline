@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar'
 import { globalStateContext } from '../contexts/globalStateContext'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 function BloodBankPage() {
 
@@ -20,11 +21,12 @@ function BloodBankPage() {
     });
 
     return (
-        <div className='bg-zinc-200' id='main'>
+        <motion.div className='bg-zinc-200' id='main'
+        initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.15}}>
             <Navbar />
             <BloodBankHero />
             <Footer />
-        </div>
+        </motion.div>
     )
 }
 

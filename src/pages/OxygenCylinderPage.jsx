@@ -5,6 +5,7 @@ import OxygenCylinderHero from '../components/Heroes/OxygenCylinderHero'
 import { globalStateContext } from '../contexts/globalStateContext'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 function OxygenCylinderPage() {
 
@@ -19,11 +20,11 @@ function OxygenCylinderPage() {
     });
     
   return (
-    <div className='bg-zinc-200' id='main'>
+    <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.15}} className='bg-zinc-200' id='main'>
             <Navbar/>
             <OxygenCylinderHero/>
             <Footer/>
-    </div>
+    </motion.div>
   )
 }
 

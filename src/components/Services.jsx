@@ -16,7 +16,7 @@ const Services = () => {
 
                         <HashLink smooth to={'/ambulance-service#main'}>
                             {/**********Ambulance Service************/}
-                            <div className='border md:w-[22vw] h-auto bg-white m-4 p-5 rounded-xl shadow-xl hover:scale-105' >
+                            <div className='transition ease-in-out delay-20 border md:w-[22vw] h-auto bg-white m-4 p-5 rounded-xl shadow-xl hover:scale-105' >
                                 <img className='w-[80vw] h-[28vh]' src={'assets/img4.webp'} alt="/" />
                                 <p className='text-3xl font-semibold m-7'>Ambulance Service</p>
                                 <p className='text-black-400 '></p>
@@ -25,7 +25,7 @@ const Services = () => {
 
                         <HashLink smooth to={'/blood-bank-service#main'}>
                             {/******************Blood Bank Service************************/}
-                            <div className='border md:w-[22vw] h-auto bg-white m-4 p-5 rounded-xl shadow-xl hover:scale-105' >
+                            <div className='transition ease-in-out delay-20 border md:w-[22vw] h-auto bg-white m-4 p-5 rounded-xl shadow-xl hover:scale-105' >
                                 <img className='w-[80vw] h-[28vh]' src={'assets/blood_bank.jpg'} alt="/" />
                                 <p className='text-3xl font-semibold p-6'>Blood Bank Service</p>
                                 <p className='text-black-400 mt-2'></p>
@@ -34,7 +34,7 @@ const Services = () => {
 
                         <HashLink smooth to={'oxygen-cylinder-service#main'}>
                             {/***********************Oxygen Cylinder Service*****************************/}
-                            <div className='border md:w-[22vw] h-auto bg-white m-4 p-5 rounded-xl shadow-xl hover:scale-105' >
+                            <div className='transition ease-in-out delay-20 border md:w-[22vw] h-auto bg-white m-4 p-5 rounded-xl shadow-xl hover:scale-105' >
                                 <img className='w-full h-[28vh]' src={'assets/Oxygen_cylinder.jpg'} alt="/" />
                                 <p className='text-3xl font-semibold p-6'>Oxygen Cylenders Service</p>
                                 <p className='text-black-400 mt-2'></p>

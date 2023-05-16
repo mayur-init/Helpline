@@ -8,7 +8,7 @@ export default function RegisterDropdown({screen}) {
 
   const options  = [
     {lable: 'user', href: '/#userRegister'},
-    {lable: 'service provider', href: '/register#registerForm'}
+    {lable: 'service provider', href: '/register'}
   ]
 
   var style
