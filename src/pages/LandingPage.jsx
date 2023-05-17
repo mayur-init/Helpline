@@ -17,7 +17,6 @@ function LandingPage() {
   const { setUserName, setUserLoggedIn, setUserMongoId, setUserId, setUserLocation, isUserLoggedIn } = useContext(globalStateContext);
   
   useEffect(() => {
-    if(isUserLoggedIn === true)
       verifyUserLogin();
   }, []);
 
