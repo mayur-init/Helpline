@@ -15,6 +15,7 @@ const {
     hospitalAmbulanceController,
     hospitalBloodBankController,
     hospitalOxygenCylinderController,
+    feedbackController,
 } = require('../controllers');
 
 // router.get('/', (req, res) =>{res.send('<h2>Project-Helpline: server is running...</h2>')});
@@ -95,5 +96,9 @@ router.put('/enquiry/:enquiryId', enquiryController.updateParticularEnquiry);
 router.post('/enquiry/:enquiryId', enquiryController.deleteParticularEnquiry);
 router.post('/getallrelatedenquiry', enquiryController.getAllRelatedEnquiries);
 router.get('/getalllocationenquiries/:location', enquiryController.getAllLocationEnquiries);
+
+//feedback routes
+router.post('/feedback', feedbackController.addFeedback);
+router.post('/feedback/:_id', feedbackController.deleteFeedback);
 
 module.exports = router;

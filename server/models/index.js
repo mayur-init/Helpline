@@ -6,6 +6,7 @@ const OxygenCylinderProvider = require('./oxygenCylinderProvider');
 const Ambulance = require('./ambulance');
 const Enquiry = require('./enquiry');
 const RefreshToken = require('./refreshToken');
+const FeedBack = require('./feedback');
 
 module.exports = {
 	User,
@@ -16,4 +17,5 @@ module.exports = {
     Ambulance,
     Enquiry,
     RefreshToken,
+    FeedBack
 };

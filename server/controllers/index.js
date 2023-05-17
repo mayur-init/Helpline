@@ -10,6 +10,7 @@ const ambulanceController = require('./ambulance/ambulanceController');
 const authController = require('./auth/authController')
 const enquiryController = require('./enquiry/enquiryController')
 const userAuthController = require('./auth/userAuthController')
+const feedbackController = require('./feedback/feedbackController');
 
 module.exports = {
     userController,
@@ -24,4 +25,5 @@ module.exports = {
     authController,
     userAuthController,
     enquiryController,
+    feedbackController,
 };
