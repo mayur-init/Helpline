@@ -11,18 +11,24 @@ import QueryTypeDropdown from '../../components/Dropdowns/QueryTypeDropdown';
 function UserPanel() {
 
     const { userName, userId, isUserLoggedIn, setUserLoggedIn } = useContext(globalStateContext);
+
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const [userData, setUserData] = useState(null);
     var [pageNo, setPageNo] = useState(1);
     const [queryType, setQueryType] = useState(0);
     const [query, setQuery] = useState('');
+
+    const [allPostedQueries, setAllPostedQueries] = useState([]);
+
     const options = [
         { label: 'Blood bank query', id: 1 },
         { label: 'oxygen cylinder query', id: 2 },
         { label: 'other...', id: 3 }
     ]
+
     const EnquiryId = useRef();
+
     const enquiryData = {
         EnquiryId,
         ParentRegdId: userId,
@@ -114,9 +120,17 @@ function UserPanel() {
 
     }
     const generateRegdId = async () => {
-        const response = await axios.post('http://localhost:5000/api/generateregdid', { IdType: 'USER' });
+        const response = await axios.post('http://localhost:5000/api/generateregdid', { IdType: 'ENQR' });
         enquiryData.EnquiryId = response.data.generatedId;
     }
+
+    const getAllPostedQueries = async () => {
+        const response = await axios.get(`http://localhost:5000/api/enquiry/${userId}`);
+        setAllPostedQueries(response.data);
+        // console.log(response.data);
+    }
+    getAllPostedQueries();
+
     return (
         <div className="" id='main'>
             <div name='panel-nav' className='h-[6vh] w-auto flex justify-center py-2 px-3 border-b-2 border-gray-200 sticky top-0 z-50'>
@@ -148,7 +162,7 @@ function UserPanel() {
                             (<div className={open ? 'flex flex-col bg-white rounded-xl p-4 w-[60vw] md:w-[20vw] mx-auto my-8 duration-500' : 'hidden md:flex flex-col bg-white rounded-xl p-4 w-[20vw] mx-auto my-8'}>
                                 <p className='text-center mt-2 mb-4 text-xl font-semibold'>Write your queries</p>
                                 <QueryTypeDropdown title='Select query type' options={options} setQueryType={setQueryType} />
-                                <textarea type='text' placeholder='Query' className='border-2 h-[10vh] w-[45vw] md:w-[14vw] border-gray-600 rounded-xl px-3 py-1 my-2' value={query} onChange={(e) => { setQuery(e.target.value) }}></textarea>
+                                <textarea type='text' placeholder='Query' className='border-2 h-[10vh] w-[45vw] md:w-[17.8vw] border-gray-600 rounded-xl px-3 py-1 my-2' value={query} onChange={(e) => { setQuery(e.target.value) }}></textarea>
                                 <p className='flex justify-end'><button className='btn w-[100px] m-2' onClick={handleClick}>Submit</button></p>
                             </div>)
                         }
@@ -164,12 +178,14 @@ function UserPanel() {
                                 userData !== null ?
                                     (
                                         <div>
-                                            <p className='text-xl m-2'><span className='font-semibold'>User Name: </span>{userData.userName}</p>
-                                            <p className='text-xl m-2'><span className='font-semibold'>Regd Id: </span>{userData.regdId}</p>
-                                            <p className='text-xl m-2'><span className='font-semibold'>Contact No: </span>{userData.contactNo}</p>
-                                            <p className='text-xl m-2'><span className='font-semibold'>Location: </span>{userData.location}</p>
-                                            <button className='btn' onClick={() => { handleFillData(userData.RegdId); setOpen(true) }}>Update</button>
-                                            <button className='btn bg-red-600' onClick={() => handleDelete(userData.RegdId)}>Delete</button>
+                                            <p className='md:text-xl m-2'><span className='font-semibold'>User Name: </span>{userData.userName}</p>
+                                            <p className='md:text-xl m-2'><span className='font-semibold'>Regd Id: </span>{userData.regdId}</p>
+                                            <p className='md:text-xl m-2'><span className='font-semibold'>Contact No: </span>{userData.contactNo}</p>
+                                            <p className='md:text-xl m-2'><span className='font-semibold'>Location: </span>{userData.location}</p>
+                                            <div className="my-6">
+                                                <button className='btn' onClick={() => { handleFillData(userData.RegdId); setOpen(true) }}>Update</button>
+                                                <button className='btn' onClick={() => handleDelete(userData.RegdId)}>Delete</button>
+                                            </div>
                                         </div>
                                     ) : null
                             }
@@ -178,6 +194,18 @@ function UserPanel() {
                     (<div className='h-full md:h-[93vh] w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
                         <p className='text-2xl font-semibold text-center m-4'>Your Queries</p>
                         <div className='bg-gray-100 w-full h-[86vh] p-4'>
+                            {
+                                allPostedQueries.map((query) => {
+                                    const { enquiryId, enquiry, _id } = query;
+                                    return (
+                                        <div className='bg-white p-4 m-4 rounded-xl text-md md:text-xl font-semibold' key={_id}>
+                                            <p>EnquiryId: <span className='font-normal'>{enquiryId}</span></p>
+                                            <p>Enquiry <span className='font-normal'>{enquiry}</span></p>
+                                            <p className='flex justify-end my-1'><button className='btn' onClick={() => deleteData(driverContactNo)}>Delete</button></p>
+                                        </div>
+                                    )
+                                })
+                            }
                         </div>
                     </div>
                     )

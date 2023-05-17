@@ -7,43 +7,48 @@ const {
     Enquiry,
 } = require('../../models')
 
-exports.generateRegdId = async (req, res, next) => {
+module.exports.generateRegdId = async (req, res, next) => {
     try {
         const idType = req.body.IdType;
-        var generatedId = `${idType.toUpperCase()}${Math.random().toString().substring(2, 8)}`;
+        const generatedId = `${idType.toUpperCase()}${Math.random().toString().substring(2, 8)}`;
+        // console.log(generatedId);
         var response = [];
 
         if (idType === "USER") {
-            response = await User.find({ "regdId": generatedId });
+            response = await User.find({ "enquiryId": generatedId });
         } else if (idType === "HOSP") {
-            response = await Hospital.find({ "regdId": generatedId });
+            response = await Hospital.find({ "enquiryId": generatedId });
 
         } else if (idType === "AMBU") {
-            response = await AmbulanceService.find({ "regdId": generatedId });
+            response = await AmbulanceService.find({ "enquiryId": generatedId });
 
         } else if (idType === "BLOOD") {
-            response = await BloodBank.find({ "regdId": generatedId });
+            response = await BloodBank.find({ "enquiryId": generatedId });
 
         } else if (idType === "OXYG") {
-            response = await OxygenCylinderProvider.find({ "regdId": generatedId });
+            response = await OxygenCylinderProvider.find({ "enquiryId": generatedId });
 
         } else if (idType === "ENQR") {
-            response = await Enquiry.find({ "regdId": generatedId });
-
+            // console.log(generatedId);
+            response = await Enquiry.find({ "enquiryId": generatedId });
+            // console.log(response);
         } else {
             return res.status(400).json({ msg: 'Invalid IdType' });
         }
 
         if (response.length === 0) {
-            res.status(200).json({ generatedId: generatedId });
-        } else {
-            await generateRegdId();
+            return res.status(200).json({ generatedId: generatedId });
         }
+        // else {
+        //     return  await generateRegdId();
+        // }
     } catch (err) {
         console.log(err);
         res.status(400).json(err);
     }
 }
+
+
 
 exports.verifyServiceProviderLogin = async (req, res, next) => {
 
@@ -101,3 +106,4 @@ exports.verifyServiceProviderLogin = async (req, res, next) => {
         res.status(400).json(err);
     }
 }
+

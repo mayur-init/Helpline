@@ -23,7 +23,7 @@ function EnquiryPage() {
   const EnquiryId = useRef();
 
   const enquiryData = {
-    EnquiryId,
+    EnquiryId: EnquiryId,
     ParentRegdId: userId,
     EnquiryType: queryType,
     Enquiry: query,
@@ -43,7 +43,7 @@ function EnquiryPage() {
     } else {
       try {
         await generateRegdId();
-        // console.log(enquiryData);
+        console.log(enquiryData);
         const response = await axios.post('http://localhost:5000/api/enquiry', enquiryData, {
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -63,7 +63,8 @@ function EnquiryPage() {
   }
 
   const generateRegdId = async () => {
-    const response = await axios.post('http://localhost:5000/api/generateregdid', {IdType: 'USER'});
+    const response = await axios.post('http://localhost:5000/api/generateregdid', {IdType: 'ENQR'});
+    console.log(response);
     enquiryData.EnquiryId = response.data.generatedId;
   }
 
