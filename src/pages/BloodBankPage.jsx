@@ -11,7 +11,7 @@ function BloodBankPage() {
 
     const navigate = useNavigate();
 
-    const { isUserLoggedIn } = useContext(globalStateContext);
+    const { isUserLoggedIn, location } = useContext(globalStateContext);
     useEffect(() => {
         if (!isUserLoggedIn) {
             toast.error('You are not logged in, log in first')
@@ -24,7 +24,7 @@ function BloodBankPage() {
         <motion.div className='bg-zinc-200' id='main'
         initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.15}}>
             <Navbar />
-            <BloodBankHero />
+            <BloodBankHero location={location}/>
             <Footer />
         </motion.div>
     )

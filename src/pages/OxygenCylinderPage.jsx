@@ -11,7 +11,7 @@ function OxygenCylinderPage() {
 
   const navigate = useNavigate();
 
-    const { isUserLoggedIn } = useContext(globalStateContext);
+    const { isUserLoggedIn, location } = useContext(globalStateContext);
     useEffect(() => {
         if (!isUserLoggedIn) {
             toast.error('You are not logged in, log in first')
@@ -22,7 +22,7 @@ function OxygenCylinderPage() {
   return (
     <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.15}} className='bg-zinc-200' id='main'>
             <Navbar/>
-            <OxygenCylinderHero/>
+            <OxygenCylinderHero location={location}/>
             <Footer/>
     </motion.div>
   )

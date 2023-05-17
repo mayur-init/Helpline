@@ -41,6 +41,7 @@ function App() {
         setUserName(UserData.userName);
         setUserId(UserData.regdId);
         setUserLoggedIn(true);
+        setLocation(UserData.location);
         toast.success(`Welcome ${UserData.userName}`);
         // console.log(res);
       } catch (err) {
@@ -48,6 +49,9 @@ function App() {
       }
     }
   }
+
+  // console.log(location);
+
 
   return (
     <div className='overflow-hidden scroll-smooth'>

@@ -44,16 +44,24 @@ exports.addAmbulanceService = async(req, res, next) => {
 };
 //done
 exports.getAmbulanceServices = async(req, res) => {
-    try{
-        const ambulanceServices = await AmbulanceService.find();
-        if(ambulanceServices.length === 0)
-            return res.status(404).json({msg : "No data exists"});
-        res.status(200).json(ambulanceServices);
+    const userlocation = req.params.userlocation;
+    if(userlocation === null)
+        return res.status(400).json({msg: 'User location is null'});
+    else{
+        try{
+            const ambulanceServices = await AmbulanceService.find({address: {$regex: userlocation, $options: 'i'}});
+
+            if(ambulanceServices.length === 0)
+                return res.status(404).json({msg : "No data exists"});
+                
+            res.status(200).json(ambulanceServices);
+        }
+        catch(err){
+            console.log(err);
+            res.status(400).json({msg : "Some issue"});
+        }
     }
-    catch(err){
-        console.log(err);
-        res.status(400).json({msg : "Some issue"});
-    }
+    
 };
 //done
 exports.updateAmbulanceService = async(req, res) => {

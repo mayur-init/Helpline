@@ -58,21 +58,21 @@ router.get('/hospital-oxygencylinder/:regdId', hospitalOxygenCylinderController.
 
 // ambulance service routes
 router.post('/ambulanceservice', ambulanceServiceController.addAmbulanceService);
-router.get('/ambulanceservice', ambulanceServiceController.getAmbulanceServices);
+router.get('/ambulanceservice/:userlocation', ambulanceServiceController.getAmbulanceServices);
 router.put('/ambulanceservice/:regdId', ambulanceServiceController.updateAmbulanceService);
 router.delete('/ambulanceservice/:regdId', ambulanceServiceController.deleteAmbulanceService);
 router.get('/ambulanceservice/:regdId', ambulanceServiceController.getParticularAmbulanceService);
 
 // oxygen cylinder provider routes
 router.post('/oxygencylinder', oxygenCylinderController.addOxygenCylinderProvider);
-router.get('/oxygencylinderproviders', oxygenCylinderController.getOxygenCylinderProviders);
+router.get('/oxygencylinderproviders/:userlocation', oxygenCylinderController.getOxygenCylinderProviders);
 router.put('/oxygencylinders/:regdId', oxygenCylinderController.updateOxygenCylinder);
 router.delete('/oxygencylinders/:regdId', oxygenCylinderController.deleteOxygenCylinderProvider);
 router.get('/oxygencylinderproviders/:regdId', oxygenCylinderController.getParticularProvider);
 
 // blood bank service routes
 router.post('/bloodbank', bloodBankController.addBloodBank);
-router.get('/bloodbanks', bloodBankController.getBloodBanks);
+router.get('/bloodbanks/:userlocation', bloodBankController.getBloodBanks);
 router.put('/bloodbanks/:regdId', bloodBankController.updateBloodBank);
 router.delete('/bloodbanks/:regdId', bloodBankController.deleteBloodBank);
 router.get('/bloodbanks/:regdId', bloodBankController.getParticularBloodBank);
@@ -92,6 +92,6 @@ router.post('/verifyrefreshtoken', userAuthController.verifyRefreshToken);
 router.post('/enquiry/', enquiryController.addEnquiry);
 router.get('/enquiry/:parentRegdId', enquiryController.getEnquiriesByParentId);
 router.put('/enquiry/:enquiryId', enquiryController.updateParticularEnquiry);
-router.delete('/enquiry/:enquiryId', enquiryController.deleteParticularEnquiry);
+router.post('/enquiry/getallrelatedenquiries', enquiryController.deleteParticularEnquiry);
 
 module.exports = router;

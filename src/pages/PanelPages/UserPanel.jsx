@@ -51,6 +51,7 @@ function UserPanel() {
         }
         collectUserData();
     }, [])
+    
     const collectUserData = async () => {
         const res = await axios.get(`http://localhost:5000/api/users/${userId.toUpperCase()}`);
         // console.log(res.data[0]);

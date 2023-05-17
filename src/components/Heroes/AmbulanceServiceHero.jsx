@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios';
 import { SlArrowDown,SlArrowUp } from "react-icons/sl";
-function AmbulanceServiceHero() {
+
+function AmbulanceServiceHero({location}) {
   const [sentence1, setsentence1] = useState(false);
   const [sentence2, setsentence2] = useState(false);
   const [ambulances, setAmbulances] = useState([]);
+
+
   // const [RegisteredAmbulances, setRegisteredAmbulances] = useState([]);
   // const [click,setClick] = useState(true); //15/05
-  console.log(ambulances.regdId);
+
+
   useEffect(() => {
     setTimeout(() => {
       setsentence1(true);
@@ -19,10 +23,13 @@ function AmbulanceServiceHero() {
   }, []);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/ambulanceservice')
+
+    fetch(`http://localhost:5000/api/ambulanceservice/${location}`)
       .then(res => res.json())
       .then(data => setAmbulances(data))
       .catch(error => console.log(error));
+
+
   }, []);
   // const getAllRegisteredAmbulanceData = async (regdId) => {
   //   try {
