@@ -4,9 +4,9 @@ const Schema = mongoose.Schema;
 const enquirySchema = new Schema({
     
     enquiryId: { type: String, required: true, unique: true },
-    parentRegdId: {type: String, required: true},
     enquiryType: {type: String, required: true},
     enquiry: {type: String, required: true},
+    userId : {type : Schema.Types.ObjectId, ref : 'User', required: true},
 
 }, { timestamps: true });
 

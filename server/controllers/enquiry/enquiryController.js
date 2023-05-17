@@ -5,15 +5,15 @@ exports.addEnquiry = async(req, res, next) => {
 
     try{
         const enquiryId = req.body.EnquiryId;
-        const parentRegdId = req.body.ParentRegdId;
         const enquiryType = req.body.EnquiryType;
         const enquiry = req.body.Enquiry;
+        const userId = req.body.UserId;
 
         const enquirydb = new Enquiry({
             enquiryId,
-            parentRegdId,
             enquiryType,
-            enquiry
+            enquiry,
+            userId
         });
         await enquirydb.save();
         res.status(201).json({msg: "success"});
@@ -73,12 +73,24 @@ exports.getAllRelatedEnquiries = async(req, res) => {
     else{
         try{
             const location = req.params.location;
+            if(userlocation === location){
+                if(enquiryType === '1' || enquiryType === '2' || enquiryType === '3'){
+                    const enquiries = await Enquiry.find({enquiryType : enquiryType}).populate('userId');
+                    if(enquiries.length !== 0){
+                        return res.status(200).json(enquiries);
+                    }else{
+                        return res.status(404).json({msg : "no enquiries"});
+                    }
+                }
+                
+            }
             // Populate all the enquiries by userId and after that sort by enquiry type
             // enqury type can be 1 for blood bank query, 2 for oxygen cylinder enquiries, 3 for other, and 4 for all type
-            
+            /*
             if(relatedUsers === null)
                 return res.status(404).json({msg : "No enquiry exists for the location"});
             res.status(200).json(ambulanceService);
+            */
         }
         catch(err){
             console.log(err);
