@@ -20,7 +20,7 @@ export default function LoginFormDropdown({title, options, setFromNo}) {
                 block: isActive,
                 hidden: !isActive
             })}>
-            {options.map((option) => <button key={option.id} ><div className={classNames('text-gray-600 border-b-2 border-gray-100 text-start w-[35vw] md:w-[15vw] py-2 hover:bg-violet-500 hover:text-white rounded-md')}  onClick={()=> {setFromNo(option.id); setActive(false)}} >
+            {options.map((option) => <button key={option.id} ><div className={classNames('text-gray-600 px-2 border-b-2 border-gray-100 text-start w-[35vw] md:w-[15vw] py-2 hover:bg-violet-500 hover:text-white rounded-md')}  onClick={()=> {setFromNo(option.id); setActive(false)}} >
               {option.label}
             </div></button>)}
         </div>

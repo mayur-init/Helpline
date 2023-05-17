@@ -202,7 +202,7 @@ function UserPanel() {
                                         <div className='bg-white p-4 m-4 rounded-xl text-md md:text-xl font-semibold' key={_id}>
                                             <p>EnquiryId: <span className='font-normal'>{enquiryId}</span></p>
                                             <p>Enquiry <span className='font-normal'>{enquiry}</span></p>
-                                            <p className='flex justify-end my-1'><button className='btn' onClick={() => deleteData(driverContactNo)}>Delete</button></p>
+                                            <p className='flex justify-end my-1'><button className='btn'>Delete</button></p>
                                         </div>
                                     )
                                 })
