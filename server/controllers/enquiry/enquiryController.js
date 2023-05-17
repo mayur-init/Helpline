@@ -63,20 +63,52 @@ exports.deleteParticularEnquiry = async (req, res) => {
     }
 };
 
+exports.getAllLocationEnquiries = async (req, res) => {
+    const location = req.params.location;
+    if (location === null)
+        return res.status(400).json({ msg: 'Location is null' });
+    else {
+        try {
+            const enquiries = await Enquiry.find().populate(
+                {
+                    path: 'userId',
+                    match: { location: { $regex: location, $options: 'i' } },
+                }
+            );
+            // console.log(enquiries);
+
+            if (enquiries.length > 0 && enquiries[0].userId !== null) {
+                return res.status(200).json(enquiries);
+            } else {
+                return res.status(404).json({ msg: "no enquiries" });
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
+
 exports.getAllRelatedEnquiries = async (req, res) => {
     const location = req.body.location;
     const enquiryType = req.body.enquiryType;
+
+    // console.log(req.body);
 
     if (location === null || enquiryType === null)
         return res.status(400).json({ msg: 'User location or enquiry type is null' });
 
     else {
         try {
-            if (enquiryType === '1' || enquiryType === '2' || enquiryType === '3') {
-                const enquiries = await Enquiry.find({ enquiryType: enquiryType }).populate('userId');
-                console.log(enquiries);
-                
-                if (enquiries.length > 0) {
+            if (enquiryType === 1 || enquiryType === 2 || enquiryType === 3) {
+                const enquiries = await Enquiry.find({ enquiryType: enquiryType }).populate(
+                    {
+                        path: 'userId',
+                        match: { location: { $regex: location, $options: 'i' } },
+                    }
+                );
+                // console.log(enquiries);
+
+                if (enquiries.length > 0 && enquiries[0].userId !== null) {
                     return res.status(200).json(enquiries);
                 } else {
                     return res.status(404).json({ msg: "no enquiries" });

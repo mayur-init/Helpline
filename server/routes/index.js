@@ -93,6 +93,7 @@ router.post('/enquiry/', enquiryController.addEnquiry);
 router.get('/enquiry/:parentRegdId', enquiryController.getEnquiriesByParentId);
 router.put('/enquiry/:enquiryId', enquiryController.updateParticularEnquiry);
 router.post('/enquiry/:enquiryId', enquiryController.deleteParticularEnquiry);
-router.post('/enquiry/getallrelatedenquiry', enquiryController.getAllRelatedEnquiries);
+router.post('/getallrelatedenquiry', enquiryController.getAllRelatedEnquiries);
+router.get('/getalllocationenquiries/:location', enquiryController.getAllLocationEnquiries);
 
 module.exports = router;
