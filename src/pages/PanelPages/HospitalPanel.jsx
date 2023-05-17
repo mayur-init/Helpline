@@ -27,6 +27,7 @@ function HospitalPanel() {
     const [DriverName, setDriverName] = useState('');
     const [DriverContactNo, setDriverContactNo] = useState('');
     const [ambulanceServiceId, setAmbulanceServiceId] = useState(null);
+    const [registeredAmbulances, setRegisteredAmbulances] = useState([]);
     // var pageNo = useRef(1);
 
     //
@@ -232,16 +233,21 @@ function HospitalPanel() {
 
     const getAllRegistedServicesData = async () => {
         try {
-            if (providerData.regdId !== null) {
+            if (providerData !== null) {
                 const response = await axios.get(`http://localhost:5000/api//hospital/getallservices/${providerData.regdId}`);
                 setRegisteredServiceData(response.data);
                 // console.log(response.data);
                 // console.log(RegisteredServicesData);
+                if (RegisteredServicesData !== null)
+                    setAmbulanceServiceId(response.data.ambulanceService.regdId);
+
+                // console.log(response.data.ambulanceService.regdId);
             }
         } catch (err) {
             console.log(err);
         }
     }
+
     getAllRegistedServicesData();
 
     //Delete Hospital entities details
@@ -303,6 +309,13 @@ function HospitalPanel() {
             console.log(err);
         }
     }
+
+    const getAllRegisteredAmbulances = async () => {
+        const res = await axios.get(`http://localhost:5000/api/ambulances/${ambulanceServiceId}`);
+        // console.log(res.data);
+        setRegisteredAmbulances(res.data);
+    }
+
     return (
         <div className="" id='main'>
             <div name='panel-nav' className='h-[6vh] w-auto flex h justify-center py-2 px-3 border-b-2 border-gray-200 sticky top-0 z-50'>
@@ -416,8 +429,10 @@ function HospitalPanel() {
                                                 <p className='text-xl m-2'><span className='font-semibold'>Email: </span>{providerData.email}</p>
                                                 <p className='text-xl m-2'><span className='font-semibold'>Address: </span>{providerData.address}</p>
                                                 <p className='text-xl m-2'><span className='font-semibold'>Password: </span>{providerData.password}</p>
-                                                <button className='btn' onClick={() => { handleFillData(providerData.regdId); setOpen(true) }}>Update</button>
-                                                <button className='btn bg-red-600' onClick={() => handleDelete(providerData.regdId)}>Delete</button>
+                                                <div className="my-6">
+                                                    <button className='btn' onClick={() => { handleFillData(providerData.regdId); setOpen(true) }}>Update</button>
+                                                    <button className='btn' onClick={() => handleDelete(providerData.regdId)}>Delete</button>
+                                                </div>
                                             </div>
                                         ) : null
                                 }
@@ -432,8 +447,8 @@ function HospitalPanel() {
                                         RegisteredServicesData.ambulanceService.regdId !== null ?
                                             (
                                                 <div className='bg-white p-4 m-4 rounded-xl text-xl font-semibold'>
-                                                    <p>RegdId: {RegisteredServicesData.ambulanceService.regdId}</p>
-                                                    <p>Contact No: {RegisteredServicesData.ambulanceService.contactNo}</p>
+                                                    <p>RegdId: <span className='font-normal'>{RegisteredServicesData.ambulanceService.regdId}</span></p>
+                                                    <p>Contact No: <span className='font-normal'>{RegisteredServicesData.ambulanceService.contactNo}</span></p>
                                                     <p className='flex justify-end'><button className='btn float-right' onClick={() => deleteData(RegisteredServicesData.ambulanceService.regdId)}>Delete</button></p>
                                                 </div>
                                             ) : null
@@ -442,8 +457,8 @@ function HospitalPanel() {
                                         RegisteredServicesData.bloodBank.regdId !== null ?
                                             (
                                                 <div className='bg-white p-4 m-4 rounded-xl text-xl font-semibold'>
-                                                    <p> RegdId: {RegisteredServicesData.bloodBank.regdId}</p>
-                                                    <p>Contact No: {RegisteredServicesData.bloodBank.contactNo}</p>
+                                                    <p> RegdId: <span className='font-normal'>{RegisteredServicesData.bloodBank.regdId}</span></p>
+                                                    <p>Contact No: <span className='font-normal'>{RegisteredServicesData.bloodBank.contactNo}</span></p>
                                                     <p className='flex justify-end'><button className='btn' onClick={() => deleteData(RegisteredServicesData.bloodBank.regdId)}>Delete</button></p>
                                                 </div>
                                             ) : null
@@ -452,8 +467,8 @@ function HospitalPanel() {
                                         RegisteredServicesData.oxygenService.regdId !== null ?
                                             (
                                                 <div className='bg-white p-4 m-4 rounded-xl text-xl font-semibold'>
-                                                    <p>RegdId: {RegisteredServicesData.oxygenService.regdId}</p>
-                                                    <p>Contact No: {RegisteredServicesData.oxygenService.contactNo}</p>
+                                                    <p>RegdId: <span className='font-normal'>{RegisteredServicesData.oxygenService.regdId}</span></p>
+                                                    <p>Contact No: <span className='font-normal'>{RegisteredServicesData.oxygenService.contactNo}</span></p>
                                                     <p className='flex justify-end'><button className='btn float-right p-2' onClick={() => deleteData(RegisteredServicesData.oxygenService.regdId)}>Delete</button></p>
                                                 </div>
                                             ) : null
@@ -464,6 +479,18 @@ function HospitalPanel() {
                                 <p className='text-2xl font-semibold text-center m-4'>Registered Ambulances</p>
                                 <div className='bg-gray-100 w-full h-[86vh]'>
                                     {/****************List of registered ambulances*******************/}
+                                    {
+                                        registeredAmbulances.map((ambulance) => {
+                                            const { driverName, driverContactNo, _id } = ambulance;
+                                            return (
+                                                <div className='bg-white p-4 m-4 rounded-xl text-md md:text-xl font-semibold' key={_id}>
+                                                    <p>Drive name: <span className='font-normal'>{driverName}</span></p>
+                                                    <p>Driver Contact: <span className='font-normal'>{driverContactNo}</span></p>
+                                                    <p className='flex justify-end my-1'><button className='btn'>Delete</button></p>
+                                                </div>
+                                            )
+                                        })
+                                    }
                                 </div>
                             </div>)
                 }
