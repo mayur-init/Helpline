@@ -10,8 +10,10 @@ exports.addUser = async(req, res) => {
     const regdId = req.body.RegdId;
     const location = req.body.Location;
 
-    if(!userName || !contactNo || !location)
+    if(!userName || !contactNo || !location){
+        // console.log(req.body);
         return res.status(422).json({error : "Some fields are empty"});
+    }
 
     try{
         

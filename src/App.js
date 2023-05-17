@@ -19,6 +19,9 @@ import axios from 'axios';
 
 function App() {
 
+  // localStorage.setItem('helpline_access_token', '');
+  // localStorage.setItem('helpline_refresh_token', '');
+  
   const [userName, setUserName] = useState(undefined);
   const [userId, setUserId] = useState(undefined);
   const [location, setLocation] = useState(undefined);

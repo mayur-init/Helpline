@@ -15,18 +15,18 @@ module.exports.generateRegdId = async (req, res, next) => {
         var response = [];
 
         if (idType === "USER") {
-            response = await User.find({ "enquiryId": generatedId });
+            response = await User.find({ "regdId": generatedId });
         } else if (idType === "HOSP") {
-            response = await Hospital.find({ "enquiryId": generatedId });
+            response = await Hospital.find({ "regdId": generatedId });
 
         } else if (idType === "AMBU") {
-            response = await AmbulanceService.find({ "enquiryId": generatedId });
+            response = await AmbulanceService.find({ "regdId": generatedId });
 
         } else if (idType === "BLOOD") {
-            response = await BloodBank.find({ "enquiryId": generatedId });
+            response = await BloodBank.find({ "regdId": generatedId });
 
         } else if (idType === "OXYG") {
-            response = await OxygenCylinderProvider.find({ "enquiryId": generatedId });
+            response = await OxygenCylinderProvider.find({ "regdId": generatedId });
 
         } else if (idType === "ENQR") {
             // console.log(generatedId);

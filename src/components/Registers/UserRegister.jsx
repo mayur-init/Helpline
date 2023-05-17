@@ -14,83 +14,83 @@ function UserRegister({ location, setLocation }) {
   // var RegdId = useRef();
 
   const UserData = {
-    UserName: userName,
+    UserName: name,
     ContactNo: contactNo,
     RegdId: userId,
     Location
   }
 
-  const util = async (e) => {
+  const options = {
+    method: 'GET',
+    url: 'https://geocodeapi.p.rapidapi.com/GetNearestCities',
+    params: {
+      latitude: location.lattitude,
+      longitude: location.longitude,
+      range: '0'
+    },
+    headers: {
+      'X-RapidAPI-Key': 'f68ef52b0emsh22a1008ad86b649p11f343jsn9561ac66dfa1',
+      'X-RapidAPI-Host': 'geocodeapi.p.rapidapi.com'
+    }
+  };
 
-    const user_access_token = localStorage.getItem('helpline_refresh_token');
-    if (user_access_token !== null) {
+  const verifyUserRegister = async () => {
+    if (name === '' || contactNo === '')
+      toast.error('Username or Contact is empty');
 
-      toast.error('You are already registered, you can login now');
-      navigate('/login', { replace: true });
+    else {
+      const user_refresh_token = localStorage.getItem('helpline_refresh_token');
 
-    } else {
-      e.preventDefault();
-
-      const options = {
-        method: 'GET',
-        url: 'https://geocodeapi.p.rapidapi.com/GetNearestCities',
-        params: {
-          latitude: location.lattitude,
-          longitude: location.longitude,
-          range: '0'
-        },
-        headers: {
-          'X-RapidAPI-Key': 'f68ef52b0emsh22a1008ad86b649p11f343jsn9561ac66dfa1',
-          'X-RapidAPI-Host': 'geocodeapi.p.rapidapi.com'
-        }
-      };
-
-      try {
-        await generateRegdId();
-        const response = await axios.request(options);
-        // console.log(response);
-
-        UserData.Location = response.data[0].City;
-
-        const registerResponse = await axios.post('http://localhost:5000/api/user', UserData, {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-          }
-        });
-
-        // console.log(UserData);
-        // console.log("sent");
-        // console.log(registerResponse.data);
-
-        //storing access and refresh tokens in localstorage
-        localStorage.setItem('helpline_access_token', registerResponse.data.access_token);
-        localStorage.setItem('helpline_refresh_token', registerResponse.data.refresh_token);
-
-      } catch (error) {
-        console.log(error);
-        // console.log(UserData.Location);
+      if (user_refresh_token !== null) {
+        toast.error('You are already registered, you can login now');
+        navigate('/login', { replace: true });
       }
+      else {
+        try {
+          //getting user location
+          const response = await axios.request(options);
+          UserData.Location = response.data[0].City;
+          // console.log(response);
 
-      if (userName === '' || contactNo === '') {
-        toast.error('Username or Contact is empty')
-      } else {
-        setUserName('');
-        setContactNo('');
-        setLocation(null);
+          //generating useId
+          await generateRegdId();
+          // console.log(userId);
 
-        setUserName(name);
-        setUserLoggedIn(true);
-        toast.success(`Welcome ${userName}`);
-        navigate('/#hero', { replace: true });
+          //adding user to database by sending data to the server
+          const registerResponse = await axios.post('http://localhost:5000/api/user', UserData, {
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+            }
+          });
+
+          //storing access and refresh tokens in localstorage
+          localStorage.setItem('helpline_access_token', registerResponse.data.access_token);
+          localStorage.setItem('helpline_refresh_token', registerResponse.data.refresh_token)
+
+          //make user login in ui
+          setUserName('');
+          setContactNo('');
+          setLocation(null);
+
+          setUserName(name);
+          setUserLoggedIn(true);
+          toast.success(`Welcome ${name}`);
+          navigate('/#hero', { replace: true });
+          
+        } catch (err) {
+          console.log(err);
+        }
       }
     }
   }
 
   const generateRegdId = async () => {
+    // console.log("generating id");
     const response = await axios.post('http://localhost:5000/api/generateregdid', { IdType: 'USER' });
     // console.log(response);
     setUserId(response.data.generatedId);
+    UserData.RegdId = response.data.generatedId;
     // console.log(userId);
     UserData.RegdId = response.data.generatedId;
   }
@@ -111,7 +111,7 @@ function UserRegister({ location, setLocation }) {
         <input type='text' onChange={handleChange} value={contactNo} placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2 w-[60vw] md:w-[20vw]'></input>
         <p className='border-2 text-start border-gray-600 rounded-full px-4 py-1 my-2 w-[60vw] md:w-[20vw]'>{location.lattitude}</p>
         <p className='border-2 text-start border-gray-600 rounded-full px-4 py-1 my-2 w-[60vw] md:w-[20vw]'>{location.longitude}</p>
-        <p className='flex md:justify-end ml-[14.5vh] md:ml-0 md:w-[20.8vw]'><button onClick={util} className='btn w-[100px] m-2'>Submit</button></p>
+        <p className='flex md:justify-end ml-[14.5vh] md:ml-0 md:w-[20.8vw]'><button onClick={() => { verifyUserRegister() }} className='btn w-[100px] m-2'>Submit</button></p>
       </div>
     </div>
   )

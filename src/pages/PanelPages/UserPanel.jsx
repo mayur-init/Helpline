@@ -74,6 +74,9 @@ function UserPanel() {
         try {
             // console.log(regdId);
             const response = await axios.delete(`http://localhost:5000/api//users/${userId}`);
+
+            localStorage.clear();
+            
             handleLogout();
         } catch (err) {
             console.log(err);
