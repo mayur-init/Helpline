@@ -10,7 +10,7 @@ import QueryTypeDropdown from '../../components/Dropdowns/QueryTypeDropdown';
 
 function UserPanel() {
 
-    const { userName, userId, isUserLoggedIn, setUserLoggedIn } = useContext(globalStateContext);
+    const { userName, userId, userMongoId, isUserLoggedIn, setUserLoggedIn } = useContext(globalStateContext);
 
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
@@ -31,12 +31,10 @@ function UserPanel() {
 
     const enquiryData = {
         EnquiryId,
-        ParentRegdId: userId,
+        UserId: userMongoId,
         EnquiryType: queryType,
         Enquiry: query,
     }
-
-
 
     const [updateData, setUpdateData] = useState({
         userName: "",
@@ -64,11 +62,13 @@ function UserPanel() {
         toast.success('Loggged out successfully');
         navigate('/login', { replace: true });
     }
+
     const handleFillData = async (regdId) => {
         const res = await axios.get(`http://localhost:5000/api/users/${userId}`);
         // console.log(res.data[0]);
         setUpdateData(res.data[0]);
     }
+
     //Delete User Details
     const handleDelete = async (regdId) => {
         try {
@@ -80,7 +80,8 @@ function UserPanel() {
         }
 
     }
-    const handleUpdate = async (regdId) => {
+
+    const handleUpdate = async () => {
         try {
             axios.put(`http://localhost:5000/api//users/${userId}`, updateData).then((response) => {
                 console.log(response);
@@ -96,6 +97,7 @@ function UserPanel() {
             console.log(err);
         }
     }
+
     const handleClick = async () => {
         if (queryType === 0 || query === '') {
             toast.error('Write some query first')
@@ -120,16 +122,18 @@ function UserPanel() {
         }
 
     }
+
     const generateRegdId = async () => {
         const response = await axios.post('http://localhost:5000/api/generateregdid', { IdType: 'ENQR' });
         enquiryData.EnquiryId = response.data.generatedId;
     }
 
     const getAllPostedQueries = async () => {
-        const response = await axios.get(`http://localhost:5000/api/enquiry/${userId}`);
+        const response = await axios.get(`http://localhost:5000/api/enquiry/${userMongoId}`);
         setAllPostedQueries(response.data);
         // console.log(response.data);
     }
+
     getAllPostedQueries();
 
     return (

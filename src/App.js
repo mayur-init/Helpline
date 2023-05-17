@@ -24,6 +24,7 @@ function App() {
   const [location, setLocation] = useState(undefined);
   const [isUserLoggedIn, setUserLoggedIn] = useState(false);
   const [isProviderLoggedIn, setProviderLoggedIn] = useState(false);
+  const [userMongoId, setUserMongoId] = useState(null);
 
   useEffect(() => {
     verifyUserLogin();
@@ -42,6 +43,7 @@ function App() {
         setUserId(UserData.regdId);
         setUserLoggedIn(true);
         setLocation(UserData.location);
+        setUserMongoId(UserData._id);
         toast.success(`Welcome ${UserData.userName}`);
         // console.log(res);
       } catch (err) {
@@ -55,7 +57,7 @@ function App() {
 
   return (
     <div className='overflow-hidden scroll-smooth'>
-      <globalStateContext.Provider value={{ userName, setUserName, userId, setUserId, location, setLocation, isUserLoggedIn, setUserLoggedIn, isProviderLoggedIn, setProviderLoggedIn }}>
+      <globalStateContext.Provider value={{ userName, setUserName, userId, userMongoId, setUserMongoId, setUserId, location, setLocation, isUserLoggedIn, setUserLoggedIn, isProviderLoggedIn, setProviderLoggedIn }}>
         {/************react-notification**************/}
         <Toaster
           position='top-right'
