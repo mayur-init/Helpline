@@ -4,7 +4,6 @@ import BloodBankPage from './pages/BloodBankPage';
 import LandingPage from './pages/LandingPage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
-import EnquiryPage from './pages/EnquiryPage'
 import AmbulanceServicePage from './pages/AmbulanceServicePage'
 import OxygenCylinderPage from './pages/OxygenCylinderPage'
 import UserPanel from './pages/PanelPages/UserPanel'
@@ -24,43 +23,43 @@ function App() {
   
   const [userName, setUserName] = useState(undefined);
   const [userId, setUserId] = useState(undefined);
-  const [location, setLocation] = useState(undefined);
+  const [userlocation, setUserLocation] = useState(undefined);
   const [isUserLoggedIn, setUserLoggedIn] = useState(false);
   const [isProviderLoggedIn, setProviderLoggedIn] = useState(false);
   const [userMongoId, setUserMongoId] = useState(null);
 
   useEffect(() => {
-    verifyUserLogin();
+    // verifyUserLogin();
   }, []);
 
-  const verifyUserLogin = async () => {
-    const user_access_token = localStorage.getItem('helpline_access_token');
-    if (user_access_token !== null) {
-      try {
-        const res = await axios.post('http://localhost:5000/api/verifyuser', {
-          AccessToken: user_access_token,
-        });
+  // const verifyUserLogin = async () => {
+  //   const user_access_token = localStorage.getItem('helpline_access_token');
+  //   if (user_access_token !== null) {
+  //     try {
+  //       const res = await axios.post('http://localhost:5000/api/verifyuser', {
+  //         AccessToken: user_access_token,
+  //       });
 
-        const UserData = res.data;
-        setUserName(UserData.userName);
-        setUserId(UserData.regdId);
-        setUserLoggedIn(true);
-        setLocation(UserData.location);
-        setUserMongoId(UserData._id);
-        toast.success(`Welcome ${UserData.userName}`);
-        // console.log(res);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-  }
+  //       const UserData = res.data;
+  //       setUserName(UserData.userName);
+  //       setUserId(UserData.regdId);
+  //       setUserLoggedIn(true);
+  //       setLocation(UserData.location);
+  //       setUserMongoId(UserData._id);
+  //       toast.success(`Welcome ${UserData.userName}`);
+  //       // console.log(res);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   }
+  // }
 
   // console.log(location);
 
 
   return (
     <div className='overflow-hidden scroll-smooth'>
-      <globalStateContext.Provider value={{ userName, setUserName, userId, userMongoId, setUserMongoId, setUserId, location, setLocation, isUserLoggedIn, setUserLoggedIn, isProviderLoggedIn, setProviderLoggedIn }}>
+      <globalStateContext.Provider value={{ userName, setUserName, userId, userMongoId, setUserMongoId, setUserId, userlocation, setUserLocation, isUserLoggedIn, setUserLoggedIn, isProviderLoggedIn, setProviderLoggedIn }}>
         {/************react-notification**************/}
         <Toaster
           position='top-right'
@@ -83,7 +82,6 @@ function App() {
               <Route path='/register' element={<RegisterPage />} />
               <Route path='/blood-bank-service' element={<BloodBankPage />} />
               <Route path='/login' element={<LoginPage />} />
-              <Route path='/enquiry' element={<EnquiryPage />} />
               <Route path='/ambulance-service' element={<AmbulanceServicePage />} />
               <Route path='/oxygen-cylinder-service' element={<OxygenCylinderPage />} />
               <Route path='/user-panel' element={<UserPanel />} />

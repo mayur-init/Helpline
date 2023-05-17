@@ -11,7 +11,7 @@ function AmbulanceServicePage() {
 
   const navigate = useNavigate();
 
-  const {isUserLoggedIn, location} = useContext(globalStateContext);
+  const {isUserLoggedIn, userlocation} = useContext(globalStateContext);
   useEffect(() =>{
     if(!isUserLoggedIn){
       toast.error('You are not logged in, log in first')
@@ -22,7 +22,7 @@ function AmbulanceServicePage() {
   return (
     <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.15}}  className='bg-zinc-200' id='main'>
             <Navbar/>
-            <AmbulanceServiceHero location = {location}/>
+            <AmbulanceServiceHero location = {userlocation}/>
             <Footer/>
     </motion.div>
   )

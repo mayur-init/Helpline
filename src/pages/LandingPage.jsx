@@ -14,8 +14,34 @@ import {  HiXMark } from 'react-icons/hi2'
 function LandingPage() {
 
   const [location, setLocation] = useState();
-
+  const { setUserName, setUserLoggedIn, setUserMongoId, setUserId, setUserLocation, isUserLoggedIn } = useContext(globalStateContext);
   
+  useEffect(() => {
+    if(isUserLoggedIn === true)
+      verifyUserLogin();
+  }, []);
+
+  const verifyUserLogin = async () => {
+    const user_access_token = localStorage.getItem('helpline_access_token');
+    if (user_access_token !== null) {
+      try {
+        const res = await axios.post('http://localhost:5000/api/verifyuser', {
+          AccessToken: user_access_token,
+        });
+
+        const UserData = res.data;
+        setUserName(UserData.userName);
+        setUserId(UserData.regdId);
+        setUserLoggedIn(true);
+        setUserLocation(UserData.location);
+        setUserMongoId(UserData._id);
+        toast.success(`Welcome ${UserData.userName}`);
+        // console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
 
   function getLocation() {
 

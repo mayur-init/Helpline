@@ -4,13 +4,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { globalStateContext } from '../../contexts/globalStateContext'
 import { HiArrowSmallLeft, HiArrowSmallRight, HiBars3, HiXMark } from 'react-icons/hi2'
-import EnquiryPage from '../EnquiryPage';
 import QueryTypeDropdown from '../../components/Dropdowns/QueryTypeDropdown';
 
 
 function UserPanel() {
 
-    const { userName, userId, userMongoId, isUserLoggedIn, setUserLoggedIn } = useContext(globalStateContext);
+    const { userName, userId, userMongoId, isUserLoggedIn, setUserLoggedIn, setUserMongoId } = useContext(globalStateContext);
 
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
@@ -60,7 +59,7 @@ function UserPanel() {
     const handleLogout = () => {
         setUserLoggedIn(false);
         toast.success('Loggged out successfully');
-        navigate('/login', { replace: true });
+        navigate('/', { replace: true });
     }
 
     const handleFillData = async (regdId) => {
@@ -76,7 +75,8 @@ function UserPanel() {
             const response = await axios.delete(`http://localhost:5000/api//users/${userId}`);
 
             localStorage.clear();
-            
+            setUserMongoId(null);
+
             handleLogout();
         } catch (err) {
             console.log(err);
@@ -136,8 +136,10 @@ function UserPanel() {
         setAllPostedQueries(response.data);
         // console.log(response.data);
     }
-
-    getAllPostedQueries();
+    
+    if(userMongoId !== null){
+        getAllPostedQueries();
+    }
 
     return (
         <div className="" id='main'>

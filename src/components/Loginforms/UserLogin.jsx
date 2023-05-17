@@ -33,7 +33,7 @@ function UserLogin({ }) {
         setUserName(UserData.userName);
         setUserId(UserData.regdId);
         setUserLoggedIn(true);
-        toast.success(`Welcome ${UserData.userName}`);
+        // toast.success(`Welcome ${UserData.userName}`);
         navigate('/#hero', { replace: true });
         // console.log(res);
       } catch (err) {

@@ -40,7 +40,7 @@ function BloodBankServiceProviderPanel() {
     const handleLogout = () =>{
         setProviderLoggedIn(false);
         toast.success('Loggged out successfully');
-        navigate('/login', {replace: true});
+        navigate('/', {replace: true});
     }
     const handleFillData = async(regdId) =>{
         const res = await axios.get(`http://localhost:5000/api/bloodbanks/${regdId}`);

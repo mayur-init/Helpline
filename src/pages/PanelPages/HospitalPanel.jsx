@@ -55,7 +55,7 @@ function HospitalPanel() {
     const handleLogout = () => {
         setProviderLoggedIn(false);
         toast.success('Loggged out successfully');
-        navigate('/login', { replace: true });
+        navigate('/', { replace: true });
     }
 
     const handleAmbulanceSubmit = async (e) => {
