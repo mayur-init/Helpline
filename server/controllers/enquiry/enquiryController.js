@@ -64,7 +64,7 @@ exports.deleteParticularEnquiry = async(req, res) => {
 };
 
 exports.getAllRelatedEnquiries = async(req, res) => {
-    const userlocation = req.body.userlocation;
+    const location = req.body.location;
     const enquiryType = req.body.enquiryType;
 
     if(userlocation === null || enquiryType === null)
@@ -72,8 +72,8 @@ exports.getAllRelatedEnquiries = async(req, res) => {
     
     else{
         try{
-            const location = req.params.location;
-            if(userlocation === location){
+            
+            if(location === location){
                 if(enquiryType === '1' || enquiryType === '2' || enquiryType === '3'){
                     const enquiries = await Enquiry.find({enquiryType : enquiryType}).populate('userId');
                     if(enquiries.length !== 0){
