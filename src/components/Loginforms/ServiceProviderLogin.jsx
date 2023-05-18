@@ -51,17 +51,17 @@ function ServiceProviderLogin() {
       } else if (formNo === 2) {
         Data.ProviderType = 'AMBU';
         redirectUrl = `/ambulance-service-provider-panel/${RegdId.toLowerCase()}`;
-        providerData = await axios.get(`http://localhost:5000/api/ambulanceservice/${RegdId}`);
+        providerData = await axios.get(`http://localhost:5000/api/ambulanceservice/getparticularprovider/${RegdId}`);
         
       } else if (formNo === 3) {
         Data.ProviderType = 'BLOOD';
         redirectUrl = `/blood-bank-service-provider-panel/${RegdId.toLowerCase()}`;
-        providerData = await axios.get(`http://localhost:5000/api/bloodbanks/${RegdId}`);
+        providerData = await axios.get(`http://localhost:5000/api/bloodbanks/getparticularprovider/${RegdId}`);
 
       } else if (formNo === 4) {
         Data.ProviderType = 'OXYG';
         redirectUrl = `/oxygen-cylinder-provider-panel/${RegdId.toLowerCase()}`;
-        providerData = await axios.get(`http://localhost:5000/api/oxygencylinderproviders/${RegdId}`);
+        providerData = await axios.get(`http://localhost:5000/api/oxygencylinderproviders/getparticularprovider/${RegdId}`);
 
       }
       

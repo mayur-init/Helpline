@@ -34,7 +34,7 @@ function AmbulanceServiceProviderPanel() {
         collectProviderData();
     }, [])
     const collectProviderData = async () => {
-        const res = await axios.get(`http://localhost:5000/api/ambulanceservice/${RegdId.toUpperCase()}`);
+        const res = await axios.get(`http://localhost:5000/api/ambulanceservice/getparticularprovider/${RegdId.toUpperCase()}`);
         // console.log(res.data[0]);
         setProviderData(res.data[0]);
     }

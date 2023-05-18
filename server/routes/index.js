@@ -62,21 +62,21 @@ router.post('/ambulanceservice', ambulanceServiceController.addAmbulanceService)
 router.get('/ambulanceservice/:userlocation', ambulanceServiceController.getAmbulanceServices);
 router.put('/ambulanceservice/:regdId', ambulanceServiceController.updateAmbulanceService);
 router.delete('/ambulanceservice/:regdId', ambulanceServiceController.deleteAmbulanceService);
-router.get('/ambulanceservice/:regdId', ambulanceServiceController.getParticularAmbulanceService);
+router.get('/ambulanceservice/getparticularprovider/:regdId', ambulanceServiceController.getParticularAmbulanceService);
 
 // oxygen cylinder provider routes
 router.post('/oxygencylinder', oxygenCylinderController.addOxygenCylinderProvider);
 router.get('/oxygencylinderproviders/:userlocation', oxygenCylinderController.getOxygenCylinderProviders);
 router.put('/oxygencylinders/:regdId', oxygenCylinderController.updateOxygenCylinder);
 router.delete('/oxygencylinders/:regdId', oxygenCylinderController.deleteOxygenCylinderProvider);
-router.get('/oxygencylinderproviders/:regdId', oxygenCylinderController.getParticularProvider);
+router.get('/oxygencylinderproviders/getparticularprovider/:regdId', oxygenCylinderController.getParticularProvider);
 
 // blood bank service routes
 router.post('/bloodbank', bloodBankController.addBloodBank);
 router.get('/bloodbanks/:userlocation', bloodBankController.getBloodBanks);
 router.put('/bloodbanks/:regdId', bloodBankController.updateBloodBank);
 router.delete('/bloodbanks/:regdId', bloodBankController.deleteBloodBank);
-router.get('/bloodbanks/:regdId', bloodBankController.getParticularBloodBank);
+router.get('/bloodbanks/getparticularprovider/:regdId', bloodBankController.getParticularBloodBank);
 
 // ambulance routes
 router.post('/ambulance', ambulanceController.addAmbulance);

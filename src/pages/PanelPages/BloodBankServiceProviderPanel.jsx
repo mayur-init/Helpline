@@ -32,7 +32,7 @@ function BloodBankServiceProviderPanel() {
     },[])
 
     const collectProviderData = async () => {
-        const res = await axios.get(`http://localhost:5000/api/bloodbanks/${RegdId.toUpperCase()}`);
+        const res = await axios.get(`http://localhost:5000/api/bloodbanks/getparticularprovider/${RegdId.toUpperCase()}`);
         // console.log(res.data[0]);
         setProviderData(res.data[0]);
     }
