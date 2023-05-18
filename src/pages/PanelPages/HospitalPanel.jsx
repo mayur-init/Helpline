@@ -46,7 +46,7 @@ function HospitalPanel() {
     }, [])
 
     const collectProviderData = async () => {
-        const res = await axios.get(`http://localhost:5000/api/hospital/${RegdId.toUpperCase()}`);
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/hospital/${RegdId.toUpperCase()}`);
         // console.log(res.data[0]);
         setProviderData(res.data[0]);
         // console.log(providerData);
@@ -75,7 +75,7 @@ function HospitalPanel() {
             }
             // console.log(ambulanceData);
             try {
-                const response = await axios.post('http://localhost:5000/api/ambulance', ambulanceData);
+                const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/ambulance`, ambulanceData);
                 // console.log(response);
                 if (response.data.msg === "success") {
                     toast.success('Ambulance Added');
@@ -112,7 +112,7 @@ function HospitalPanel() {
                     Password: providerData.password,
                 }
                 try {
-                    const response = await axios.post('http://localhost:5000/api/bloodbank', Data, {
+                    const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/bloodbank`, Data, {
                         headers: {
                             "Access-Control-Allow-Origin": "*",
                             "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
@@ -154,7 +154,7 @@ function HospitalPanel() {
                 }
                 // console.log(ambulanceData);
                 try {
-                    const response = await axios.post('http://localhost:5000/api/oxygencylinder', Data, {
+                    const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/oxygencylinder`, Data, {
                         headers: {
                             "Access-Control-Allow-Origin": "*",
                             "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
@@ -198,7 +198,7 @@ function HospitalPanel() {
                 }
                 // console.log(Data);
                 try {
-                    const response = await axios.post('http://localhost:5000/api/ambulanceservice', Data, {
+                    const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/ambulanceservice`, Data, {
                         headers: {
                             "Access-Control-Allow-Origin": "*",
                             "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
@@ -222,7 +222,7 @@ function HospitalPanel() {
 
     const generateRegdId = async (ProviderType) => {
         try {
-            const response = await axios.post('http://localhost:5000/api/generateregdid', { IdType: ProviderType });
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/generateregdid`, { IdType: ProviderType });
             // console.log(response.data.generatedId);
             return response.data.generatedId;
         } catch (err) {
@@ -234,7 +234,7 @@ function HospitalPanel() {
     const getAllRegistedServicesData = async () => {
         try {
             if (providerData !== null) {
-                const response = await axios.get(`http://localhost:5000/api//hospital/getallservices/${providerData.regdId}`);
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api//hospital/getallservices/${providerData.regdId}`);
                 setRegisteredServiceData(response.data);
                 // console.log(response.data);
                 // console.log(RegisteredServicesData);
@@ -255,12 +255,12 @@ function HospitalPanel() {
         try {
             var response = null;
             if (regdId.startsWith("AMBU")) {
-                response = await axios.delete(`http://localhost:5000/api//ambulanceservice/${regdId}`);
+                response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api//ambulanceservice/${regdId}`);
             } else if (regdId.startsWith("BLOOD")) {
-                response = await axios.delete(`http://localhost:5000/api//bloodbanks/${regdId}`);
+                response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api//bloodbanks/${regdId}`);
             }
             else if (regdId.startsWith("OXYG")) {
-                response = await axios.delete(`http://localhost:5000/api//oxygencylinders/${regdId}`);
+                response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api//oxygencylinders/${regdId}`);
             }
 
             //    console.log(response);
@@ -275,7 +275,7 @@ function HospitalPanel() {
     }
     // console.log(RegisteredServicesData);
     const handleFillData = async (regdId) => {
-        const res = await axios.get(`http://localhost:5000/api/hospital/${regdId}`);
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/hospital/${regdId}`);
         // console.log(res.data[0]);
         setUpdateData(res.data[0]);
     }
@@ -283,7 +283,7 @@ function HospitalPanel() {
     const handleDelete = async (regdId) => {
         try {
             console.log(regdId);
-            const response = await axios.delete(`http://localhost:5000/api//hospital/${regdId}`);
+            const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api//hospital/${regdId}`);
             handleLogout();
         } catch (err) {
             console.log(err);
@@ -293,7 +293,7 @@ function HospitalPanel() {
     //Update Hospital's Information
     const handleUpdate = async (regdId) => {
         try {
-            axios.put(`http://localhost:5000/api//hospital/${regdId}`, updateData).then((response) => {
+            axios.put(`${process.env.REACT_APP_BACKEND_URL}/api//hospital/${regdId}`, updateData).then((response) => {
                 console.log(response);
                 console.log(updateData);
                 setUpdateData({
@@ -311,7 +311,7 @@ function HospitalPanel() {
     }
 
     const getAllRegisteredAmbulances = async () => {
-        const res = await axios.get(`http://localhost:5000/api/ambulances/${ambulanceServiceId}`);
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/ambulances/${ambulanceServiceId}`);
         // console.log(res.data);
         setRegisteredAmbulances(res.data);
     }

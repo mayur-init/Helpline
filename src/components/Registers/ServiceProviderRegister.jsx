@@ -48,7 +48,7 @@ function ServiceProviderRegister() {
         try {
           await generateRegdId();
           //send hospital register data in db
-          const response = await axios.post('http://localhost:5000/api/hospital', Data, {
+          const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/hospital`, Data, {
             headers: {
               "Access-Control-Allow-Origin": "*",
               "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
@@ -61,7 +61,7 @@ function ServiceProviderRegister() {
       } else if (formNo === 2) {
         try {
           await generateRegdId();
-          const response = await axios.post('http://localhost:5000/api/ambulanceservice', Data, {
+          const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/ambulanceservice`, Data, {
             headers: {
               "Access-Control-Allow-Origin": "*",
               "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
@@ -74,7 +74,7 @@ function ServiceProviderRegister() {
       } else if (formNo === 3) {
         try {
           await generateRegdId();
-          const response = await axios.post('http://localhost:5000/api/bloodbank', Data, {
+          const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/bloodbank`, Data, {
             headers: {
               "Access-Control-Allow-Origin": "*",
               "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
@@ -87,7 +87,7 @@ function ServiceProviderRegister() {
       } else if (formNo === 4) {
         try {
           await generateRegdId();
-          const response = await axios.post('http://localhost:5000/api/oxygencylinder', Data, {
+          const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/oxygencylinder`, Data, {
             headers: {
               "Access-Control-Allow-Origin": "*",
               "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
@@ -132,13 +132,13 @@ function ServiceProviderRegister() {
     var response;
 
     if(formNo === 1){
-      response = await axios.post('http://localhost:5000/api/generateregdid', {IdType: 'HOSP'});
+      response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/generateregdid`, {IdType: 'HOSP'});
     }else if(formNo === 2){
-      response = await axios.post('http://localhost:5000/api/generateregdid', {IdType: 'AMBU'});
+      response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/generateregdid`, {IdType: 'AMBU'});
     }else if(formNo === 3){
-      response = await axios.post('http://localhost:5000/api/generateregdid', {IdType: 'BLOOD'});
+      response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/generateregdid`, {IdType: 'BLOOD'});
     }else if(formNo === 4){
-      response = await axios.post('http://localhost:5000/api/generateregdid', {IdType: 'OXYG'});
+      response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/generateregdid`, {IdType: 'OXYG'});
     }
     RegdId = response.data.generatedId;
     Data.RegdId = RegdId;

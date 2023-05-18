@@ -50,7 +50,7 @@ function UserPanel() {
     }, [])
     
     const collectUserData = async () => {
-        const res = await axios.get(`http://localhost:5000/api/users/${userId.toUpperCase()}`);
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/users/${userId.toUpperCase()}`);
         // console.log(res.data[0]);
         setUserData(res.data[0]);
     }
@@ -63,7 +63,7 @@ function UserPanel() {
     }
 
     const handleFillData = async (regdId) => {
-        const res = await axios.get(`http://localhost:5000/api/users/${userId}`);
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/users/${userId}`);
         // console.log(res.data[0]);
         setUpdateData(res.data[0]);
     }
@@ -72,7 +72,7 @@ function UserPanel() {
     const handleDelete = async (regdId) => {
         try {
             // console.log(regdId);
-            const response = await axios.delete(`http://localhost:5000/api//users/${userId}`);
+            const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api//users/${userId}`);
 
             localStorage.clear();
             setUserMongoId(null);
@@ -86,7 +86,7 @@ function UserPanel() {
 
     const handleUpdate = async () => {
         try {
-            axios.put(`http://localhost:5000/api//users/${userId}`, updateData).then((response) => {
+            axios.put(`${process.env.REACT_APP_BACKEND_URL}/api//users/${userId}`, updateData).then((response) => {
                 console.log(response);
                 // console.log(updateData);
                 setUpdateData({
@@ -108,7 +108,7 @@ function UserPanel() {
             try {
                 await generateRegdId();
                 // console.log(enquiryData);
-                const response = await axios.post('http://localhost:5000/api/enquiry', enquiryData, {
+                const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/enquiry`, enquiryData, {
                     headers: {
                         "Access-Control-Allow-Origin": "*",
                         "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
@@ -127,12 +127,12 @@ function UserPanel() {
     }
 
     const generateRegdId = async () => {
-        const response = await axios.post('http://localhost:5000/api/generateregdid', { IdType: 'ENQR' });
+        const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/generateregdid`, { IdType: 'ENQR' });
         enquiryData.EnquiryId = response.data.generatedId;
     }
 
     const getAllPostedQueries = async () => {
-        const response = await axios.get(`http://localhost:5000/api/enquiry/${userMongoId}`);
+        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/enquiry/${userMongoId}`);
         setAllPostedQueries(response.data);
         // console.log(response.data);
     }

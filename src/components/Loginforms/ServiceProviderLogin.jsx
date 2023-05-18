@@ -46,22 +46,22 @@ function ServiceProviderLogin() {
       if(formNo === 1){
         Data.ProviderType = 'HOSP';
         redirectUrl = `/hospital-service-panel/${RegdId.toLowerCase()}`;
-        providerData = await axios.get(`http://localhost:5000/api/hospital/${RegdId}`);
+        providerData = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/hospital/${RegdId}`);
 
       } else if (formNo === 2) {
         Data.ProviderType = 'AMBU';
         redirectUrl = `/ambulance-service-provider-panel/${RegdId.toLowerCase()}`;
-        providerData = await axios.get(`http://localhost:5000/api/ambulanceservice/getparticularprovider/${RegdId}`);
+        providerData = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/ambulanceservice/getparticularprovider/${RegdId}`);
         
       } else if (formNo === 3) {
         Data.ProviderType = 'BLOOD';
         redirectUrl = `/blood-bank-service-provider-panel/${RegdId.toLowerCase()}`;
-        providerData = await axios.get(`http://localhost:5000/api/bloodbanks/getparticularprovider/${RegdId}`);
+        providerData = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/bloodbanks/getparticularprovider/${RegdId}`);
 
       } else if (formNo === 4) {
         Data.ProviderType = 'OXYG';
         redirectUrl = `/oxygen-cylinder-provider-panel/${RegdId.toLowerCase()}`;
-        providerData = await axios.get(`http://localhost:5000/api/oxygencylinderproviders/getparticularprovider/${RegdId}`);
+        providerData = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/oxygencylinderproviders/getparticularprovider/${RegdId}`);
 
       }
       
@@ -93,7 +93,7 @@ function ServiceProviderLogin() {
 
   const isVerified = async () =>{
     try {
-      const res = await axios.post('http://localhost:5000/api/providerlogin', Data);
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/providerlogin`, Data);
       // console.log(res.data);
       return res.data;
     } catch (error) {

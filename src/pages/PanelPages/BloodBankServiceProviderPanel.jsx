@@ -32,7 +32,7 @@ function BloodBankServiceProviderPanel() {
     },[])
 
     const collectProviderData = async () => {
-        const res = await axios.get(`http://localhost:5000/api/bloodbanks/getparticularprovider/${RegdId.toUpperCase()}`);
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/bloodbanks/getparticularprovider/${RegdId.toUpperCase()}`);
         // console.log(res.data[0]);
         setProviderData(res.data[0]);
     }
@@ -43,7 +43,7 @@ function BloodBankServiceProviderPanel() {
         navigate('/', {replace: true});
     }
     const handleFillData = async(regdId) =>{
-        const res = await axios.get(`http://localhost:5000/api/bloodbanks/${regdId}`);
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/bloodbanks/${regdId}`);
         // console.log(res.data[0]);
         setUpdateData(res.data[0]);
     }
@@ -51,7 +51,7 @@ function BloodBankServiceProviderPanel() {
     const handleDelete= async (regdId) =>{
         try { 
             console.log(regdId);
-             const response = await axios.delete(`http://localhost:5000/api//bloodbanks/${regdId}`);
+             const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api//bloodbanks/${regdId}`);
              handleLogout();
          } catch (err) {
              console.log(err);
@@ -60,7 +60,7 @@ function BloodBankServiceProviderPanel() {
     }
     const handleUpdate= async (regdId) =>{
         try{
-        axios.put(`http://localhost:5000/api//bloodbanks/${regdId}`,updateData).then((response) => {
+        axios.put(`${process.env.REACT_APP_BACKEND_URL}/api//bloodbanks/${regdId}`,updateData).then((response) => {
             console.log(response);
             console.log(updateData);
             setUpdateData({

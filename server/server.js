@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 5000;
 
 // db connection
 mongoose.set('strictQuery', true);
-mongoose.connect("mongodb+srv://mayur-init:Whyred07@cluster0.ldhun.mongodb.net/helpline?retryWrites=true&w=majority", {
+mongoose.connect(config.DB_URL, {
     useNewUrlParser: true, 
     useUnifiedTopology: true,
 });

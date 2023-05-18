@@ -5,7 +5,7 @@ function OxygenCylinderHero({location}) {
   const [oxygencylinderproviders, setOxygencylinderproviders] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/oxygencylinderproviders/${location}`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/oxygencylinderproviders/${location}`)
       .then(res => res.json())
       .then(data => setOxygencylinderproviders(data))
       .catch(error => console.log(error));
