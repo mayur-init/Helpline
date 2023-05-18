@@ -124,8 +124,8 @@ function BloodBankServiceProviderPanel() {
                                                 <p className='text-xl m-2'><span className='font-semibold'>User name: </span>{providerData.providerName}</p>
                                                 <p className='text-xl m-2'><span className='font-semibold'>Regd Id: </span>{providerData.regdId}</p>
                                                 <p className='text-xl m-2'><span className='font-semibold'>Email: </span>{providerData.email}</p>
-                                                <p className='text-xl m-2'><span className='font-semibold'>Address: </span>{providerData.address}</p>
-                                                <p className='text-xl m-2'><span className='font-semibold'>Password: </span>{providerData.password}</p>
+                                                <p className='text-xl m-2'><span className='font-semibold'>Location: </span>{providerData.address}</p>
+                                                {/* <p className='text-xl m-2'><span className='font-semibold'>Password: </span>{providerData.password}</p> */}
                                                 <button className='btn'onClick={()=>{handleFillData(providerData.regdId);setOpen(true)}}>Update</button>
                                                 <button className='btn bg-red-600' onClick={()=>handleDelete(providerData.regdId)}>Delete</button>
                                             </div>

@@ -56,7 +56,7 @@ exports.verifyServiceProviderLogin = async (req, res, next) => {
 
     try {
 
-        console.log(req.body);
+        // console.log(req.body);
 
         const regdId = req.body.RegdId;
         const password = req.body.Password;

@@ -198,8 +198,8 @@ function AmbulanceServiceProviderPanel() {
                                                 <p className='md:text-xl m-2'><span className='font-semibold'>User name: </span>{providerData.providerName}</p>
                                                 <p className='md:text-xl m-2'><span className='font-semibold'>Regd Id: </span>{providerData.regdId}</p>
                                                 <p className='md:text-xl m-2'><span className='font-semibold'>Email: </span>{providerData.email}</p>
-                                                <p className='md:text-xl m-2'><span className='font-semibold'>Address: </span>{providerData.address}</p>
-                                                <p className='md:text-xl m-2'><span className='font-semibold'>Password: </span>{providerData.password}</p>
+                                                <p className='md:text-xl m-2'><span className='font-semibold'>Location: </span>{providerData.address}</p>
+                                                {/* <p className='md:text-xl m-2'><span className='font-semibold'>Password: </span>{providerData.password}</p> */}
                                                 <div className='my-6'>
                                                     <button className='btn' onClick={() => { handleFillData(providerData.regdId); setOpen(true) }}>Update</button>
                                                     <button className='btn' onClick={() => handleDelete(providerData.regdId)}>Delete</button>
