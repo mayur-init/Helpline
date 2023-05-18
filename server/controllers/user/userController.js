@@ -1,96 +1,97 @@
-const {User, RefreshToken} = require('../../models');
+const { User, RefreshToken } = require('../../models');
 const bcrypt = require('bcryptjs');
 const config = require('../../config');
 const JwtService = require('../../services/JwtService');
 
 // to add a user
-exports.addUser = async(req, res) => {
+exports.addUser = async (req, res) => {
     const userName = req.body.UserName;
     const contactNo = req.body.ContactNo;
     const regdId = req.body.RegdId;
     const location = req.body.Location;
 
-    if(!userName || !contactNo || !location){
-        // console.log(req.body);
-        return res.status(422).json({error : "Some fields are empty"});
-    }
+    if (userName === null || contactNo === null || location === null || regdId === null) {
+        console.log(req.body);
+        return res.status(422).json({ error: "Some fields are empty" });
 
-    try{
-        
-        const userExist = await User.findOne({contactNo : contactNo});
-        if(userExist){
-            return res.status(422).json({msg : "contact no already exist"});
+    } else {
+        try {
+
+            // const userExist = await User.findOne({contactNo : contactNo});
+            // if(userExist){
+            //     return res.status(422).json({msg : "contact no already exist"});
+            // }
+
+            //generate tokens
+            const access_token = JwtService.sign({ regdId: regdId });
+            const refresh_token = JwtService.sign({ regdId: regdId }, '1y', config.REFRESH_SECRET);
+
+            const user = new User({
+                userName,
+                contactNo,
+                regdId,
+                location,
+                accessToken: access_token,
+            });
+
+            const refreshToken = new RefreshToken({
+                refreshToken: refresh_token
+            });
+
+            await user.save();
+            await refreshToken.save();
+            res.status(201).json({ msg: "success", access_token: access_token, refresh_token: refresh_token });
         }
-
-        //generate tokens
-        const access_token = JwtService.sign({ regdId: regdId });
-        const refresh_token = JwtService.sign({ regdId: regdId }, '1y', config.REFRESH_SECRET);
-
-        const user = new User({
-            userName,
-            contactNo,
-            regdId,
-            location,
-            accessToken: access_token,
-        });
-
-        const refreshToken = new RefreshToken({
-            refreshToken: refresh_token
-        });
-
-        await user.save();
-        await refreshToken.save();
-        res.status(201).json({msg: "success", access_token: access_token, refresh_token: refresh_token});
-    }
-    catch(err){
-        console.log(err);
-        res.status(400).json(err);
+        catch (err) {
+            console.log(err);
+            res.status(400).json(err);
+        }
     }
 };
 
-exports.getUser = async(req, res) => {
-    try{
+exports.getUser = async (req, res) => {
+    try {
         const userId = req.params.regdId;
-        const user = await User.find({"regdId":userId});
-        if(user.length === 0)
-            return res.status(404).json({msg : "Not found"});
+        const user = await User.find({ "regdId": userId });
+        if (user.length === 0)
+            return res.status(404).json({ msg: "Not found" });
         res.status(200).json(user);
     }
-    catch(err){
+    catch (err) {
         console.log(err);
-        res.status(400).json({msg : "Some issue"});
+        res.status(400).json({ msg: "Some issue" });
     }
 }
 
-exports.updateUser = async(req, res) => {
+exports.updateUser = async (req, res) => {
     const contactNo = req.body.contactNo;
-    try{
-        if(contactNo){
-            const userExist = await User.findOne({contactNo : contactNo});
-            if(userExist){
-                return res.status(422).json({msg : "contact no already exist"});
+    try {
+        if (contactNo) {
+            const userExist = await User.findOne({ contactNo: contactNo });
+            if (userExist) {
+                return res.status(422).json({ msg: "contact no already exist" });
             }
         }
         const userId = req.params.regdId;
-        const response = await User.findOneAndUpdate({"regdId":userId}, {$set : req.body} , {new : true});
-        if(response)
-            res.status(200).json({ msg : "Updated Successfully"});
-        return res.status(404).json({msg : "Not found"});
-        
-    }catch(err){
-        res.status(400).json({msg : "Some issue"});
+        const response = await User.findOneAndUpdate({ "regdId": userId }, { $set: req.body }, { new: true });
+        if (response)
+            res.status(200).json({ msg: "Updated Successfully" });
+        return res.status(404).json({ msg: "Not found" });
+
+    } catch (err) {
+        res.status(400).json({ msg: "Some issue" });
     }
 };
 
-exports.removeUser = async(req, res) => {
-    try{
+exports.removeUser = async (req, res) => {
+    try {
         const userId = req.params.regdId;
-        const response = await User.findOneAndDelete({"regdId":userId});
-        if(!response)
-            return res.status(404).json({msg : "Not found"});
-        res.status(200).json({msg : "Deleted Successfully"});
+        const response = await User.findOneAndDelete({ "regdId": userId });
+        if (!response)
+            return res.status(404).json({ msg: "Not found" });
+        res.status(200).json({ msg: "Deleted Successfully" });
     }
-    catch(err){
-        res.status(400).json({msg : "Some issue"});
+    catch (err) {
+        res.status(400).json({ msg: "Some issue" });
     }
 };
