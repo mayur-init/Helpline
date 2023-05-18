@@ -6,6 +6,8 @@ const {
     OxygenCylinderProvider,
     Enquiry,
 } = require('../../models')
+const bcrypt = require('bcryptjs');
+
 
 module.exports.generateRegdId = async (req, res, next) => {
     try {
@@ -88,7 +90,8 @@ exports.verifyServiceProviderLogin = async (req, res, next) => {
 
         } else {
             //checking if password is matching or not
-            if (response[0].password == password) {
+            const correctPassword = await bcrypt.compare(password, response[0].password);
+            if (correctPassword) {
                 verified = true;
             }
 

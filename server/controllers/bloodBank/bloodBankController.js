@@ -1,4 +1,5 @@
 const { BloodBank } = require('../../models');
+const bcrypt = require('bcryptjs');
 
 exports.addBloodBank = async (req, res) => {
 
@@ -14,6 +15,9 @@ exports.addBloodBank = async (req, res) => {
         return res.status(422).json({ error: "Some fields are empty" });
 
     try {
+        //hashing the password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
         const bloodBankExist = await BloodBank.findOne({ contactNo: contactNo });
         if (bloodBankExist) {
             return res.status(422).json({ msg: "contact no already exist" });
@@ -31,7 +35,7 @@ exports.addBloodBank = async (req, res) => {
             regdId,
             parentRegdId,
             contactNo,
-            password
+            password: hashedPassword,
         });
         await bloodBank.save();
 
@@ -49,7 +53,7 @@ exports.getBloodBanks = async (req, res) => {
         return res.status(400).json({ msg: 'User location is null' });
     else {
         try {
-            const bloodBanks = await BloodBank.find({address: {$regex: userlocation, $options: 'i'}});
+            const bloodBanks = await BloodBank.find({ address: { $regex: userlocation, $options: 'i' } });
             if (bloodBanks.length === 0)
                 return res.status(404).json({ msg: "No data exists" });
             res.status(200).json(bloodBanks);

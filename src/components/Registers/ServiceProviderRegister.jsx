@@ -161,7 +161,7 @@ function ServiceProviderRegister() {
         <input type='text' onChange={(e) => { setServiceProviderName(e.target.value) }} value={ServiceProviderName} placeholder='Service Provider Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
         <input type='text' onChange={handleChange} value={ContactNo} placeholder='Contact' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
         <input type='text' onChange={(e) => { setEmail(e.target.value) }} value={Email} placeholder='Email' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
-        <input type='text' onChange={(e) => { setAddress(e.target.value) }} value={Address} placeholder='Permanent Address' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
+        <input type='text' onChange={(e) => { setAddress(e.target.value) }} value={Address} placeholder='City name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
         <input type='text' onChange={(e) => { setPassword(e.target.value) }} value={Password} placeholder='Password' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2'></input>
         <p className='flex justify-end'><button onClick={() => { util() }} className='btn w-[100px] m-2'>Submit</button></p>
       </div>
