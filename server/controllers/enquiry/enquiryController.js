@@ -28,7 +28,7 @@ exports.addEnquiry = async (req, res, next) => {
 exports.getEnquiriesByParentId = async (req, res) => {
     try {
         const createrId = req.params.parentRegdId;
-        const enquiries = await Enquiry.find({ "parentRegdId": createrId });
+        const enquiries = await Enquiry.find({ "userId": createrId });
         if (enquiries.length === 0)
             return res.status(404).json({ msg: "Not found" });
         res.status(200).json(enquiries);

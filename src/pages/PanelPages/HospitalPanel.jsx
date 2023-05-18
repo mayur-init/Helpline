@@ -315,6 +315,7 @@ function HospitalPanel() {
         // console.log(res.data);
         setRegisteredAmbulances(res.data);
     }
+    getAllRegisteredAmbulances();
 
     return (
         <div className="" id='main'>
@@ -477,7 +478,7 @@ function HospitalPanel() {
                             </div>) : pageNo === 3 &&
                             (<div className='h-full md:h-[93vh] w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
                                 <p className='text-2xl font-semibold text-center m-4'>Registered Ambulances</p>
-                                <div className='bg-gray-100 w-full h-[86vh]'>
+                                <div className='bg-gray-100 w-full h-[86vh] p-4'>
                                     {/****************List of registered ambulances*******************/}
                                     {
                                         registeredAmbulances.map((ambulance) => {
