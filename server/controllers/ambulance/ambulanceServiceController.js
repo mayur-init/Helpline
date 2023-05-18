@@ -13,7 +13,7 @@ exports.addAmbulanceService = async(req, res, next) => {
     const password = req.body.Password;
 
     if(!providerName || !email || !address || !contactNo || !password){
-        console.log(req.body);
+        // console.log(req.body);
         return res.status(422).json({error : "Some fields are empty"});
     }
 
