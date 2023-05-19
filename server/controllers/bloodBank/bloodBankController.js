@@ -86,13 +86,17 @@ exports.updateBloodBank = async (req, res) => {
                     return res.status(200).json({ msg: "email already exist" });
                 }
             }
+
+            if(bloodbank.password !== req.body.password){
+                req.body.password = await bcrypt.hash(req.body.password, 10);
+            }
         }
         else
             return res.status(404).json({ msg: "Not found" });
 
         const updatedBloodBank = await BloodBank.findOneAndUpdate({ regdId: bloodbankId }, { $set: req.body }, { new: true });
         if (updatedBloodBank)
-            return res.status(200).json({ msg: "success" });
+            return res.status(200).json({ msg: "success", data : updatedBloodBank });
         return res.status(404).json({ msg: "Not found" });
 
     } catch (err) {

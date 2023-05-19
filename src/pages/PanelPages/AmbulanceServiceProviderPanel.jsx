@@ -75,7 +75,7 @@ function AmbulanceServiceProviderPanel() {
 
 
     const handleFillData = async (regdId) => {
-        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/ambulanceservice/${regdId}`);
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/ambulanceservice/getparticularprovider/${regdId}`);
         // console.log(res.data[0]);
         setUpdateData(res.data[0]);
     }

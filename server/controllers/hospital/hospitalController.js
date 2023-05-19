@@ -87,13 +87,17 @@ exports.updateHospital = async (req, res) => {
                     return res.status(200).json({ msg: "email already exist" });
                 }
             }
+
+            if(hospital.password !== req.body.password){
+                req.body.password = await bcrypt.hash(req.body.password, 10);
+            }
         }
         else
             return res.status(404).json({ msg: "Not found" });
 
         const updatedHospital = await Hospital.findOneAndUpdate({ regdId: hospitalId }, { $set: req.body }, { new: true });
         if (updatedHospital)
-            return res.status(200).json({ msg: "success" });
+            return res.status(200).json({ msg: "success", data: updatedHospital });
         return res.status(404).json({ msg: "Not found" });
 
     } catch (err) {
