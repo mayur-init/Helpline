@@ -35,6 +35,8 @@ function HospitalPanel() {
     const [OxygenSerivceContactNo, setOxygenServiceContactNo] = useState('');
     const [AmbulnceServiceContactNo, setAmbulanceServiceContactNo] = useState('');
     const [RegisteredServicesData, setRegisteredServiceData] = useState();
+    const [enquiryData, setEnquiryData] = useState(null);
+
     // var RegisteredServicesData = useRef(null);
 
     useEffect(() => {
@@ -317,6 +319,15 @@ function HospitalPanel() {
     }
     getAllRegisteredAmbulances();
 
+    const getEnquiries = async () => {
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/getalllocationenquiries/${providerData.address}`);
+        // console.log(res.data);
+        setEnquiryData(res.data);
+    }
+    if (enquiryData === null) {
+        getEnquiries();
+    }
+
     return (
         <div className="" id='main'>
             <div name='panel-nav' className='h-[6vh] w-auto flex h justify-center py-2 px-3 border-b-2 border-gray-200 sticky top-0 z-50'>
@@ -498,8 +509,31 @@ function HospitalPanel() {
                 {pageNo === 4 &&
                     (<div className='h-full md:h-[93vh] w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
                         <p className='text-2xl font-semibold text-center m-4'>Enquiries</p>
-                        <div className='bg-gray-100 w-full h-[86vh]'>
+                        <div className='bg-gray-100 w-full h-[86vh] p-4'>
                             {/****************List of related enquiries*******************/}
+                            {
+                                    enquiryData !== null ? (
+                                        enquiryData.map((query) => {
+                                            const { enquiryId, enquiry, userId, _id } = query;
+                                            return (
+                                                <div className='bg-white p-4 m-4 rounded-xl text-md md:text-xl font-semibold' key={_id}>
+                                                    <p>EnquiryId: <span className='font-normal p-1'>{enquiryId}</span></p>
+                                                    <p>Enquiry: <span className='font-normal  p-1'>{enquiry}</span></p>
+                                                    {
+                                                        userId !== null ? (
+                                                            <div>
+                                                                <p>User name:<span className='font-normal  p-1'>{userId.userName}</span></p>
+                                                                <p>Contact: <span className='font-normal  p-1'>{userId.contactNo}</span></p>
+                                                            </div>
+                                                        ) : null
+                                                    }
+
+                                                    <p className='flex justify-end my-1'><button className='btn'>Delete</button></p>
+                                                </div>
+                                            )
+                                        })
+                                    ) : null
+                                }
                         </div>
                     </div>)}
             </div>
