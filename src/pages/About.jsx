@@ -21,7 +21,7 @@ function About() {
                 <div className='grid md:grid-cols-4 text-center md:my-[6vh]'>
                     {AboutUsData.map((item) => {
                         return (
-                            <div className='transition ease-in-out delay-20 border w-[18vw] h-auto bg-white m-4 p-5 rounded-xl shadow-xl hover:scale-105 hover:bg-gradient-to-b from-[#6045ea] to-[#8567f7] hover:text-[#ffffff]' key={item.id}>
+                            <div className='transition ease-in-out delay-20 border w-[60vw] md:w-[18vw] h-auto bg-white m-4 p-5 rounded-xl shadow-xl hover:scale-105 hover:bg-gradient-to-b from-[#6045ea] to-[#8567f7] hover:text-[#ffffff]' key={item.id}>
                                 <img className='m-auto w-32 h-32 rounded-full hover:scale-110' src={item.image} alt="/" />
                                 <p className='text-2xl font-semibold m-4'>{item.name}</p>
                                 <p className='text-black-400  text-lg m-4'>{item.role}</p>

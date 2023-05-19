@@ -67,7 +67,7 @@ function Navbar() {
         <ul>
           <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white  rounded-md" onClick={navHandler}><HashLink smooth to='/#services'>Services</HashLink></li>
           <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white  rounded-md" onClick={navHandler}><HashLink smooth to='/about'>About us</HashLink></li>
-          <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white rounded-md" onClick={navHandler}><HashLink smooth to='/#contact'>Contact us</HashLink></li>
+          <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white rounded-md" onClick={navHandler}><HashLink smooth to='#contact'>Contact us</HashLink></li>
           <li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white rounded-md" ><RegisterDropdown screen={'sm'} /></li>
           {isUserLoggedIn ? (<li className="border-b-2 border-gray-100  text-gray-600 p-3 hover:bg-violet-600  hover:text-white rounded-md" onClick={() => { handleLogout(); navHandler(); }}>Logout</li>) : null}
           {
