@@ -37,7 +37,7 @@ function Navbar() {
       <div className='hidden md:flex'>
         <HashLink smooth to='/#services'><button className='mx-2 font-semibold underline hover:text-violet-600'>Services</button></HashLink>
         <HashLink smooth to='/about'><button className='mx-2 font-semibold underline hover:text-violet-600'>About us</button></HashLink>
-        <HashLink smooth to='/#contact'><button className='mx-2 font-semibold underline hover:text-violet-600'>Contact us</button></HashLink>
+        <HashLink smooth to='#contact'><button className='mx-2 font-semibold underline hover:text-violet-600'>Contact us</button></HashLink>
         <button className='mx-2 font-semibold underline hover:text-violet-600'><RegisterDropdown /></button>
         {
           !isUserLoggedIn ?

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-const LandingHero = () => {
 
+const LandingHero = () => {
   return (
     <div className='min-h-screen flex flex-col justify-center items-center bg-white' id='hero'>
       <div className='grid md:grid-cols-2 md:w-[70vw] text-center m-6'>
