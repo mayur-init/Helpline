@@ -15,6 +15,7 @@ import AdminPanel from './pages/PanelPages/AdminPanel'
 import { globalStateContext } from './contexts/globalStateContext'
 import { Toaster, toast } from 'react-hot-toast'
 import axios from 'axios';
+import About from './pages/About';
 
 function App() {
 
@@ -90,6 +91,7 @@ function App() {
               <Route path='/oxygen-cylinder-provider-panel/:RegdId' element={<OxygenCylinderProviderPanel />} />
               <Route path='/hospital-service-panel/:RegdId' element={<HospitalPanel />} />
               <Route path='/admin-panel' element={<AdminPanel />} />
+              <Route path='/about' element={<About/>}/>
             </Routes>
           </Router>
       </globalStateContext.Provider>
