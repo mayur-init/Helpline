@@ -34,7 +34,7 @@ function AmbulanceServiceProviderPanel() {
         collectProviderData();
     }, [])
     const collectProviderData = async () => {
-        const res = await axios.get(`http://localhost:5000/api/ambulanceservice/getparticularprovider/${RegdId.toUpperCase()}`);
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/ambulanceservice/getparticularprovider/${RegdId.toUpperCase()}`);
         // console.log(res.data[0]);
         setProviderData(res.data[0]);
     }
@@ -58,7 +58,7 @@ function AmbulanceServiceProviderPanel() {
         }
         // console.log(ambulanceData);
         try {
-            const response = await axios.post('http://localhost:5000/api/ambulance', ambulanceData);
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/ambulance`, ambulanceData);
             // console.log(response);
             if (response.data.msg === "success") {
                 toast.success('Ambulance Added');
@@ -75,7 +75,7 @@ function AmbulanceServiceProviderPanel() {
 
 
     const handleFillData = async (regdId) => {
-        const res = await axios.get(`http://localhost:5000/api/ambulanceservice/${regdId}`);
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/ambulanceservice/${regdId}`);
         // console.log(res.data[0]);
         setUpdateData(res.data[0]);
     }
@@ -83,7 +83,7 @@ function AmbulanceServiceProviderPanel() {
     const handleDelete = async (regdId) => {
         try {
             console.log(regdId);
-            const response = await axios.delete(`http://localhost:5000/api//ambulanceservice/${regdId}`);
+            const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/ambulanceservice/${regdId}`);
             handleLogout();
         } catch (err) {
             console.log(err);
@@ -92,7 +92,7 @@ function AmbulanceServiceProviderPanel() {
     }
     const handleUpdate = async (regdId) => {
         try {
-            axios.put(`http://localhost:5000/api//ambulanceservice/${regdId}`, updateData).then((response) => {
+            axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/ambulanceservice/${regdId}`, updateData).then((response) => {
                 console.log(response);
                 console.log(updateData);
                 setUpdateData({
@@ -112,7 +112,7 @@ function AmbulanceServiceProviderPanel() {
     const deleteData = async (contact) => {
         try {
             var response = null;
-            response = await axios.delete(`http://localhost:5000/api//ambulances/${contact}`);
+            response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/ambulances/${contact}`);
             // console.log(response);
             if (response.data.msg === "Success") {
                 toast.success("Deleted successfully");
@@ -128,7 +128,7 @@ function AmbulanceServiceProviderPanel() {
     }
     const getAllRegisteredAmbulanceData = async () => {
         try {
-            const res = await axios.get(`http://localhost:5000/api/ambulances/${providerData.regdId}`);
+            const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/ambulances/${providerData.regdId}`);
             // console.log(res.data);
             setRegisteredAmbulances(res.data);
         } catch (err) {
@@ -198,8 +198,8 @@ function AmbulanceServiceProviderPanel() {
                                                 <p className='md:text-xl m-2'><span className='font-semibold'>User name: </span>{providerData.providerName}</p>
                                                 <p className='md:text-xl m-2'><span className='font-semibold'>Regd Id: </span>{providerData.regdId}</p>
                                                 <p className='md:text-xl m-2'><span className='font-semibold'>Email: </span>{providerData.email}</p>
-                                                <p className='md:text-xl m-2'><span className='font-semibold'>Address: </span>{providerData.address}</p>
-                                                <p className='md:text-xl m-2'><span className='font-semibold'>Password: </span>{providerData.password}</p>
+                                                <p className='md:text-xl m-2'><span className='font-semibold'>Location: </span>{providerData.address}</p>
+                                                {/* <p className='md:text-xl m-2'><span className='font-semibold'>Password: </span>{providerData.password}</p> */}
                                                 <div className='my-6'>
                                                     <button className='btn' onClick={() => { handleFillData(providerData.regdId); setOpen(true) }}>Update</button>
                                                     <button className='btn' onClick={() => handleDelete(providerData.regdId)}>Delete</button>

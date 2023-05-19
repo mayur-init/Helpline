@@ -4,7 +4,7 @@ function BloodBankHero({location}) {
     const [bloodbanks, setBloodbanks] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/bloodbanks/${location}`)
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/api/bloodbanks/${location}`)
             .then(res => res.json())
             .then(data => setBloodbanks(data))
             .catch(error => console.log(error));

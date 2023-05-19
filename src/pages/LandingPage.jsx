@@ -24,7 +24,7 @@ function LandingPage() {
     const user_access_token = localStorage.getItem('helpline_access_token');
     if (user_access_token !== null) {
       try {
-        const res = await axios.post('http://localhost:5000/api/verifyuser', {
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/verifyuser`, {
           AccessToken: user_access_token,
         });
 
@@ -64,7 +64,7 @@ function LandingPage() {
         // try {
         //   let config = {
         //     method: 'get',
-        //     url: 'http://localhost:5000/getNearby',
+        //     url:  `${process.env.REACT_APP_BACKEND_URL}/getNearby`,
         //     headers: {},
         //     data: data,
         //   }

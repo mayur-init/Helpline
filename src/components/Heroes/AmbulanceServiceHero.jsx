@@ -24,7 +24,7 @@ function AmbulanceServiceHero({location}) {
 
   useEffect(() => {
 
-    fetch(`http://localhost:5000/api/ambulanceservice/${location}`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/ambulanceservice/${location}`)
       .then(res => res.json())
       .then(data => setAmbulances(data))
       .catch(error => console.log(error));

@@ -29,10 +29,11 @@ function UserRegister({ location, setLocation }) {
       range: '0'
     },
     headers: {
-      'X-RapidAPI-Key': 'f68ef52b0emsh22a1008ad86b649p11f343jsn9561ac66dfa1',
+      'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_KEY,
       'X-RapidAPI-Host': 'geocodeapi.p.rapidapi.com'
     }
   };
+
 
   const verifyUserRegister = async () => {
     if (name === '' || contactNo === '')
@@ -57,7 +58,7 @@ function UserRegister({ location, setLocation }) {
           // console.log(userId);
 
           //adding user to database by sending data to the server
-          const registerResponse = await axios.post('http://localhost:5000/api/user', UserData, {
+          const registerResponse = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/user`, UserData, {
             headers: {
               "Access-Control-Allow-Origin": "*",
               "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
@@ -87,7 +88,7 @@ function UserRegister({ location, setLocation }) {
 
   const generateRegdId = async () => {
     // console.log("generating id");
-    const response = await axios.post('http://localhost:5000/api/generateregdid', { IdType: 'USER' });
+    const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/generateregdid`, { IdType: 'USER' });
     // console.log(response);
     setUserId(response.data.generatedId);
     UserData.RegdId = response.data.generatedId;

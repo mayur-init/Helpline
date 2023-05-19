@@ -1,5 +1,6 @@
 const {AmbulanceService} = require('../../models');
 const {Ambulance} = require('../../models');
+const bcrypt = require('bcryptjs');
 
 exports.addAmbulanceService = async(req, res, next) => {
 
@@ -11,10 +12,15 @@ exports.addAmbulanceService = async(req, res, next) => {
     const contactNo = req.body.ContactNo;
     const password = req.body.Password;
 
-    if(!providerName || !email || !address || !contactNo || !password)
+    if(!providerName || !email || !address || !contactNo || !password){
+        // console.log(req.body);
         return res.status(422).json({error : "Some fields are empty"});
+    }
 
     try{
+            //hashing the password
+            const hashedPassword = await bcrypt.hash(password, 10);
+
             const ambulanceServiceExist = await AmbulanceService.findOne({contactNo : contactNo});
             if(ambulanceServiceExist){
                 return res.status(422).json({msg : "contact no already exist"});
@@ -32,8 +38,9 @@ exports.addAmbulanceService = async(req, res, next) => {
                 regdId,
                 parentRegdId,
                 contactNo, 
-                password
+                password: hashedPassword,
             });
+            
             await ambulanceService.save();
             res.status(201).json({msg: "success"});
     }

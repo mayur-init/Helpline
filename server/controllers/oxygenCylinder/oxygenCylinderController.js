@@ -1,4 +1,5 @@
 const { OxygenCylinderProvider } = require('../../models');
+const bcrypt = require('bcryptjs');
 
 exports.addOxygenCylinderProvider = async (req, res) => {
 
@@ -14,6 +15,9 @@ exports.addOxygenCylinderProvider = async (req, res) => {
         return res.status(422).json({ error: "Some fields are empty" });
 
     try {
+        //hashing the password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
         const oxygenCylinderExist = await OxygenCylinderProvider.findOne({ contactNo: contactNo });
         if (oxygenCylinderExist) {
             return res.status(422).json({ msg: "contact no already exist" });
@@ -31,7 +35,7 @@ exports.addOxygenCylinderProvider = async (req, res) => {
             regdId,
             parentRegdId,
             contactNo,
-            password
+            password: hashedPassword,
         });
         await oxygenCylinder.save();
 
