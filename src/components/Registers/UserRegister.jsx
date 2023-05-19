@@ -50,7 +50,7 @@ function UserRegister({ location, setLocation }) {
           //getting user location
           const response = await axios.request(options);
           UserData.Location = response.data[0].City;
-          // console.log(response);
+          //console.log(response);
 
           //generating useId
           await generateRegdId();

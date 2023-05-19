@@ -28,7 +28,7 @@ function AmbulanceServiceHero({location}) {
       .then(res => res.json())
       .then(data => setAmbulances(data))
       .catch(error => console.log(error));
-
+      console.log(location);
 
   }, []);
   // const getAllRegisteredAmbulanceData = async (regdId) => {
