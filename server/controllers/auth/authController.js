@@ -110,3 +110,20 @@ exports.verifyServiceProviderLogin = async (req, res, next) => {
     }
 }
 
+exports.getHashedPassword = async (req, res, next) =>{
+    const password = req.params.password;
+    if(password === null)
+        return res.status(400).json({msg: 'Password is null'});
+    else{
+        try{
+            const hashedPassword = await bcrypt.hash(password, 10);
+
+            if(await password !== null){
+                return res.status(200).json({hashedPassword: hashedPassword});
+            }
+        }catch(err){
+            console.log(err);
+        }
+    }
+}
+

@@ -88,6 +88,7 @@ router.post('/providerlogin', authController.verifyServiceProviderLogin);
 router.post('/generateregdid', authController.generateRegdId);
 router.post('/verifyuser', userAuthController.verifyUserLogin);
 router.post('/verifyrefreshtoken', userAuthController.verifyRefreshToken);
+router.get('/gethashedpassword/:password', authController.getHashedPassword);
 
 //enquiry routes
 router.post('/enquiry/', enquiryController.addEnquiry);
