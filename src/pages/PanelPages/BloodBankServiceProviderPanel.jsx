@@ -46,7 +46,7 @@ function BloodBankServiceProviderPanel() {
         navigate('/', { replace: true });
     }
     const handleFillData = async (regdId) => {
-        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/bloodbanks/${regdId}`);
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/bloodbanks/getparticularprovider/${regdId}`);
         // console.log(res.data[0]);
         setUpdateData(res.data[0]);
     }

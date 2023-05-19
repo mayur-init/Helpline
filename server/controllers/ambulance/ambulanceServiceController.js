@@ -92,13 +92,17 @@ exports.updateAmbulanceService = async(req, res) => {
                     return res.status(200).json({msg : "email already exist"});
                 }
             }
+
+            if(ambulanceService.password !== req.body.password){
+                req.body.password = await bcrypt.hash(req.body.password, 10);
+            }
         }
         else
             return res.status(404).json({msg : "Not found"});
 
         const updatedAmbService = await AmbulanceService.findOneAndUpdate({regdId : ambulanceServiceId}, {$set : req.body}, {new : true});
         if(updatedAmbService)
-            return res.status(200).json({msg : "success"});
+            return res.status(200).json({msg : "success", data : updatedAmbService});
         return res.status(404).json({msg : "Not found"});
         
     }catch(err){
