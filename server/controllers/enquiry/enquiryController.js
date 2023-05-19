@@ -89,8 +89,8 @@ exports.getAllLocationEnquiries = async (req, res) => {
 }
 
 exports.getAllRelatedEnquiries = async (req, res) => {
-    const location = req.body.location;
-    const enquiryType = req.body.enquiryType;
+    const location = req.body.Location;
+    const enquiryType = req.body.EnquiryType;
 
     // console.log(req.body);
 
