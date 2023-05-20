@@ -16,12 +16,6 @@ exports.addUser = async (req, res) => {
 
     } else {
         try {
-
-            // const userExist = await User.findOne({contactNo : contactNo});
-            // if(userExist){
-            //     return res.status(422).json({msg : "contact no already exist"});
-            // }
-
             //generate tokens
             const access_token = JwtService.sign({ regdId: regdId });
             const refresh_token = JwtService.sign({ regdId: regdId }, '1y', config.REFRESH_SECRET);
@@ -95,3 +89,21 @@ exports.removeUser = async (req, res) => {
         res.status(400).json({ msg: "Some issue" });
     }
 };
+
+exports.updateUserLocation = async (req, res, next) =>{
+    const userId = req.body.UserId;
+    const newLocation = req.body.NewLocation;
+    if(newLocation === null || userId === null)
+        return res.status(400).json({msg: 'New Location is null'});
+    else{
+        try{
+            const response = await User.findOneAndUpdate({regdId: userId}, {$set: {location: newLocation}});
+            if(response)
+                return res.status(200).json({msg: 'success'});
+            else
+                return res.status(400).json({msg: 'something went wrong'});
+        }catch(err){
+            console.log(err);
+        }
+    }
+}
