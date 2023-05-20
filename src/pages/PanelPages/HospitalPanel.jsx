@@ -439,6 +439,7 @@ function HospitalPanel() {
                                                 <p className='text-xl m-2'><span className='font-semibold'>User name: </span>{providerData.providerName}</p>
                                                 <p className='text-xl m-2'><span className='font-semibold'>Regd Id: </span>{providerData.regdId}</p>
                                                 <p className='text-xl m-2'><span className='font-semibold'>Email: </span>{providerData.email}</p>
+                                                <p className='text-xl m-2'><span className='font-semibold'>Contact: </span>{providerData.contactNo}</p>
                                                 <p className='text-xl m-2'><span className='font-semibold'>Location: </span>{providerData.address}</p>
                                                 {/* <p className='text-xl m-2'><span className='font-semibold'>Password: </span>{providerData.password}</p> */}
                                                 <div className="my-6">
@@ -509,7 +510,11 @@ function HospitalPanel() {
                 {pageNo === 4 &&
                     (<div className='h-full w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
                         <p className='text-2xl font-semibold text-center m-4'>Enquiries</p>
+<<<<<<< HEAD
                         <div className='bg-gray-100 w-full h-full p-4'>
+=======
+                        <div className='bg-gray-100 w-full h-auto overflow-x p-4'>
+>>>>>>> 9d9e522f0097ba10bf362613d166b24a4853cea7
                             {/****************List of related enquiries*******************/}
                             {
                                     enquiryData !== null ? (

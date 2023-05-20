@@ -143,7 +143,7 @@ function UserPanel() {
 
     return (
         <div className="" id='main'>
-            <div name='panel-nav' className='h-[6vh] w-auto flex justify-center py-2 px-3 border-b-2 border-gray-200 sticky top-0 z-50'>
+            <div name='panel-nav' className='h-[6vh] fixed w-auto flex justify-center py-2 px-3 border-b-2 border-gray-200 sticky top-0 z-50'>
                 <p className='text-xl font-semibold hover:text-violet-500'>Helpline</p>
                 <div className='ml-auto flex'>
                     <p className='border-gray-300 border-2 rounded-xl px-2 h-[27px]'>{userName}</p>
@@ -201,9 +201,10 @@ function UserPanel() {
                             }
                         </div>
                     </div>) :
-                    (<div className='h-full md:h-[93vh] w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
+                    (<div className='h-full md:h-auto w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
                         <p className='text-2xl font-semibold text-center m-4'>Your Queries</p>
-                        <div className='bg-gray-100 w-full h-[86vh] p-4'>
+                        <div className='bg-gray-100 w-full h-auto relative p-4'>
+                            <div>
                             {
                                 allPostedQueries.map((query) => {
                                     const { enquiryId, enquiry, _id } = query;
@@ -216,6 +217,7 @@ function UserPanel() {
                                     )
                                 })
                             }
+                            </div>
                         </div>
                     </div>
                     )
