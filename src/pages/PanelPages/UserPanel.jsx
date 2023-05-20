@@ -140,6 +140,13 @@ function UserPanel() {
     if(userMongoId !== null){
         getAllPostedQueries();
     }
+    const handleEnquiryDelete = async (enquiryId) => {
+       try {
+        const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api//removequery/${enquiryId}`);
+       } catch (error) {
+        console.log(error);
+       }
+    }
 
     return (
         <div className="" id='main'>
@@ -212,7 +219,7 @@ function UserPanel() {
                                         <div className='bg-white p-4 m-4 rounded-xl text-md md:text-xl font-semibold' key={_id}>
                                             <p>EnquiryId: <span className='font-normal'>{enquiryId}</span></p>
                                             <p>Enquiry <span className='font-normal'>{enquiry}</span></p>
-                                            <p className='flex justify-end my-1'><button className='btn'>Delete</button></p>
+                                            <p className='flex justify-end my-1' onClick={handleEnquiryDelete(enquiryId)}><button className='btn'>Delete</button></p>
                                         </div>
                                     )
                                 })

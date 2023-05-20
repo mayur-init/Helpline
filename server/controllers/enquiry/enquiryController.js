@@ -56,7 +56,7 @@ exports.deleteParticularEnquiry = async (req, res) => {
         const response = await Enquiry.removeOne({ "enquiryId": enquiryId });
         if (response === null)
             return res.status(404).json({ msg: "Not found" });
-        res.status(200).json(msg : "success");
+        res.status(200).json({msg: "success"});
     }
     catch (err) {
         res.status(400).json({ msg: "Some issue" });
