@@ -140,6 +140,19 @@ function UserPanel() {
     if(userMongoId !== null){
         getAllPostedQueries();
     }
+    const handleEnquiryDelete = async (enquiryId) => {
+       try {
+        const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api//removequery/${enquiryId}`);
+        if (response.data.msg === "success") {
+            toast.success("Enquiry Deleted");
+        } else {
+            toast.error("Something went wrong!");
+        }
+        getAllPostedQueries();
+       } catch (error) {
+        console.log(error);
+       }
+    }
 
     return (
         <div className="" id='main'>
@@ -203,7 +216,7 @@ function UserPanel() {
                     </div>) :
                     (<div className='h-full md:h-auto w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
                         <p className='text-2xl font-semibold text-center m-4'>Your Queries</p>
-                        <div className='bg-gray-100 w-full h-auto relative p-4'>
+                        <div className='bg-gray-100 w-full h-[86vh] relative p-4'>
                             <div>
                             {
                                 allPostedQueries.map((query) => {
@@ -212,7 +225,7 @@ function UserPanel() {
                                         <div className='bg-white p-4 m-4 rounded-xl text-md md:text-xl font-semibold' key={_id}>
                                             <p>EnquiryId: <span className='font-normal'>{enquiryId}</span></p>
                                             <p>Enquiry <span className='font-normal'>{enquiry}</span></p>
-                                            <p className='flex justify-end my-1'><button className='btn'>Delete</button></p>
+                                            <p className='flex justify-end my-1' onClick={()=>{handleEnquiryDelete(enquiryId)}}><button className='btn'>Delete</button></p>
                                         </div>
                                     )
                                 })
