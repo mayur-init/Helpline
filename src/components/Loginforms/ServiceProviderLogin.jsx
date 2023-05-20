@@ -104,7 +104,7 @@ function ServiceProviderLogin() {
   return (
     <div>
       <div className='flex justify-center items-center'>
-        <div className='w-auto h-[60vh] mb-[8vh] p-4 text-center bg-white rounded-xl'>
+        <div className='w-auto h-[55vh] mb-[8vh] p-4 text-center bg-white rounded-xl'>
           <p className='text-2xl md:text-3xl font-semibold text-gray-700 my-[4vh] flex justify-center hover:text-violet-600'>Service Provider Login</p>
           <div className='flex flex-col justify-center w-[37vh] md:w-[50vh] h-auto mt-[8vh] mb-[4vh]'>
             <LoginFormDropdown title={'Login as'} options={options} setFromNo={setFromNo} />
