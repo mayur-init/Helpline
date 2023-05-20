@@ -92,7 +92,19 @@ function OxygenCylinderProviderPanel() {
     if (enquiryData === null) {
         getEnquiries();
     }
-
+    const handleEnquiryDelete = async (enquiryId) => {
+        try {
+         const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api//removequery/${enquiryId}`);
+         if (response.data.msg === "success") {
+             toast.success("Enquiry Deleted");
+         } else {
+             toast.error("Something went wrong!");
+         }
+         getEnquiries();
+        } catch (error) {
+         console.log(error);
+        }
+     }
     return (
         <div className="" id='main'>
             <div name='panel-nav' className='h-[6vh] w-auto flex h justify-center py-2 px-3 border-b-2 border-gray-200 sticky top-0 z-50'>
@@ -155,7 +167,7 @@ function OxygenCylinderProviderPanel() {
                         </div>) :
                         (<div className='h-full w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
                             <p className='text-2xl font-semibold text-center m-4'>Enquiries</p>
-                            <div className='bg-gray-100 w-full h-[86vh] p-4'>
+                            <div className='bg-gray-100 w-full h-full p-4'>
                                 {/****************List of related enquiries*******************/}
                                 {
                                     enquiryData !== null ? (
@@ -174,7 +186,7 @@ function OxygenCylinderProviderPanel() {
                                                         ) : null
                                                     }
 
-                                                    <p className='flex justify-end my-1'><button className='btn'>Delete</button></p>
+                                                    <p className='flex justify-end my-1'><button className='btn' onClick={()=>{handleEnquiryDelete(enquiryId)}}>Resolve</button></p>
                                                 </div>
                                             )
                                         })

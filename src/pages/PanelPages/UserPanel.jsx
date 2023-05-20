@@ -216,7 +216,7 @@ function UserPanel() {
                     </div>) :
                     (<div className='h-full md:h-auto w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
                         <p className='text-2xl font-semibold text-center m-4'>Your Queries</p>
-                        <div className='bg-gray-100 w-full h-[86vh] relative p-4'>
+                        <div className='bg-gray-100 w-full h-full relative p-4'>
                             <div>
                             {
                                 allPostedQueries.map((query) => {
