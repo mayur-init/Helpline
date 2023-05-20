@@ -11,14 +11,18 @@ const Footer = () => {
     const [feedback, setFeedback] = useState();
 
     const handleFeedback = async () => {
-        const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/feedback`, {
-            UserName: userName,
-            FeedBack: feedback
-        });
-
-        if(res.data.msg === "success"){
-            setFeedback('');
-            toast.success("Thank you submitting your feedback");
+        if(feedback === null || feedback === '')
+            toast.success('Please write some feedback');
+        else{
+            const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/feedback`, {
+                UserName: userName,
+                FeedBack: feedback
+            });
+    
+            if(res.data.msg === "success"){
+                setFeedback('');
+                toast.success("Thank you submitting your feedback");
+            }
         }
     }
 
