@@ -51,16 +51,21 @@ exports.updateParticularEnquiry = async (req, res) => {
 };
 
 exports.deleteParticularEnquiry = async (req, res) => {
-    try {
-        const enquiryId = req.params.enquiryId;
-        const response = await Enquiry.removeOne({ "enquiryId": enquiryId });
-        if (response === null)
-            return res.status(404).json({ msg: "Not found" });
-        res.status(200).json({msg: "success"});
+    const enquiryId = req.params.enquiryId;
+    if(enquiryId === null)
+        return res.status(400).json({msg: 'Enquiry Id is null'});
+    else{
+        try {
+            const response = await Enquiry.deleteOne({ "enquiryId": enquiryId });
+            if (response === null)
+                return res.status(404).json({ msg: "Not found" });
+            res.status(200).json({msg : "success"});
+        }
+        catch (err) {
+            res.status(400).json({ msg: "Some issue" });
+        }
     }
-    catch (err) {
-        res.status(400).json({ msg: "Some issue" });
-    }
+    
 };
 
 exports.getAllLocationEnquiries = async (req, res) => {
