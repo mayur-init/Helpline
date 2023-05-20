@@ -16,7 +16,6 @@ import { globalStateContext } from './contexts/globalStateContext'
 import { Toaster, toast } from 'react-hot-toast'
 import axios from 'axios';
 import About from './pages/About';
-
 function App() {
 
   // localStorage.setItem('helpline_access_token', '');
@@ -55,7 +54,7 @@ function App() {
   //   }
   // }
 
-  // console.log(location);
+   console.log(userlocation);
 
 
   return (

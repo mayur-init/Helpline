@@ -507,9 +507,9 @@ function HospitalPanel() {
                             </div>)
                 }
                 {pageNo === 4 &&
-                    (<div className='h-full md:h-[93vh] w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
+                    (<div className='h-full w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
                         <p className='text-2xl font-semibold text-center m-4'>Enquiries</p>
-                        <div className='bg-gray-100 w-full h-[86vh] p-4'>
+                        <div className='bg-gray-100 w-full h-full p-4'>
                             {/****************List of related enquiries*******************/}
                             {
                                     enquiryData !== null ? (
