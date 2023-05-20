@@ -97,6 +97,7 @@ router.put('/enquiry/:enquiryId', enquiryController.updateParticularEnquiry);
 router.post('/enquiry/:enquiryId', enquiryController.deleteParticularEnquiry);
 router.post('/getallrelatedenquiry', enquiryController.getAllRelatedEnquiries);
 router.get('/getalllocationenquiries/:location', enquiryController.getAllLocationEnquiries);
+router.delete('/removequery/:enquiryId', enquiryController.deleteParticularEnquiry);
 
 //feedback routes
 router.post('/feedback', feedbackController.addFeedback);
