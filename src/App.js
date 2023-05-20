@@ -54,7 +54,7 @@ function App() {
   //   }
   // }
 
-   console.log(userlocation);
+  //  console.log(userlocation);
 
 
   return (
