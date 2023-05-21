@@ -26,7 +26,8 @@ router.get('/getNearby', googleMapApiController.getNearby);
 // user routes
 router.post('/user', userController.addUser);           // to register a user
 router.get('/users/:regdId', userController.getUser);       // to view a user
-router.put('/users/:regdId',userController.updateUser);
+router.put('/users/:regdId', userController.updateUser);
+router.post('/updateuserlocation', userController.updateUserLocation);
 router.delete('/users/:regdId', userController.removeUser);
 
 // to collect hospital data
