@@ -108,8 +108,6 @@ exports.updateUserLocation = async (req, res, next) =>{
             const response = await User.findOneAndUpdate({regdId: userId}, {$set: {location: newLocation}});
             if(response)
                 return res.status(200).json({msg: 'success'});
-            else
-                return res.status(400).json({msg: 'something went wrong'});
         }catch(err){
             console.log(err);
         }

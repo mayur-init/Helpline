@@ -9,15 +9,16 @@ import { HiOutlineMapPin } from 'react-icons/hi2';
 import UserRegister from '../components/Registers/UserRegister';
 import { globalStateContext } from '../contexts/globalStateContext'
 import { toast } from 'react-hot-toast';
-import {  HiXMark } from 'react-icons/hi2'
+import { HiXMark } from 'react-icons/hi2'
 
 function LandingPage() {
 
   const [location, setLocation] = useState();
   const { setUserName, setUserLoggedIn, setUserMongoId, setUserId, setUserLocation, isUserLoggedIn, userlocation, userId } = useContext(globalStateContext);
-  
+
   useEffect(() => {
-      verifyUserLogin();
+    verifyUserLogin();
+    getLocation();
   }, []);
 
   //fetching use longitude and lattitude
@@ -32,7 +33,6 @@ function LandingPage() {
           "longitude": longitude,
         });
       });
-
     } else {
       console.log('Geolocation navigation not supported by your browser');
     }
@@ -62,40 +62,43 @@ function LandingPage() {
   }
 
   //updating user location on loging in
-  const updateUserLocation = async () =>{
-    //getting user location
-    const response = await axios.request(options);
-    const newLocation = response.data[0].City;
+  const updateUserLocation = async () => {
+    if (location !== undefined) {
+      const options = {
+        method: 'GET',
+        url: 'https://geocodeapi.p.rapidapi.com/GetNearestCities',
+        params: {
+          latitude: location.lattitude,
+          longitude: location.longitude,
+          range: '0'
+        },
+        headers: {
+          'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_KEY,
+          'X-RapidAPI-Host': 'geocodeapi.p.rapidapi.com'
+        }
+      };
 
-    if(newLocation === "Āsansol"){
-      newLocation = "Asansol"
-    }
+      //getting user location
+      const response = await axios.request(options);
+      const newLocation = response.data[0].City
 
-    if(newLocation !== userlocation){
-      //update userlocation
-      setUserLocation(newLocation);
-      //update userLocation in db
-      const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/updateuserlocation`, {
-        UserId: userId,
-        NewLocation: newLocation
-      });
+      if (newLocation === "Āsansol") {
+        newLocation = "Asansol"
+      }
+
+      if (newLocation !== userlocation) {
+        //update userlocation
+        setUserLocation(newLocation);
+        //update userLocation in db
+        const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/updateuserlocation`, {
+          UserId: userId,
+          NewLocation: newLocation
+        });
+      }
     }
   }
 
-  if(location !== undefined){
-    const options = {
-      method: 'GET',
-      url: 'https://geocodeapi.p.rapidapi.com/GetNearestCities',
-      params: {
-        latitude: location.lattitude,
-        longitude: location.longitude,
-        range: '0'
-      },
-      headers: {
-        'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_KEY,
-        'X-RapidAPI-Host': 'geocodeapi.p.rapidapi.com'
-      }
-    };
+  if(location !== null){
     updateUserLocation();
   }
 
@@ -110,9 +113,9 @@ function LandingPage() {
         <div className='bg-white w-[68.5vw] md:w-[73vw] h-auto mt-[4vh] text-center p-4 self-center mb-[10vh] rounded-xl shadow-2xl'>
           <div className='flex flex-col justify-center h-full w-full p-4'>
             {location &&
-            <div className='flex justify-end'>
-              <button onClick={()=>{setLocation(!location)}}><HiXMark size={30}/></button>
-            </div>
+              <div className='flex justify-end'>
+                <button onClick={() => { setLocation(!location) }}><HiXMark size={30} /></button>
+              </div>
             }
             <h1 className='text-3xl font-semibold text-gray-800 mx-6 my-2 hover:text-violet-600'>Add your location</h1>
             {!location ?
@@ -127,7 +130,7 @@ function LandingPage() {
         </div>
       </div>
 
-      <Footer/>
+      <Footer />
     </div>
   )
 }
