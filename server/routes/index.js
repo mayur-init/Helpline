@@ -12,13 +12,9 @@ const {
     authController,
     userAuthController,
     enquiryController,
-    hospitalAmbulanceController,
-    hospitalBloodBankController,
-    hospitalOxygenCylinderController,
     feedbackController,
 } = require('../controllers');
 
-// router.get('/', (req, res) =>{res.send('<h2>Project-Helpline: server is running...</h2>')});
 
 //google map api releated routes
 router.get('/getNearby', googleMapApiController.getNearby);
@@ -28,35 +24,15 @@ router.post('/user', userController.addUser);           // to register a user
 router.get('/users/:regdId', userController.getUser);       // to view a user
 router.put('/users/:regdId', userController.updateUser);
 router.post('/updateuserlocation', userController.updateUserLocation);
-router.delete('/users/:regdId', userController.removeUser);
+router.post('/users/:regdId', userController.removeUser);
 
-// to collect hospital data
+// hospital service routes
 router.post('/hospital', hospitalController.addHospital);
 router.get('/hospitals', hospitalController.getHospitals);
 router.put('/hospital/:regdId', hospitalController.updateHospital);
 router.delete('/hospital/:regdId', hospitalController.deleteHospital);
 router.get('/hospital/:regdId', hospitalController.getParticularhospital);
 router.get('/hospital/getallservices/:hospitalRegdId', hospitalController.getAllRegisteredServices);
-
-//hospital-ambulance routes
-router.post('/hospital-ambulance', hospitalAmbulanceController.addAmbulance);
-router.get('/hospital-ambulances/:regdId', hospitalAmbulanceController.getAllAmbulances);
-router.delete('/hospital-ambulance/:contact', hospitalAmbulanceController.deleteAmbulance);
-
-//hospital-bloodbank routes
-router.post('/hospital-bloodbank', hospitalBloodBankController.addBloodBank);
-router.get('/hospital-bloodbanks/:regdId', hospitalBloodBankController.getBloodBanks);
-router.put('/hospital-bloodbank/:regdId', hospitalBloodBankController.updateBloodBank);
-router.delete('/hospital-bloodbank/:regdId', hospitalBloodBankController.deleteBloodBank);
-router.get('/hospital-bloodbank/:regdId', hospitalBloodBankController.getParticularBloodBank);
-
- //hospital-oxygen cylinder routes
-router.post('/hospital-oxygencylinder', hospitalOxygenCylinderController.addOxygenCylinderProvider);
-router.get('/hospital-oxygencylinders/:regdId', hospitalOxygenCylinderController.getOxygenCylinderProviders);
-router.put('/hospital-oxygencylinder/:regdId', hospitalOxygenCylinderController.updateOxygenCylinder);
-router.delete('/hospital-oxygencylinder/:regdId', hospitalOxygenCylinderController.deleteOxygenCylinderProvider);
-router.get('/hospital-oxygencylinder/:regdId', hospitalOxygenCylinderController.getParticularProvider); 
-
 
 // ambulance service routes
 router.post('/ambulanceservice', ambulanceServiceController.addAmbulanceService);

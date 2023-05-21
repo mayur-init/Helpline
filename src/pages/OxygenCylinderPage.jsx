@@ -1,4 +1,4 @@
-import React, {useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import OxygenCylinderHero from '../components/Heroes/OxygenCylinderHero'
@@ -11,19 +11,19 @@ function OxygenCylinderPage() {
 
   const navigate = useNavigate();
 
-    const { isUserLoggedIn, userlocation } = useContext(globalStateContext);
-    useEffect(() => {
-        if (!isUserLoggedIn) {
-            toast.error('You are not logged in, log in first')
-            navigate('/login#loginForm', { replace: true });
-        }
-    });
-    
+  const { isUserLoggedIn, userlocation } = useContext(globalStateContext);
+  useEffect(() => {
+    if (!isUserLoggedIn) {
+      toast.error('You are not logged in, log in first')
+      navigate('/login#loginForm', { replace: true });
+    }
+  });
+
   return (
-    <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{delay:0.15}} className='bg-zinc-200' id='main'>
-            <Navbar/>
-            <OxygenCylinderHero location={userlocation}/>
-            <Footer/>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.15 }} className='bg-zinc-200' id='main'>
+      <Navbar />
+      <OxygenCylinderHero location={userlocation} />
+      <Footer />
     </motion.div>
   )
 }

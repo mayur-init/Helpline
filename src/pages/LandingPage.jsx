@@ -20,6 +20,7 @@ function LandingPage() {
       verifyUserLogin();
   }, []);
 
+  //fetching use longitude and lattitude
   function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async function (position) {
@@ -37,6 +38,7 @@ function LandingPage() {
     }
   }
 
+  //verying if use is logged in
   const verifyUserLogin = async () => {
     const user_access_token = localStorage.getItem('helpline_access_token');
     if (user_access_token !== null) {
@@ -59,6 +61,7 @@ function LandingPage() {
     }
   }
 
+  //updating user location on loging in
   const updateUserLocation = async () =>{
     //getting user location
     const response = await axios.request(options);
@@ -115,7 +118,6 @@ function LandingPage() {
             {!location ?
               (<div className='flex justify-center'>
                 <p className='self-center'><button onClick={getLocation} className='btn flex justify-center m-2'>My location</button></p>
-                {/* <HiOutlineMapPin className='w-6 h-6 m-2 hover:scale-150'/> */}
               </div>) :
               (<div className='w-full'>
                 <UserRegister location={location} setLocation={setLocation} />

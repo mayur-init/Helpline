@@ -80,10 +80,7 @@ exports.verifyServiceProviderLogin = async (req, res, next) => {
         } else if (providerType === "OXYG") {
             response = await OxygenCylinderProvider.find({ "regdId": regdId });
 
-        }
-
-        // console.log(response);
-        //console.log(response[0].password);        
+        }        
 
         if (response.length === 0) {
             return res.status(200).json({ registered: false, verified: verified });

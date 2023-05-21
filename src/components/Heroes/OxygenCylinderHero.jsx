@@ -1,20 +1,21 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
-function OxygenCylinderHero({location}) {
+function OxygenCylinderHero({ location }) {
 
-  const [oxygencylinderproviders, setOxygencylinderproviders] = useState([]);
+    const [oxygencylinderproviders, setOxygencylinderproviders] = useState([]);
 
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/oxygencylinderproviders/${location}`)
-      .then(res => res.json())
-      .then(data => setOxygencylinderproviders(data))
-      .catch(error => console.log(error));
-  }, []);
+    useEffect(() => {
+        //fetching all the blood bank data filtered by location
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/api/oxygencylinderproviders/${location}`)
+            .then(res => res.json())
+            .then(data => setOxygencylinderproviders(data))
+            .catch(error => console.log(error));
+    }, []);
 
-  return (
-   <div>
-    { /* Hero Page Starts */}
-    <div className=' hidden w-full h-[100vh] bg-white  flex flex-col justify-between'>
+    return (
+        <div>
+            { /* Hero Page Starts */}
+            <div className=' hidden w-full h-[100vh] bg-white  flex flex-col justify-between'>
                 {/* Hero Page Start */}
                 <div className='grid md:grid-cols-2 max-w-[1240px] m-auto'>
                     <div>
@@ -25,33 +26,30 @@ function OxygenCylinderHero({location}) {
                         <h1 className='py-3 text-5xl md:text-7xl font-bold text-gray-800 hover:text-red-600'>Save Your Time</h1>
                     </div>
                 </div>
-    </div>
-    { /* Hero Page Ends */}
+            </div>
+            { /* Hero Page Ends */}
 
-    {/*OxygenProvider Details Start*/}
-    <h1 className='text-3xl md:text-4xl font-semibold my-12 text-gray-800 text-center '>Our Oxygen Providers Details</h1>
-        
-        <div className='h-auto flex flex-col justify-content-center mx-auto mb-[8vh]'>
-        {
-            oxygencylinderproviders.map((item) => {
-                const { _id, providerName, address, regdId , email, contactNo} = item;
-                return (
-                    <div className="border min-h-[6vh] w-[85vw] md:w-[60vw] mx-auto bg-white my-3 md:my-4 py-4 px-[5vw] rounded-3xl shadow-xl" key={_id}>
-                            <h1 className="font-bold text-2xl text-gray-600 my-2">{providerName}</h1>
-                            <h2 className="text-xl my-2 font-semibold">Contact No: {contactNo}</h2>
-                            <h1 className='text-xl my-2 font-semibold'>Address: {address}</h1>
-                            {/* <h2 className="text-xl my-3 font-semibold">Registration No: {regdNo}</h2>
-                            <h2 className="text-xl my-3 font-semibold">Email: {email}</h2> */}
-                    </div>
-                   
-                )
-            })
-        }
-         </div>
-        {/*OxygenProvider Details Ends*/}
+            {/*OxygenProvider Details Start*/}
+            <h1 className='text-3xl md:text-4xl font-semibold my-12 text-gray-800 text-center '>Our Oxygen Providers Details</h1>
 
-    </div>
-  )
+            <div className='h-auto flex flex-col justify-content-center mx-auto mb-[8vh]'>
+                {
+                    oxygencylinderproviders.map((item) => {
+                        const { _id, providerName, address, regdId, email, contactNo } = item;
+                        return (
+                            <div className="border min-h-[6vh] w-[85vw] md:w-[60vw] mx-auto bg-white my-3 md:my-4 py-4 px-[5vw] rounded-3xl shadow-xl" key={_id}>
+                                <h1 className="font-bold text-2xl text-gray-600 my-2">{providerName}</h1>
+                                <h2 className="text-xl my-2 font-semibold">Contact No: {contactNo}</h2>
+                                <h1 className='text-xl my-2 font-semibold'>Location: {address}</h1>
+                            </div>
+
+                        )
+                    })
+                }
+            </div>
+            {/*OxygenProvider Details Ends*/}
+        </div>
+    )
 }
 
 export default OxygenCylinderHero

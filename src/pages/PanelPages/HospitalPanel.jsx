@@ -10,10 +10,12 @@ function HospitalPanel() {
 
     const { RegdId } = useParams();
     const navigate = useNavigate();
+
     const { isProviderLoggedIn, setProviderLoggedIn } = useContext(globalStateContext);
     const [providerData, setProviderData] = useState(null);
     const [open, setOpen] = useState(false);
     const [click, setClick] = useState(false);
+
     const [updateData, setUpdateData] = useState({
         providerName: "",
         contactNo: "",
@@ -28,16 +30,13 @@ function HospitalPanel() {
     const [DriverContactNo, setDriverContactNo] = useState('');
     const [ambulanceServiceId, setAmbulanceServiceId] = useState(null);
     const [registeredAmbulances, setRegisteredAmbulances] = useState([]);
-    // var pageNo = useRef(1);
 
-    //
     const [BloodBankContactNo, setBloodBankContactNo] = useState('');
     const [OxygenSerivceContactNo, setOxygenServiceContactNo] = useState('');
     const [AmbulnceServiceContactNo, setAmbulanceServiceContactNo] = useState('');
     const [RegisteredServicesData, setRegisteredServiceData] = useState();
     const [enquiryData, setEnquiryData] = useState(null);
 
-    // var RegisteredServicesData = useRef(null);
 
     useEffect(() => {
         if (!isProviderLoggedIn) {
@@ -256,31 +255,33 @@ function HospitalPanel() {
     const deleteData = async (regdId) => {
         try {
             var response = null;
-            if (regdId.startsWith("AMBU")) {
+            if (regdId.startsWith("AMBU"))
                 response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api//ambulanceservice/${regdId}`);
-            } else if (regdId.startsWith("BLOOD")) {
+
+            else if (regdId.startsWith("BLOOD"))
                 response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api//bloodbanks/${regdId}`);
-            }
-            else if (regdId.startsWith("OXYG")) {
+
+            else if (regdId.startsWith("OXYG"))
                 response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api//oxygencylinders/${regdId}`);
-            }
+
 
             //    console.log(response);
-            if (response.data.msg === "Success") {
+            if (response.data.msg === "Success")
                 toast.success("Deleted successfully");
-            } else {
+            else
                 toast.error("Something went wrong!");
-            }
+
         } catch (err) {
             console.log(err);
         }
     }
-    // console.log(RegisteredServicesData);
+
     const handleFillData = async (regdId) => {
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/hospital/${regdId}`);
         // console.log(res.data[0]);
         setUpdateData(res.data[0]);
     }
+
     //Delete Hospital Details
     const handleDelete = async (regdId) => {
         try {
@@ -292,6 +293,7 @@ function HospitalPanel() {
         }
 
     }
+
     //Update Hospital's Information
     const handleUpdate = async (regdId) => {
         try {
@@ -327,19 +329,21 @@ function HospitalPanel() {
     if (enquiryData === null) {
         getEnquiries();
     }
+
     const handleEnquiryDelete = async (enquiryId) => {
         try {
-         const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api//removequery/${enquiryId}`);
-         if (response.data.msg === "success") {
-             toast.success("Enquiry Deleted");
-         } else {
-             toast.error("Something went wrong!");
-         }
-         getEnquiries();
+            const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api//removequery/${enquiryId}`);
+            if (response.data.msg === "success") {
+                toast.success("Enquiry Deleted");
+            } else {
+                toast.error("Something went wrong!");
+            }
+            getEnquiries();
         } catch (error) {
-         console.log(error);
+            console.log(error);
         }
-     }
+    }
+
     return (
         <div className="" id='main'>
             <div name='panel-nav' className='h-[6vh] w-auto flex h justify-center py-2 px-3 border-b-2 border-gray-200 sticky top-0 z-50'>
@@ -520,33 +524,36 @@ function HospitalPanel() {
                             </div>)
                 }
                 {pageNo === 4 &&
-                    (<div className='h-full w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
+                    (<div className='h-auto w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
                         <p className='text-2xl font-semibold text-center m-4'>Enquiries</p>
-                        <div className='bg-gray-100 w-full h-full p-4'>
+                        <div className='bg-gray-100 w-full h-auto p-4'>
                             {/****************List of related enquiries*******************/}
                             {
-                                    enquiryData !== null ? (
-                                        enquiryData.map((query) => {
-                                            const { enquiryId, enquiry, userId, _id } = query;
-                                            return (
-                                                <div className='bg-white p-4 m-4 rounded-xl text-md md:text-xl font-semibold' key={_id}>
-                                                    <p>EnquiryId: <span className='font-normal p-1'>{enquiryId}</span></p>
-                                                    <p>Enquiry: <span className='font-normal  p-1'>{enquiry}</span></p>
-                                                    {
-                                                        userId !== null ? (
-                                                            <div>
-                                                                <p>User name:<span className='font-normal  p-1'>{userId.userName}</span></p>
-                                                                <p>Contact: <span className='font-normal  p-1'>{userId.contactNo}</span></p>
+                                enquiryData !== null ? (
+                                    enquiryData.map((query) => {
+                                        const { enquiryId, enquiry, userId, _id } = query;
+                                        return (
+                                            <div>
+                                                {
+                                                    userId !== null ? (
+                                                        <div>
+                                                            <div className='bg-white p-4 m-4 rounded-xl text-md md:text-xl font-semibold' key={_id}>
+                                                                <p>EnquiryId: <span className='font-normal p-1'>{enquiryId}</span></p>
+                                                                <p>Enquiry: <span className='font-normal  p-1'>{enquiry}</span></p>
+                                                                <div>
+                                                                    <p>User name:<span className='font-normal  p-1'>{userId.userName}</span></p>
+                                                                    <p>Contact: <span className='font-normal  p-1'>{userId.contactNo}</span></p>
+                                                                </div>
+                                                                <p className='flex justify-end my-1'><button className='btn' onClick={() => { handleEnquiryDelete(enquiryId) }}>Resolve</button></p>
                                                             </div>
-                                                        ) : null
-                                                    }
-
-                                                    <p className='flex justify-end my-1'><button className='btn' onClick={()=>{handleEnquiryDelete(enquiryId)}}>Resolve</button></p>
-                                                </div>
-                                            )
-                                        })
-                                    ) : null
-                                }
+                                                        </div>
+                                                    ) : null
+                                                }
+                                            </div>
+                                        )
+                                    })
+                                ) : null
+                            }
                         </div>
                     </div>)}
             </div>

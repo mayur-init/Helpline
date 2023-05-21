@@ -1,3 +1,4 @@
+//data that will show in about us in the section of our team
 const AboutUsData = [
     {
         id : "1",

@@ -9,9 +9,11 @@ function AmbulanceServiceProviderPanel() {
 
     const { RegdId } = useParams();
     const navigate = useNavigate();
+
     const { isProviderLoggedIn, setProviderLoggedIn } = useContext(globalStateContext);
     const [providerData, setProviderData] = useState(null);
     const [open, setOpen] = useState(false);
+
     const [updateData, setUpdateData] = useState({
         providerName: "",
         contactNo: "",
@@ -19,10 +21,12 @@ function AmbulanceServiceProviderPanel() {
         address: "",
         password: "",
     });
+
     //ambulance states
     const [DriverName, setDriverName] = useState('');
     const [DriverContactNo, setDriverContactNo] = useState('');
     const [RegisteredAmbulances, setRegisteredAmbulances] = useState([]);
+
     var [pageNo, setPageNo] = useState(1);
     var cnt = pageNo;
 
@@ -33,6 +37,7 @@ function AmbulanceServiceProviderPanel() {
         }
         collectProviderData();
     }, [])
+
     const collectProviderData = async () => {
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/ambulanceservice/getparticularprovider/${RegdId.toUpperCase()}`);
         // console.log(res.data[0]);
@@ -50,7 +55,6 @@ function AmbulanceServiceProviderPanel() {
         if (DriverName === "" || DriverContactNo === "") {
             toast.error("All fields are mendatory");
         }
-
         const ambulanceData = {
             DriverName,
             ParentRegdId: providerData.regdId,
@@ -79,6 +83,7 @@ function AmbulanceServiceProviderPanel() {
         // console.log(res.data[0]);
         setUpdateData(res.data[0]);
     }
+
     //Delete Ambulance Provider Details
     const handleDelete = async (regdId) => {
         try {
@@ -90,6 +95,7 @@ function AmbulanceServiceProviderPanel() {
         }
 
     }
+
     const handleUpdate = async (regdId) => {
         try {
             axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/ambulanceservice/${regdId}`, updateData).then((response) => {
@@ -108,6 +114,7 @@ function AmbulanceServiceProviderPanel() {
             console.log(err);
         }
     }
+
     //Delete ambulances dtails
     const deleteData = async (contact) => {
         try {
@@ -126,6 +133,7 @@ function AmbulanceServiceProviderPanel() {
             console.log(err);
         }
     }
+
     const getAllRegisteredAmbulanceData = async () => {
         try {
             const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/ambulances/${providerData.regdId}`);
@@ -135,9 +143,10 @@ function AmbulanceServiceProviderPanel() {
             console.log(err);
         }
     }
+    if (RegisteredAmbulances !== null) {
+        getAllRegisteredAmbulanceData();
+    }
 
-    getAllRegisteredAmbulanceData();
-    // console.log(RegisteredAmbulances);
     return (
         <div className="" id='main'>
             <div name='panel-nav' className='h-[6vh] bg-white w-auto flex h justify-center py-2 px-3 border-b-2 border-gray-200 sticky top-0 z-50'>
@@ -156,7 +165,7 @@ function AmbulanceServiceProviderPanel() {
                         <div className='flex justify-end'>
                             <button className='bg-gray-100 p-2 rounded-2xl hover:bg-white m-2' onClick={() => { setPageNo(1) }}><HiArrowSmallLeft /></button>
                             <button className='bg-gray-100 p-2 rounded-2xl hover:bg-white m-2' onClick={() => { setPageNo(2) }}><HiArrowSmallRight /></button>
-                            <button className='md:hidden p-2' onClick={() => { setOpen(!open) }} >{open ? <HiXMark size={30} /> : <HiBars3 size={30}/>}</button>
+                            <button className='md:hidden p-2' onClick={() => { setOpen(!open) }} >{open ? <HiXMark size={30} /> : <HiBars3 size={30} />}</button>
                         </div>
                         {/**********************Add Services Forms*******************************/}
                         {
@@ -214,17 +223,20 @@ function AmbulanceServiceProviderPanel() {
                             <p className='text-xl md:text-2xl font-semibold text-center m-4'>Registered Ambulances</p>
                             <div className='bg-gray-100 w-full h-[100vh] p-4'>
                                 {/****************List of registered ambulances*******************/}
-                                {
-                                    RegisteredAmbulances.map((ambulance) => {
-                                        const { _id, driverName, driverContactNo } = ambulance;
-                                        return (
-                                            <div className='bg-white p-4 m-4 rounded-xl text-md md:text-xl font-semibold' key={_id}>
-                                                <p>Driver Name: <span className='font-normal'>{driverName}</span></p>
-                                                <p>Driver Contact No: <span className='font-normal'>{driverContactNo}</span></p>
-                                                <p className='flex justify-end my-1'><button className='btn' onClick={() => deleteData(driverContactNo)}>Delete</button></p>
-                                            </div>
-                                        )
-                                    })
+                                {   
+                                    RegisteredAmbulances !== null? (
+                                        RegisteredAmbulances.map((ambulance) => {
+                                            const { _id, driverName, driverContactNo } = ambulance;
+                                            return (
+                                                <div className='bg-white p-4 m-4 rounded-xl text-md md:text-xl font-semibold' key={_id}>
+                                                    <p>Driver Name: <span className='font-normal'>{driverName}</span></p>
+                                                    <p>Driver Contact No: <span className='font-normal'>{driverContactNo}</span></p>
+                                                    <p className='flex justify-end my-1'><button className='btn' onClick={() => deleteData(driverContactNo)}>Delete</button></p>
+                                                </div>
+                                            )
+                                        })
+                                    ): null
+                                    
                                 }
                             </div>
                         </div>)

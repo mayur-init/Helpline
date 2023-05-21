@@ -78,15 +78,21 @@ exports.updateUser = async (req, res) => {
 };
 
 exports.removeUser = async (req, res) => {
-    try {
-        const userId = req.params.regdId;
-        const response = await User.findOneAndDelete({ "regdId": userId });
-        if (!response)
-            return res.status(404).json({ msg: "Not found" });
-        res.status(200).json({ msg: "Deleted Successfully" });
-    }
-    catch (err) {
-        res.status(400).json({ msg: "Some issue" });
+    const refresh_token = req.body.Refresh_token;
+    const userId = req.params.regdId;
+    if(refresh_token === null || userId === null)
+        return res.status(400).json({msg: 'UserId or Refresh token is null'});
+    else{
+        try {
+            const response = await User.findOneAndDelete({ "regdId": userId });
+            const resp = await RefreshToken.findOneAndDelete({"refreshToken": refresh_token});
+            if (!response || !resp)
+                return res.status(404).json({ msg: "Not found" });
+            res.status(200).json({ msg: "Deleted Successfully" });
+        }
+        catch (err) {
+            res.status(400).json({ msg: "Some issue" });
+        }
     }
 };
 

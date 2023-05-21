@@ -159,10 +159,6 @@ exports.getAllRegisteredServices = async (req, res, next) => {
             const bloodBankData = await BloodBank.find({ "parentRegdId": hospId });
             const oxygenServiceData = await OxygenCylinderProvider.find({ "parentRegdId": hospId });
 
-            // console.log(hospitalData);
-            // console.log(bloodBankData);
-            // console.log(oxygenServiceData);
-
             if (ambulanceServiceData.length > 0) {
                 registeredServiceData.ambulanceService.regdId = ambulanceServiceData[0].regdId;
                 registeredServiceData.ambulanceService.contactNo = ambulanceServiceData[0].contactNo;

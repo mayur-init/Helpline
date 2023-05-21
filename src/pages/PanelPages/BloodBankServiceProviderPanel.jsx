@@ -10,6 +10,7 @@ function BloodBankServiceProviderPanel() {
 
     const { RegdId } = useParams();
     const navigate = useNavigate();
+
     const { isProviderLoggedIn, setProviderLoggedIn } = useContext(globalStateContext);
     const [providerData, setProviderData] = useState(null);
     const [open, setOpen] = useState(false);
@@ -45,11 +46,13 @@ function BloodBankServiceProviderPanel() {
         toast.success('Loggged out successfully');
         navigate('/', { replace: true });
     }
+
     const handleFillData = async (regdId) => {
         const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/bloodbanks/getparticularprovider/${regdId}`);
         // console.log(res.data[0]);
         setUpdateData(res.data[0]);
     }
+
     //Delete Blood Bank Provider Details
     const handleDelete = async (regdId) => {
         try {
@@ -61,6 +64,7 @@ function BloodBankServiceProviderPanel() {
         }
 
     }
+
     const handleUpdate = async (regdId) => {
         try {
             axios.put(`${process.env.REACT_APP_BACKEND_URL}/api//bloodbanks/${regdId}`, updateData).then((response) => {
@@ -89,22 +93,21 @@ function BloodBankServiceProviderPanel() {
         // console.log(res.data);
         setEnquiryData(res.data);
     }
-    if (enquiryData === null) {
-        getEnquiries();
-    }
+    getEnquiries();
+
     const handleEnquiryDelete = async (enquiryId) => {
         try {
-         const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api//removequery/${enquiryId}`);
-         if (response.data.msg === "success") {
-             toast.success("Enquiry Deleted");
-         } else {
-             toast.error("Something went wrong!");
-         }
-         getEnquiries();
+            const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api//removequery/${enquiryId}`);
+            if (response.data.msg === "success") {
+                toast.success("Enquiry Deleted");
+            } else {
+                toast.error("Something went wrong!");
+            }
+            getEnquiries();
         } catch (error) {
-         console.log(error);
+            console.log(error);
         }
-     }
+    }
 
     return (
         <div className="" id='main'>
@@ -166,28 +169,31 @@ function BloodBankServiceProviderPanel() {
                                 }
                             </div>
                         </div>) :
-                        (<div className='h-full w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
+                        (<div className='h-auto w-full md:w-[80vw] ml-[10vw] md:ml-[25vw]'>
                             <p className='text-2xl font-semibold text-center m-4'>Enquiries</p>
-                            <div className='bg-gray-100 w-full h-full p-4'>
+                            <div className='bg-gray-100 w-full h-auto p-4'>
                                 {/****************List of related enquiries*******************/}
                                 {
                                     enquiryData !== null ? (
                                         enquiryData.map((query) => {
                                             const { enquiryId, enquiry, userId, _id } = query;
                                             return (
-                                                <div className='bg-white p-4 m-4 rounded-xl text-md md:text-xl font-semibold' key={_id}>
-                                                    <p>EnquiryId: <span className='font-normal p-1'>{enquiryId}</span></p>
-                                                    <p>Enquiry: <span className='font-normal  p-1'>{enquiry}</span></p>
+                                                <div>
                                                     {
                                                         userId !== null ? (
                                                             <div>
-                                                                <p>User name:<span className='font-normal  p-1'>{userId.userName}</span></p>
-                                                                <p>Contact: <span className='font-normal  p-1'>{userId.contactNo}</span></p>
+                                                                <div className='bg-white p-4 m-4 rounded-xl text-md md:text-xl font-semibold' key={_id}>
+                                                                    <p>EnquiryId: <span className='font-normal p-1'>{enquiryId}</span></p>
+                                                                    <p>Enquiry: <span className='font-normal  p-1'>{enquiry}</span></p>
+                                                                    <div>
+                                                                        <p>User name:<span className='font-normal  p-1'>{userId.userName}</span></p>
+                                                                        <p>Contact: <span className='font-normal  p-1'>{userId.contactNo}</span></p>
+                                                                    </div>
+                                                                    <p className='flex justify-end my-1'><button className='btn' onClick={() => { handleEnquiryDelete(enquiryId) }}>Resolve</button></p>
+                                                                </div>
                                                             </div>
                                                         ) : null
                                                     }
-
-                                                    <p className='flex justify-end my-1'><button className='btn'onClick={()=>{handleEnquiryDelete(enquiryId)}}>Resolve</button></p>
                                                 </div>
                                             )
                                         })

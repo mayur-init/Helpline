@@ -134,12 +134,12 @@ exports.deleteAmbulanceService = async(req, res) => {
         res.status(404).json({msg : "Some issue"});
     }
 };
-//done
+
 exports.getParticularAmbulanceService = async(req, res) => {
     try{
         const ambulanceServiceId = req.params.regdId;
         const ambulancsService = await AmbulanceService.find({"regdId" : ambulanceServiceId});
-        console.log(ambulancsService);
+        // console.log(ambulancsService);
         
         if(ambulancsService.length === 0)
             return res.status(404).json({msg : "Not found"});

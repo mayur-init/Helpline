@@ -72,7 +72,10 @@ function UserPanel() {
     const handleDelete = async (regdId) => {
         try {
             // console.log(regdId);
-            const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api//users/${userId}`);
+            const refresh_token = localStorage.getItem('helpline_refresh_token');
+            const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api//users/${userId}`, {
+                Refresh_token: refresh_token
+            });
 
             localStorage.clear();
             setUserMongoId(null);
@@ -81,7 +84,6 @@ function UserPanel() {
         } catch (err) {
             console.log(err);
         }
-
     }
 
     const handleUpdate = async () => {
@@ -136,10 +138,10 @@ function UserPanel() {
         setAllPostedQueries(response.data);
         // console.log(response.data);
     }
-    
     if(userMongoId !== null){
         getAllPostedQueries();
     }
+    
     const handleEnquiryDelete = async (enquiryId) => {
        try {
         const response = await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api//removequery/${enquiryId}`);

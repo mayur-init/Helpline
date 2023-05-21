@@ -10,14 +10,15 @@ import { globalStateContext } from '../../contexts/globalStateContext'
 function ServiceProviderLogin() {
 
   const options = [
-    {label: 'Hospital Service', id: 1},
-    { label: 'Ambulance Service Provider', id: 2},
+    { label: 'Hospital Service', id: 1 },
+    { label: 'Ambulance Service Provider', id: 2 },
     { label: 'Blood Bank Service Provider', id: 3 },
     { label: 'Oxygen Cylinder Provider', id: 4 }
   ]
 
   const [formNo, setFromNo] = useState(0);
   const navigate = useNavigate();
+
   // state management for ambulance service provider
   const [ServiceProviderName, setServiceProviderName] = useState('');
   const [RegdId, setRegdId] = useState('');
@@ -26,7 +27,7 @@ function ServiceProviderLogin() {
 
   var ProviderType = useRef('');
   var redirectUrl = useRef('');
-  var providerData = null; 
+  var providerData = null;
 
   const Data = {
     RegdId,
@@ -41,9 +42,9 @@ function ServiceProviderLogin() {
     } else {
 
       setProviderLoggedIn(true);
-      // toast.success(`Welcome ${ServiceProviderName}`);
 
-      if(formNo === 1){
+      //fetching data of a paricular service provider which is logging in
+      if (formNo === 1) {
         Data.ProviderType = 'HOSP';
         redirectUrl = `/hospital-service-panel/${RegdId.toLowerCase()}`;
         providerData = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/hospital/${RegdId}`);
@@ -52,7 +53,7 @@ function ServiceProviderLogin() {
         Data.ProviderType = 'AMBU';
         redirectUrl = `/ambulance-service-provider-panel/${RegdId.toLowerCase()}`;
         providerData = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/ambulanceservice/getparticularprovider/${RegdId}`);
-        
+
       } else if (formNo === 3) {
         Data.ProviderType = 'BLOOD';
         redirectUrl = `/blood-bank-service-provider-panel/${RegdId.toLowerCase()}`;
@@ -64,25 +65,23 @@ function ServiceProviderLogin() {
         providerData = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/oxygencylinderproviders/getparticularprovider/${RegdId}`);
 
       }
-      
-      // console.log(Data);
+
       //verifying service provider
       const res = await isVerified();
-      // console.log(res);
 
-      if(res.registered === false){
+      if (res.registered === false) {
         toast.error('You have not registered yet, register yourself first');
       }
-      else if(res.verified === false){
+      else if (res.verified === false) {
         toast.error('UserName or Password incorrect');
       }
-      
-      if(res.registered === true && res.verified === true){
+
+      if (res.registered === true && res.verified === true) {
         setProviderLoggedIn(true);
-        if(providerData !== null){
+        if (providerData !== null) {
           toast.success(`Welcome ${providerData.data[0].providerName}`);
         }
-        navigate( redirectUrl , {replace: true});
+        navigate(redirectUrl, { replace: true });
       }
     }
   }
@@ -91,7 +90,8 @@ function ServiceProviderLogin() {
     setProviderLoggedIn(false);
   });
 
-  const isVerified = async () =>{
+  //verify service proiver credentials
+  const isVerified = async () => {
     try {
       const res = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/providerlogin`, Data);
       // console.log(res.data);
@@ -108,7 +108,6 @@ function ServiceProviderLogin() {
           <p className='text-2xl md:text-3xl font-semibold text-gray-700 my-[4vh] flex justify-center hover:text-violet-600'>Service Provider Login</p>
           <div className='flex flex-col justify-center w-[37vh] md:w-[50vh] h-auto mt-[8vh] mb-[4vh]'>
             <LoginFormDropdown title={'Login as'} options={options} setFromNo={setFromNo} />
-            {/* <input type='text' placeholder='Service Provider Name' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setServiceProviderName(e.target.value) }}></input> */}
             <input type='text' placeholder='Regd Id' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setRegdId(e.target.value) }}></input>
             <input type='text' placeholder='Password' className='border-2 border-gray-600 rounded-full px-4 py-1 my-2' onChange={(e) => { setPassword(e.target.value) }}></input>
             <p className='flex justify-end'><button className='btn w-[100px] m-2' onClick={handleClick}>Submit</button></p>
