@@ -66,16 +66,18 @@ exports.getUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
     const contactNo = req.body.contactNo;
     try {
-        if (contactNo) {
+        const userId = req.params.regdId;
+        const user = await User.findOne({regdId : userId});
+        if (user.contactNo !== contactNo) {
             const userExist = await User.findOne({ contactNo: contactNo });
             if (userExist) {
                 return res.status(422).json({ msg: "contact no already exist" });
             }
         }
-        const userId = req.params.regdId;
+        
         const response = await User.findOneAndUpdate({ "regdId": userId }, { $set: req.body }, { new: true });
         if (response)
-            res.status(200).json({ msg: "Updated Successfully" });
+            return res.status(200).json({ msg: "Updated Successfully" });
         return res.status(404).json({ msg: "Not found" });
 
     } catch (err) {
